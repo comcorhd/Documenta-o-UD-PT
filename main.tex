@@ -583,7 +583,105 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		    \end{dependency}
 		    \caption{\textit{Primeira tentativa}}\label{dep:primeiratentativa}
 		\end{figure*}
+	
+\section{Pronomes substantivos, pronomes adjetivos, interrogativos, artigos e determinantes}\label{sec:pronedet}
 
+	Pronomes substantivos são anotados como de upos \textit{PRON} e são núcleo do sintagma de que fazem parte, recebendo a deprel do sintagma (\fullref{dep:pronsubst}).
+	
+	Pronomes adjetivos são anotados como de upos \textit{DET}, e recebem deprel \textit{det}, sendo dependentes do token que modificam (\fullref{dep:pronadj}).
+	
+	Pronomes interrogativos, assim como os pronomes substantivos, têm upos \textit{PRON} e recebem o deprel do sintagma (\fullref{dep:pronint}). Não confundir com os advérbios interrogativos (Xxx), que podem inclusive se tornar conjunções quando introduzindo orações subordinadas (Xxx).
+	
+	Artigos/determinantes têm anotação similar à dos pronomes adjetivos (\textit{DET/det}), como na \fullref{dep:artdet}.
+	
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				ADV \& PRON \& AUX \& ADV \& NOUN \& ADP \& PRON \& PUNCT \\
+				Talvez \& isto \& seja \& muito \& barulho \& por \& nada \& . \\
+				talvez \& isto \& ser \& muito \& barulho \& por \& nada \& . \\
+			\end{deptext}
+			\depedge{5}{1}{advmod}
+			\depedge{5}{2}{nsubj}
+			\depedge{5}{3}{cop}
+			\depedge{5}{4}{advmod}
+			\depedge{7}{6}{case}
+			\depedge{5}{7}{nmod}
+			\depedge{5}{8}{punct}
+			\deproot{5}{root}
+		\end{dependency}
+		\caption{Talvez \textit{isto} seja muito barulho por nada
+		}\label{dep:pronsubst}
+	\end{figure*}
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				DET \& NOUN \& VERB \& PRON \& DET \& NOUN \& ADJ \& PUNCT \\
+				Aquele \& pensamento \& provocou \& me \& um \& arrepio \& delicioso \& . \\
+				aquele \& pensamento \& provocar \& eu \& um \& arrepio \& delicioso \& . \\
+			\end{deptext}
+			\deproot{3}{root}
+			\depedge{2}{1}{det}
+			\depedge{3}{2}{nsubj}
+			\depedge{3}{4}{iobj}
+			\depedge{6}{5}{det}
+			\depedge{3}{6}{obj}
+			\depedge{6}{7}{amod}
+			\depedge{3}{8}{punct}
+		\end{dependency}
+		\caption{\textit{Aquele} pensamento provocou-me um arrepio delicioso}\label{dep:pronadj}
+	\end{figure*}
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				CCONJ \& VERB \& PRON \& PRON \& ADV \& ADV \& VERB \& PUNCT \\
+				E \& sabe \& quem \& eu \& ainda \& não \& vi \& ? \\
+				e \& saber \& quem \& eu \& ainda \& não \& ver \& ? \\
+			\end{deptext}
+			\depedge{2}{1}{cc}
+			\depedge{7}{3}{obj}
+			\depedge{2}{7}{ccomp}
+			\depedge{2}{8}{punct}
+			\depedge{7}{4}{nsubj}
+			\depedge{7}{6}{advmod}
+			\depedge{7}{5}{advmod}
+			\deproot{2}{root}
+		\end{dependency}
+		\caption{E sabe \textit{quem} eu ainda não vi?}\label{dep:pronint}
+	\end{figure*}
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				AUX \& DET \& NOUN \& ADP \& DET \& NOUN \& ADP \& DET \& NOUN \& PUNCT \\
+				Eram \& o \& retrato \& de \& o \& cérebro \& de \& este \& partido \& . \\
+				ser \& o \& retrato \& de \& o \& cérebro \& de \& este \& partido \& . \\
+			\end{deptext}
+			\depedge{3}{1}{cop}
+			\depedge{3}{6}{nmod}
+			\depedge{6}{9}{nmod}
+			\depedge{3}{2}{det}
+			\depedge{6}{4}{case}
+			\depedge{6}{5}{det}
+			\depedge{9}{7}{case}
+			\depedge{9}{8}{det}
+			\depedge{3}{10}{punct}
+			\deproot{3}{root}
+		\end{dependency}
+		\caption{Eram \textit{o} retrato d\textit{o} cérebro deste partido}\label{dep:artdet}
+	\end{figure*}
+
+	
 \chapter{Atributos morfológicos (feats)}\label{sec:feats}
 
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
