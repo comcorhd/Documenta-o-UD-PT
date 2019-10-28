@@ -129,23 +129,13 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 \section{Verbos auxiliares}\label{sec:verbosauxiliares}
 
-	Verbos auxiliares são classificados como \emph{AUX}. O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}). De modo geral, classificamos como verbos auxiliares os verbos de ligação (\fullref{sec:verbosdeligacao}), o verbo auxiliar na voz passiva (\fullref{sec:servozpassiva}), as locuções de tempo composto (\fullref{sec:auxtempocomposto}), e as locuções verbais aspectuais e modais (\fullref{sec:auxaspecto}).
+	Verbos auxiliares são classificados como \emph{AUX}. O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}). De modo geral, classificamos como verbos auxiliares os verbos de ligação (\fullref{sec:verbosdeligacao}), o verbo auxiliar na voz passiva (\fullref{sec:servozpassiva}), as locuções de tempo composto (\fullref{sec:auxtempocomposto}), e as locuções verbais aspectuais e modais. No UD, as locuções verbais aspectuais/modais não existem, ou seja, os verbos são anotados como se constituíssem duas orações (\fullref{sec:auxaspecto}). No entanto, conforme apontado no trabalho supracitado, é possível propor uma anotação que leve em conta a auxiliaridade das locuções verbais aspectuais (\fullref{sec:locverbalJDP}).
 	
 	Via de regra, verbos auxiliares (\emph{AUX}) não podem ter dependentes, e dependem de um verbo principal (\emph{VERB}). O deprel pode ser \emph{cop}, \emph{aux} ou \emph{aux:pass}, de acordo com a função sintática.
 
-	\fullref{tab:aux}
-
-%	\fullref{tab:verbosdeligacao}
-
-%	\fullref{tab:vozpassiva}
-	
-%	\fullref{tab:locucoesverbais}
-
-%	\fullref{tab:auxphrasalverb}
-
 	\subsection{Verbos de ligação}\label{sec:verbosdeligacao}
 	
-		Apenas os verbos \say{ser} e \say{estar} são considerados verbos de ligação, e portanto serão sempre anotados como \textit{AUX}. Os demais verbos que a GT costuma elencar como verbo de ligação (parecer, permanecer, etc.) são anotados como \textit{VERB}. Os verbos de ligação \textit{AUX} terão relação sintática \emph{cop}, e nunca poderão ser núcleo de uma oração (Xx) nem conter dependentes.
+		Apenas os verbos \say{ser} e \say{estar} são considerados verbos de ligação, e portanto serão sempre anotados como \textit{AUX}. Os demais verbos que a GT costuma elencar como verbo de ligação (\say{parecer}, \say{permanecer}, etc.) são anotados como \textit{VERB}. Os verbos de ligação \textit{AUX} terão relação sintática \emph{cop}, e nunca poderão ser núcleo de uma oração (Xx) nem conter dependentes.
 
 		\fullref{dep:serAUX}
 
@@ -206,7 +196,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 		\fullref{dep:auxtempocomposto}
 
-		\fullref{tab:locucoesverbais}
+		\fullref{tab:loctempocomposto}
 
 		\begin{figure*}[htbp]
 			\centering
@@ -233,15 +223,43 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		\end{figure*}
 
 
-	\subsection{Locuções verbais aspectuais/modais}\label{sec:auxaspecto}
+	\subsection{Locuções verbais aspectuais/modais não existem no UD}\label{sec:auxaspecto}
+	
+		Em UD, não existem locuções verbais aspectuais ou modais, de modo que as sentenças são anotadas como em \fullref{dep:locverbalUD}.
+		
+		Para entender melhor o fenômeno das locuções verbais e conhecer um modelo de anotação para o fenômeno, ver \fullref{sec:locverbalJDP}.
+		
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& VERB \& ADV \& ADP \& PROPN \& PUNCT \\
+					A \& seleção \& deve \& contar \& hoje \& com \& Giovane \& . \\
+					o \& seleção \& dever \& contar \& hoje \& com \& Giovane \& . \\
+				\end{deptext}
+				\depedge{2}{1}{det}
+				\depedge{4}{5}{advmod}
+				\deproot{3}{root}
+				\depedge{4}{7}{obl}
+				\depedge{7}{6}{case}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{8}{punct}
+				\depedge{3}{4}{xcomp}
+			\end{dependency}
+			\caption{A seleção \emph{deve contar} hoje com Giovane}
+			\label{dep:locverbalUD}
+		\end{figure*}
+	
+	\subsection{Proposta de anotação para as locuções verbais aspectuais/modais}\label{sec:locverbalJDP}
 
-		Para as gramáticas, é um exemplo de locução verbal aspectual a \fullref{dep:auxphrasalverb}, e para algumas gramáticas (e não para outras), é um exemplo de locução modal a \fullref{dep:auxmodal}.
+		Em UD, não existem locuções verbais ou modais, mas estudamos uma alternativa para marcar a auxiliaridade dos verbos segundo alguns estudos gramaticais.
+		
+		O que distingue a locução verbal aspectual da modal é que, na primeira, o verbo auxiliar perdeu o seu conteúdo lexical e serve apenas para caracterizar a temporalidade da ação do verbo principal, e na segunda, o verbo auxiliar (ou pleno, segundo algumas gramáticas) caracteriza um julgamento do enunciador sobre a ação do verbo principal.
+		
+		Alguns gramáticos divergem sobre como a classificação se dá, portanto propomos apenas herdar, no Bosque-UD, o que já era a anotação originária do PALAVRAS \citep{bick2000parsing}, e não modificá-la em relação a quais devem ser os verbos auxiliares. Para o PALAVRAS (no Bosque-UD, até a versão 2.4), locuções verbais modais não são locuções, isto é, os dois verbos se configuram como verbos plenos (\fullref{dep:verbmodal}).
 
-		\fullref{tab:locucoesverbais}
-
-		Segundo as gramáticas, o que distingue a locução verbal aspectual da modal é que, na primeira, o verbo auxiliar caracteriza a temporalidade da ação do verbo principal, e na segunda, o verbo auxiliar caracteriza um julgamento do enunciador sobre a ação do verbo principal. Alguns gramáticos divergem sobre como a classificação se dá, portanto apenas herdamos, no Bosque-UD, o que já era a anotação originária do PALAVRAS \citep{bick2000parsing}, e resolvemos não modificá-la.
-
-		Nos casos de locução verbal aspectual, geralmente há uma partícula interveniente no meio da locução, como na \fullref{dep:auxphrasalverb}, em que há um \say{a} entre \say{começar} e \say{ouvir}. Encaramos que estamos diante de um fenômeno de \emph{phrasal verb}, uma MWE do tipo \emph{AUX}, como sugerido em \citet{elvis2019locverbal}. Na frase, \emph{vai ouvir} é uma locução verbal de tempo composto (\fullref{sec:auxtempocomposto}), e \say{começar a ouvir} é uma locução verbal aspectual, sendo \say{começar a} uma expressão multi-palavra (MWE) do tipo auxiliar.
+		Nos casos de locução verbal aspectual, sim, há uma locução, isto é, o primeiro verbo é auxiliar (\textit{AUX/aux}), e o segundo, verbo pleno (\textit{VERB}). Às vezes há uma partícula interveniente no meio da locução, como na \fullref{dep:auxphrasalverb}, em que há um \say{a} entre \say{começar} e \say{ouvir}. Encaramos que estamos diante de um fenômeno de \emph{phrasal verb}, uma MWE do tipo \emph{AUX}, como sugerido em \citet{elvis2019locverbal}. Na frase, \emph{vai ouvir} é uma locução verbal de tempo composto (\fullref{sec:auxtempocomposto}), e \say{começar a ouvir} é uma locução verbal aspectual, sendo \say{começar a} uma expressão multi-palavra (MWE) do tipo auxiliar.
 
 		\fullref{tab:auxphrasalverb}
 
@@ -250,21 +268,21 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			\vspace{.8cm}
 			\begin{dependency}
 				\begin{deptext}
-					DET \& NOUN \& AUX \& VERB \& ADV \& ADP \& PROPN \& PUNCT \\
+					DET \& NOUN \& VERB \& VERB \& ADV \& ADP \& PROPN \& PUNCT \\
 					A \& seleção \& deve \& contar \& hoje \& com \& Giovane \& . \\
 					o \& seleção \& dever \& contar \& hoje \& com \& Giovane \& . \\
 				\end{deptext}
 				\depedge{2}{1}{det}
 				\depedge{4}{5}{advmod}
-				\deproot{4}{root}
+				\deproot{3}{root}
 				\depedge{4}{7}{obl}
 				\depedge{7}{6}{case}
-				\depedge{4}{2}{nsubj}
-				\depedge{4}{8}{punct}
-				\depedge{4}{3}{aux}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{8}{punct}
+				\depedge{3}{4}{xcomp}
 			\end{dependency}
 			\caption{A seleção \emph{deve contar} hoje com Giovane}
-			\label{dep:auxmodal}
+			\label{dep:verbmodal}
 		\end{figure*}
 
 		\begin{figure*}[htbp]
@@ -350,7 +368,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	\subsection{Não são locuções verbais: dois verbos plenos}
 
-		Ainda segundo as decisões do PALAVRAS \citep{bick2000parsing}, há outras tantas colocações de dois verbos que não são locuções verbais. Portanto, são todos casos de verbos plenos, de upos \emph{VERB}, em que o segundo verbo é dependente do primeiro, como oração substantiva objetiva reduzida de infinitivo (Xx).
+		Ainda segundo as decisões do PALAVRAS \citep{bick2000parsing}, há outras tantas colocações de dois verbos que não são locuções verbais. Portanto, são todos casos de verbos plenos, de upos \emph{VERB}, em que o segundo verbo é dependente do primeiro, como oração subordinada substantiva objetiva direta reduzida de infinitivo (Xx).
 
 		\fullref{dep:naolocverbal}
 
@@ -388,7 +406,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	
 	Numerais ordinais devem ser anotados como \textit{ADJ} (\fullref{sec:adjounum}).
 	
-	Ver também: \fullref{sec:numeroscompostos}
+	Ver também: \fullref{sec:numeroscompostos}.
 
 	\subsection{Números compostos}\label{sec:numeroscompostos}
 	
@@ -677,72 +695,6 @@ OBS.: Consideramos \say{Não é que} como MWE.
 \chapter*{Apêndice}
 
 	Todas as listas são retiradas do corpus Bosque-UD em sua versão 2.5.
-
-	\begin{table}[]
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{Verbo auxiliar} & \textbf{Frequência} \\\hline
-				acabar & 56\\\hline
-				andar & 4\\\hline
-				chegar & 19\\\hline
-				começar & 62\\\hline
-				continuar & 57\\\hline
-				costumar & 10\\\hline
-				deixar & 24\\\hline
-				dever & 217\\\hline
-				estar & 282\\\hline
-				faltar & 1\\\hline
-				ficar & 11\\\hline
-				haver & 37\\\hline
-				ir & 358\\\hline
-				parar & 3\\\hline
-				parecer & 17\\\hline
-				passar & 39\\\hline
-				poder & 394\\\hline
-				procurar & 1\\\hline
-				quer & 1\\\hline
-				ser & 1304\\\hline
-				ter & 536\\\hline
-				vir & 68\\\hline
-				voltar & 40\\\hline
-			\end{tabular}
-		}
-		\hfill
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{Verbo auxiliar} & \textbf{Frequência} \\\hline
-				ser & 1304\\\hline
-				ter & 536\\\hline
-				poder & 394\\\hline
-				ir & 358\\\hline
-				estar & 282\\\hline
-				dever & 217\\\hline
-				vir & 68\\\hline
-				começar & 62\\\hline
-				continuar & 57\\\hline
-				acabar & 56\\\hline
-				voltar & 40\\\hline
-				passar & 39\\\hline
-				haver & 37\\\hline
-				deixar & 24\\\hline
-				chegar & 19\\\hline
-				parecer & 17\\\hline
-				ficar & 11\\\hline
-				costumar & 10\\\hline
-				andar & 4\\\hline
-				parar & 3\\\hline
-				faltar & 1\\\hline
-				procurar & 1\\\hline
-				quer & 1\\\hline
-			\end{tabular}
-		}
-		\caption{Lista das 23 palavras que ocorrem 3541 vezes como verbo auxiliar (\emph{AUX}) no Bosque-UD}
-		\label{tab:aux}
-	\end{table}
 	
 	\begin{table}[]
 		\centering
@@ -769,69 +721,15 @@ OBS.: Consideramos \say{Não é que} como MWE.
 	\end{table}
 
 	\begin{table}[]
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{Locução verbal} & \textbf{Frequência} \\\hline
-				acabar & 56\\\hline
-				andar & 4\\\hline
-				chegar & 19\\\hline
-				começar & 62\\\hline
-				continuar & 57\\\hline
-				costumar & 10\\\hline
-				deixar & 24\\\hline
-				dever & 217\\\hline
-				estar & 249\\\hline
-				faltar & 1\\\hline
-				ficar & 10\\\hline
-				haver & 37\\\hline
-				ir & 358\\\hline
-				parar & 3\\\hline
-				parecer & 17\\\hline
-				passar & 39\\\hline
-				poder & 394\\\hline
-				procurar & 1\\\hline
-				quer & 1\\\hline
-				ser & 53\\\hline
-				ter & 536\\\hline
-				vir & 68\\\hline
-				voltar & 40\\\hline
-			\end{tabular}
-		}
-		\hfill
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{Locução verbal} & \textbf{Frequência} \\\hline
-				ter & 536\\\hline
-				poder & 394\\\hline
-				ir & 358\\\hline
-				estar & 249\\\hline
-				dever & 217\\\hline
-				vir & 68\\\hline
-				começar & 62\\\hline
-				continuar & 57\\\hline
-				acabar & 56\\\hline
-				ser & 53\\\hline
-				voltar & 40\\\hline
-				passar & 39\\\hline
-				haver & 37\\\hline
-				deixar & 24\\\hline
-				chegar & 19\\\hline
-				parecer & 17\\\hline
-				costumar & 10\\\hline
-				ficar & 10\\\hline
-				andar & 4\\\hline
-				parar & 3\\\hline
-				faltar & 1\\\hline
-				procurar & 1\\\hline
-				quer & 1\\\hline
-			\end{tabular}
-		}
-		\caption{Lista das 23 palavras que ocorrem 2256 vezes como locução verbal (\emph{AUX/aux}) no Bosque-UD}
-		\label{tab:locucoesverbais}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			\textbf{Voz passiva} & \textbf{Frequência} \\\hline
+			ficar & 1\\\hline
+			ser & 1114\\\hline
+		\end{tabular}
+		\caption{Lista das 2 palavras que ocorrem 1115 vezes como locução verbal de tempo composto (\emph{AUX/aux}) no Bosque-UD}
+		\label{tab:loctempocomposto}
 	\end{table}
 
 	\begin{table}[]
@@ -912,7 +810,7 @@ OBS.: Consideramos \say{Não é que} como MWE.
 				tornar a & 1\\\hline
 			\end{tabular}
 		}
-		\caption{Lista das 31 MWEs que ocorrem 570 vezes como locuções auxiliares (\emph{AUX/aux + ADP/compound}) no Bosque-UD}
+		\caption{Lista das 31 MWEs que ocorreriam 570 vezes como locuções auxiliares (\emph{AUX/aux + ADP/compound}) no Bosque-UD segundo nossa proposta de anotação}
 		\label{tab:auxphrasalverb}
 	\end{table}
 
