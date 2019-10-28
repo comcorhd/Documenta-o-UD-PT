@@ -40,7 +40,7 @@
 
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
 
-Os treebanks adaptados para a gramática UD são disponibilizados no formato CoNLL, em que há um token por linha. Cada anotação de cada token, por sua vez, é disposta em uma coluna, sendo 10 colunas ao todo. Cada token tem a configuração conforme a \fullref{tab:colunasUD}, com uma tabulação (\textit{Tab}) separando as colunas. Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{underline}.
+Os treebanks adaptados para a gramática UD são disponibilizados no formato CoNLL-U, em que há um token por linha. Cada anotação de cada token, por sua vez, é disposta em uma coluna, sendo 10 colunas ao todo. Cada token tem a configuração conforme a \fullref{tab:colunasUD}, com uma tabulação (\textit{Tab}) separando as colunas. Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{underline}, conforme diretivas da página do \href{https://universaldependencies.org/format}{formato CoNLL-U} (acesso em 28 de outubro de 2019).
 
 \begin{table}
     \centering
@@ -50,6 +50,22 @@ Os treebanks adaptados para a gramática UD são disponibilizados no formato CoN
     \caption{Colunas do formato UD 2.0}
     \label{tab:colunasUD}
 \end{table}
+
+\section{Princípios}\label{sec:principios}
+
+	De \href{https://universaldependencies.org/introduction.html}{Página do Universal Dependencies} (acesso em 28 de outubro de 2019).
+	
+	What is needed for UD to be successful?
+	The secret to understanding the design and current success of UD is to realize that the design is a very subtle compromise between approximately 6 things:
+	
+	\begin{enumerate}
+		\item UD needs to be satisfactory on linguistic analysis grounds for individual languages.
+		\item UD needs to be good for linguistic typology, i.e., providing a suitable basis for bringing out cross-linguistic parallelism across languages and language families.
+		\item UD must be suitable for rapid, consistent annotation by a human annotator.
+		\item UD must be suitable for computer parsing with high accuracy.
+		\item UD must be easily comprehended and used by a non-linguist, whether a language learner or an engineer with prosaic needs for language processing. We refer to this as seeking a habitable design, and it leads us to favor traditional grammar notions and terminology.
+		\item UD must support well downstream language understanding tasks (relation extraction, reading comprehension, machine translation, …).
+	\end{enumerate}
 
 \section{Colunas/anotações}\label{sec:colunas}
 
@@ -603,6 +619,10 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
 
+\section{Locuções verbais}\label{sec:deplocverbal}
+
+	Ver \fullref{sec:verbosauxiliares}.
+
 \section{Estruturas comparativas}
 
 Estruturas comparativas são de anotação complexa, o que se verifica pela existência de um \href{https://universaldependencies.org/workgroups/comparatives.html}{working group (WG) em UD} dedicado especialmente a elas. A seguir, listamos as frases utilizadas no WG, traduzidas em português, e com a anotação adequada, além de algumas frases de anotação complexa no Bosque-UD.
@@ -693,6 +713,8 @@ OBS.: Consideramos \say{Não é que} como MWE.
     	\end{figure}{}
 
 \chapter*{Apêndice}
+
+	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
 	Todas as listas são retiradas do corpus Bosque-UD em sua versão 2.5.
 	
