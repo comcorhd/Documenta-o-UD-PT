@@ -100,8 +100,6 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
     \centering
     \begin{tabular}{| c | c |}
     \hline
-    \textbf{upos} & \textbf{Observações} \\
-    \hline
     ADJ & adjetivos e numerais ordinais \\
     \hline
     ADP & preposições \\
@@ -110,7 +108,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
     \hline
     ADV & advérbio \\
     \hline
-    AUX & \fullref{sec:verbosauxiliares} \\
+    AUX & verbos auxiliares e copulativos \\
     \hline
     SYM & símbolos \\
     \hline
@@ -124,7 +122,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
     \hline
     PROPN & nomes próprios, apenas se com inicial maiúscula \\
     \hline
-    NUM & numeral - exceto os ordinais, que são adjetivos \\
+    NUM & numerais - exceto os ordinais, que são adjetivos \\
     \hline
     PART & partícula \\
     \hline
@@ -180,6 +178,8 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	\subsection{Verbo \textit{ser} como voz passiva}\label{sec:servozpassiva}
 	
 		A anotação de \say{ser} como voz passiva, além do upos \emph{AUX}, deve receber deprel \emph{aux:pass}.
+
+		Para o fenômeno da voz passiva, ver Xxx.
 
 		\fullref{dep:serPASS}
 
@@ -602,6 +602,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				ADV \& PRON \& AUX \& ADV \& NOUN \& ADP \& PRON \& PUNCT \\
 				Talvez \& isto \& seja \& muito \& barulho \& por \& nada \& . \\
 				talvez \& isto \& ser \& muito \& barulho \& por \& nada \& . \\
+				\& PronType=Dem \& \& \& \& \& \& \\
 			\end{deptext}
 			\depedge{5}{1}{advmod}
 			\depedge{5}{2}{nsubj}
@@ -612,8 +613,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			\depedge{5}{8}{punct}
 			\deproot{5}{root}
 		\end{dependency}
-		\caption{Talvez \textit{isto} seja muito barulho por nada
-		}\label{dep:pronsubst}
+		\caption{Talvez \textit{isto} seja muito barulho por nada}\label{dep:pronsubst}
 	\end{figure*}
 
 	\begin{figure*}[htbp]
@@ -624,6 +624,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				DET \& NOUN \& VERB \& PRON \& DET \& NOUN \& ADJ \& PUNCT \\
 				Aquele \& pensamento \& provocou \& me \& um \& arrepio \& delicioso \& . \\
 				aquele \& pensamento \& provocar \& eu \& um \& arrepio \& delicioso \& . \\
+				PronType=Dem \& \& \& \& \& \& \& \\
 			\end{deptext}
 			\deproot{3}{root}
 			\depedge{2}{1}{det}
@@ -680,6 +681,130 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		\end{dependency}
 		\caption{Eram \textit{o} retrato d\textit{o} cérebro deste partido}\label{dep:artdet}
 	\end{figure*}
+
+	\subsection{Pronomes demonstrativos}\label{sec:prondem}
+
+		Pronomes demonstrativos devem receber a etiqueta \emph{PronType=Dem} na coluna feats.
+
+		Podem ser classificados tanto como pronomes substantivos, quando substituem um substantivo (\fullref{dep:pronsubst}), quanto como pronomes adjetivos (\fullref{dep:pronadj}), quando modificam um substantivo.
+
+	\subsection{Pronomes relativos}
+
+		Pronomes relativos devem receber o valor \emph{PronType=Rel} na coluna feats.
+
+		\say{Cujo/a} são os únicos pronomes relativos que são adjetivos (\emph{DET}), e não substantivos.
+
+		\fullref{dep:relque}
+
+		\fullref{dep:relonde}
+
+		\fullref{dep:relcuja}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& PRON \& VERB \& AUX \& DET \& NOUN \& PUNCT \& PUNCT \& VERB \& PUNCT \\
+					O \& que \& fizeram \& foi \& um \& absurdo \& » \& , \& disse \& . \\
+					o \& que \& fazer \& ser \& um \& absurdo \& » \& , \& dizer \& . \\
+				\end{deptext}
+				\depedge{9}{6}{parataxis}
+				\depedge{3}{2}{det}
+				\depedge{1}{3}{acl:relcl}
+				\depedge{6}{4}{cop}
+				\depedge{6}{5}{det}
+				\depedge{6}{7}{punct}
+				\depedge{6}{8}{punct}
+				\depedge{9}{10}{punct}
+				\depedge{6}{1}{nsubj}
+				\deproot{9}{root}
+			\end{dependency}
+			\caption{O \emph{que} fizeram foi um absurdo», disse}\label{dep:relque}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					VERB \& DET \& NOUN \& PRON \& DET \& NOUN \& VERB \& PUNCT \\
+					Observou \& os \& lugares \& onde \& essas \& pessoas \& almoçam \& . \\
+					observar \& o \& lugar \& onde \& esse \& pessoa \& almoçar \& . \\
+					\& \& \& PronType=Rel \& \& \& \& \\
+				\end{deptext}
+				\depedge{7}{4}{obl}
+				\depedge{6}{5}{det}
+				\depedge{7}{6}{nsubj}
+				\depedge{3}{7}{acl:relcl}
+				\depedge{3}{2}{det}
+				\depedge{1}{3}{obj}
+				\depedge{3}{7}{acl:relcl}
+				\depedge{1}{8}{punct}
+				\deproot{1}{root}
+			\end{dependency}
+			\caption{Observou \emph{onde} essas pessoas almoçam}\label{dep:relonde}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& DET \& NOUN \& VERB \& NOUN \\
+					Uma \& galeria \& cuja \& concepção \& permitirá \& intervenções \& . \\
+					um \& galeria \& cujo \& concepção \& permitir \& intervenção \& . \\
+					\& \& PronType=Rel \& \& \& \\
+				\end{deptext}
+				\depedge{2}{1}{det}
+				\depedge{5}{4}{nsubj}
+				\depedge{4}{3}{det}
+				\depedge{2}{5}{acl:relcl}
+				\depedge{5}{6}{obj}
+				\deproot{2}{root}
+				\depedge{2}{7}{punct}
+			\end{dependency}
+			\caption{Uma galeria \emph{cuja} concepção permitirá intervenções no subsolo}\label{dep:relcuja}
+		\end{figure*}
+
+
+	\subsection{\emph{A} mais querida, \emph{O} que eu sei: pronome ou artigo?}
+
+		Em frases como \fullref{dep:amaisquerida} e \fullref{dep:oqueeusei}, preferimos a leitura de um pronome substantivo demonstantivo (\emph{PRON}).
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& ADV \& ADJ \\
+					A \& mais \& querida \\
+					a \& mais \& querido \\
+					PronType=Dem \& \& \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{amod}
+				\depedge{3}{2}{advmod}
+			\end{dependency}
+			\caption{\emph{A} mais querida}\label{dep:amaisquerida}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& PRON \& PRON \& VERB \\
+					O \& que \& eu \& sei \\
+					o \& que \& eu \& sei \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{4}{2}{obj}
+				\depedge{4}{3}{nsubj}
+				\depedge{1}{4}{acl:relcl}
+			\end{dependency}
+			\caption{\emph{O} que eu sei}\label{dep:oqueeusei}
+		\end{figure*}
 
 	
 \chapter{Atributos morfológicos (feats)}\label{sec:feats}
