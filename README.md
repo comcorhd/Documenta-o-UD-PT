@@ -26,7 +26,7 @@ Fluxo de trabalho para preparação da Documentação UD em português (e para l
 3) Instalar o [Git (Windows)](https://git-scm.com/downloads) e **clonar** a *sua* versão do repositório:
 
 ```
-git clone https://github.com/{username}/Documenta-o-UD-PT
+git clone https://github.com/{seu username do github sem as chaves}/Documenta-o-UD-PT
 ```
 
 4) Instalar o [MiKTeX](https://miktex.org/download) e editar o arquivo **main.tex** com o compilador **XeLaTeX**.

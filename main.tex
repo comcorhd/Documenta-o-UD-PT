@@ -584,15 +584,23 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		    \caption{\textit{Primeira tentativa}}\label{dep:primeiratentativa}
 		\end{figure*}
 	
-\section{Pronomes substantivos, pronomes adjetivos, interrogativos, artigos e determinantes}\label{sec:pronedet}
+\section{Pronomes substantivos, pronomes adjetivos e artigos}\label{sec:pronedet}
 
 	Pronomes substantivos são anotados como de upos \textit{PRON} e são núcleo do sintagma de que fazem parte, recebendo a deprel do sintagma (\fullref{dep:pronsubst}).
 	
 	Pronomes adjetivos são anotados como de upos \textit{DET}, e recebem deprel \textit{det}, sendo dependentes do token que modificam (\fullref{dep:pronadj}).
 	
-	Pronomes interrogativos, assim como os pronomes substantivos, têm upos \textit{PRON} e recebem o deprel do sintagma (\fullref{dep:pronint}). Não confundir com os advérbios interrogativos (Xxx), que podem inclusive se tornar conjunções quando introduzindo orações subordinadas (Xxx).
-	
-	Artigos/determinantes têm anotação similar à dos pronomes adjetivos (\textit{DET/det}), como na \fullref{dep:artdet}.
+	Artigos/determinantes têm anotação similar à dos pronomes adjetivos (\textit{DET/det}), como na \fullref{dep:artdet}, e devem receber o valor \emph{PronType=Art} na coluna feats, além de \emph{Definite=[Def, Ind]}.
+
+	Ver também:
+
+	\fullref{sec:pronint}
+
+	\fullref{sec:prondem}
+
+	\fullref{sec:pronrel}
+
+	\fullref{sec:pronind}
 	
 	\begin{figure*}[htbp]
 		\centering
@@ -643,30 +651,11 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		\vspace{.8cm}
 		\begin{dependency}
 			\begin{deptext}
-				CCONJ \& VERB \& PRON \& PRON \& ADV \& ADV \& VERB \& PUNCT \\
-				E \& sabe \& quem \& eu \& ainda \& não \& vi \& ? \\
-				e \& saber \& quem \& eu \& ainda \& não \& ver \& ? \\
-			\end{deptext}
-			\depedge{2}{1}{cc}
-			\depedge{7}{3}{obj}
-			\depedge{2}{7}{ccomp}
-			\depedge{2}{8}{punct}
-			\depedge{7}{4}{nsubj}
-			\depedge{7}{6}{advmod}
-			\depedge{7}{5}{advmod}
-			\deproot{2}{root}
-		\end{dependency}
-		\caption{E sabe \textit{quem} eu ainda não vi?}\label{dep:pronint}
-	\end{figure*}
-
-	\begin{figure*}[htbp]
-		\centering
-		\vspace{.8cm}
-		\begin{dependency}
-			\begin{deptext}
 				AUX \& DET \& NOUN \& ADP \& DET \& NOUN \& ADP \& DET \& NOUN \& PUNCT \\
 				Eram \& o \& retrato \& de \& o \& cérebro \& de \& este \& partido \& . \\
 				ser \& o \& retrato \& de \& o \& cérebro \& de \& este \& partido \& . \\
+				      \& Definite=Det \& \& \& \& \& \& \& \& \\
+				      \& PronType=Art \& \& \& \& \& \& \& \& \\
 			\end{deptext}
 			\depedge{3}{1}{cop}
 			\depedge{3}{6}{nmod}
@@ -682,13 +671,39 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		\caption{Eram \textit{o} retrato d\textit{o} cérebro deste partido}\label{dep:artdet}
 	\end{figure*}
 
+	\subsection{Pronomes interrogativos}\label{sec:pronint}
+
+		Pronomes interrogativos, assim como os pronomes substantivos, têm upos \textit{PRON} e recebem o deprel do sintagma (\fullref{dep:pronint}). Não confundir com os advérbios interrogativos (Xxx), que podem inclusive se tornar conjunções quando introduzindo orações subordinadas (Xxx).
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					CCONJ \& VERB \& PRON \& PRON \& ADV \& ADV \& VERB \& PUNCT \\
+					E \& sabe \& quem \& eu \& ainda \& não \& vi \& ? \\
+					e \& saber \& quem \& eu \& ainda \& não \& ver \& ? \\
+					\& \& PronType=Int \& \& \& Polarity=Neg \& \& \\
+				\end{deptext}
+				\depedge{2}{1}{cc}
+				\depedge{7}{3}{obj}
+				\depedge{2}{7}{ccomp}
+				\depedge{2}{8}{punct}
+				\depedge{7}{4}{nsubj}
+				\depedge{7}{6}{advmod}
+				\depedge{7}{5}{advmod}
+				\deproot{2}{root}
+			\end{dependency}
+			\caption{E sabe \textit{quem} eu ainda não vi?}\label{dep:pronint}
+		\end{figure*}
+
 	\subsection{Pronomes demonstrativos}\label{sec:prondem}
 
 		Pronomes demonstrativos devem receber a etiqueta \emph{PronType=Dem} na coluna feats.
 
 		Podem ser classificados tanto como pronomes substantivos, quando substituem um substantivo (\fullref{dep:pronsubst}), quanto como pronomes adjetivos (\fullref{dep:pronadj}), quando modificam um substantivo.
 
-	\subsection{Pronomes relativos}
+	\subsection{Pronomes relativos}\label{sec:pronrel}
 
 		Pronomes relativos devem receber o valor \emph{PronType=Rel} na coluna feats.
 
@@ -708,6 +723,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					PRON \& PRON \& VERB \& AUX \& DET \& NOUN \& PUNCT \& PUNCT \& VERB \& PUNCT \\
 					O \& que \& fizeram \& foi \& um \& absurdo \& » \& , \& disse \& . \\
 					o \& que \& fazer \& ser \& um \& absurdo \& » \& , \& dizer \& . \\
+ 					\& PronType=Rel \& \& \& \& \& \& \& \& \\
 				\end{deptext}
 				\depedge{9}{6}{parataxis}
 				\depedge{3}{2}{det}
@@ -768,6 +784,50 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		\end{figure*}
 
 
+	\subsection{Pronomes indefinidos}\label{sec:pronind}
+
+		Pronomes indefinidos devem receber o valor \emph{PronType=Ind} na coluna feats, e podem ser pronomes substantivos, como na \fullref{dep:pronindsubst}, ou adjetivos, como na \fullref{dep:pronindadj}.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& VERB \& DET \& NOUN \\
+					Ninguém \& força \& sua \& escalação \\
+					ninguém \& forçar \& seu \& escalação \\
+					PronType=Ind \& \& \& \\
+				\end{deptext}
+				\depedge{4}{3}{det}
+				\depedge{2}{4}{obj}
+				\depedge{2}{1}{nsubj}
+				\deproot{2}{root}
+			\end{dependency}
+			\caption{\emph{Ninguém} força sua escalação}\label{dep:pronindsubst}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& DET \& NOUN \& ADJ \& PUNCT \\
+					Essa \& divisão \& gera \& algumas \& distorções \& terríveis \& . \\
+					esse \& divisão \& gerar \& algum \& distorção \& terrível \& . \\
+					\& \& \& PronType=Ind \& \& \& \\
+				\end{deptext}
+				\depedge{3}{2}{nsubj}
+				\depedge{2}{1}{det}
+				\depedge{5}{4}{det}
+				\deproot{3}{root}
+				\depedge{5}{6}{amod}
+				\depedge{3}{7}{punct}
+				\depedge{3}{5}{obj}
+			\end{dependency}
+			\caption{Essa divisão gera \emph{algumas} distorções terríveis}\label{dep:pronindadj}
+		\end{figure*}
+
+
 	\subsection{\emph{A} mais querida, \emph{O} que eu sei: pronome ou artigo?}
 
 		Em frases como \fullref{dep:amaisquerida} e \fullref{dep:oqueeusei}, preferimos a leitura de um pronome substantivo demonstantivo (\emph{PRON}).
@@ -796,7 +856,8 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\begin{deptext}
 					PRON \& PRON \& PRON \& VERB \\
 					O \& que \& eu \& sei \\
-					o \& que \& eu \& sei \\
+					o \& que \& eu \& saber \\
+					\& PronType=Dem \& \& \\
 				\end{deptext}
 				\deproot{1}{root}
 				\depedge{4}{2}{obj}
