@@ -26,7 +26,7 @@ Fluxo de trabalho para preparação da Documentação UD em português (e para l
 3) Instalar o [Git (Windows)](https://git-scm.com/downloads) e **clonar** a *sua* versão do repositório:
 
 ```
-git clone https://github.com/{username}/Documenta-o-UD-PT
+git clone https://github.com/{seu username no github sem as chaves}/Documenta-o-UD-PT
 ```
 
 4) Instalar o [MiKTeX](https://miktex.org/download) e editar o arquivo **main.tex** com o compilador **XeLaTeX**.
@@ -51,9 +51,6 @@ git commit -m "sobre o que é o commit #número_do_issue_se_houver"
 git push
 ```
 
-4) Enviar as alterações para a versão oficial do repositório:
-
-[![Enviar PR no GitHub](https://img.shields.io/github/issues-pr/alvelvis/Documenta-o-UD-PT.svg?style=social)](https://github.com/alvelvis/Documenta-o-UD-PT/pulls)
 
 ## Para atualizar a documentação
 
