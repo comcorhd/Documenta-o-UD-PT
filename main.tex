@@ -241,7 +241,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	\subsection{Locuções verbais aspectuais/modais não existem no UD}\label{sec:auxaspecto}
 	
-		Em UD, não existem locuções verbais aspectuais ou modais, de modo que as sentenças são anotadas como em \fullref{dep:locverbalUD}.
+		Em UD, não existem locuções verbais aspectuais ou modais, de modo que as sentenças são anotadas como na \fullref{dep:locverbalUD} e \fullref{dep:locverbalUD2}.
 		
 		Para entender melhor o fenômeno das locuções verbais e conhecer um modelo de anotação para o fenômeno, ver \fullref{sec:locverbalJDP}.
 		
@@ -266,6 +266,29 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			\caption{A seleção \emph{deve contar} hoje com Giovane}
 			\label{dep:locverbalUD}
 		\end{figure*}
+		
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& PROPN \& AUX \& AUX \& SCONJ \& VERB \& DET \& NOUN \& PUNCT \\
+					O \& Tribunal \& vai \& começar \& a \& ouvir \& as \& testemunhas \& . \\
+					o \& Tribunal \& ir \& começar \& a \& ouvir \& o \& testemunha \& . \\
+				\end{deptext}
+				\depedge{2}{1}{det}
+				\deproot{4}{root}
+				\depedge{6}{8}{obj}
+				\depedge{8}{7}{det}
+				\depedge{4}{2}{nsubj}
+				\depedge{4}{9}{punct}
+				\depedge{4}{3}{aux}
+				\depedge{4}{6}{xcomp}
+				\depedge{6}{5}{mark}
+			\end{dependency}
+			\caption{O Tribunal vai \emph{começar a ouvir} as testemunhas}
+			\label{dep:locverbalUD2}
+		\end{figure*}
 	
 	\subsection{Proposta de anotação para as locuções verbais aspectuais/modais}\label{sec:locverbalJDP}
 
@@ -273,33 +296,13 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		
 		O que distingue a locução verbal aspectual da modal é que, na primeira, o verbo auxiliar perdeu o seu conteúdo lexical e serve apenas para caracterizar a temporalidade da ação do verbo principal, e na segunda, o verbo auxiliar (ou pleno, segundo algumas gramáticas) caracteriza um julgamento do enunciador sobre a ação do verbo principal.
 		
-		Alguns gramáticos divergem sobre como a classificação se dá, portanto propomos apenas herdar, no Bosque-UD, o que já era a anotação originária do PALAVRAS \citep{bick2000parsing}, e não modificá-la em relação a quais devem ser os verbos auxiliares. Para o PALAVRAS (no Bosque-UD, até a versão 2.4), locuções verbais modais não são locuções, isto é, os dois verbos se configuram como verbos plenos (\fullref{dep:verbmodal}).
+		Alguns gramáticos divergem sobre como a classificação se dá, portanto propomos apenas herdar, no Bosque-UD, o que já era a anotação originária do PALAVRAS \citep{bick2000parsing}, e não modificá-la em relação a quais devem ser os verbos auxiliares.
+		
+		Para o PALAVRAS (no Bosque-UD, até a versão 2.4), locuções verbais modais não são locuções, isto é, os dois verbos se configuram como verbos plenos, tal como é a anotação seguindo as diretivas do UD (\fullref{dep:locverbalUD}).
 
-		Nos casos de locução verbal aspectual, sim, há uma locução, isto é, o primeiro verbo é auxiliar (\textit{AUX/aux}), e o segundo, verbo pleno (\textit{VERB}). Às vezes há uma partícula interveniente no meio da locução, como na \fullref{dep:auxphrasalverb}, em que há um \say{a} entre \say{começar} e \say{ouvir}. Encaramos que estamos diante de um fenômeno de \emph{phrasal verb}, uma MWE do tipo \emph{AUX}, como sugerido em \citet{elvis2019locverbal}. Na frase, \emph{vai ouvir} é uma locução verbal de tempo composto (\fullref{sec:auxtempocomposto}), e \say{começar a ouvir} é uma locução verbal aspectual, sendo \say{começar a} uma expressão multi-palavra (MWE) do tipo auxiliar.
+		Nos casos de locução verbal aspectual, para o PALAVRAS, há uma locução, isto é, o primeiro verbo é auxiliar (\textit{AUX/aux}), e o segundo, verbo pleno (\textit{VERB}). Às vezes há uma partícula interveniente no meio da locução, como na \fullref{dep:auxphrasalverb}, em que há um \say{a} entre \say{começar} e \say{ouvir}. Encaramos que estamos diante de um fenômeno de \emph{phrasal verb}, uma MWE do tipo \emph{AUX}, como sugerido em \citet{elvis2019locverbal}. Na frase, \emph{vai ouvir} é uma locução verbal de tempo composto (\fullref{sec:auxtempocomposto}), e \say{começar a ouvir} é uma locução verbal aspectual, sendo \say{começar a} uma expressão multi-palavra (MWE) do tipo auxiliar.
 
 		\fullref{tab:auxphrasalverb}
-
-		\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					DET \& NOUN \& VERB \& VERB \& ADV \& ADP \& PROPN \& PUNCT \\
-					A \& seleção \& deve \& contar \& hoje \& com \& Giovane \& . \\
-					o \& seleção \& dever \& contar \& hoje \& com \& Giovane \& . \\
-				\end{deptext}
-				\depedge{2}{1}{det}
-				\depedge{4}{5}{advmod}
-				\deproot{3}{root}
-				\depedge{4}{7}{obl}
-				\depedge{7}{6}{case}
-				\depedge{3}{2}{nsubj}
-				\depedge{3}{8}{punct}
-				\depedge{3}{4}{xcomp}
-			\end{dependency}
-			\caption{A seleção \emph{deve contar} hoje com Giovane}
-			\label{dep:verbmodal}
-		\end{figure*}
 
 		\begin{figure*}[htbp]
 			\centering
@@ -384,7 +387,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	\subsection{Não são locuções verbais: dois verbos plenos}
 
-		Ainda segundo as decisões do PALAVRAS \citep{bick2000parsing}, há outras tantas colocações de dois verbos que não são locuções verbais. Portanto, são todos casos de verbos plenos, de upos \emph{VERB}, em que o segundo verbo é dependente do primeiro, como oração subordinada substantiva objetiva direta reduzida de infinitivo (Xx).
+		Quando não estamos diante de verbos de ligação, voz passiva ou locuções verbais de tempo composto, temos as colocações de dois verbos plenos que não são locuções verbais. Portanto, são todos casos de verbos plenos, de upos \emph{VERB}, em que o segundo verbo é dependente do primeiro, como oração subordinada substantiva objetiva direta reduzida de infinitivo (Xx).
 
 		\fullref{dep:naolocverbal}
 
@@ -416,13 +419,34 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 \section{Numerais}\label{sec:numerais}
 
-	Numerais cardinais (360) e fracionários (dois terços) devem ser anotados como de upos \emph{NUM}, sejam por extenso ou em algarismos. Numerais multiplicativos (dobro, triplo), por outro lado, devem ser anotados como de upos \emph{NUM}.
+	Numerais cardinais (360) e fracionários (\fullref{dep:numfrac}) devem ser anotados como de upos \emph{NUM}, sejam por extenso ou em algarismos. Numerais multiplicativos (dobro, triplo), por outro lado, devem ser anotados como de upos \emph{NUM}.
 	
 	Numerais coletivos (como \say{dezenas}, \say{centenas}, \say{milhares}, etc.), no corpus Bosque-UD, podem estar anotados de duas formas diferentes: como \emph{NUM}, caso seja um número exato (\say{duas centenas}, \say{dois bilhões}), ou como \emph{NOUN}, quando é indefinido (\say{centenas de pessoas}).
 	
 	Numerais ordinais devem ser anotados como \textit{ADJ} (\fullref{sec:adjounum}).
 	
 	Ver também: \fullref{sec:numeroscompostos}.
+	
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				NUM \& NOUN \& CCONJ \& NUM \\
+				2 \& casas \& e \& meia \\
+				2 \& casa \& e \& meio \\
+				NumType=Card \& \& \& NumType=Frac \\
+				MWE=2\_e\_meia \& \& \& \\
+				MWEPOS=NUM \& \& \& \\
+			\end{deptext}
+			\depedge{2}{1}{nummod}
+			\depedge{1}{3}{flat}
+			\depedge{1}{4}{flat}
+			\deproot{2}{root}
+		\end{dependency}
+		\caption{\textit{2 casas e meia}}
+		\label{dep:numfrac}
+	\end{figure*}
 
 	\subsection{Números compostos}\label{sec:numeroscompostos}
 	
@@ -440,6 +464,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NUM \& CCONJ \& NUM \\
 					Trinta \& e \& sete \\
 					trinta \& e \& sete \\
+					NumType=Card \& \& NumType=Card \\
 					MWE=trinta\_e\_sete \& \& \\
 					MWEPOS=NUM \& \& \\
 				\end{deptext}
@@ -459,6 +484,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NOUN \& ADP \& NUM \& NUM \& ADP \& NOUN \\
 					Montante \& de \& 1300 \& milhões \& de \& dólares \\
 					montante \& de \& 1300 \& milhão \& de \& dólar \\
+					\& \& NumType=Card \& NumType=Card \\
 					\& \& MWE=1300\_milhões \& \& \& \\
 					\& \& MWEPOS=NUM \& \& \& \\
 				\end{deptext}
@@ -485,6 +511,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					SYM \& NUM \\
 					R\$ \& 50 \\
 					R\$ \& 50 \\
+					\& NumType=Card \\
 				\end{deptext}
 				\depedge{1}{2}{nummod}
 				\deproot{1}{root}
@@ -501,6 +528,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					SYM \& NUM \\
 					U\$ \& 50 \\
 					U\$ \& 50 \\
+					\& NumType=Card \\
 				\end{deptext}
 				\depedge{1}{2}{nummod}
 				\deproot{1}{root}
@@ -517,6 +545,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NUM \& SYM \\
 					50 \& \% \\
 					50 \& \% \\
+					NumType=Card \& \\
 				\end{deptext}
 				\depedge{2}{1}{nummod}
 				\deproot{2}{root}
@@ -533,6 +562,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NUM \& NUM \\
 					2 \& centenas \\
 					2 \& centena \\
+					NumType=Card \& NumType=Card \\
 				\end{deptext}
 				\depedge{2}{1}{nummod}
 				\deproot{2}{root}
@@ -543,7 +573,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	
 	\subsection{\textit{50\% das pessoas}: quem é o pai?}\label{sec:50porcentodaspessoas}
 	
-		Sempre que houver sintagma preposicionado, o sintagma anterior será o head, como em \fullref{dep:50porcentodaspessoas} (onde o símbolo é o head, segundo \fullref{sec:rs50}).
+		Sempre que houver sintagma preposicionado, o sintagma anterior será o head, como em \fullref{dep:50porcentodaspessoas} (onde o símbolo é o head, segundo \fullref{sec:rs50}), e \fullref{dep:montantede}.
 	
 		\begin{figure*}[htbp]
 			\centering
@@ -553,6 +583,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NUM \& SYM \& ADP \& DET \& NOUN \\
 					50 \& \% \& de \& as \& pessoas \\
 					50 \& \% \& de \& as \& pessoa \\
+					NumType=Card \\
 				\end{deptext}
 				\depedge{2}{1}{nummod}
 				\deproot{2}{root}
@@ -654,7 +685,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				AUX \& DET \& NOUN \& ADP \& DET \& NOUN \& ADP \& DET \& NOUN \& PUNCT \\
 				Eram \& o \& retrato \& de \& o \& cérebro \& de \& este \& partido \& . \\
 				ser \& o \& retrato \& de \& o \& cérebro \& de \& este \& partido \& . \\
-				      \& Definite=Det \& \& \& \& \& \& \& \& \\
+				      \& Definite=Def \& \& \& \& \& \& \& \& \\
 				      \& PronType=Art \& \& \& \& \& \& \& \& \\
 			\end{deptext}
 			\depedge{3}{1}{cop}
@@ -663,7 +694,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			\depedge{3}{2}{det}
 			\depedge{6}{4}{case}
 			\depedge{6}{5}{det}
-			\depedge{9}{7}{case}
+			\depedge{9}{7}{case}'
 			\depedge{9}{8}{det}
 			\depedge{3}{10}{punct}
 			\deproot{3}{root}
@@ -935,6 +966,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					ADJ \& NUM \& NOUN \& ADP \& NOUN \& PUNCT \\
 					Primeiros \& dois \& anos \& de \& mandato \& . \\
 					primeiro \& dois \& ano \& de \& mandato \& . \\
+					NumType=Ord \\
 				\end{deptext}
 				\deproot{3}{root}
 				\depedge{3}{1}{amod}
@@ -985,6 +1017,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NUM \& NOUN \\
 					3.600 \& concessionários \\
 					3.600 \& concessionário \\
+					NumType=Card \\
 				\end{deptext}
 				\deproot{2}{root}
 				\depedge{2}{1}{nummod}
@@ -1125,7 +1158,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			\caption{A solução que deram, \emph{obter} equilíbrio}\label{dep:apostooracional}
 		\end{figure*}
 
-		\subsubsection{Orações com \emph{, o que}}\label{sec:apostooque}
+		\subsubsection{Orações com '', o que''}\label{sec:apostooque}
 
 			Em orações com a presença de \say{, o que}, analisamos o \say{o} como pronome demonstrativo (conforme \fullref{sec:amaisquerida}), funcionando como aposto da oração antecendente (\fullref{dep:apostooque}).
 
@@ -1155,28 +1188,31 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 		\subsubsection{Apostos coordenados}\label{sec:apostoscoordenados}
 
-			Apostos coordenados são analisados como apostos dependentes da primeira palavra, e não como coordenações.
+			Apostos coordenados são analisados como apostos dependentes da primeira palavra, e não como coordenações, como na \fullref{dep:apostoscoordenados}.
 
 			\begin{figure*}[htbp]
 				\centering
 				\vspace{.8cm}
 				\begin{dependency}
 					\begin{deptext}
-						DET \& NOUN \& ADJ \& PUNCT \& PROPN \& PUNCT \& PROPN \& CCONJ \& PROPN \\
-						Os \& continentes \& obstinados \& , \& África \& , \& Ásia \& e \& Europa \\
-						o \& continente \& obstinado \& , \& África \& , \& Ásia \& e \& Europa \\ 
+						DET \& NOUN \& PUNCT \& PROPN \& PROPN \& PUNCT \& DET \& PUNCT \& PROPN \& PUNCT \\
+						O \& réu \& , \& Alexandre \& Cardoso \& , \& o \& « \& Topeira \& » \\
+						o \& réu \& , \& Alexandre \& Cardoso \& , \& o \& « \& Topeira \& » \\
+						%Definite=Def \& NumType=Ord \\
+						%PronType=Art \\
 					\end{deptext}
 					\deproot{2}{root}
 					\depedge{2}{1}{det}
-					\depedge{2}{3}{amod}
-					\depedge{2}{5}{appos}
-					\depedge{5}{4}{punct}
-					\depedge{7}{6}{punct}
-					\depedge{2}{7}{appos}
-					\depedge{9}{8}{cc}
+					\depedge{4}{3}{punct}
+					\depedge{4}{5}{flat:name}
+					\depedge{4}{6}{punct}
+					\depedge{2}{4}{appos}
 					\depedge{2}{9}{appos}
+					\depedge{9}{8}{punct}
+					\depedge{9}{7}{det}
+					\depedge{9}{10}{punct}
 				\end{dependency}
-				\caption{Os continentes obstinados, \emph{África}, \emph{Ásia} e \emph{Europa}}\label{dep:apostoscoordenados}
+				\caption{O terceiro réu, \emph{Alexandre} Cardoso, o «\emph{Topeira}»}\label{dep:apostoscoordenados}
 			\end{figure*}
 
 \section{Locuções verbais}\label{sec:deplocverbal}
