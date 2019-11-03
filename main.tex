@@ -143,7 +143,9 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 \section{Verbos auxiliares}\label{sec:verbosauxiliares}
 
-	Verbos auxiliares são classificados como \emph{AUX}. O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}). De modo geral, classificamos como verbos auxiliares os verbos de ligação (\fullref{sec:verbosdeligacao}), o verbo auxiliar na voz passiva (\fullref{sec:servozpassiva}), as locuções de tempo composto (\fullref{sec:auxtempocomposto}), e as locuções verbais aspectuais e modais. No UD, as locuções verbais aspectuais/modais não existem, ou seja, os verbos são anotados como se constituíssem duas orações (\fullref{sec:auxaspecto}). No entanto, conforme apontado no trabalho supracitado, é possível propor uma anotação que leve em conta a auxiliaridade das locuções verbais aspectuais (\fullref{sec:locverbalJDP}).
+	Verbos auxiliares são classificados como \emph{AUX}. O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}). De modo geral, classificamos como verbos auxiliares os verbos de ligação (\fullref{sec:verbosdeligacao}), o verbo auxiliar na voz passiva (\fullref{sec:servozpassiva}), as locuções de tempo composto (\fullref{sec:auxtempocomposto}), e as locuções verbais aspectuais e modais.
+	
+	No UD, as locuções verbais aspectuais e modais não são classificadas como locução, ou seja, os verbos são anotados como se constituíssem duas orações distintas (\fullref{sec:auxaspecto}). No entanto, conforme apontado no trabalho supracitado, é possível propor uma anotação que leve em conta a auxiliaridade das locuções verbais aspectuais (\fullref{sec:locverbalJDP}).
 	
 	Via de regra, verbos auxiliares (\emph{AUX}) não podem ter dependentes, e dependem de um verbo principal (\emph{VERB}). O deprel pode ser \emph{cop}, \emph{aux} ou \emph{aux:pass}, de acordo com a função sintática.
 
@@ -934,7 +936,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
 
-\section{Adjuntos e argumentos do substantivo}
+\section{Adjuntos e argumentos do substantivo}\label{sec:adjuntoseargumentosdosubstantivo}
 
 	Ver subseções:
 
@@ -1215,9 +1217,65 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\caption{O terceiro réu, \emph{Alexandre} Cardoso, o «\emph{Topeira}»}\label{dep:apostoscoordenados}
 			\end{figure*}
 
+\section{Argumentos do adjetivo}\label{sec:argumentosdoadjetivo}
+	
+	Os argumentos do adjetivo não devem ser confundidos com os argumentos do nome (\fullref{sec:complementonominal}) nem do verbo (Xxx).
+	
+	Caso o complemento do adjetivo seja nominal, deve ter deprel \emph{obl}, conforme \fullref{dep:argumentoadjetivonominal}.
+	
+	Caso o complemento do adjetivo seja oracional, deve ter deprel \emph{ccomp}, conforme \fullref{dep:argumentoadjetivooracional}.
+	
+	\begin{figure*}[htbp]
+	\centering
+	\vspace{.8cm}
+	\begin{dependency}
+		\begin{deptext}
+			DET \& NOUN \& VERB \& DET \& NOUN \& ADJ \& ADP \& DET \& NOUN \& PUNCT \\
+			A \& reivindicação \& irritou \& os \& partidos \& favoráveis \& a \& a \& revisão \& . \\
+			o \& reivindicação \& irritar \& o \& partido \& favorável \& a \& a \& revisão \& . \\
+		\end{deptext}
+		\deproot{3}{root}
+		\depedge{3}{2}{nsubj}
+		\depedge{2}{1}{det}
+		\depedge{5}{4}{det}
+		\depedge{3}{5}{obj}
+		\depedge{5}{6}{amod}
+		\depedge{9}{8}{case}
+		\depedge{9}{7}{det}
+		\depedge{3}{10}{punct}
+		\depedge{6}{9}{obl}
+	\end{dependency}
+	\caption{A reivindicação irritou os partidos favoráveis à \emph{revisão}}\label{dep:argumentoadjetivonominal}
+\end{figure*}
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				DET \& NOUN \& VERB \& DET \& NOUN \& ADJ \& SCONJ \& VERB \& NOUN \& PUNCT \\
+				A \& reivindicação \& irritou \& os \& partidos \& favoráveis \& a \& rever \& candidaturas \& . \\
+				o \& reivindicação \& irritar \& o \& partido \& favorável \& a \& rever \& candidatura \& . \\
+			\end{deptext}
+			\deproot{3}{root}
+			\depedge{3}{2}{nsubj}
+			\depedge{2}{1}{det}
+			\depedge{5}{4}{det}
+			\depedge{3}{5}{obj}
+			\depedge{5}{6}{amod}
+			\depedge{8}{7}{mark}
+			\depedge{3}{10}{punct}
+			\depedge{6}{8}{ccomp}
+			\depedge{8}{9}{obj}
+		\end{dependency}
+		\caption{A reivindicação irritou os partidos favoráveis a \emph{rever} candidaturas}\label{dep:argumentoadjetivooracional}
+	\end{figure*}
+	
+	
+
 \section{Locuções verbais}\label{sec:deplocverbal}
 
-	Ver \fullref{sec:verbosauxiliares}.
+	Locuções verbais são os casos de dois verbos em que o primeiro tem upos \emph{AUX}, e o segundo, \emph{VERB}, sendo o primeiro um verbo auxiliar e o segundo, verbo pleno. Para identificar os casos de locução verbal, consultar \fullref{sec:verbosauxiliares}.
 
 \section{Estruturas comparativas}
 
