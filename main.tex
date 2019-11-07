@@ -936,6 +936,153 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
 
+\section{Argumentos do verbo}\label{sec:argumentosdoverbo}
+
+	Os argumentos de um verbo são os objetos de um verbo transitivo. Os objetos podem ser nominais (\fullref{sec:objetonominal}) ou oracionais (\fullref{sec:objetooracional}). 
+
+
+	\subsection{Caso seja nominal}\label{sec:objetonominal}
+
+		Em UD, caso o verbo possua apenas um objeto nominal em uma dada sentença, esse objeto deve obrigatoriamente ser direto (deprel \emph{obj}), independentemente da presença ou não de preposição, como na \fullref{dep:objapenas}, que tem anotação igual à \fullref{dep:objapenas2}.
+
+		Caso haja mais de um objeto, o primeiro será direto (seja ele nominal ou oracional), e o segundo, indireto (deprel \emph{iobj}), assim como na \fullref{dep:objeiobj}.
+
+		O objeto indireto prototípico é aquele que é beneficiário/destinatário da ação do verbo, como na \fullref{dep:iobjprototipico}.
+
+		Para diferenciar um objeto de um adjunto adverbial, no Bosque-UD, temos mantido a anotação original do PALAVRAS: quando a preposição possui a anotação \emph{PIV} na coluna de xpos (a coluna onde colocamos a anotação original do PALAVRAS), isso significa que é um caso de objeto, e não de adjunto.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& VERB \& PRON \\
+					Eu \& adoro \& você \\
+					eu \& adorar \& você \\
+				\end{deptext}
+				\deproot{2}{root}
+				\depedge{2}{3}{obj}
+				\depedge{2}{1}{nsubj}
+			\end{dependency}
+			\caption{Eu adoro \emph{você}}\label{dep:objapenas}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& VERB \& ADP \& PRON \\
+					Eu \& gosto \& de \& você \\
+					eu \& gostar \& de \& você \\
+				\end{deptext}
+				\deproot{2}{root}
+				\depedge{2}{1}{nsubj}
+				\depedge{2}{4}{obj}
+				\depedge{4}{3}{case}
+			\end{dependency}
+			\caption{Eu gosto de \emph{você}}\label{dep:objapenas2}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& ADV \& DET \& NOUN \& ADP \& NOUN \& ADP \& DET \& NOUN \\
+					O \& atacante \& pediu \& mais \& um \& dia \& de \& folga \& a \& o \& treinador \\
+					o \& atacante \& pedir \& mais \& um \& dia \& de \& folga \& a \& o \& treinador \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{2}{1}{det}
+				\depedge{3}{2}{nsubj}
+				\depedge{6}{5}{det}
+				\depedge{6}{4}{advmod}
+				\depedge{3}{6}{obj}
+				\depedge{8}{7}{case}
+				\depedge{6}{8}{nmod}
+				\depedge{3}{11}{iobj}
+				\depedge{11}{10}{det}
+				\depedge{11}{9}{case}
+			\end{dependency}
+			\caption{O atacante pediu mais um \emph{dia} de folga ao \emph{treinador}}\label{dep:objeiobj}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PROPN \& VERB \& ADP \& DET \& NOUN \& DET \& NOUN \& SCONJ \& VERB
+					Souza \& negou \& a \& os \& réus \& o \& direito \& de \& apelarem
+					Souza \& negar \& a \& o \& réu \& o \& direito \& de \& apelar
+				\end{deptext}
+				\deproot{2}{root}
+				\depedge{2}{1}{nsubj}
+				\depedge{2}{5}{iobj}
+				\depedge{5}{4}{det}
+				\depedge{5}{3}{case}
+				\depedge{2}{7}{obj}
+				\depedge{2}{6}{det}
+				\depedge{6}{9}{acl}
+				\depedge{9}{8}{mark}
+			\end{dependency}
+			\caption{Souza negou aos réus o direito de apelarem}\label{dep:iobjprototipico}
+		\end{figure*}
+
+
+	\subsection{Caso seja oracional}\label{sec:objetooracional}
+	
+		O objeto oracional é uma oração subordinada substantiva objetiva (direta ou indireta). Em UD, não há nenhuma diferenciação entre a anotação da oração objetiva direta e a indireta, mas deve-se notar outras diferenças em relação à análise das gramáticas do português.
+
+		De modo geral, orações subordinadas substantivas objetivas devem receber o deprel \emph{ccomp}, como na \fullref{dep:ccomp} e na \fullref{dep:ccomp2}.
+
+		No entanto, em alguns casos, o objeto oracional pode ser \emph{xcomp}, quando o sujeito da oração subordinada é, obrigatoriamente, mesmo sujeito ou o objeto da oração à qual se subordina. De modo geral, são os casos de oração subordinada substantiva objetiva reduzida de infinitivo, como em \fullref{dep:xcomp1}, \fullref{dep:xcomp2}, \fullref{dep:xcomp3}, e \fullref{dep:xcomp4}. 
+
+		Esses casos, porém, não devem ser confundidos com os de sujeito oculto quando a oração é desenvolvida (ou seja, tem a conjunção subordinativa), como na \fullref{dep:xcompsujeitooculto}.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					VERB \& ADP \& DET \& NOUN \& SCONJ \& PRON \& VERB \\
+					Pediu \& a \& os \& presentes \& que \& se \& empenhem \\
+					pedir \& a \& o \& presente \& que \& se \& empenhar \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{4}{iobj}
+				\depedge{4}{3}{det}
+				\depedge{4}{2}{case}
+				\depedge{1}{7}{ccomp}
+				\depedge{7}{6}{det}
+				\depedge{7}{5}{case}
+			\end{dependency}
+			\caption{Pediu aos presentes que se \emph{empenhem}}\label{dep:ccomp}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& DET \& PROPN \& VERB \& ADP \& DET \& NOUN \\
+					Os \& eleitores \& querem \& o \& PT \& participando \& de \& o \& governo \\
+					o \& eleitor \& quer \& o \& PT \& participar \& de \& o \& govero \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{5}{obj}
+				\depedge{3}{6}{ccomp}
+				\depedge{6}{9}{obl}
+				\depedge{2}{1}{det}
+				\depedge{5}{4}{det}
+				\depedge{9}{8}{det}
+				\depedge{9}{4}{det}
+			\end{dependency}
+			\caption{Os eleitores querem o PT participando do governo}\label{dep:ccomp2}
+		\end{figure*}
+
 \section{Adjuntos e argumentos do substantivo}\label{sec:adjuntoseargumentosdosubstantivo}
 
 	Ver subseções:
@@ -1366,7 +1513,7 @@ OBS.: Consideramos \say{Não é que} como MWE.
     	\label{fig:equeMWE3}
     	\end{figure}{}
 
-\chapter*{Apêndice}
+\chapter{Apêndice}
 
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
