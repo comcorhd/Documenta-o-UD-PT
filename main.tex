@@ -936,6 +936,98 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
 
+\section{Predicativos}\label{sec:predicativos}
+
+	Os predicativos do sujeito, quando são o predicado nominal da oração (conforme Xxx), devem ter deprel \emph{root} como na \fullref{dep:predicativodosujeito1}.
+
+	Quando são adjunto do sujeito, os predicativos são adjuntos adnominais, conforme \fullref{sec:adjuntoadnominal}, e devem receber deprel \emph{acl}.
+
+	Os predicativos do objeto podem diferir caso sejam subordinados ao objeto ou ao verbo, conforme \fullref{sec:pintouamodelonua} e \fullref{sec:declarouoreuculpado}.
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				DET \& NOUN \& AUX \& VERB \& ADP \& NOUN \\
+				Os \& arquivos \& são \& protegidos \& por \& senha \\
+				o \& arquivo \& ser \& proteger \& por \& senha \\
+			\end{deptext}
+			\deproot{4}{root}
+			\depedge{4}{3}{aux:pass}
+			\depedge{4}{2}{nsubj}
+			\depedge{2}{1}{det}
+			\depedge{6}{5}{case}
+			\depedge{4}{6}{obl:agent}
+		\end{dependency}
+		\caption{Os arquivos são \emph{protegidos} por senhas}\label{dep:predicativodosujeito1}
+	\end{figure*}
+
+	\subsection{Pintou a modelo \emph{nua}: predicativo do objeto subordinado ao objeto}\label{sec:pintouamodelonua}
+
+		Assim como o predicativo do sujeito, o predicativo do objeto que é subordinado ao objeto deve ter deprel \emph{acl}, como na \fullref{dep:pintouamodelonua}.
+
+		Caso o predicativo seja dependente do verbo, será \emph{xcomp}, conforme \fullref{sec:declarouoreuculpado}.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					VERB \& DET \& NOUN \& ADJ \\
+					Pintou \& a \& modelo \& nua \\
+					pintar \& a \& modelo \& nu \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{obj}
+				\depedge{3}{2}{det}
+				\depedge{3}{4}{acl}
+			\end{dependency}
+			\caption{Pintou a modelo \emph{nua}}\label{dep:pintouamodelonua}
+		\end{figure*}
+
+	\subsection{Declarou o réu \emph{culpado}: predicativo do objeto subordinado ao verbo}\label{sec:declarouoreuculpado}
+
+		Quando o predicativo do objeto é dependente do verbo, e não do objeto, estamos diante de um caso de \fullref{sec:argumentosdoverbo}, que deve ter deprel \emph{xcomp}, como na \fullref{dep:declarouoreuculpado} e na \fullref{dep:euoconsideroidiota}.
+	
+		Na frase \fullref{dep:xcomp4}, além do \say{deixando} que é \emph{xcomp} (objeto oracional), há também o \say{extenso} que tem deprel \emph{xcomp} por ser predicativo do objeto \say{currículo} mas argumento do verbo \emph{deixando}.
+	
+		Caso o predicativo seja dependente do objeto, será \emph{acl}, conforme \fullref{sec:pintouamodelonua}.
+	
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					VERB \& DET \& NOUN \& ADJ \\
+					Declarou \& o \& réu \& culpado \\
+					declarar \& o \& réu \& culpado \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{obj}
+				\depedge{1}{4}{xcomp}
+				\depedge{3}{2}{det}
+			\end{dependency}
+			\caption{Declarou o réu \emph{culpado}}\label{dep:declarouoreuculpado}
+		\end{figure*}
+	
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& PRON \& VERB \& ADJ \\
+					Eu \& o \& considero \& idiota \\
+					eu \& ele \& considero \& idiota \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{2}{obj}
+				\depedge{3}{1}{nsubj}
+				\depedge{3}{4}{xcomp}
+			\end{dependency}
+			\caption{Eu o considero \emph{idiota}}\label{dep:euoconsideroidiota}
+		\end{figure*}
+
 \section{Argumentos do verbo}\label{sec:argumentosdoverbo}
 
 	Os argumentos de um verbo são os objetos de um verbo transitivo. Os objetos podem ser nominais (\fullref{sec:objetonominal}) ou oracionais (\fullref{sec:objetooracional}). 
@@ -1183,48 +1275,6 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\depedge{2}{4}{ccomp}
 			\end{dependency}
 			\caption{Ele disse que \emph{viria}}\label{dep:xcompsujeitooculto}
-		\end{figure*}
-
-	\subsection {Declarou o réu \emph{culpado}: predicativo do objeto subordinado ao verbo}\label{sec:declarouoreuculpado}
-
-		Quando o predicativo do objeto é dependente do verbo, e não do objeto, estamos diante de um caso de argumento do verbo que deve ter deprel \emph{xcomp}, como na \fullref{dep:declarouoreuculpado} e na \fullref{dep:euoconsideroidiota}.
-
-		Na frase \fullref{dep:xcomp4}, além do \emph{xcomp} objeto oracional, há também o \emph{xcomp} que é predicativo do objeto \say{currículo}, pois é argumento do verbo \emph{deixar}.
-
-		Caso o predicativo seja dependente do objeto, será \emph{acl}, conforme \fullref{sec:predicativos}.
-
-		\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					VERB \& DET \& NOUN \& ADJ \\
-					Declarou \& o \& réu \& culpado \\
-					declarar \& o \& réu \& culpado \\
-				\end{deptext}
-				\deproot{1}{root}
-				\depedge{1}{3}{obj}
-				\depedge{1}{4}{xcomp}
-				\depedge{3}{2}{det}
-			\end{dependency}
-			\caption{Declarou o réu \emph{culpado}}\label{dep:declarouoreuculpado}
-		\end{figure*}
-
-		\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					PRON \& PRON \& VERB \& ADJ \\
-					Eu \& o \& considero \& idiota \\
-					eu \& ele \& considero \& idiota \\
-				\end{deptext}
-				\deproot{3}{root}
-				\depedge{3}{2}{obj}
-				\depedge{3}{1}{nsubj}
-				\depedge{3}{4}{xcomp}
-			\end{dependency}
-			\caption{Eu o considero \emph{idiota}}\label{dep:euoconsideroidiota}
 		\end{figure*}
 		
 
