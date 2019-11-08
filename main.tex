@@ -989,15 +989,16 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			\vspace{.8cm}
 			\begin{dependency}
 				\begin{deptext}
-					DET \& NOUN \& VERB \& ADV \& DET \& NOUN \& ADP \& NOUN \& ADP \& DET \& NOUN \\
+					DET \& NOUN \& VERB \& PRON \& DET \& NOUN \& ADP \& NOUN \& ADP \& DET \& NOUN \\
 					O \& atacante \& pediu \& mais \& um \& dia \& de \& folga \& a \& o \& treinador \\
 					o \& atacante \& pedir \& mais \& um \& dia \& de \& folga \& a \& o \& treinador \\
+					\& \& \& PronType=Ind \\
 				\end{deptext}
 				\deproot{3}{root}
 				\depedge{2}{1}{det}
 				\depedge{3}{2}{nsubj}
 				\depedge{6}{5}{det}
-				\depedge{6}{4}{advmod}
+				\depedge{5}{4}{det}
 				\depedge{3}{6}{obj}
 				\depedge{8}{7}{case}
 				\depedge{6}{8}{nmod}
@@ -1013,9 +1014,9 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			\vspace{.8cm}
 			\begin{dependency}
 				\begin{deptext}
-					PROPN \& VERB \& ADP \& DET \& NOUN \& DET \& NOUN \& SCONJ \& VERB
-					Souza \& negou \& a \& os \& réus \& o \& direito \& de \& apelarem
-					Souza \& negar \& a \& o \& réu \& o \& direito \& de \& apelar
+					PROPN \& VERB \& ADP \& DET \& NOUN \& DET \& NOUN \& SCONJ \& VERB \\
+					Souza \& negou \& a \& os \& réus \& o \& direito \& de \& apelarem \\
+					Souza \& negar \& a \& o \& réu \& o \& direito \& de \& apelar \\
 				\end{deptext}
 				\deproot{2}{root}
 				\depedge{2}{1}{nsubj}
@@ -1023,11 +1024,11 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\depedge{5}{4}{det}
 				\depedge{5}{3}{case}
 				\depedge{2}{7}{obj}
-				\depedge{2}{6}{det}
-				\depedge{6}{9}{acl}
+				\depedge{7}{6}{det}
+				\depedge{7}{9}{acl}
 				\depedge{9}{8}{mark}
 			\end{dependency}
-			\caption{Souza negou aos réus o direito de apelarem}\label{dep:iobjprototipico}
+			\caption{Souza negou aos \emph{réus} o \emph{direito} de apelarem}\label{dep:iobjprototipico}
 		\end{figure*}
 
 
@@ -1037,9 +1038,11 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 		De modo geral, orações subordinadas substantivas objetivas devem receber o deprel \emph{ccomp}, como na \fullref{dep:ccomp} e na \fullref{dep:ccomp2}.
 
-		No entanto, em alguns casos, o objeto oracional pode ser \emph{xcomp}, quando o sujeito da oração subordinada é, obrigatoriamente, mesmo sujeito ou o objeto da oração à qual se subordina. De modo geral, são os casos de oração subordinada substantiva objetiva reduzida de infinitivo, como em \fullref{dep:xcomp1}, \fullref{dep:xcomp2}, \fullref{dep:xcomp3}, e \fullref{dep:xcomp4}. 
+		No entanto, em alguns casos, o objeto oracional pode ser \emph{xcomp}, quando o sujeito da oração subordinada é, obrigatoriamente, mesmo sujeito ou o objeto da oração à qual se subordina. De modo geral, são os casos de oração subordinada substantiva objetiva reduzida, como em \fullref{dep:xcomp1}, \fullref{dep:xcomp2}, \fullref{dep:xcomp3}, e \fullref{dep:xcomp4}. 
 
 		Esses casos, porém, não devem ser confundidos com os de sujeito oculto quando a oração é desenvolvida (ou seja, tem a conjunção subordinativa), como na \fullref{dep:xcompsujeitooculto}.
+
+		Outro caso de argumento do verbo que deve receber deprel \emph{xcomp}, embora seja nominal, é o dos predicativos do objeto quando são subordinados ao verbo, e não ao objeto, conforme \fullref{sec:declarouoreuculpado}.
 
 		\begin{figure*}[htbp]
 			\centering
@@ -1055,8 +1058,8 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\depedge{4}{3}{det}
 				\depedge{4}{2}{case}
 				\depedge{1}{7}{ccomp}
-				\depedge{7}{6}{det}
-				\depedge{7}{5}{case}
+				\depedge{7}{6}{expl}
+				\depedge{7}{5}{mark}
 			\end{dependency}
 			\caption{Pediu aos presentes que se \emph{empenhem}}\label{dep:ccomp}
 		\end{figure*}
@@ -1068,7 +1071,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\begin{deptext}
 					DET \& NOUN \& VERB \& DET \& PROPN \& VERB \& ADP \& DET \& NOUN \\
 					Os \& eleitores \& querem \& o \& PT \& participando \& de \& o \& governo \\
-					o \& eleitor \& quer \& o \& PT \& participar \& de \& o \& govero \\
+					o \& eleitor \& quer \& o \& PT \& participar \& de \& o \& governo \\
 				\end{deptext}
 				\deproot{3}{root}
 				\depedge{3}{2}{nsubj}
@@ -1078,10 +1081,152 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\depedge{2}{1}{det}
 				\depedge{5}{4}{det}
 				\depedge{9}{8}{det}
-				\depedge{9}{4}{det}
+				\depedge{9}{7}{case}
 			\end{dependency}
-			\caption{Os eleitores querem o PT participando do governo}\label{dep:ccomp2}
+			\caption{Os eleitores querem o PT \emph{participando} do governo}\label{dep:ccomp2}
 		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& PRON \& SCONJ \& VERB \& DET \& NOUN \& ADP \& PROPN \\
+					Os \& temas \& destinam \& se \& a \& mostrar \& o \& papel \& de \& Portugal \\
+					o \& tema \& destinar \& se \& a \& mostrar \& o \& papel \& de \& Portugal \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{6}{xcomp}
+				\depedge{6}{8}{obj}
+				\depedge{8}{10}{nmod}
+				\depedge{2}{1}{det}
+				\depedge{3}{4}{expl}
+				\depedge{6}{5}{mark}
+				\depedge{8}{7}{det}
+				\depedge{10}{9}{case}
+			\end{dependency}
+			\caption{Os temas destinam-se a \emph{mostrar} o papel de Portugal}\label{dep:xcomp1}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& SCONJ \& VERB \& NOUN \\
+					O \& rendimento \& destinado \& a \& garantir \& condições \\
+					o \& rendimento \& destinar \& a \& garantir \& condição \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{5}{xcomp}
+				\depedge{5}{6}{obj}
+				\depedge{2}{1}{det}
+				\depedge{5}{4}{mark}
+			\end{dependency}
+			\caption{O rendimento destinado a \emph{garantir} condições}\label{dep:xcomp2}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PROPN \& PROPN \& VERB \& VERB \& ADP \& PROPN \\
+					Netscape \& Communications \& decidiu \& adquirir \& a \& Collabra \\
+					Netscape \& Communications \& decidir \& adquirir \& a \& Collabra \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{1}{nsubj}
+				\depedge{3}{4}{xcomp}
+				\depedge{4}{6}{obj}
+				\depedge{1}{2}{flat:name}
+				\depedge{6}{5}{det}
+			\end{dependency}
+			\caption{Netscape Communications decidiu \emph{adquirir} a Collabra}\label{dep:xcomp3}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& PRON \& VERB \& VERB \& DET \& NOUN \& ADJ \\
+					O \& que \& acaba \& deixando \& o \& currículo \& extenso \\
+					o \& que \& acabar \& deixar \& o \& currículo \& extenso \\
+					PronType=Dem \& PronType=Rel \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{acl:relcl}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{4}{xcomp}
+				\depedge{4}{6}{obj}
+				\depedge{6}{5}{det}
+				\depedge{4}{7}{xcomp}
+			\end{dependency}
+			\caption{o que acaba \emph{deixando} o currículo extenso}\label{dep:xcomp4}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& VERB \& SCONJ \& VERB \\
+					Ele \& disse \& que \& viria \\
+					ele \& dizer \& que \& vir \\
+				\end{deptext}
+				\deproot{2}{root}
+				\depedge{2}{1}{nsubj}
+				\depedge{4}{3}{mark}
+				\depedge{2}{4}{ccomp}
+			\end{dependency}
+			\caption{Ele disse que \emph{viria}}\label{dep:xcompsujeitooculto}
+		\end{figure*}
+
+	\subsection {Declarou o réu \emph{culpado}: predicativo do objeto subordinado ao verbo}\label{sec:declarouoreuculpado}
+
+		Quando o predicativo do objeto é dependente do verbo, e não do objeto, estamos diante de um caso de argumento do verbo que deve ter deprel \emph{xcomp}, como na \fullref{dep:declarouoreuculpado} e na \fullref{dep:euoconsideroidiota}.
+
+		Na frase \fullref{dep:xcomp4}, além do \emph{xcomp} objeto oracional, há também o \emph{xcomp} que é predicativo do objeto \say{currículo}, pois é argumento do verbo \emph{deixar}.
+
+		Caso o predicativo seja dependente do objeto, será \emph{acl}, conforme \fullref{sec:predicativos}.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					VERB \& DET \& NOUN \& ADJ \\
+					Declarou \& o \& réu \& culpado \\
+					declarar \& o \& réu \& culpado \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{obj}
+				\depedge{1}{4}{xcomp}
+				\depedge{3}{2}{det}
+			\end{dependency}
+			\caption{Declarou o réu \emph{culpado}}\label{dep:declarouoreuculpado}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& PRON \& VERB \& ADJ \\
+					Eu \& o \& considero \& idiota \\
+					eu \& ele \& considero \& idiota \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{2}{obj}
+				\depedge{3}{1}{nsubj}
+				\depedge{3}{4}{xcomp}
+			\end{dependency}
+			\caption{Eu o considero \emph{idiota}}\label{dep:euoconsideroidiota}
+		\end{figure*}
+		
 
 \section{Adjuntos e argumentos do substantivo}\label{sec:adjuntoseargumentosdosubstantivo}
 
