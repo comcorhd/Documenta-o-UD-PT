@@ -969,6 +969,14 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
 
+\section{Parataxis}\label{sec:parataxis}
+
+	O deprel \emph{parataxis} é utilizado quando a relação entre duas orações não é explicitamente nem de coordenação, nem de subordinação.
+
+	Em UD, discurso direto também é caso de \emph{parataxis} (\fullref{sec:discursodireto}).
+
+	\fullref{dep:parataxis1}
+
 \section{Predicativos}\label{sec:predicativos}
 
 	Os predicativos do sujeito, quando são o predicado nominal da oração (conforme Xxx), devem ter deprel \emph{root} como na \fullref{dep:predicativodosujeito1}.
@@ -1651,6 +1659,37 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 \section{Locuções verbais}\label{sec:deplocverbal}
 
 	Locuções verbais são os casos de dois verbos em que o primeiro tem upos \emph{AUX}, e o segundo, \emph{VERB}, sendo o primeiro um verbo auxiliar e o segundo, verbo pleno. Para identificar os casos de locução verbal, consultar \fullref{sec:verbosauxiliares}.
+
+\section{Discurso direto}\label{sec:discursodireto}
+
+	Discurso direto é anotado como de deprel \emph{parataxis}.
+
+	\fullref{dep:discursodireto}
+
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				PUNCT \& AUX \& DET \& NOUN \& ADP \& DET \& ADJ \& NOUN \& PUNCT \& PUNCT \& VERB \\
+				« \& É \& uma \& coisa \& de \& o \& Primeiro \& Mundo \& » \& , \& afirmou \\
+				« \& ser \& uma \& coisa \& de \& o \& primeiro \& mundo \& » \& , \& afirmar \\
+			\end{deptext}
+			\deproot{11}{root}
+			\depedge{11}{4}{parataxis}
+			\depedge{4}{1}{punct}
+			\depedge{4}{9}{punct}
+			\depedge{4}{10}{punct}
+			\depedge{4}{2}{aux}
+			\depedge{4}{3}{det}
+			\depedge{8}{7}{amod}
+			\depedge{8}{6}{det}
+			\depedge{8}{5}{case}
+			\depedge{4}{8}{nmod}
+		\end{dependency}
+		\caption{«É uma \emph{coisa} do Primeiro Mundo», afirmou}\label{dep:discursodireto}
+	\end{figure*}
 
 \section{Estruturas comparativas}
 
