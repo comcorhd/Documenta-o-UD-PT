@@ -40,7 +40,9 @@
 
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
 
-Os treebanks adaptados para a gramática UD são disponibilizados no formato CoNLL-U, em que há um token por linha. Cada anotação de cada token, por sua vez, é disposta em uma coluna, sendo 10 colunas ao todo. Cada token tem a configuração conforme a \fullref{tab:colunasUD}, com uma tabulação (\textit{Tab}) separando as colunas. Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{underline}, conforme diretivas da página do \href{https://universaldependencies.org/format}{formato CoNLL-U} (acesso em 28 de outubro de 2019).
+Os treebanks adaptados para a gramática UD são disponibilizados no formato CoNLL-U, em que há um token por linha. Cada anotação de cada token, por sua vez, é disposta em uma coluna, sendo 10 colunas ao todo. Cada token tem a configuração conforme a \fullref{tab:colunasUD}, com uma tabulação (\textit{Tab}) separando as colunas.
+
+Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{underline}, conforme diretivas da página do \href{https://universaldependencies.org/format}{formato CoNLL-U} (acesso em 28 de outubro de 2019).
 
 \begin{table}
     \centering
@@ -89,6 +91,37 @@ Os treebanks adaptados para a gramática UD são disponibilizados no formato CoN
 
 
 Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence e Token (e suas respectivas anotações), desenvolvemos e utilizamos o \href{https://github.com/alvelvis/ACDC-UD/blob/master/estrutura_ud.py}{estrutura\_ud.py}.
+
+\chapter{Lemas}\label{sec:lemas}
+
+	O lema é a segunda coluna (ou atributo) no formato CoNLL-U. De modo geral, os lemas não são capitalizados, isto é, devem ter letras minúsculas, exceto pelos nomes próprios (\emph{PROPN}).
+
+	Veja, na tabela \fullref{tab:lemma}, como encontrar o lema para as classes gramaticais que flexionam.
+
+	\begin{table}[]
+	    \centering
+	    \begin{tabular}{ c | c }
+	    \textbf{upos} & \textbf{lema} \\
+	    \hline
+	    ADJ & o adjetivo no masculino singular \\
+	    \hline
+	    AUX & verbo no infinitivo \\
+	    \hline
+	    NOUN & o substantivo no singular não capitalizado \\
+	    \hline
+	    DET & igual aos ADJ \\
+	    \hline
+	    PROPN & o nome próprio no singular \\
+	    \hline
+	    VERB & o verbo no infinitivo \\
+	    \hline
+	    PRON & se substantivos, devem seguir as diretivas dos \emph{NOUN};\\ & se adjetivos, dos \emph{ADJ} \\
+	    \end{tabular}
+	    \caption{Como encontrar o lema das classes gramaticais que flexionam}
+	    \label{tab:lemma}
+	\end{table}{}
+
+	
 
 \chapter{Classes gramaticais (upos)}\label{sec:upos}
 
