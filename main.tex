@@ -379,10 +379,11 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			\label{dep:naolocverbal}
 		\end{figure*}
 
-\section{Formas participiais: verbo ou adjetivo?}
+\section{Formas participiais: verbo ou adjetivo?}\label{sec:formaspart}
 
 	A discussão sobre o status das formas participiais, frequentemente ambíguas entre \emph{ADJ} ou \emph{VERB}, é reconhecida na literatura linguística, e não é um fenômeno específico do Português (ver, por exemplo, PROPOR 2018 e Dissert Luiza).
 	
+	\subsection{Adjetivo}
 	No processo de anotação do Bosque-UD, anotamos como \emph{ADJ}:
 
 	\begin{enumerate}
@@ -391,8 +392,6 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		\fullref{fig:partadj1}
 
 		\fullref{fig:partadj2}
-
-		\fullref{fig:partadj3}
 
 
 		\begin{figure}
@@ -425,37 +424,11 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\label{fig:partadj2}
 			\end{figure*}
 
-
-		\begin{figure*}[htbp]
-				\centering
-				\vspace{.8cm}
-				\begin{dependency}
-					\begin{deptext}
-						PRON\& VERB\& ADP\& ADV\& ADP\& NOUN\& ADJ\\
-						Ele\& vive\& até\& hoje\& de\& forma\& angustiada\\
-						ele\& viver\& até\& hoje\& de\& forma\& angustiado\\
-					\end{deptext}
-					
-					\depedge{2}{1}{nsubj}
-					\deproot{2}{root}
-					\depedge{4}{3}{case}
-					\depedge{2}{4}{advmod}
-					\depedge{6}{5}{case}
-					\depedge{2}{6}{obl}
-					\depedge{6}{7}{amod}
-
-				\end{dependency}
-				\caption{Ele vive até hoje de forma \emph{angustiada}}
-				\label{fig:partadj3}
-			\end{figure*}
-
 		\item Formas participiais que estejam em coordenação com outros adjetivos.
 
+		\fullref{fig:partadj3}
+
 		\fullref{fig:partadj4}
-
-		\fullref{fig:partadj5}
-
-		\fullref{fig:partadj6}
 
 		\begin{figure*}[htbp]
 			\centering
@@ -476,7 +449,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 			\end{dependency}
 			\caption{Este futebol \emph{automatizado} e excessivamente defensivo}
-			\label{fig:partadj4}
+			\label{fig:partadj3}
 		\end{figure*}
 
 		\begin{figure*}[htbp]
@@ -502,48 +475,27 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				
 			\end{dependency}
 			\caption{Foi uma decisão muito \emph{ponderada}, muito difícil e muito amadurecida}
-			\label{fig:partadj5}
-		\end{figure*}
-
-
-		\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					DET\& NOUN\& ADV\& ADJ\& CC\& ADJ\\
-					Um\& coletivo\& tão\& alargado\& e\& dispersivo\\
-					um\& coletivo\& tão\& alargado\& e\& dispersivo\\
-				\end{deptext}
-				
-				\depedge{2}{1}{det}
-				\deproot{2}{root}
-				\depedge{4}{3}{advmod}
-				\depedge{2}{4}{amod}
-				\depedge{6}{5}{cc}
-				\depedge{4}{6}{conj}
-
-			\end{dependency}
-			\caption{Um coletivo tão \emph{alargado} e dispersivo}
-			\label{fig:partadj6}
+			\label{fig:partadj4}
 		\end{figure*}
 
     	\end{enumerate}{}
 
-	No processo de anotação do Bosque-UD, anotamos como \emph{VERB} (com deprel \emph{acl}):
+	\subsection{Verbo}
+
+	No processo de anotação do Bosque-UD, anotamos como \emph{VERB} (deprel \emph{acl}):
 
 		\begin{enumerate}
 		\item Construções em que se pode incluir um agente da passiva sem prejudicar o sentido da frase.
 		
-		\fullref{fig:partadj7}
+		\fullref{fig:partverb1}
 
-		\fullref{fig:partadj8}
+		\fullref{fig:partverb2}
 
 			\begin{figure}
 			\centering
 			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image65.png}
 			\caption{Resta portanto saber se as medidas \emph{anunciadas}, em tese adequadas, terão na prática o efeito que se espera.}
-			\label{fig:partadj7}
+			\label{fig:partverb1}
 		\end{figure}{}		
 
 			\begin{figure*}[htbp]
@@ -569,10 +521,260 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				
 			\end{dependency}
 			\caption{Os serviços mais \emph{procurados} são correio eletrônico e transferência de arquivos}
-			\label{fig:partadj8}
+			\label{fig:partverb2}
 		\end{figure*}		
 			
 		\end{enumerate}
+
+	\subsection{Casos difíceis}
+
+		\begin{enumerate}
+		\item Os seguintes casos foram anotados como adjetivo:
+
+		\fullref{fig:partDIF1}
+
+		\fullref{fig:partDIF6}
+
+		\fullref{fig:partDIF7}\newline
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image49.png}
+			\caption{Opinião diferente têm por vezes as autoridades monetárias nacionais, \emph{empenhadas} em fazer passar a ideia de que o escudo não tem sempre de seguir a evolução da moeda espanhola.}	
+			\label{fig:partDIF1}
+		\end{figure}	
+
+		\begin{figure*}[htbp]
+				\centering
+				\vspace{.8cm}
+				\begin{dependency}
+					\begin{deptext}
+						PROPN\& PUNCT\& ADJ\& PUNCT\& VERB\& NOUN\& ADP\& DET\& NOUN\\
+						Joilson\& ,\& casado\& ,\& pedia\& informações\& sobre\& o\& abrigo\\
+						Joilson\& ,\& casado\& ,\& pedir\& informação\& sobre\& o\& abrigo\\
+					\end{deptext}
+					
+					\depedge{5}{1}{nsubj}
+					\depedge{3}{2}{punct}
+					\depedge{1}{3}{amod}
+					\depedge{3}{4}{punct}
+					\deproot{5}{root}
+					\depedge{5}{6}{obj}
+					\depedge{9}{7}{case}
+					\depedge{9}{8}{det}
+					\depedge{6}{9}{nmod}
+				\end{dependency}
+				\caption{Joilson, \emph{casado}, pedia informações sobre o abrigo}
+				\label{fig:partDIF6}
+			\end{figure*}
+
+			\begin{figure*}[htbp]
+				\centering
+				\vspace{.8cm}
+				\begin{dependency}
+					\begin{deptext}
+						DET\& NOUN\& ADP\& NOUN\& ADJ\\
+						O\& procurador\& de\& Justiça\& aposentado\\
+						o\& procurador\& de\& justiça\& aposentado\\
+					\end{deptext}
+					
+					\depedge{2}{1}{det}
+					\deproot{2}{root}
+					\depedge{4}{3}{case}
+					\depedge{2}{4}{nmod}
+					\depedge{4}{5}{amod}
+				\end{dependency}
+				\caption{O procurador de Justiça \emph{aposentado}}
+				\label{fig:partDIF7}
+			\end{figure*}
+
+		A presença do “mais” e pode auxiliar a análise como um adjetivo, ainda que esse critério nem sempre seja definitivo ou preciso. Exemplos:
+
+		\fullref{fig:partDIF2}
+
+		\fullref{fig:partDIF3}
+
+		No exemplo encontrado na \fullref{fig:partDIF3}, temos um caso de \emph{ADJ}/\emph{acl} e não de \emph{ADJ}/\emph{amod}. Aqui, “cotado” é o predicativo do sujeito de uma oração predicativa na ordem invertida: O brasileiro Raul Boesel é o mais cotado na bolsa de apostas. Como o verbo de ligação nunca é o núcleo da oração, o predicativo recebe a etiqueta de \emph{root}. Anotação similar se encontra na \fullref{fig:partDIF9}.
+
+		Em frases como a \fullref{fig:partDIF4}, \say{tão} funciona como \say{mais}. Além disso, há o critério da coordenação.
+
+		\begin{figure*}[htbp]
+				\centering
+				\vspace{.8cm}
+				\begin{dependency}
+					\begin{deptext}
+						VERB \& ADJ\\
+						Chegou \& atrasado\\
+						chegar \& atrasado\\
+					\end{deptext}
+					
+					\deproot{1}{root}
+					\depedge{1}{2}{acl}
+				\end{dependency}
+				\caption{Chegou \emph{atrasado}}
+				\label{fig:partDIF9}
+			\end{figure*}
+
+		\begin{figure*}[htbp]
+				\centering
+				\vspace{.8cm}
+				\begin{dependency}
+					\begin{deptext}
+						VERB\& DET\& NOUN\& ADP\& DET\& NOUN\& ADV\& ADJ\\
+						Divulgou\& as\& acusações\& sem\& uma\& checagem\& mais\& aprofundada\\
+						divulgar\& o\& acusação\& sem\& um\& checagem\& mais\& aprofundado\\
+					\end{deptext}
+					
+					\deproot{1}{root}
+					\depedge{3}{2}{det}
+					\depedge{1}{3}{obj}
+					\depedge{6}{4}{case}
+					\depedge{6}{5}{det}
+					\depedge{1}{6}{obl}
+					\depedge{8}{7}{advmod}
+					\depedge{6}{8}{amod}
+				\end{dependency}
+				\caption{Divulgou as acusações sem uma checagem mais \emph{aprofundada}}
+				\label{fig:partDIF2}
+			\end{figure*}
+
+			\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image19.png}
+			\caption{O mais \emph{cotado} na bolsa de apostas é o brasileiro Raul Boesel, que ontem não consegui terminar a corrida em Detroit.}	
+			\label{fig:partDIF3}
+		\end{figure}
+			
+			\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET\& NOUN\& ADV\& ADJ\& CC\& ADJ\\
+					Um\& coletivo\& tão\& alargado\& e\& dispersivo\\
+					um\& coletivo\& tão\& alargado\& e\& dispersivo\\
+				\end{deptext}
+				
+				\depedge{2}{1}{det}
+				\deproot{2}{root}
+				\depedge{4}{3}{advmod}
+				\depedge{2}{4}{amod}
+				\depedge{6}{5}{cc}
+				\depedge{4}{6}{conj}
+
+			\end{dependency}
+			\caption{Um coletivo tão \emph{alargado} e dispersivo}
+			\label{fig:partDIF4}
+		\end{figure*}
+
+		\item Os seguintes casos foram analisados como verbo:
+
+		\fullref{fig:partDIF5}
+
+		\fullref{fig:partDIF8}
+
+		\begin{figure*}[htbp]
+				\centering
+				\vspace{.8cm}
+				\begin{dependency}
+					\begin{deptext}
+						DET\& NOUN\& PUNCT\& VERB\& ADP\& DET\& NOUN\& PUNCT\& VERB\\
+						O\& técnico\& ,\& irritado\& com\& sua\& atuação\& ,\& reclamou\\
+						o\& técnico\& ,\& irritar\& com\& seu\& atuação\& ,\& reclamar\\
+					\end{deptext}
+					
+					\depedge{2}{1}{det}
+					\depedge{9}{2}{nsubj}
+					\depedge{4}{3}{punct}
+					\depedge{2}{4}{acl}
+					\depedge{7}{5}{case}
+					\depedge{7}{6}{det}
+					\depedge{4}{7}{obl}
+					\depedge{4}{8}{punct}
+					\deproot{9}{root}
+				\end{dependency}
+				\caption{O técnico, \emph{irritado} com sua atuação, reclamou}
+				\label{fig:partDIF5}
+			\end{figure*}
+
+		\begin{figure*}[htbp]
+		    \centering
+		    \vspace{.8cm}
+		    \begin{dependency}
+			    \begin{deptext}
+			    VERB \& NOUN \& VERB \& SCONJ \& VERB \& NOUN \& ADJ\\
+			    Utilizaram \& bactérias \& conhecidas \& por \& devorarem \& material \& orgânico\\
+			    utilizar \& bactéria \& conhecer \& por \& devorar \& material \& orgânico\\
+			    \end{deptext}
+			    \deproot{1}{root}
+			    \depedge{1}{2}{obj}
+			    \depedge{2}{3}{acl}
+			    \depedge{5}{4}{mark}
+			    \depedge{3}{5}{xcomp}
+			    \depedge{5}{6}{obj}
+			    \depedge{6}{9}{amod}
+		    \end{dependency}
+		    \caption{Utilizaram bactérias conhecidas por devorarem material orgânico}
+		    \label{fig:partDIF8}
+		\end{figure*}
+
+		\item Há casos em que a palavra pode ser anotada como verbo ou adjetivo, dependendo do contexto. Alguns exemplos são \say{passado/a}, \say{elevado/a} e \say{disposto/a}.
+
+		\fullref{fig:passado1}
+
+		\fullref{fig:passado2}\newline
+
+		\fullref{fig:elevado1}
+
+		\fullref{fig:elevado2}\newline
+
+		\fullref{fig:disposto1}
+
+		\fullref{fig:disposto2}
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/passado1.png}
+			\caption{O consumidor poderia optar pelo envio de um cheque sobre o estrangeiro \emph{passado} pelo banco do comprador}	
+			\label{fig:passado1}
+		\end{figure}
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/passado2.png}
+			\caption{Esta senhora senta-se junto dela e começa a recordar-lhe o tempo \emph{passado}}	
+			\label{fig:passado2}
+		\end{figure}
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/elevado1.png}
+			\caption{Citam a generosidade dos subsídios de desemprego, o muito \emph{elevado} salário mínimo e as regras de protecção de emprego como factores desmotivadores da criação de postos de trabalho}	
+			\label{fig:elevado1}
+		\end{figure}
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/elevado2.png}
+			\caption{Os países Ibéricos são os que mostram mais \emph{elevada} taxa de crescimento, 4,5 por cento ao ano}	
+			\label{fig:elevado2}
+		\end{figure}
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/disposto1.png}
+			\caption{Uma placa de mármore \emph{disposta} sobre um soclo}	
+			\label{fig:disposto1}
+		\end{figure}
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/disposto2.png}
+			\caption{Tem já muitos candidatos nas suas costas \emph{dispostos} a roubar-lhe o terceiro lugar}	
+			\label{fig:disposto2}
+		\end{figure}
+
+	\end{enumerate}
 
 \section{Numerais}\label{sec:numerais}
 
@@ -1214,6 +1416,10 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	    \label{fig:comparative2}
 	\end{figure}{}
 
+
+\section{Particípio}
+
+	Ver \fullref{sec:formaspart}.
 	
 \section{Elementos discursivos}
 
@@ -1281,6 +1487,48 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
     	\caption{\emph{É que} são uns antipáticos que nunca oferecem copos}
     	\label{fig:equeMWE3}
     	\end{figure}{}
+
+	\subsection{Tal como / Como}
+
+		Existem dois casos em que a combinação \say{tal como} aparece. Em um deles, \say{tal como} é equivalente a \say{do mesmo modo que} ou \say{conforme}, como na \fullref{fig:talcomo1}.
+
+		No outro caso, \say{tal como} indica uma espécie de hiperonímia, como na \fullref{fig:talcomo2}.
+
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image36.PNG}
+	    	\caption{O fax foi enviado, \emph{tal como} pedido, à presidente do Instituto, Zita Seabra.}
+	    	\label{fig:talcomo1}
+	    	\end{figure}{}
+		
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image2.PNG}
+	    	\caption{A zona lúdica, com os divertimentos, áreas comerciais de «souvenirs» e de restauração, compreende espaços distintos para os vários temas, ainda em análise, \emph{tais como} Portugal, Japão, Brasil, África e Far-West.}
+	    	\label{fig:talcomo2}
+	    	\end{figure}{}
+
+		Para solucionarmos essa diferença, criamos dois tipos distintos de MWE (expressão multipalavra). Nos casos do primeiro tipo, em que há equivalência com \say{conforme}, \say{tal como} foi anotado como MWE com valor de conjunção subordinativa. 
+
+		Essa MWE com valor de conjunção subordinativa inicia uma oração adverbial; logo, o núcleo do fragmento, independente de ser verbo ou não, teve deprel anotado como \emph{advcl}. (\fullref{fig:talcomo3})
+
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image69.PNG}
+	    	\caption{\emph{Tal como} a rainha Isabel II, John Major limitou-se a acompanhar os factos.}
+	    	\label{fig:talcomo3}
+	    	\end{figure}{}
+
+		Para os casos em que \say{tal como} indica hiperonímia, criamos uma MWE com valor prepositivo (\fullref{fig:talcomo2}).
+
+		Além disso, essa estrutura de hiperonímia também pode aparecer em frases com apenas \say{como}, em vez de \say{tal como}. Essas frases, em termos semânticos, têm valores semelhantes; no entanto, não há MWE nas frases de \say{como}. (\fullref{fig:talcomo4})
+
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image39.PNG}
+	    	\caption{Abstratos entre medianos e medíocres, \emph{como} Fukushima, Pérsio, Raimo e Douchez, têm o mesmo ou maior destaque que Volpi e nada que se possa chamar de autonomia para oferecer como lenitivo.}
+	    	\label{fig:talcomo4}
+	    	\end{figure}{}
 
 \section{Conjunções}
 
