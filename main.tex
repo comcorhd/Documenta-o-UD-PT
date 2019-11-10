@@ -1427,7 +1427,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	\subsection{É que}
 
 
-	A construção \say{é que} pode aparecer de duas maneiras: marcada ou não como MWE. Como MWE, \say{é que} é uma ocorrência típica do discurso oral, sem ligação clara com a estrutura da oração. Por outro lado, \say{é} e \say{que} são independentes entre si quando introduzem uma oração subordinada substantiva predicativa ou subjetiva. (ver Xx)
+	A construção \say{é que} pode aparecer de duas maneiras: marcada ou não como MWE. Como MWE, \say{é que} é uma ocorrência típica do discurso oral, sem ligação clara com a estrutura da oração. Por outro lado, \say{é} e \say{que} são independentes entre si quando introduzem uma oração subordinada substantiva predicativa ou subjetiva.
 
 	Quando \say{é que} tem esse efeito discursivo, anota-se da seguinte maneira:
 
@@ -1488,6 +1488,82 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
     	\label{fig:equeMWE3}
     	\end{figure}{}
 
+	Quando \say{é} e \say{que} são independentes, eles não formam MWE e podem se encaixar em uma das situações a seguir:
+
+	\begin{enumerate}
+		\item A conjunção subordinativa (\emph{SCONJ}) introduz uma oração subordinada substantiva predicativa, cujo núcleo tem deprel \emph{ccomp}. O verbo \say{ser} é pleno (\emph{VERB/root}), e o nome que o precede tem deprel \emph{nsubj}.
+
+		\fullref{fig:equesemMWE1}
+
+		\fullref{fig:equesemMWE3}		
+
+		Decidimos que ocorrências como \say{o bom}, \say{o pior}, \say{o espantoso} ou \say{o certo} seriam marcadas como \emph{DET NOUN}, de modo análogo a frases como \say{A desgraça é que...}. Isso facilita que classifiquemos o adjetivo, que aqui se comporta como substantivo, como \emph{nsubj} da oração. (Ver \fullref{fig:equesemMWE2})
+
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image21.PNG}
+	    	\caption{A desgraça é que, cientificamente, como demonstra a moderna criminologia, quase nada dessa política criminal «simbólica» serve para atenuar o gravíssimo problema da criminalidade.}
+	    	\label{fig:equesemMWE1}
+	    	\end{figure}{}
+
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image59.PNG}
+	    	\caption{O bom é que o Fernando Henrique não estava presente}
+	    	\label{fig:equesemMWE2}
+	    	\end{figure}{}
+
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image56.PNG}
+	    	\caption{O que é mais espantoso no meio de tudo isto é que toda esta bagunça provocada pelo senhor tem contado com a complacência dos governos}
+	    	\label{fig:equesemMWE3}
+	    	\end{figure}{}
+
+		\item A conjunção subordinativa (\emph{SCONJ}) introduz uma oração subordinada substantiva subjetiva, cujo núcleo tem deprel \emph{csubj}. O verbo \say{ser} é \emph{AUX/cop}, e o adjetivo que o precede é \emph{root}.
+
+		Na \fullref{fig:equesemMWE4}, por exemplo, ao substituirmos por \say{isso} a oração introduzida por \say{que} e a invertemos, temos \say{Isso é certo}. 
+
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image26.PNG}
+	    	\caption{Certo é que Pinochet fez do país uma casa portuguesa, com certeza}
+	    	\label{fig:equesemMWE4}
+	    	\end{figure}{}
+
+	\end{enumerate}
+
+		Mais casos difíceis:
+
+		\fullref{fig:equedif1}: \say{é} foi anotado como AUX/discourse e \say{que} como SCONJ/mark. Não é um caso de MWE, visto que consideramos apenas \say{é} como discourse.
+
+		\fullref{fig:equedif2}: \say{R} é \emph{root} (ver Xx) e \say{é} tem deprel \emph{parataxis}.
+
+		\fullref{fig:equedif3}
+
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image45.PNG}
+	    	\caption{A minha decisão não foi pacífica, posso dizer é que foi pacífica a maneira como o processo aconteceu}
+	    	\label{fig:equedif1}
+	    	\end{figure}{}
+
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image6.PNG}
+	    	\caption{R. -- Nestes casos, a boa política é que durma em casa}
+	    	\label{fig:equedif2}
+	    	\end{figure}{}
+
+		\begin{figure}
+	    	\centering
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image64.PNG}
+	    	\caption{O que acontece, explica Robert Snowden, que estuda a percepção visual do movimento há mais de dez anos, é que quando está nevoeiro vemos o mundo com menos contraste}
+	    	\label{fig:equedif3}
+	    	\end{figure}{}
+
+	
+
 	\subsection{Tal como / Como}
 
 		Existem dois casos em que a combinação \say{tal como} aparece. Em um deles, \say{tal como} é equivalente a \say{do mesmo modo que} ou \say{conforme}, como na \fullref{fig:talcomo1}.
@@ -1503,7 +1579,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		
 		\begin{figure}
 	    	\centering
-	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image2.PNG}
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/como2.PNG}
 	    	\caption{A zona lúdica, com os divertimentos, áreas comerciais de «souvenirs» e de restauração, compreende espaços distintos para os vários temas, ainda em análise, \emph{tais como} Portugal, Japão, Brasil, África e Far-West.}
 	    	\label{fig:talcomo2}
 	    	\end{figure}{}
@@ -1525,7 +1601,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 		\begin{figure}
 	    	\centering
-	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image39.PNG}
+	    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/como1.PNG}
 	    	\caption{Abstratos entre medianos e medíocres, \emph{como} Fukushima, Pérsio, Raimo e Douchez, têm o mesmo ou maior destaque que Volpi e nada que se possa chamar de autonomia para oferecer como lenitivo.}
 	    	\label{fig:talcomo4}
 	    	\end{figure}{}
