@@ -1989,6 +1989,8 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		\subsection{Caso seja verbo}
 			A oração subordinada adverbial será anotada como \emph{advcl}, não havendo diferenciação semântica (temporal, causal, concessiva, final, etc). Poderá modificar \emph{VERB}.
 
+			Nas estruturas comparativas, independente de o núcleo do fragmento ser um verbo ou um nome, ele será anotado com a deprel \emph{advcl}. (ver Xx)
+
 			\fullref{fig:advcl1}
 
 			\fullref{fig:advcl2}
@@ -2041,7 +2043,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\label{fig:advcl2}
 			\end{figure*}
 
-		\subsection{\emph{Teve uma relação extraconjugal com Monica Lewinsky}}
+		\subsection{''Teve uma relação extraconjugal com \emph{Monica} Lewinsky''}
 			Consideramos que \say{Monica} apontará para o verbo, e não para o nome. Sendo assim, o pai de \say{Monica} será \say{teve} e sua deprel será \emph{obl}, . 
 			
 			\fullref{fig:monica}
@@ -2068,9 +2070,6 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\caption{Teve uma relação extraconjugal com \emph{Monica} Lewinsky}
 				\label{fig:monica}
 			\end{figure*}
-
-			
-			Nas estruturas comparativas, independente de o núcleo do fragmento ser um verbo ou um nome, ele será anotado com a deprel \emph{advcl}. (ver Xx)
 
 
 \section{Adjuntos e argumentos do substantivo}\label{sec:adjuntoseargumentosdosubstantivo}
@@ -2648,7 +2647,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	
 
-	\subsection{Tal como / Como}
+	\subsection{Como / tal como}
 
 		Existem dois casos em que a combinação \say{tal como} aparece. Em um deles, \say{tal como} é equivalente a \say{do mesmo modo que} ou \say{conforme}, como na \fullref{fig:talcomo1}.
 
