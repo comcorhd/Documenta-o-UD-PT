@@ -40,7 +40,9 @@
 
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
 
-Os treebanks adaptados para a gramática UD são disponibilizados no formato CoNLL, em que há um token por linha. Cada anotação de cada token, por sua vez, é disposta em uma coluna, sendo 10 colunas ao todo. Cada token tem a configuração conforme a \fullref{tab:colunasUD}, com uma tabulação (\textit{Tab}) separando as colunas. Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{underline}.
+Os treebanks adaptados para a gramática UD são disponibilizados no formato CoNLL-U, em que há um token por linha. Cada anotação de cada token, por sua vez, é disposta em uma coluna, sendo 10 colunas ao todo. Cada token tem a configuração conforme a \fullref{tab:colunasUD}, com uma tabulação (\textit{Tab}) separando as colunas.
+
+Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{underline}, conforme diretivas da página do \href{https://universaldependencies.org/format}{formato CoNLL-U} (acesso em 28 de outubro de 2019).
 
 \begin{table}
     \centering
@@ -50,6 +52,22 @@ Os treebanks adaptados para a gramática UD são disponibilizados no formato CoN
     \caption{Colunas do formato UD 2.0}
     \label{tab:colunasUD}
 \end{table}
+
+\section{Princípios}\label{sec:principios}
+
+	De \href{https://universaldependencies.org/introduction.html}{Página do Universal Dependencies} (acesso em 28 de outubro de 2019).
+	
+	What is needed for UD to be successful?
+	The secret to understanding the design and current success of UD is to realize that the design is a very subtle compromise between approximately 6 things:
+	
+	\begin{enumerate}
+		\item UD needs to be satisfactory on linguistic analysis grounds for individual languages.
+		\item UD needs to be good for linguistic typology, i.e., providing a suitable basis for bringing out cross-linguistic parallelism across languages and language families.
+		\item UD must be suitable for rapid, consistent annotation by a human annotator.
+		\item UD must be suitable for computer parsing with high accuracy.
+		\item UD must be easily comprehended and used by a non-linguist, whether a language learner or an engineer with prosaic needs for language processing. We refer to this as seeking a habitable design, and it leads us to favor traditional grammar notions and terminology.
+		\item UD must support well downstream language understanding tasks (relation extraction, reading comprehension, machine translation, …).
+	\end{enumerate}
 
 \section{Colunas/anotações}\label{sec:colunas}
 
@@ -74,6 +92,37 @@ Os treebanks adaptados para a gramática UD são disponibilizados no formato CoN
 
 Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence e Token (e suas respectivas anotações), desenvolvemos e utilizamos o \href{https://github.com/alvelvis/ACDC-UD/blob/master/estrutura_ud.py}{estrutura\_ud.py}.
 
+\chapter{Lemas}\label{sec:lemas}
+
+	O lema é a segunda coluna (ou atributo) no formato CoNLL-U. De modo geral, os lemas não são capitalizados, isto é, devem ter letras minúsculas, exceto pelos nomes próprios (\emph{PROPN}).
+
+	Veja, na tabela \fullref{tab:lemma}, como encontrar o lema para as classes gramaticais que flexionam.
+
+	\begin{table}[]
+	    \centering
+	    \begin{tabular}{ c | c }
+	    \textbf{upos} & \textbf{lema} \\
+	    \hline
+	    ADJ & o adjetivo no masculino singular \\
+	    \hline
+	    AUX & verbo no infinitivo \\
+	    \hline
+	    NOUN & o substantivo no singular não capitalizado \\
+	    \hline
+	    DET & igual aos ADJ \\
+	    \hline
+	    PROPN & o nome próprio no singular \\
+	    \hline
+	    VERB & o verbo no infinitivo \\
+	    \hline
+	    PRON & se substantivos, devem seguir as diretivas dos \emph{NOUN};\\ & se adjetivos, dos \emph{ADJ} \\
+	    \end{tabular}
+	    \caption{Como encontrar o lema das classes gramaticais que flexionam}
+	    \label{tab:lemma}
+	\end{table}{}
+
+	
+
 \chapter{Classes gramaticais (upos)}\label{sec:upos}
 
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
@@ -84,8 +133,6 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
     \centering
     \begin{tabular}{| c | c |}
     \hline
-    \textbf{upos} & \textbf{Observações} \\
-    \hline
     ADJ & adjetivos e numerais ordinais \\
     \hline
     ADP & preposições \\
@@ -94,7 +141,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
     \hline
     ADV & advérbio \\
     \hline
-    AUX & \fullref{sec:verbosauxiliares} \\
+    AUX & verbos auxiliares e copulativos \\
     \hline
     SYM & símbolos \\
     \hline
@@ -108,7 +155,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
     \hline
     PROPN & nomes próprios, apenas se com inicial maiúscula \\
     \hline
-    NUM & numeral - exceto os ordinais, que são adjetivos \\
+    NUM & numerais - exceto os ordinais, que são adjetivos \\
     \hline
     PART & partícula \\
     \hline
@@ -129,23 +176,15 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 \section{Verbos auxiliares}\label{sec:verbosauxiliares}
 
-	Verbos auxiliares são classificados como \emph{AUX}. O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}). De modo geral, classificamos como verbos auxiliares os verbos de ligação (\fullref{sec:verbosdeligacao}), o verbo auxiliar na voz passiva (\fullref{sec:servozpassiva}), as locuções de tempo composto (\fullref{sec:auxtempocomposto}), e as locuções verbais aspectuais e modais (\fullref{sec:auxaspecto}).
+	Verbos auxiliares são classificados como \emph{AUX}. O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}). De modo geral, classificamos como verbos auxiliares os verbos de ligação (\fullref{sec:verbosdeligacao}), o verbo auxiliar na voz passiva (\fullref{sec:servozpassiva}), as locuções de tempo composto (\fullref{sec:auxtempocomposto}), e as locuções verbais aspectuais e modais.
+	
+	No UD, as locuções verbais aspectuais e modais não são classificadas como locução, ou seja, os verbos são anotados como se constituíssem duas orações distintas (\fullref{sec:auxaspecto}). No entanto, conforme apontado no trabalho supracitado, é possível propor uma anotação que leve em conta a auxiliaridade das locuções verbais aspectuais (\fullref{sec:locverbalJDP}).
 	
 	Via de regra, verbos auxiliares (\emph{AUX}) não podem ter dependentes, e dependem de um verbo principal (\emph{VERB}). O deprel pode ser \emph{cop}, \emph{aux} ou \emph{aux:pass}, de acordo com a função sintática.
 
-	\fullref{tab:aux}
-
-%	\fullref{tab:verbosdeligacao}
-
-%	\fullref{tab:vozpassiva}
-	
-%	\fullref{tab:locucoesverbais}
-
-%	\fullref{tab:auxphrasalverb}
-
 	\subsection{Verbos de ligação}\label{sec:verbosdeligacao}
 	
-		Apenas os verbos \say{ser} e \say{estar} são considerados verbos de ligação, e portanto serão sempre anotados como \textit{AUX}. Os demais verbos que a GT costuma elencar como verbo de ligação (parecer, permanecer, etc.) são anotados como \textit{VERB}. Os verbos de ligação \textit{AUX} terão relação sintática \emph{cop}, e nunca poderão ser núcleo de uma oração (Xx) nem conter dependentes.
+		Apenas os verbos \say{ser} e \say{estar} são considerados verbos de ligação, e portanto serão sempre anotados como \textit{AUX}. Os demais verbos que a GT costuma elencar como verbo de ligação (\say{parecer}, \say{permanecer}, etc.) são anotados como \textit{VERB}. Os verbos de ligação \textit{AUX} terão relação sintática \emph{cop}, e nunca poderão ser núcleo de uma oração (Xx) nem conter dependentes.
 
 		\fullref{dep:serAUX}
 
@@ -174,6 +213,8 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	\subsection{Verbo \textit{ser} como voz passiva}\label{sec:servozpassiva}
 	
 		A anotação de \say{ser} como voz passiva, além do upos \emph{AUX}, deve receber deprel \emph{aux:pass}.
+
+		Para o fenômeno da voz passiva, ver Xxx.
 
 		\fullref{dep:serPASS}
 
@@ -206,7 +247,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 		\fullref{dep:auxtempocomposto}
 
-		\fullref{tab:locucoesverbais}
+		\fullref{tab:loctempocomposto}
 
 		\begin{figure*}[htbp]
 			\centering
@@ -233,39 +274,70 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		\end{figure*}
 
 
-	\subsection{Locuções verbais aspectuais/modais}\label{sec:auxaspecto}
-
-		Para as gramáticas, é um exemplo de locução verbal aspectual a \fullref{dep:auxphrasalverb}, e para algumas gramáticas (e não para outras), é um exemplo de locução modal a \fullref{dep:auxmodal}.
-
-		\fullref{tab:locucoesverbais}
-
-		Segundo as gramáticas, o que distingue a locução verbal aspectual da modal é que, na primeira, o verbo auxiliar caracteriza a temporalidade da ação do verbo principal, e na segunda, o verbo auxiliar caracteriza um julgamento do enunciador sobre a ação do verbo principal. Alguns gramáticos divergem sobre como a classificação se dá, portanto apenas herdamos, no Bosque-UD, o que já era a anotação originária do PALAVRAS \citep{bick2000parsing}, e resolvemos não modificá-la.
-
-		Nos casos de locução verbal aspectual, geralmente há uma partícula interveniente no meio da locução, como na \fullref{dep:auxphrasalverb}, em que há um \say{a} entre \say{começar} e \say{ouvir}. Encaramos que estamos diante de um fenômeno de \emph{phrasal verb}, uma MWE do tipo \emph{AUX}, como sugerido em \citet{elvis2019locverbal}. Na frase, \emph{vai ouvir} é uma locução verbal de tempo composto (\fullref{sec:auxtempocomposto}), e \say{começar a ouvir} é uma locução verbal aspectual, sendo \say{começar a} uma expressão multi-palavra (MWE) do tipo auxiliar.
-
-		\fullref{tab:auxphrasalverb}
-
+	\subsection{Locuções verbais aspectuais/modais não existem no UD}\label{sec:auxaspecto}
+	
+		Em UD, não existem locuções verbais aspectuais ou modais, de modo que as sentenças são anotadas como na \fullref{dep:locverbalUD} e \fullref{dep:locverbalUD2}.
+		
+		Para entender melhor o fenômeno das locuções verbais e conhecer um modelo de anotação para o fenômeno, ver \fullref{sec:locverbalJDP}.
+		
 		\begin{figure*}[htbp]
 			\centering
 			\vspace{.8cm}
 			\begin{dependency}
 				\begin{deptext}
-					DET \& NOUN \& AUX \& VERB \& ADV \& ADP \& PROPN \& PUNCT \\
+					DET \& NOUN \& VERB \& VERB \& ADV \& ADP \& PROPN \& PUNCT \\
 					A \& seleção \& deve \& contar \& hoje \& com \& Giovane \& . \\
 					o \& seleção \& dever \& contar \& hoje \& com \& Giovane \& . \\
 				\end{deptext}
 				\depedge{2}{1}{det}
 				\depedge{4}{5}{advmod}
-				\deproot{4}{root}
+				\deproot{3}{root}
 				\depedge{4}{7}{obl}
 				\depedge{7}{6}{case}
-				\depedge{4}{2}{nsubj}
-				\depedge{4}{8}{punct}
-				\depedge{4}{3}{aux}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{8}{punct}
+				\depedge{3}{4}{xcomp}
 			\end{dependency}
 			\caption{A seleção \emph{deve contar} hoje com Giovane}
-			\label{dep:auxmodal}
+			\label{dep:locverbalUD}
 		\end{figure*}
+		
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& PROPN \& AUX \& AUX \& SCONJ \& VERB \& DET \& NOUN \& PUNCT \\
+					O \& Tribunal \& vai \& começar \& a \& ouvir \& as \& testemunhas \& . \\
+					o \& Tribunal \& ir \& começar \& a \& ouvir \& o \& testemunha \& . \\
+				\end{deptext}
+				\depedge{2}{1}{det}
+				\deproot{4}{root}
+				\depedge{6}{8}{obj}
+				\depedge{8}{7}{det}
+				\depedge{4}{2}{nsubj}
+				\depedge{4}{9}{punct}
+				\depedge{4}{3}{aux}
+				\depedge{4}{6}{xcomp}
+				\depedge{6}{5}{mark}
+			\end{dependency}
+			\caption{O Tribunal vai \emph{começar a ouvir} as testemunhas}
+			\label{dep:locverbalUD2}
+		\end{figure*}
+	
+	\subsection{Proposta de anotação para as locuções verbais aspectuais/modais}\label{sec:locverbalJDP}
+
+		Em UD, não existem locuções verbais ou modais, mas estudamos uma alternativa para marcar a auxiliaridade dos verbos segundo alguns estudos gramaticais.
+		
+		O que distingue a locução verbal aspectual da modal é que, na primeira, o verbo auxiliar perdeu o seu conteúdo lexical e serve apenas para caracterizar a temporalidade da ação do verbo principal, e na segunda, o verbo auxiliar (ou pleno, segundo algumas gramáticas) caracteriza um julgamento do enunciador sobre a ação do verbo principal.
+		
+		Alguns gramáticos divergem sobre como a classificação se dá, portanto propomos apenas herdar, no Bosque-UD, o que já era a anotação originária do PALAVRAS \citep{bick2000parsing}, e não modificá-la em relação a quais devem ser os verbos auxiliares.
+		
+		Para o PALAVRAS (no Bosque-UD, até a versão 2.4), locuções verbais modais não são locuções, isto é, os dois verbos se configuram como verbos plenos, tal como é a anotação seguindo as diretivas do UD (\fullref{dep:locverbalUD}).
+
+		Nos casos de locução verbal aspectual, para o PALAVRAS, há uma locução, isto é, o primeiro verbo é auxiliar (\textit{AUX/aux}), e o segundo, verbo pleno (\textit{VERB}). Às vezes há uma partícula interveniente no meio da locução, como na \fullref{dep:auxphrasalverb}, em que há um \say{a} entre \say{começar} e \say{ouvir}. Encaramos que estamos diante de um fenômeno de \emph{phrasal verb}, uma MWE do tipo \emph{AUX}, como sugerido em \citet{elvis2019locverbal}. Na frase, \emph{vai ouvir} é uma locução verbal de tempo composto (\fullref{sec:auxtempocomposto}), e \say{começar a ouvir} é uma locução verbal aspectual, sendo \say{começar a} uma expressão multi-palavra (MWE) do tipo auxiliar.
+
+		\fullref{tab:auxphrasalverb}
 
 		\begin{figure*}[htbp]
 			\centering
@@ -350,7 +422,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	\subsection{Não são locuções verbais: dois verbos plenos}
 
-		Ainda segundo as decisões do PALAVRAS \citep{bick2000parsing}, há outras tantas colocações de dois verbos que não são locuções verbais. Portanto, são todos casos de verbos plenos, de upos \emph{VERB}, em que o segundo verbo é dependente do primeiro, como oração substantiva objetiva reduzida de infinitivo (Xx).
+		Quando não estamos diante de verbos de ligação, voz passiva ou locuções verbais de tempo composto, temos as colocações de dois verbos plenos que não são locuções verbais. Portanto, são todos casos de verbos plenos, de upos \emph{VERB}, em que o segundo verbo é dependente do primeiro, como oração subordinada substantiva objetiva direta reduzida de infinitivo (Xx).
 
 		\fullref{dep:naolocverbal}
 
@@ -382,17 +454,38 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 \section{Numerais}\label{sec:numerais}
 
-	Numerais cardinais (360) e fracionários (dois terços) devem ser anotados como de upos \emph{NUM}, sejam por extenso ou em algarismos. Numerais multiplicativos (dobro, triplo), por outro lado, devem ser anotados como de upos \emph{NUM}.
+	Numerais cardinais (360) e fracionários (\fullref{dep:numfrac}) devem ser anotados como de upos \emph{NUM}, sejam por extenso ou em algarismos. Numerais multiplicativos (dobro, triplo), por outro lado, devem ser anotados como de upos \emph{NUM}.
 	
 	Numerais coletivos (como \say{dezenas}, \say{centenas}, \say{milhares}, etc.), no corpus Bosque-UD, podem estar anotados de duas formas diferentes: como \emph{NUM}, caso seja um número exato (\say{duas centenas}, \say{dois bilhões}), ou como \emph{NOUN}, quando é indefinido (\say{centenas de pessoas}).
 	
 	Numerais ordinais devem ser anotados como \textit{ADJ} (\fullref{sec:adjounum}).
 	
-	Ver também: \fullref{sec:numeroscompostos}
+	Ver também: \fullref{sec:numeroscompostos}.
+	
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				NUM \& NOUN \& CCONJ \& NUM \\
+				2 \& casas \& e \& meia \\
+				2 \& casa \& e \& meio \\
+				NumType=Card \& \& \& NumType=Frac \\
+				MWE=2\_e\_meia \& \& \& \\
+				MWEPOS=NUM \& \& \& \\
+			\end{deptext}
+			\depedge{2}{1}{nummod}
+			\depedge{1}{3}{flat}
+			\depedge{1}{4}{flat}
+			\deproot{2}{root}
+		\end{dependency}
+		\caption{\textit{2 casas e meia}}
+		\label{dep:numfrac}
+	\end{figure*}
 
 	\subsection{Números compostos}\label{sec:numeroscompostos}
 	
-		Números compostos podem conter upos \emph{NUM}, \emph{CCONJ} e \emph{ADP}. Quando o número composto modifica um substantivo, o primeiro número deve se subordinar ao substantivo como \say{nummod}; quando há um sintagma preposicionado, o primeiro número do número composto será o head, e o substantivo, \emph{nmod} do número. Além disso, deve-se notar que o primeiro número deve receber no misc \emph{MWE} e \emph{MWEPOS}.
+		Números compostos podem conter upos \emph{NUM}, \emph{CCONJ} e \emph{ADP}. Quando o número composto modifica um substantivo, o primeiro número deve se subordinar ao substantivo como \emph{nummod}; quando há um sintagma preposicionado, o primeiro número do número composto será o head, e o substantivo, \emph{nmod} do número. Além disso, deve-se notar que o primeiro número deve receber no misc \emph{MWE} e \emph{MWEPOS}.
 		
 		\fullref{dep:trintaesete}
 	
@@ -406,6 +499,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NUM \& CCONJ \& NUM \\
 					Trinta \& e \& sete \\
 					trinta \& e \& sete \\
+					NumType=Card \& \& NumType=Card \\
 					MWE=trinta\_e\_sete \& \& \\
 					MWEPOS=NUM \& \& \\
 				\end{deptext}
@@ -425,6 +519,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NOUN \& ADP \& NUM \& NUM \& ADP \& NOUN \\
 					Montante \& de \& 1300 \& milhões \& de \& dólares \\
 					montante \& de \& 1300 \& milhão \& de \& dólar \\
+					\& \& NumType=Card \& NumType=Card \\
 					\& \& MWE=1300\_milhões \& \& \& \\
 					\& \& MWEPOS=NUM \& \& \& \\
 				\end{deptext}
@@ -451,6 +546,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					SYM \& NUM \\
 					R\$ \& 50 \\
 					R\$ \& 50 \\
+					\& NumType=Card \\
 				\end{deptext}
 				\depedge{1}{2}{nummod}
 				\deproot{1}{root}
@@ -467,6 +563,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					SYM \& NUM \\
 					U\$ \& 50 \\
 					U\$ \& 50 \\
+					\& NumType=Card \\
 				\end{deptext}
 				\depedge{1}{2}{nummod}
 				\deproot{1}{root}
@@ -483,6 +580,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NUM \& SYM \\
 					50 \& \% \\
 					50 \& \% \\
+					NumType=Card \& \\
 				\end{deptext}
 				\depedge{2}{1}{nummod}
 				\deproot{2}{root}
@@ -499,6 +597,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NUM \& NUM \\
 					2 \& centenas \\
 					2 \& centena \\
+					NumType=Card \& NumType=Card \\
 				\end{deptext}
 				\depedge{2}{1}{nummod}
 				\deproot{2}{root}
@@ -509,7 +608,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	
 	\subsection{\textit{50\% das pessoas}: quem é o pai?}\label{sec:50porcentodaspessoas}
 	
-		Sempre que houver sintagma preposicionado, o sintagma anterior será o head, como em \fullref{dep:50porcentodaspessoas} (onde o símbolo é o head, segundo \fullref{sec:rs50}).
+		Sempre que houver sintagma preposicionado, o sintagma anterior será o head, como em \fullref{dep:50porcentodaspessoas} (onde o símbolo é o head, segundo \fullref{sec:rs50}), e \fullref{dep:montantede}.
 	
 		\begin{figure*}[htbp]
 			\centering
@@ -519,6 +618,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					NUM \& SYM \& ADP \& DET \& NOUN \\
 					50 \& \% \& de \& as \& pessoas \\
 					50 \& \% \& de \& as \& pessoa \\
+					NumType=Card \\
 				\end{deptext}
 				\depedge{2}{1}{nummod}
 				\deproot{2}{root}
@@ -549,7 +649,291 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		    \end{dependency}
 		    \caption{\textit{Primeira tentativa}}\label{dep:primeiratentativa}
 		\end{figure*}
+	
+\section{Pronomes substantivos, pronomes adjetivos e artigos}\label{sec:pronedet}
 
+	Pronomes substantivos são anotados como de upos \textit{PRON} e são núcleo do sintagma de que fazem parte, recebendo a deprel do sintagma (\fullref{dep:pronsubst}).
+	
+	Pronomes adjetivos são anotados como de upos \textit{DET}, e recebem deprel \textit{det}, sendo dependentes do token que modificam (\fullref{dep:pronadj}).
+	
+	Artigos/determinantes têm anotação similar à dos pronomes adjetivos (\textit{DET/det}), como na \fullref{dep:artdet}, e devem receber o valor \emph{PronType=Art} na coluna feats, além de \emph{Definite=[Def, Ind]}.
+
+	Ver também:
+
+	\fullref{sec:pronint}
+
+	\fullref{sec:prondem}
+
+	\fullref{sec:pronrel}
+
+	\fullref{sec:pronind}
+	
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				ADV \& PRON \& AUX \& ADV \& NOUN \& ADP \& PRON \& PUNCT \\
+				Talvez \& isto \& seja \& muito \& barulho \& por \& nada \& . \\
+				talvez \& isto \& ser \& muito \& barulho \& por \& nada \& . \\
+				\& PronType=Dem \& \& \& \& \& \& \\
+			\end{deptext}
+			\depedge{5}{1}{advmod}
+			\depedge{5}{2}{nsubj}
+			\depedge{5}{3}{cop}
+			\depedge{5}{4}{advmod}
+			\depedge{7}{6}{case}
+			\depedge{5}{7}{nmod}
+			\depedge{5}{8}{punct}
+			\deproot{5}{root}
+		\end{dependency}
+		\caption{Talvez \textit{isto} seja muito barulho por nada}\label{dep:pronsubst}
+	\end{figure*}
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				DET \& NOUN \& VERB \& PRON \& DET \& NOUN \& ADJ \& PUNCT \\
+				Aquele \& pensamento \& provocou \& me \& um \& arrepio \& delicioso \& . \\
+				aquele \& pensamento \& provocar \& eu \& um \& arrepio \& delicioso \& . \\
+				PronType=Dem \& \& \& \& \& \& \& \\
+			\end{deptext}
+			\deproot{3}{root}
+			\depedge{2}{1}{det}
+			\depedge{3}{2}{nsubj}
+			\depedge{3}{4}{iobj}
+			\depedge{6}{5}{det}
+			\depedge{3}{6}{obj}
+			\depedge{6}{7}{amod}
+			\depedge{3}{8}{punct}
+		\end{dependency}
+		\caption{\textit{Aquele} pensamento provocou-me um arrepio delicioso}\label{dep:pronadj}
+	\end{figure*}
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				AUX \& DET \& NOUN \& ADP \& DET \& NOUN \& ADP \& DET \& NOUN \& PUNCT \\
+				Eram \& o \& retrato \& de \& o \& cérebro \& de \& este \& partido \& . \\
+				ser \& o \& retrato \& de \& o \& cérebro \& de \& este \& partido \& . \\
+				      \& Definite=Def \& \& \& \& \& \& \& \& \\
+				      \& PronType=Art \& \& \& \& \& \& \& \& \\
+			\end{deptext}
+			\depedge{3}{1}{cop}
+			\depedge{3}{6}{nmod}
+			\depedge{6}{9}{nmod}
+			\depedge{3}{2}{det}
+			\depedge{6}{4}{case}
+			\depedge{6}{5}{det}
+			\depedge{9}{7}{case}'
+			\depedge{9}{8}{det}
+			\depedge{3}{10}{punct}
+			\deproot{3}{root}
+		\end{dependency}
+		\caption{Eram \textit{o} retrato d\textit{o} cérebro deste partido}\label{dep:artdet}
+	\end{figure*}
+
+	\subsection{Pronomes interrogativos}\label{sec:pronint}
+
+		Pronomes interrogativos, assim como os pronomes substantivos, têm upos \textit{PRON} e recebem o deprel do sintagma (\fullref{dep:pronint}). Não confundir com os advérbios interrogativos (Xxx), que podem inclusive se tornar conjunções quando introduzindo orações subordinadas (Xxx).
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					CCONJ \& VERB \& PRON \& PRON \& ADV \& ADV \& VERB \& PUNCT \\
+					E \& sabe \& quem \& eu \& ainda \& não \& vi \& ? \\
+					e \& saber \& quem \& eu \& ainda \& não \& ver \& ? \\
+					\& \& PronType=Int \& \& \& Polarity=Neg \& \& \\
+				\end{deptext}
+				\depedge{2}{1}{cc}
+				\depedge{7}{3}{obj}
+				\depedge{2}{7}{ccomp}
+				\depedge{2}{8}{punct}
+				\depedge{7}{4}{nsubj}
+				\depedge{7}{6}{advmod}
+				\depedge{7}{5}{advmod}
+				\deproot{2}{root}
+			\end{dependency}
+			\caption{E sabe \textit{quem} eu ainda não vi?}\label{dep:pronint}
+		\end{figure*}
+
+	\subsection{Pronomes demonstrativos}\label{sec:prondem}
+
+		Pronomes demonstrativos devem receber a etiqueta \emph{PronType=Dem} na coluna feats.
+
+		Podem ser classificados tanto como pronomes substantivos, quando substituem um substantivo (\fullref{dep:pronsubst}), quanto como pronomes adjetivos (\fullref{dep:pronadj}), quando modificam um substantivo.
+
+	\subsection{Pronomes relativos}\label{sec:pronrel}
+
+		Pronomes relativos devem receber o valor \emph{PronType=Rel} na coluna feats.
+
+		\say{Cujo/a} são os únicos pronomes relativos que são adjetivos (\emph{DET}), e não substantivos.
+
+		\fullref{dep:relque}
+
+		\fullref{dep:relonde}
+
+		\fullref{dep:relcuja}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& PRON \& VERB \& AUX \& DET \& NOUN \& PUNCT \& PUNCT \& VERB \& PUNCT \\
+					O \& que \& fizeram \& foi \& um \& absurdo \& » \& , \& disse \& . \\
+					o \& que \& fazer \& ser \& um \& absurdo \& » \& , \& dizer \& . \\
+ 					\& PronType=Rel \& \& \& \& \& \& \& \& \\
+				\end{deptext}
+				\depedge{9}{6}{parataxis}
+				\depedge{3}{2}{det}
+				\depedge{1}{3}{acl:relcl}
+				\depedge{6}{4}{cop}
+				\depedge{6}{5}{det}
+				\depedge{6}{7}{punct}
+				\depedge{6}{8}{punct}
+				\depedge{9}{10}{punct}
+				\depedge{6}{1}{nsubj}
+				\deproot{9}{root}
+			\end{dependency}
+			\caption{O \emph{que} fizeram foi um absurdo», disse}\label{dep:relque}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					VERB \& DET \& NOUN \& PRON \& DET \& NOUN \& VERB \& PUNCT \\
+					Observou \& os \& lugares \& onde \& essas \& pessoas \& almoçam \& . \\
+					observar \& o \& lugar \& onde \& esse \& pessoa \& almoçar \& . \\
+					\& \& \& PronType=Rel \& \& \& \& \\
+				\end{deptext}
+				\depedge{7}{4}{obl}
+				\depedge{6}{5}{det}
+				\depedge{7}{6}{nsubj}
+				\depedge{3}{7}{acl:relcl}
+				\depedge{3}{2}{det}
+				\depedge{1}{3}{obj}
+				\depedge{3}{7}{acl:relcl}
+				\depedge{1}{8}{punct}
+				\deproot{1}{root}
+			\end{dependency}
+			\caption{Observou \emph{onde} essas pessoas almoçam}\label{dep:relonde}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& DET \& NOUN \& VERB \& NOUN \\
+					Uma \& galeria \& cuja \& concepção \& permitirá \& intervenções \& . \\
+					um \& galeria \& cujo \& concepção \& permitir \& intervenção \& . \\
+					\& \& PronType=Rel \& \& \& \\
+				\end{deptext}
+				\depedge{2}{1}{det}
+				\depedge{5}{4}{nsubj}
+				\depedge{4}{3}{det}
+				\depedge{2}{5}{acl:relcl}
+				\depedge{5}{6}{obj}
+				\deproot{2}{root}
+				\depedge{2}{7}{punct}
+			\end{dependency}
+			\caption{Uma galeria \emph{cuja} concepção permitirá intervenções no subsolo}\label{dep:relcuja}
+		\end{figure*}
+
+
+	\subsection{Pronomes indefinidos}\label{sec:pronind}
+
+		Pronomes indefinidos devem receber o valor \emph{PronType=Ind} na coluna feats, e podem ser pronomes substantivos, como na \fullref{dep:pronindsubst}, ou adjetivos, como na \fullref{dep:pronindadj}.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& VERB \& DET \& NOUN \\
+					Ninguém \& força \& sua \& escalação \\
+					ninguém \& forçar \& seu \& escalação \\
+					PronType=Ind \& \& \& \\
+				\end{deptext}
+				\depedge{4}{3}{det}
+				\depedge{2}{4}{obj}
+				\depedge{2}{1}{nsubj}
+				\deproot{2}{root}
+			\end{dependency}
+			\caption{\emph{Ninguém} força sua escalação}\label{dep:pronindsubst}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& DET \& NOUN \& ADJ \& PUNCT \\
+					Essa \& divisão \& gera \& algumas \& distorções \& terríveis \& . \\
+					esse \& divisão \& gerar \& algum \& distorção \& terrível \& . \\
+					\& \& \& PronType=Ind \& \& \& \\
+				\end{deptext}
+				\depedge{3}{2}{nsubj}
+				\depedge{2}{1}{det}
+				\depedge{5}{4}{det}
+				\deproot{3}{root}
+				\depedge{5}{6}{amod}
+				\depedge{3}{7}{punct}
+				\depedge{3}{5}{obj}
+			\end{dependency}
+			\caption{Essa divisão gera \emph{algumas} distorções terríveis}\label{dep:pronindadj}
+		\end{figure*}
+
+
+	\subsection{\emph{A} mais querida, \emph{O} que eu sei: pronome ou artigo?}\label{sec:amaisquerida}
+
+		Em frases como \fullref{dep:amaisquerida} e \fullref{dep:oqueeusei}, preferimos a leitura de um pronome substantivo demonstantivo (\emph{PRON}).
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& ADV \& ADJ \\
+					A \& mais \& querida \\
+					a \& mais \& querido \\
+					PronType=Dem \& \& \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{amod}
+				\depedge{3}{2}{advmod}
+			\end{dependency}
+			\caption{\emph{A} mais querida}\label{dep:amaisquerida}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& PRON \& PRON \& VERB \\
+					O \& que \& eu \& sei \\
+					o \& que \& eu \& saber \\
+					\& PronType=Dem \& \& \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{4}{2}{obj}
+				\depedge{4}{3}{nsubj}
+				\depedge{1}{4}{acl:relcl}
+			\end{dependency}
+			\caption{\emph{O} que eu sei}\label{dep:oqueeusei}
+		\end{figure*}
+
+	
 \chapter{Atributos morfológicos (feats)}\label{sec:feats}
 
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
@@ -585,27 +969,749 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
 
+\section{Parataxis}\label{sec:parataxis}
+
+	O deprel \emph{parataxis} é utilizado quando a relação entre duas orações não é explicitamente nem de coordenação, nem de subordinação.
+
+	Em UD, discurso direto também é caso de \emph{parataxis} (\fullref{sec:discursodireto}).
+
+	\fullref{dep:parataxis1}
+
+\section{Predicativos}\label{sec:predicativos}
+
+	Os predicativos do sujeito, quando são o predicado nominal da oração (conforme Xxx), devem ter deprel \emph{root} como na \fullref{dep:predicativodosujeito1}.
+
+	Quando são adjunto do sujeito, os predicativos são adjuntos adnominais, conforme \fullref{sec:adjuntoadnominal}, e devem receber deprel \emph{acl}.
+
+	Os predicativos do objeto podem diferir caso sejam subordinados ao objeto ou ao verbo, conforme \fullref{sec:pintouamodelonua} e \fullref{sec:declarouoreuculpado}.
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				DET \& NOUN \& AUX \& VERB \& ADP \& NOUN \\
+				Os \& arquivos \& são \& protegidos \& por \& senha \\
+				o \& arquivo \& ser \& proteger \& por \& senha \\
+			\end{deptext}
+			\deproot{4}{root}
+			\depedge{4}{3}{aux:pass}
+			\depedge{4}{2}{nsubj}
+			\depedge{2}{1}{det}
+			\depedge{6}{5}{case}
+			\depedge{4}{6}{obl:agent}
+		\end{dependency}
+		\caption{Os arquivos são \emph{protegidos} por senhas}\label{dep:predicativodosujeito1}
+	\end{figure*}
+
+	\subsection{Pintou a modelo \emph{nua}: predicativo do objeto subordinado ao objeto}\label{sec:pintouamodelonua}
+
+		Assim como o predicativo do sujeito, o predicativo do objeto que é subordinado ao objeto deve ter deprel \emph{acl}, como na \fullref{dep:pintouamodelonua}.
+
+		Caso o predicativo seja dependente do verbo, será \emph{xcomp}, conforme \fullref{sec:declarouoreuculpado}.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					VERB \& DET \& NOUN \& ADJ \\
+					Pintou \& a \& modelo \& nua \\
+					pintar \& a \& modelo \& nu \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{obj}
+				\depedge{3}{2}{det}
+				\depedge{3}{4}{acl}
+			\end{dependency}
+			\caption{Pintou a modelo \emph{nua}}\label{dep:pintouamodelonua}
+		\end{figure*}
+
+	\subsection{Declarou o réu \emph{culpado}: predicativo do objeto subordinado ao verbo}\label{sec:declarouoreuculpado}
+
+		Quando o predicativo do objeto é dependente do verbo, e não do objeto, estamos diante de um caso de \fullref{sec:argumentosdoverbo}, que deve ter deprel \emph{xcomp}, como na \fullref{dep:declarouoreuculpado} e na \fullref{dep:euoconsideroidiota}.
+	
+		Na frase \fullref{dep:xcomp4}, além do \say{deixando} que é \emph{xcomp} (objeto oracional), há também o \say{extenso} que tem deprel \emph{xcomp} por ser predicativo do objeto \say{currículo} mas argumento do verbo \emph{deixando}.
+	
+		Caso o predicativo seja dependente do objeto, será \emph{acl}, conforme \fullref{sec:pintouamodelonua}.
+	
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					VERB \& DET \& NOUN \& ADJ \\
+					Declarou \& o \& réu \& culpado \\
+					declarar \& o \& réu \& culpado \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{obj}
+				\depedge{1}{4}{xcomp}
+				\depedge{3}{2}{det}
+			\end{dependency}
+			\caption{Declarou o réu \emph{culpado}}\label{dep:declarouoreuculpado}
+		\end{figure*}
+	
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& PRON \& VERB \& ADJ \\
+					Eu \& o \& considero \& idiota \\
+					eu \& ele \& considero \& idiota \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{2}{obj}
+				\depedge{3}{1}{nsubj}
+				\depedge{3}{4}{xcomp}
+			\end{dependency}
+			\caption{Eu o considero \emph{idiota}}\label{dep:euoconsideroidiota}
+		\end{figure*}
+
+\section{Argumentos do verbo}\label{sec:argumentosdoverbo}
+
+	Os argumentos de um verbo são os objetos de um verbo transitivo. Os objetos podem ser nominais (\fullref{sec:objetonominal}) ou oracionais (\fullref{sec:objetooracional}). 
+
+
+	\subsection{Caso seja nominal}\label{sec:objetonominal}
+
+		Em UD, caso o verbo possua apenas um objeto nominal em uma dada sentença, esse objeto deve obrigatoriamente ser direto (deprel \emph{obj}), independentemente da presença ou não de preposição, como na \fullref{dep:objapenas}, que tem anotação igual à \fullref{dep:objapenas2}.
+
+		Caso haja mais de um objeto, o primeiro será direto (seja ele nominal ou oracional), e o segundo, indireto (deprel \emph{iobj}), assim como na \fullref{dep:objeiobj}.
+
+		O objeto indireto prototípico é aquele que é beneficiário/destinatário da ação do verbo, como na \fullref{dep:iobjprototipico}.
+
+		Para diferenciar um objeto de um adjunto adverbial, no Bosque-UD, temos mantido a anotação original do PALAVRAS: quando a preposição possui a anotação \emph{PIV} na coluna de xpos (a coluna onde colocamos a anotação original do PALAVRAS), isso significa que é um caso de objeto, e não de adjunto.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& VERB \& PRON \\
+					Eu \& adoro \& você \\
+					eu \& adorar \& você \\
+				\end{deptext}
+				\deproot{2}{root}
+				\depedge{2}{3}{obj}
+				\depedge{2}{1}{nsubj}
+			\end{dependency}
+			\caption{Eu adoro \emph{você}}\label{dep:objapenas}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& VERB \& ADP \& PRON \\
+					Eu \& gosto \& de \& você \\
+					eu \& gostar \& de \& você \\
+				\end{deptext}
+				\deproot{2}{root}
+				\depedge{2}{1}{nsubj}
+				\depedge{2}{4}{obj}
+				\depedge{4}{3}{case}
+			\end{dependency}
+			\caption{Eu gosto de \emph{você}}\label{dep:objapenas2}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& PRON \& DET \& NOUN \& ADP \& NOUN \& ADP \& DET \& NOUN \\
+					O \& atacante \& pediu \& mais \& um \& dia \& de \& folga \& a \& o \& treinador \\
+					o \& atacante \& pedir \& mais \& um \& dia \& de \& folga \& a \& o \& treinador \\
+					\& \& \& PronType=Ind \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{2}{1}{det}
+				\depedge{3}{2}{nsubj}
+				\depedge{6}{5}{det}
+				\depedge{5}{4}{det}
+				\depedge{3}{6}{obj}
+				\depedge{8}{7}{case}
+				\depedge{6}{8}{nmod}
+				\depedge{3}{11}{iobj}
+				\depedge{11}{10}{det}
+				\depedge{11}{9}{case}
+			\end{dependency}
+			\caption{O atacante pediu mais um \emph{dia} de folga ao \emph{treinador}}\label{dep:objeiobj}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PROPN \& VERB \& ADP \& DET \& NOUN \& DET \& NOUN \& SCONJ \& VERB \\
+					Souza \& negou \& a \& os \& réus \& o \& direito \& de \& apelarem \\
+					Souza \& negar \& a \& o \& réu \& o \& direito \& de \& apelar \\
+				\end{deptext}
+				\deproot{2}{root}
+				\depedge{2}{1}{nsubj}
+				\depedge{2}{5}{iobj}
+				\depedge{5}{4}{det}
+				\depedge{5}{3}{case}
+				\depedge{2}{7}{obj}
+				\depedge{7}{6}{det}
+				\depedge{7}{9}{acl}
+				\depedge{9}{8}{mark}
+			\end{dependency}
+			\caption{Souza negou aos \emph{réus} o \emph{direito} de apelarem}\label{dep:iobjprototipico}
+		\end{figure*}
+
+
+	\subsection{Caso seja oracional}\label{sec:objetooracional}
+	
+		O objeto oracional é uma oração subordinada substantiva objetiva (direta ou indireta). Em UD, não há nenhuma diferenciação entre a anotação da oração objetiva direta e a indireta, mas deve-se notar outras diferenças em relação à análise das gramáticas do português.
+
+		De modo geral, orações subordinadas substantivas objetivas devem receber o deprel \emph{ccomp}, como na \fullref{dep:ccomp} e na \fullref{dep:ccomp2}.
+
+		No entanto, em alguns casos, o objeto oracional pode ser \emph{xcomp}, quando o sujeito da oração subordinada é, obrigatoriamente, mesmo sujeito ou o objeto da oração à qual se subordina. De modo geral, são os casos de oração subordinada substantiva objetiva reduzida, como em \fullref{dep:xcomp1}, \fullref{dep:xcomp2}, \fullref{dep:xcomp3}, e \fullref{dep:xcomp4}. 
+
+		Esses casos, porém, não devem ser confundidos com os de sujeito oculto quando a oração é desenvolvida (ou seja, tem a conjunção subordinativa), como na \fullref{dep:xcompsujeitooculto}.
+
+		Outro caso de argumento do verbo que deve receber deprel \emph{xcomp}, embora seja nominal, é o dos predicativos do objeto quando são subordinados ao verbo, e não ao objeto, conforme \fullref{sec:declarouoreuculpado}.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					VERB \& ADP \& DET \& NOUN \& SCONJ \& PRON \& VERB \\
+					Pediu \& a \& os \& presentes \& que \& se \& empenhem \\
+					pedir \& a \& o \& presente \& que \& se \& empenhar \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{4}{iobj}
+				\depedge{4}{3}{det}
+				\depedge{4}{2}{case}
+				\depedge{1}{7}{ccomp}
+				\depedge{7}{6}{expl}
+				\depedge{7}{5}{mark}
+			\end{dependency}
+			\caption{Pediu aos presentes que se \emph{empenhem}}\label{dep:ccomp}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& DET \& PROPN \& VERB \& ADP \& DET \& NOUN \\
+					Os \& eleitores \& querem \& o \& PT \& participando \& de \& o \& governo \\
+					o \& eleitor \& quer \& o \& PT \& participar \& de \& o \& governo \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{5}{obj}
+				\depedge{3}{6}{ccomp}
+				\depedge{6}{9}{obl}
+				\depedge{2}{1}{det}
+				\depedge{5}{4}{det}
+				\depedge{9}{8}{det}
+				\depedge{9}{7}{case}
+			\end{dependency}
+			\caption{Os eleitores querem o PT \emph{participando} do governo}\label{dep:ccomp2}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& PRON \& SCONJ \& VERB \& DET \& NOUN \& ADP \& PROPN \\
+					Os \& temas \& destinam \& se \& a \& mostrar \& o \& papel \& de \& Portugal \\
+					o \& tema \& destinar \& se \& a \& mostrar \& o \& papel \& de \& Portugal \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{6}{xcomp}
+				\depedge{6}{8}{obj}
+				\depedge{8}{10}{nmod}
+				\depedge{2}{1}{det}
+				\depedge{3}{4}{expl}
+				\depedge{6}{5}{mark}
+				\depedge{8}{7}{det}
+				\depedge{10}{9}{case}
+			\end{dependency}
+			\caption{Os temas destinam-se a \emph{mostrar} o papel de Portugal}\label{dep:xcomp1}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& SCONJ \& VERB \& NOUN \\
+					O \& rendimento \& destinado \& a \& garantir \& condições \\
+					o \& rendimento \& destinar \& a \& garantir \& condição \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{5}{xcomp}
+				\depedge{5}{6}{obj}
+				\depedge{2}{1}{det}
+				\depedge{5}{4}{mark}
+			\end{dependency}
+			\caption{O rendimento destinado a \emph{garantir} condições}\label{dep:xcomp2}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PROPN \& PROPN \& VERB \& VERB \& ADP \& PROPN \\
+					Netscape \& Communications \& decidiu \& adquirir \& a \& Collabra \\
+					Netscape \& Communications \& decidir \& adquirir \& a \& Collabra \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{1}{nsubj}
+				\depedge{3}{4}{xcomp}
+				\depedge{4}{6}{obj}
+				\depedge{1}{2}{flat:name}
+				\depedge{6}{5}{det}
+			\end{dependency}
+			\caption{Netscape Communications decidiu \emph{adquirir} a Collabra}\label{dep:xcomp3}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& PRON \& VERB \& VERB \& DET \& NOUN \& ADJ \\
+					O \& que \& acaba \& deixando \& o \& currículo \& extenso \\
+					o \& que \& acabar \& deixar \& o \& currículo \& extenso \\
+					PronType=Dem \& PronType=Rel \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{acl:relcl}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{4}{xcomp}
+				\depedge{4}{6}{obj}
+				\depedge{6}{5}{det}
+				\depedge{4}{7}{xcomp}
+			\end{dependency}
+			\caption{o que acaba \emph{deixando} o currículo extenso}\label{dep:xcomp4}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& VERB \& SCONJ \& VERB \\
+					Ele \& disse \& que \& viria \\
+					ele \& dizer \& que \& vir \\
+				\end{deptext}
+				\deproot{2}{root}
+				\depedge{2}{1}{nsubj}
+				\depedge{4}{3}{mark}
+				\depedge{2}{4}{ccomp}
+			\end{dependency}
+			\caption{Ele disse que \emph{viria}}\label{dep:xcompsujeitooculto}
+		\end{figure*}
+		
+
+\section{Adjuntos e argumentos do substantivo}\label{sec:adjuntoseargumentosdosubstantivo}
+
+	Ver subseções:
+
+	\fullref{sec:adjuntoadnominal}
+
+	\fullref{sec:complementonominal}
+
+	\fullref{sec:aposto}
+
+	\subsection{Adjunto adnominal}\label{sec:adjuntoadnominal}
+
+		Adjuntos adnominais são adjuntos de substantivos. Eles podem ser substantivos, adjetivos, numerais ou orações, e terão anotações diferentes dependendo do upos.
+
+		Caso sejam \emph{NOUN}, devem ter deprel \emph{nmod} (\fullref{dep:nmod}, e  \fullref{dep:nmod2}).
+
+		Caso sejam \emph{ADJ}, devem ter deprel \emph{amod} (\fullref{dep:amod}).
+
+		Caso sejam \emph{NUM}, devem ter deprel \emph{nummod} (\fullref{dep:nummod}). Ver também: \fullref{sec:numerais}.
+
+		Adjuntos adnominais que são \emph{VERB} são orações subordinadas adjetivas, e devem ter deprel \emph{acl:relcl}, caso sejam desenvolvidas (\fullref{dep:aclrelcl}), ou \emph{acl}, caso sejam reduzidas (\fullref{dep:acl}).
+
+		Sentenças como Xxx (ter relação com) são ambíguas, e privilegiamos leituras como \emph{obl} (Xxx).
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					ADJ \& NUM \& NOUN \& ADP \& NOUN \& PUNCT \\
+					Primeiros \& dois \& anos \& de \& mandato \& . \\
+					primeiro \& dois \& ano \& de \& mandato \& . \\
+					NumType=Ord \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{3}{1}{amod}
+				\depedge{3}{2}{nummod}
+				\depedge{5}{4}{case}
+				\depedge{3}{5}{nmod}
+				\depedge{3}{6}{punct}
+			\end{dependency}
+			\caption{Primeiros dois anos de \emph{mandato}}\label{dep:nmod}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					NOUN \& ADP \& NOUN \\
+					Anel \& de \& ouro \\
+					anel \& de \& ouro \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{nmod}
+				\depedge{3}{2}{case}
+			\end{dependency}
+			\caption{Anel de \emph{ouro}}\label{dep:nmod2}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					NOUN \& ADJ \\
+					Anel \& dourado \\
+					anel \& dourado \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{2}{amod}
+			\end{dependency}
+			\caption{Anel \emph{dourado}}\label{dep:amod}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					NUM \& NOUN \\
+					3.600 \& concessionários \\
+					3.600 \& concessionário \\
+					NumType=Card \\
+				\end{deptext}
+				\deproot{2}{root}
+				\depedge{2}{1}{nummod}
+			\end{dependency}
+			\caption{\emph{3.600} concessionários}\label{dep:nummod}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& AUX \& DET \& NOUN \& PRON \& VERB \& NOUN \& PUNCT \\
+					Esse \& é \& outro \& ponto \& que \& merece \& atenção \& . \\
+					esse \& ser \& outro \& ponto \& que \& merecer \& atenção \& . \\
+					PronType=Dem\& \& PronType=Ind \& \& PronType=Rel \& \& \& \\
+				\end{deptext}
+				\deproot{4}{root}
+				\depedge{4}{2}{cop}
+				\depedge{4}{1}{nsubj}
+				\depedge{4}{3}{det}
+				\depedge{6}{5}{nsubj}
+				\depedge{4}{6}{acl:relcl}
+				\depedge{4}{3}{det}
+				\depedge{6}{7}{obj}
+				\depedge{8}{4}{punct}
+			\end{dependency}
+			\caption{Esse é outro ponto que \emph{merece} atenção}\label{dep:aclrelcl}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& AUX \& DET \& NOUN \& VERB \& ADP \& NOUN \& PUNCT \\
+					Esse \& é \& outro \& ponto \& merecedor \& de \& atenção \& . \\
+					esse \& ser \& outro \& ponto \& merecedor \& de \& atenção \& . \\
+					PronType=Dem\& \& PronType=Ind \& \& VerbForm=Inf \& \& \& \\
+				\end{deptext}
+				\deproot{4}{root}
+				\depedge{4}{2}{cop}
+				\depedge{4}{1}{nsubj}
+				\depedge{4}{3}{det}
+				\depedge{4}{5}{acl}
+				\depedge{5}{7}{nmod}
+				\depedge{7}{6}{case}
+				\depedge{8}{4}{punct}
+			\end{dependency}
+			\caption{Esse é outro ponto \emph{merecedor} de atenção}\label{dep:acl}
+		\end{figure*}
+
+	\subsection{Complemento nominal}\label{sec:complementonominal}
+
+		Complementos nominais são argumentos de substantivos, como na \fullref{dep:complementonominal}. Têm anotação igual à dos adjuntos adnominais (\emph{nmod, amod, nummod, acl:relcl ou acl}), de modo que \say{a compra da \emph{casa}}, \say{a compra do \emph{mês}} e \say{anel de \emph{ouro}} são igualmente analisados como \emph{nmod}.
+
+		Ver \fullref{sec:adjuntoadnominal}.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					NOUN \& ADP \& NOUN \\
+					Medo \& de \& represálias \\
+					medo \& de \& represália \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{3}{2}{case}
+				\depedge{1}{3}{nmod}
+			\end{dependency}
+			\caption{Medo de \emph{represálias}}\label{dep:complementonominal}
+		\end{figure*}
+
+	\subsection{Aposto}\label{sec:aposto}
+
+		Apostos, geralmente, apresentam uma relação de igualdade entre os nomes e verbos que relacionam.
+
+		Tanto os apostos nominais (\fullref{dep:apostonominal1}, e \fullref{dep:apostonominal2}) como os oracionais (\fullref{dep:apostooracional}) recebem deprel \emph{appos}, sejam eles restritivos ou explicativos.
+
+		Ver também: \fullref{sec:apostooque}.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& PUNCT \& PROPN \& PUNCT \& VERB \& DET \& NOUN \\
+					O \& ministro \& , \& FHC \& , \& fez \& um \& pronunciamento \\
+					o  \& ministro \& , \& FHC \& , \& fazer \& um \& pronunciamento \\
+				\end{deptext}
+				\deproot{6}{root}
+				\depedge{6}{2}{nsubj}
+				\depedge{6}{8}{obj}
+				\depedge{2}{1}{det}
+				\depedge{8}{7}{det}
+				\depedge{4}{3}{punct}
+				\depedge{4}{5}{punct}
+				\depedge{2}{4}{appos}
+			\end{dependency}
+			\caption{O ministro, \emph{FHC}, fez um pronunciamento}\label{dep:apostonominal1}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					VERB \& DET \& NOUN \& PROPN \\
+					Afirmou \& o \& levantador \& Maurício \\
+					afirmar \& o \& levantador \& Maurício \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{1}{3}{nsubj}
+				\depedge{3}{4}{appos}
+				\depedge{3}{2}{det}
+			\end{dependency}
+			\caption{Afirmou o levantador \emph{Maurício}}\label{dep:apostonominal2}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& PRON \& VERB \& PUNCT \& VERB \& NOUN \\
+					A \& solução \& que \& deram \& , \& obter \& equilíbrio \\
+					o \& solução \& que \& dar \& , \& obter \& equilíbrio \\ 
+				\end{deptext}
+				\deproot{2}{root}
+				\depedge{2}{1}{det}
+				\depedge{2}{4}{acl:relcl}
+				\depedge{2}{6}{appos}
+				\depedge{6}{7}{obj}
+				\depedge{6}{5}{punct}
+				\depedge{4}{3}{obj}
+			\end{dependency}
+			\caption{A solução que deram, \emph{obter} equilíbrio}\label{dep:apostooracional}
+		\end{figure*}
+
+		\subsubsection{Orações com '', o que''}\label{sec:apostooque}
+
+			Em orações com a presença de \say{, o que}, analisamos o \say{o} como pronome demonstrativo (conforme \fullref{sec:amaisquerida}), funcionando como aposto da oração antecendente (\fullref{dep:apostooque}).
+
+			\begin{figure*}[htbp]
+				\centering
+				\vspace{.8cm}
+				\begin{dependency}
+					\begin{deptext}
+						VERB \& DET \& NOUN \& ADP \& DET \& NOUN \& PUNCT \& PRON \& PRON \& PRON \& VERB \\
+						Morreu \& o \& cachorro \& de \& a \& velha \& , \& o \& que \& a \& entristece \\
+						morrer \& o \& cachorro \& de \& a \& velho \& , \& o \& que \& ela \& entristece \\
+					\end{deptext}
+					\deproot{1}{root}
+					\depedge{1}{3}{nsubj}
+					\depedge{3}{2}{det}
+					\depedge{6}{5}{det}
+					\depedge{6}{4}{case}
+					\depedge{3}{6}{nmod}
+					\depedge{7}{8}{punct}
+					\depedge{1}{8}{appos}
+					\depedge{8}{11}{acl:relcl}
+					\depedge{11}{9}{nsubj}
+					\depedge{11}{10}{obj}
+				\end{dependency}
+				\caption{Morreu o cachorro da velha, \emph{o} que a entristece}\label{dep:apostooque}
+			\end{figure*}
+
+		\subsubsection{Apostos coordenados}\label{sec:apostoscoordenados}
+
+			Apostos coordenados são analisados como apostos dependentes da primeira palavra, e não como coordenações, como na \fullref{dep:apostoscoordenados}.
+
+			\begin{figure*}[htbp]
+				\centering
+				\vspace{.8cm}
+				\begin{dependency}
+					\begin{deptext}
+						DET \& NOUN \& PUNCT \& PROPN \& PROPN \& PUNCT \& DET \& PUNCT \& PROPN \& PUNCT \\
+						O \& réu \& , \& Alexandre \& Cardoso \& , \& o \& « \& Topeira \& » \\
+						o \& réu \& , \& Alexandre \& Cardoso \& , \& o \& « \& Topeira \& » \\
+						%Definite=Def \& NumType=Ord \\
+						%PronType=Art \\
+					\end{deptext}
+					\deproot{2}{root}
+					\depedge{2}{1}{det}
+					\depedge{4}{3}{punct}
+					\depedge{4}{5}{flat:name}
+					\depedge{4}{6}{punct}
+					\depedge{2}{4}{appos}
+					\depedge{2}{9}{appos}
+					\depedge{9}{8}{punct}
+					\depedge{9}{7}{det}
+					\depedge{9}{10}{punct}
+				\end{dependency}
+				\caption{O terceiro réu, \emph{Alexandre} Cardoso, o «\emph{Topeira}»}\label{dep:apostoscoordenados}
+			\end{figure*}
+
+\section{Argumentos do adjetivo}\label{sec:argumentosdoadjetivo}
+	
+	Os argumentos do adjetivo não devem ser confundidos com os argumentos do nome (\fullref{sec:complementonominal}) nem do verbo (Xxx).
+	
+	Caso o complemento do adjetivo seja nominal, deve ter deprel \emph{obl}, conforme \fullref{dep:argumentoadjetivonominal}. Pode ser considerado um caso de adjunto adverbial (\fullref{sec:adjadv}).
+	
+	Caso o complemento do adjetivo seja oracional, deve ter deprel \emph{ccomp}, conforme \fullref{dep:argumentoadjetivooracional}.
+	
+	\begin{figure*}[htbp]
+	\centering
+	\vspace{.8cm}
+	\begin{dependency}
+		\begin{deptext}
+			DET \& NOUN \& VERB \& DET \& NOUN \& ADJ \& ADP \& DET \& NOUN \& PUNCT \\
+			A \& reivindicação \& irritou \& os \& partidos \& favoráveis \& a \& a \& revisão \& . \\
+			o \& reivindicação \& irritar \& o \& partido \& favorável \& a \& a \& revisão \& . \\
+		\end{deptext}
+		\deproot{3}{root}
+		\depedge{3}{2}{nsubj}
+		\depedge{2}{1}{det}
+		\depedge{5}{4}{det}
+		\depedge{3}{5}{obj}
+		\depedge{5}{6}{amod}
+		\depedge{9}{8}{case}
+		\depedge{9}{7}{det}
+		\depedge{3}{10}{punct}
+		\depedge{6}{9}{obl}
+	\end{dependency}
+	\caption{A reivindicação irritou os partidos favoráveis à \emph{revisão}}\label{dep:argumentoadjetivonominal}
+\end{figure*}
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				DET \& NOUN \& VERB \& DET \& NOUN \& ADJ \& SCONJ \& VERB \& NOUN \& PUNCT \\
+				A \& reivindicação \& irritou \& os \& partidos \& favoráveis \& a \& rever \& candidaturas \& . \\
+				o \& reivindicação \& irritar \& o \& partido \& favorável \& a \& rever \& candidatura \& . \\
+			\end{deptext}
+			\deproot{3}{root}
+			\depedge{3}{2}{nsubj}
+			\depedge{2}{1}{det}
+			\depedge{5}{4}{det}
+			\depedge{3}{5}{obj}
+			\depedge{5}{6}{amod}
+			\depedge{8}{7}{mark}
+			\depedge{3}{10}{punct}
+			\depedge{6}{8}{ccomp}
+			\depedge{8}{9}{obj}
+		\end{dependency}
+		\caption{A reivindicação irritou os partidos favoráveis a \emph{rever} candidaturas}\label{dep:argumentoadjetivooracional}
+	\end{figure*}
+	
+	
+
+\section{Locuções verbais}\label{sec:deplocverbal}
+
+	Locuções verbais são os casos de dois verbos em que o primeiro tem upos \emph{AUX}, e o segundo, \emph{VERB}, sendo o primeiro um verbo auxiliar e o segundo, verbo pleno. Para identificar os casos de locução verbal, consultar \fullref{sec:verbosauxiliares}.
+
+\section{Discurso direto}\label{sec:discursodireto}
+
+	Discurso direto é anotado como de deprel \emph{parataxis}.
+
+	\fullref{dep:discursodireto}
+
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				PUNCT \& AUX \& DET \& NOUN \& ADP \& DET \& ADJ \& NOUN \& PUNCT \& PUNCT \& VERB \\
+				« \& É \& uma \& coisa \& de \& o \& Primeiro \& Mundo \& » \& , \& afirmou \\
+				« \& ser \& uma \& coisa \& de \& o \& primeiro \& mundo \& » \& , \& afirmar \\
+			\end{deptext}
+			\deproot{11}{root}
+			\depedge{11}{4}{parataxis}
+			\depedge{4}{1}{punct}
+			\depedge{4}{9}{punct}
+			\depedge{4}{10}{punct}
+			\depedge{4}{2}{aux}
+			\depedge{4}{3}{det}
+			\depedge{8}{7}{amod}
+			\depedge{8}{6}{det}
+			\depedge{8}{5}{case}
+			\depedge{4}{8}{nmod}
+		\end{dependency}
+		\caption{«É uma \emph{coisa} do Primeiro Mundo», afirmou}\label{dep:discursodireto}
+	\end{figure*}
+
 \section{Estruturas comparativas}
 
-Estruturas comparativas são de anotação complexa, o que se verifica pela existência de um \href{https://universaldependencies.org/workgroups/comparatives.html}{working group (WG) em UD} dedicado especialmente a elas. A seguir, listamos as frases utilizadas no WG, traduzidas em português, e com a anotação adequada, além de algumas frases de anotação complexa no Bosque-UD.
-
-\subsection{Frases do Working Group}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image20.png}
-    \caption{Eu coloquei \emph{tanta farinha quanto} a receita pedia}
-    \label{fig:comparative1}
-    \end{figure}{}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image27.png}
-    \caption{Martin é o cara \emph{mais inteligente de todos}}
-    \label{fig:comparative2}
-\end{figure}{}
-
-\subsection{Frases do Bosque-UD}
+	Estruturas comparativas são de anotação complexa, o que se verifica pela existência de um \href{https://universaldependencies.org/workgroups/comparatives.html}{working group (WG) em UD} dedicado especialmente a elas. A seguir, listamos as frases utilizadas no WG, traduzidas em português, e com a anotação adequada, além de algumas frases de anotação complexa no Bosque-UD.
+	
+	\subsection{Frases do Working Group}
+	
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image20.png}
+	    \caption{Eu coloquei \emph{tanta farinha quanto} a receita pedia}
+	    \label{fig:comparative1}
+	    \end{figure}{}
+	
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image27.png}
+	    \caption{Martin é o cara \emph{mais inteligente de todos}}
+	    \label{fig:comparative2}
+	\end{figure}{}
+	
+	\subsection{Frases do Bosque-UD}
 
 \section{Elementos discursivos}
 
@@ -674,75 +1780,11 @@ OBS.: Consideramos \say{Não é que} como MWE.
     	\label{fig:equeMWE3}
     	\end{figure}{}
 
-\chapter*{Apêndice}
+\chapter{Apêndice}
+
+	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
 	Todas as listas são retiradas do corpus Bosque-UD em sua versão 2.5.
-
-	\begin{table}[]
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{Verbo auxiliar} & \textbf{Frequência} \\\hline
-				acabar & 56\\\hline
-				andar & 4\\\hline
-				chegar & 19\\\hline
-				começar & 62\\\hline
-				continuar & 57\\\hline
-				costumar & 10\\\hline
-				deixar & 24\\\hline
-				dever & 217\\\hline
-				estar & 282\\\hline
-				faltar & 1\\\hline
-				ficar & 11\\\hline
-				haver & 37\\\hline
-				ir & 358\\\hline
-				parar & 3\\\hline
-				parecer & 17\\\hline
-				passar & 39\\\hline
-				poder & 394\\\hline
-				procurar & 1\\\hline
-				quer & 1\\\hline
-				ser & 1304\\\hline
-				ter & 536\\\hline
-				vir & 68\\\hline
-				voltar & 40\\\hline
-			\end{tabular}
-		}
-		\hfill
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{Verbo auxiliar} & \textbf{Frequência} \\\hline
-				ser & 1304\\\hline
-				ter & 536\\\hline
-				poder & 394\\\hline
-				ir & 358\\\hline
-				estar & 282\\\hline
-				dever & 217\\\hline
-				vir & 68\\\hline
-				começar & 62\\\hline
-				continuar & 57\\\hline
-				acabar & 56\\\hline
-				voltar & 40\\\hline
-				passar & 39\\\hline
-				haver & 37\\\hline
-				deixar & 24\\\hline
-				chegar & 19\\\hline
-				parecer & 17\\\hline
-				ficar & 11\\\hline
-				costumar & 10\\\hline
-				andar & 4\\\hline
-				parar & 3\\\hline
-				faltar & 1\\\hline
-				procurar & 1\\\hline
-				quer & 1\\\hline
-			\end{tabular}
-		}
-		\caption{Lista das 23 palavras que ocorrem 3541 vezes como verbo auxiliar (\emph{AUX}) no Bosque-UD}
-		\label{tab:aux}
-	\end{table}
 	
 	\begin{table}[]
 		\centering
@@ -769,69 +1811,15 @@ OBS.: Consideramos \say{Não é que} como MWE.
 	\end{table}
 
 	\begin{table}[]
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{Locução verbal} & \textbf{Frequência} \\\hline
-				acabar & 56\\\hline
-				andar & 4\\\hline
-				chegar & 19\\\hline
-				começar & 62\\\hline
-				continuar & 57\\\hline
-				costumar & 10\\\hline
-				deixar & 24\\\hline
-				dever & 217\\\hline
-				estar & 249\\\hline
-				faltar & 1\\\hline
-				ficar & 10\\\hline
-				haver & 37\\\hline
-				ir & 358\\\hline
-				parar & 3\\\hline
-				parecer & 17\\\hline
-				passar & 39\\\hline
-				poder & 394\\\hline
-				procurar & 1\\\hline
-				quer & 1\\\hline
-				ser & 53\\\hline
-				ter & 536\\\hline
-				vir & 68\\\hline
-				voltar & 40\\\hline
-			\end{tabular}
-		}
-		\hfill
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{Locução verbal} & \textbf{Frequência} \\\hline
-				ter & 536\\\hline
-				poder & 394\\\hline
-				ir & 358\\\hline
-				estar & 249\\\hline
-				dever & 217\\\hline
-				vir & 68\\\hline
-				começar & 62\\\hline
-				continuar & 57\\\hline
-				acabar & 56\\\hline
-				ser & 53\\\hline
-				voltar & 40\\\hline
-				passar & 39\\\hline
-				haver & 37\\\hline
-				deixar & 24\\\hline
-				chegar & 19\\\hline
-				parecer & 17\\\hline
-				costumar & 10\\\hline
-				ficar & 10\\\hline
-				andar & 4\\\hline
-				parar & 3\\\hline
-				faltar & 1\\\hline
-				procurar & 1\\\hline
-				quer & 1\\\hline
-			\end{tabular}
-		}
-		\caption{Lista das 23 palavras que ocorrem 2256 vezes como locução verbal (\emph{AUX/aux}) no Bosque-UD}
-		\label{tab:locucoesverbais}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			\textbf{Voz passiva} & \textbf{Frequência} \\\hline
+			ficar & 1\\\hline
+			ser & 1114\\\hline
+		\end{tabular}
+		\caption{Lista das 2 palavras que ocorrem 1115 vezes como locução verbal de tempo composto (\emph{AUX/aux}) no Bosque-UD}
+		\label{tab:loctempocomposto}
 	\end{table}
 
 	\begin{table}[]
@@ -912,7 +1900,7 @@ OBS.: Consideramos \say{Não é que} como MWE.
 				tornar a & 1\\\hline
 			\end{tabular}
 		}
-		\caption{Lista das 31 MWEs que ocorrem 570 vezes como locuções auxiliares (\emph{AUX/aux + ADP/compound}) no Bosque-UD}
+		\caption{Lista das 31 MWEs que ocorreriam 570 vezes como locuções auxiliares (\emph{AUX/aux + ADP/compound}) no Bosque-UD segundo nossa proposta de anotação}
 		\label{tab:auxphrasalverb}
 	\end{table}
 
