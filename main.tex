@@ -1329,6 +1329,160 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			\caption{\emph{O} que eu sei}\label{dep:oqueeusei}
 		\end{figure*}
 
+
+\section{Preposições}
+
+As preposições são palavras que operam como conectores, geralemente, de termos nominais.
+
+Entretanto, no Bosque-UD, palavras tidas usualmente como preposições podem operar como conjunções subordinativas quando em contexto de introdução de oração (\fullref{dep:classedinamica}).
+
+\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					CCONJ \& PROPN \& CCONJ \& DET \& NOUN \& ADV \& VERB \& DET \& NOUN \& SCONJ \& PRON \& 						VERB \\
+					Nem \& Lula \& nem \& o \& partido \& ainda \& encontram \& um \& discurso \& para \& se \& 							diferenciar \\
+				\end{deptext}
+				\deproot{7}{root}
+				\depedge{7}{9}{obj}
+				\depedge{12}{10}{mark}
+				\depedge{9}{12}{acl}
+				
+			\end{dependency}\label{dep:classedinamica}
+			\caption{Nem Lula nem o partido ainda encontraram um discurso \emph{para} se diferenciar}
+		\end{figure*}
+
+	\subsection{Princípio de classes dinâmicas}
+
+\section{Conjunções}
+
+Há dois tipos de conjunções no Bosque-UD: conjunção coordenativa (CCONJ) e conjunção subordinativa (SCONJ). As funções que apresentam são \emph{cc} (coordenador) e \emph{mark} (subordinador). As locuções coordenativas e subordinativas frequentemente aparecem como expressões multi-palavras (MWE) e têm a mesma função que as conjunções coordenativas (\emph{cc/mark}), além da mesma classe gramatical (\emph{CCONJ/SCONJ}).
+
+\subsection{Conjunções coordenativas}
+
+As conjunções coordenativas que estão marcadas como tal no corpus são \emph{e, mas, ou nem, porém, entretanto, quer, portanto, contudo, todavia, tampouco}. Além disso, existem as conjunções que aparecem como expressões multi palavras(MWE), são elas: \emph{no entanto, ou seja,além disso, por outro lado, ainda assim, isto é, em vez de, desse modo, apesar disso, sendo assim}.
+
+Além disso, também são consideradas conjunções casos em que não há uma oração. Toda vez que houver a coordenação entre dois ou mais termos, sejam eles oracionais ou nominais, o conectivo entre eles será classificado como conjunção, e o núcleo da coordenação deverá ter deprel \emph{conj}.
+
+\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PRON \& PRON \& VERB \& NOUN \& CCONJ \& ADV \& ADV \& VERB \& PRON \& PRON \& 						AUX \& VERB\\
+					Eles \& se \& dizem \& oposição \& mas \& ainda \& não \& informaram \& o \& que \& vão \& 							combater \\
+				\end{deptext}
+				\deproot{3}{root}
+				\depedge{8}{5}{cc}
+				\depedge{3}{8}{conj}
+				
+			\end{dependency}
+			\caption{Eles se dizem oposição, \emph{mas} ainda não informaram o que vão combater}
+			\label{dep:mas}
+		\end{figure*}
+
+\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					CCONJ \& VERB \& PUNCT \& VERB \& DET \& NOUN \& ADP \& DET \& NOUN \& ADJ \& ADP \& NUM \& 					NOUN \& CCONJ \& ADV \& VERB \& VERB \& DET \& NOUN \& VERB \\
+					Ou \& seja \& , \& alugam \& o \& imóvel \& por \& um \& prazo \& máximo \& de \\
+					de \& 90 \& dias \& e \& ainda \& podem \& receber \& o \& valor \& adiantado \\
+					\& \& \& \& MWE=ou\_seja \& \\
+					\& \& \& \& MWEPOS=CCONJ \& \\
+				\end{deptext}
+				\depedge{4}{1}{cc}
+				\depedge{1}{2}{fixed}
+				\depedge{1}{3}{punct}
+				\deproot{4}{root}
+				\depedge{6}{5}{det}
+				\depedge{4}{6}{obj}
+				\depedge{9}{7}{case}
+				\depedge{9}{8}{det}
+				\depedge{4}{9}{obl}
+				\depedge{9}{10}{amod}
+				\depedge{13}{11}{case}
+				\depedge{13}{12}{nummod}
+				\depedge{9}{13}{nmod}
+				\depedge{17}{14}{cc}
+				\depedge{17}{15}{advmod}
+				\depedge{4}{16}{conj}
+				\depedge{16}{17}{xcomp}
+				\depedge{19}{18}{det}
+				\depedge{17}{19}{obj}
+				\depedge{19}{20}{acl}
+
+				
+			\end{dependency}
+			\caption{ \emph{Ou seja} , alugam o imóvel por um prazo máximo de 90 dias e ainda podem receber o valor adiantado}
+			\label{dep:ousejaMWE2}
+		\end{figure*}
+
+
+
+
+\subsection{Conjunções subordinativas}
+
+As conjunções subordinativas que estão marcadas como tal no corpus são \emph{}. Além disso, existem as conjunções que aparecem como expressões multi palavras(MWE), são elas: \emph{a fim de que, à medida que, a partir de, a favor de, a não ser que, ao passo que, ainda que, sem que, já que}. 
+
+É importante lembrar que palavras tidas usualmente como preosição, ao introduzir orações, são classificadas como conjunções subordinativas e recebem a deprel mark. (Ver seção Preposições)
+
+\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					SCONJ \& PRON \& VERB \& DET \& NOUN \& PUNCT \& VERB \& NOUN \& ADJ \& CCONJ \& VERB \& 						DET \& NOUN \& ADJ \\
+					Se \& eu \& dirigisse \& uma \& federação \& , \& apresentaria \& balanços \& mensais \& e \& liberaria 					\& minhas \& contas \& bancárias \\
+				\end{deptext}
+				\depedge{3}{1}{mark}
+				\depedge{7}{3}{advcl}
+				\deproot{7}{root}
+				\depedge{11}{10}{cc}
+				\depedge{7}{11}{conj}
+				
+			\end{dependency}
+			\caption{\emph{Se} eu dirigisse uma federação, apresentaria balanços mensais e liberaria minhas contas bancárias}
+		\end{figure*}
+
+\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					CCONJ \& PUNCT \& SCONJ \& SCONJ \& VERB \& ADV \& VERB \& VERB \& PRON \& ADJ  \\
+					Mas \& , \& mesmo \& que \& quisessem \& não \& conseguiriam \& fazer \& nada \& menor \\
+					\& \& MWE=mesmo\_que \& \\
+					\& \& MWEPOS=SCONJ \& \\
+				\end{deptext}
+				\depedge{5}{3}{mark}
+				\depedge{3}{4}{fixed}
+				\depedge{7}{5}{advcl}
+				\deproot{7}{root}				
+			\end{dependency}
+			\caption{Mas, \emph{mesmo que} quisessem não conseguiriam fazer nada menor}
+		\end{figure*}
+
+
+\subsection{Advérbios interrogativos}
+
+Advérbios são palavras que costumam modificar verbos, adjetivos e outros advérbios. Além disso, em português, algumas dessas palvras podem operar como conjunções subordinativas quando aparecem na introdução de orações subordinadas adverbiais.
+
+\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+						SCONJ \& VERB \& DET \& NOUN \& PUNCT \& AUX \& SCONJ \& VERB \&										 VERB \& DET \& NOUN \\
+						Quando \& recebo \& a \& bola \& , \& tenho \& que \& 													ficar \& olhando \& sua \& trajetória \\
+				\end{deptext}
+				\depedge{2}{1}{mark}
+				\depedge{8}{2}{advcl}	
+			\end{dependency}
+			\caption{\emph{Quando} recebo a bola, tenho que ficar olhando sua trajetória}
+		\end{figure*}
 	
 \chapter{Atributos morfológicos (feats)}\label{sec:feats}
 
@@ -2499,6 +2653,151 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 		\end{dependency}
 		\caption{«É uma \emph{coisa} do Primeiro Mundo», afirmou}\label{dep:discursodireto}
 	\end{figure*}
+
+	\section{Estruturas comparativas}
+
+	Estruturas comparativas são de anotação complexa, o que se verifica pela existência de um \href{https://universaldependencies.org/workgroups/comparatives.html}{working group (WG) em UD} dedicado especialmente a elas. A seguir, listamos as frases utilizadas no WG, traduzidas em português, e com a anotação adequada, além de algumas frases de anotação complexa no Bosque-UD.
+
+	\subsection{Frases do Working Group}
+
+	\fullref{fig:comparative1}
+
+	\fullref{fig:comparative2}
+
+	\fullref{fig:comparative3}
+
+	\fullref{fig:comparative4}
+	
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image23.png}
+	    \caption{Eu coloquei \emph{tanta farinha quanto} a receita pedia}
+	    \label{fig:comparative1}
+	    \end{figure}{}
+	
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image32.png}
+	    \caption{Martin é o cara \emph{mais inteligente de todos}}
+	    \label{fig:comparative2}
+	\end{figure}{}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image44.png}
+	    \caption{Ele toca \emph{melhor bêbado do que sóbrio}}
+	    \label{fig:comparative3}
+	\end{figure}{}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image35.png}
+	    \caption{Matilda é \emph{mais gentil do que você pensa}}
+	    \label{fig:comparative4}
+	\end{figure}{}
+
+	\subsection{Frases do Bosque-UD}
+
+	\subsubsection{mais do que}
+
+	\fullref{fig:comparative5}
+
+	\fullref{fig:comparative6}
+
+	\fullref{fig:comparative7}
+
+	\fullref{fig:comparative8}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image17.png}
+	    \caption{Não sei se fui claro: seria \emph{mais} fácil um pinguim cruzar três Saaras \emph{do que} FHC comer carne de bode espremido a um magote de sertanejos suados.}
+	    \label{fig:comparative5}
+	\end{figure}{}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image40.png}
+	    \caption{Sua popularidade está \emph{mais} baixa \emph{do que} nunca e um de seus possíveis oponentes é filho de George Bush.}
+	    \label{fig:comparative6}
+	\end{figure}{}
+
+	\subsubsection{menos do que}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image10.png}
+	    \caption{O compromisso com a precisão (e, por extensão, com o leitor) vale \emph{menos do que} a torcida da imprensa nessas horas.}
+	    \label{fig:comparative7}
+	\end{figure}{}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image43.png}
+	    \caption{Segundo explicou o dirigente José Azevedo, a entrada em vigor dos novos diplomas trouxe consigo «inúmeras anomalias, geradoras de injustiças gritantes», como é o caso dos profissionais que, depois de subirem na carreira, ficam a ganhar \emph{menos do que} antes da progressão.}
+	    \label{fig:comparative8}
+	\end{figure}{}
+
+	\subsubsection{melhor do que}
+
+	\fullref{fig:comparative9}
+
+	\fullref{fig:comparative10}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image70.png}
+	    \caption{Se abordo este tema aqui não é para arriscar-me na análise política, coisa que outros farão \emph{melhor do que} eu.}
+	    \label{fig:comparative9}
+	\end{figure}{}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image54.png}
+	    \caption{É possível que quem apresentou essa ideia considere que seja \emph{melhor} para os Estados Unidos e para o mundo ter qualquer acordo \emph{do que} não ter nada.}
+	    \label{fig:comparative10}
+	\end{figure}{}
+
+	\subsubsection{pior do que}
+
+	\fullref{fig:comparative11}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image18.png}
+	    \caption{Eurico e Milton Areal porque o terreno estava quase impraticável, mas nem melhor nem \emph{pior do que} na primeira metade do encontro e o Tirsense parecia mais fresco e estava em situação de vantagem numérica.}
+	    \label{fig:comparative11}
+	\end{figure}{}
+
+
+	\subsubsection{Comparativos tão/tanto quanto}
+
+	\fullref{fig:comparative12}
+
+	\fullref{fig:comparative13}
+
+	\fullref{fig:comparative14}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image15.png}
+	    \caption{Hopkins diz que, ao contrário dos seus filmes anteriores, que «eram \emph{tão} divertidos \emph{quanto} ver tinta a secar» e «bons exercícios de disciplina e economia e tudo isso», este é um filme do tipo que lhe apetece fazer agora -- acção.}
+	    \label{fig:comparative12}
+	\end{figure}{}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image13.png}
+	    \caption{; e a sua relevância é \emph{tanto} maior \emph{quanto} o seu calendário a torna um barómetro da estação que antecipa.}
+	    \label{fig:comparative13}
+	\end{figure}{}
+
+	\begin{figure}
+	    \centering
+	    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image5.png}
+	    \caption{Nestes últimos dias, os bracarenses apenas têm estudado «pormenores do jogo, pois, quando duas equipas de nível semelhante se encontram, os pormenores é que decidem», reforçou Donner, que vai iniciar o jogo com uma defesa 3x2x1, agressiva \emph{quanto} baste.}
+	    \label{fig:comparative14}
+	\end{figure}{}
 
 \section{Particípio}
 
