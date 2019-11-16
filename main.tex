@@ -23,7 +23,7 @@
 \author{Elvis de Souza\affiliation{PUC-Rio, Brasil}\and Tatiana Cavalcanti\and Aline Silveira\and Wograine Evelyn\and Cláudia Freitas}
 \title{Documentação UD em português\\
 (e para língua portuguesa)}
-\abstract{O projeto Universal Dependencies \citep{mcdonald2013universal} apresenta um tagset e uma gramática. Isso significa dizer que, para além de um conjunto de etiquetas que correspondem às classes da Gramática Tradicional (objeto, sujeito etc.), o UD também faz diversas escolhas que diferem da GT. Nesse documento, apresentamos a documentação detalhadas e as escolhas linguísticas relativas ao processo de revisão do material UD em Português. Considerando que UD funciona como uma espécie de segunda língua gramatical, partimos, sempre que possível, das categorias e análises de GT, e não de UD. Os exemplos de frases e as listas foram retirados do corpus \href{https://github.com/UniversalDependencies/UD\_Portuguese-Bosque}{Bosque-UD} (\citet{rademaker2017universal}) versão 2.5.}
+\abstract{O projeto Universal Dependencies \citep{mcdonald2013universal} apresenta um tagset e uma gramática. Isso significa dizer que, para além de um conjunto de etiquetas que correspondem às classes da Gramática Tradicional (objeto, sujeito etc.), o UD também faz diversas escolhas que diferem da GT. Nesse documento, apresentamos a documentação detalhada e as escolhas linguísticas relativas ao processo de revisão do material UD em Português. Considerando que UD funciona como uma espécie de segunda língua gramatical, partimos, sempre que possível, das categorias e análises de GT, e não de UD. Os exemplos de frases e as listas foram retirados do corpus \href{https://github.com/UniversalDependencies/UD\_Portuguese-Bosque}{Bosque-UD} (\citet{rademaker2017universal}) versão 2.5.}
 
 \input{localpackages.tex}
 \input{localcommands.tex}
@@ -76,9 +76,9 @@ Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{und
 \begin{enumerate}
     \item “id” corresponde ao número do token, em ordem crescente;
     \item “word”, à palavra tal como aparece na frase (exceto no caso de contração, como “da”, em que a palavra será desmembrada nos tokens “de” e “a”);
-    \item “lemma” se refere à palavra tal como aparece no dicionário: em no singular e em masculino ou infinitivo;
+    \item “lemma” se refere à palavra tal como aparece no dicionário: em singular e em masculino ou infinitivo;
     \item “upos” (classe gramatical \say{universal}) se refere à classe gramatical;
-    \item No corpus Bosque-UD, a coluna “xpos” (classe gramatical específica) é preenchida com a saída do sistema PALAVRAS para a mesma frase;
+    \item No corpus Bosque-UD, a coluna “xpos” (classe gramatical específica) é preenchida com a saída do sistema PALAVRAS \citep{bick2000parsing} para a mesma frase;
     \item “feats” (atributos morfológicos) é preenchida com as características morfológicas do token;
     \item “dephead” (dependência sintática), com o id do token de quem é filho;
     \item “deprel” (relação de dependência), com a relação sintática que o conecta ao seu pai;
@@ -94,28 +94,28 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 \chapter{Lemas}\label{sec:lemas}
 
-	O lema é a segunda coluna (ou atributo) no formato CoNLL-U. De modo geral, os lemas não são capitalizados, isto é, devem ter letras minúsculas, exceto pelos nomes próprios (\emph{PROPN}).
+	O lema é a terceira coluna (ou atributo) no formato CoNLL-U. De modo geral, os lemas não são capitalizados, isto é, devem ter letras minúsculas, exceto pelos nomes próprios (\emph{PROPN}).
 
-	Veja, na tabela \fullref{tab:lemma}, como encontrar o lema para as classes gramaticais que flexionam.
+	\fullref{tab:lemma}
 
 	\begin{table}[]
 	    \centering
 	    \begin{tabular}{ c | c }
 	    \textbf{upos} & \textbf{lema} \\
+          \hline
+	    NOUN & o substantivo no singular, não capitalizado \\
+	    \hline
+	    PROPN & o nome próprio no singular, capitalizado \\
 	    \hline
 	    ADJ & o adjetivo no masculino singular \\
 	    \hline
-	    AUX & verbo no infinitivo \\
+           VERB & o verbo no infinitivo \\
 	    \hline
-	    NOUN & o substantivo no singular não capitalizado \\
+	    AUX & verbo no infinitivo \\
 	    \hline
 	    DET & igual aos ADJ \\
 	    \hline
-	    PROPN & o nome próprio no singular \\
-	    \hline
-	    VERB & o verbo no infinitivo \\
-	    \hline
-	    PRON & se substantivos, devem seguir as diretivas dos \emph{NOUN};\\ & se adjetivos, dos \emph{ADJ} \\
+	    PRON & se substantivos, devem seguir as diretivas dos \emph{NOUN};\\ & se pronomes adjetivos, dos \emph{ADJ} \\
 	    \end{tabular}
 	    \caption{Como encontrar o lema das classes gramaticais que flexionam}
 	    \label{tab:lemma}
@@ -126,6 +126,8 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 \chapter{Classes gramaticais (upos)}\label{sec:upos}
 
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
+
+São 17 as classes gramaticais em UD. Elas são decididas com base no contexto, seguindo o \fullref{sec:classesdinamicas}.
 
 \fullref{tab:upos}
 
@@ -168,7 +170,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
     X & no Bosque-UD, palavras estrangeiras \\
     \hline
     \end{tabular}
-    \caption{As classes gramaticais do UD em português}
+    \caption{As 17 classes gramaticais do UD em português}
     \label{tab:upos}
 \end{table}{}
 
@@ -176,15 +178,17 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 \section{Verbos auxiliares}\label{sec:verbosauxiliares}
 
-	Verbos auxiliares são classificados como \emph{AUX}. O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}). De modo geral, classificamos como verbos auxiliares os verbos de ligação (\fullref{sec:verbosdeligacao}), o verbo auxiliar na voz passiva (\fullref{sec:servozpassiva}), as locuções de tempo composto (\fullref{sec:auxtempocomposto}), e as locuções verbais aspectuais e modais.
+	Verbos auxiliares são classificados como \emph{AUX}. Via de regra, verbos auxiliares (\emph{AUX}) não podem ter dependentes, e dependem de um verbo principal (\emph{VERB}). O deprel pode ser \emph{cop}, \emph{aux} ou \emph{aux:pass}, de acordo com a função sintática.
+
+	O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}). De modo geral, classificamos como verbos auxiliares os verbos de ligação (\fullref{sec:verbosdeligacao}), o verbo auxiliar na voz passiva (\fullref{sec:servozpassiva}), as locuções de tempo composto (\fullref{sec:auxtempocomposto}), e as locuções verbais aspectuais e modais.
 	
 	No UD, as locuções verbais aspectuais e modais não são classificadas como locução, ou seja, os verbos são anotados como se constituíssem duas orações distintas (\fullref{sec:auxaspecto}). No entanto, conforme apontado no trabalho supracitado, é possível propor uma anotação que leve em conta a auxiliaridade das locuções verbais aspectuais (\fullref{sec:locverbalJDP}).
-	
-	Via de regra, verbos auxiliares (\emph{AUX}) não podem ter dependentes, e dependem de um verbo principal (\emph{VERB}). O deprel pode ser \emph{cop}, \emph{aux} ou \emph{aux:pass}, de acordo com a função sintática.
 
 	\subsection{Verbos de ligação}\label{sec:verbosdeligacao}
 	
-		Apenas os verbos \say{ser} e \say{estar} são considerados verbos de ligação, e portanto serão sempre anotados como \textit{AUX}. Os demais verbos que a GT costuma elencar como verbo de ligação (\say{parecer}, \say{permanecer}, etc.) são anotados como \textit{VERB}. Os verbos de ligação \textit{AUX} terão relação sintática \emph{cop}, e nunca poderão ser núcleo de uma oração (Xx) nem conter dependentes.
+		Apenas os verbos \say{ser} e \say{estar} são considerados verbos de ligação, e portanto serão sempre anotados como \textit{AUX}. Os demais verbos que a GT costuma elencar como verbo de ligação (\say{parecer}, \say{permanecer}, etc.) são anotados como \textit{VERB}.
+
+		Os verbos de ligação \textit{AUX} terão relação sintática \emph{cop}, e nunca poderão ser núcleo de uma oração nem conter dependentes.
 
 		\fullref{dep:serAUX}
 
@@ -214,11 +218,9 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	
 		A anotação de \say{ser} como voz passiva, além do upos \emph{AUX}, deve receber deprel \emph{aux:pass}.
 
-		Para o fenômeno da voz passiva, ver Xxx.
+		Para o fenômeno da voz passiva, ver \fullref{sec:vozpass}.
 
 		\fullref{dep:serPASS}
-
-		\fullref{tab:vozpassiva}
 		
 		\begin{figure*}[htbp]
 		    \centering
@@ -276,7 +278,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	\subsection{Locuções verbais aspectuais/modais não existem no UD}\label{sec:auxaspecto}
 	
-		Em UD, não existem locuções verbais aspectuais ou modais, de modo que as sentenças são anotadas como na \fullref{dep:locverbalUD} e \fullref{dep:locverbalUD2}.
+		Em UD, não existem locuções verbais aspectuais ou modais, de modo que as sentenças são anotadas como na \fullref{dep:locverbalUD} e \fullref{dep:locverbalUD2}, com dois verbos plenos (\emph{VERB}), sendo o segundo de deprel \emph{xcomp} dependente do primeiro.
 		
 		Para entender melhor o fenômeno das locuções verbais e conhecer um modelo de anotação para o fenômeno, ver \fullref{sec:locverbalJDP}.
 		
@@ -327,15 +329,15 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	
 	\subsection{Proposta de anotação para as locuções verbais aspectuais/modais}\label{sec:locverbalJDP}
 
-		Em UD, não existem locuções verbais ou modais, mas estudamos uma alternativa para marcar a auxiliaridade dos verbos segundo alguns estudos gramaticais.
+		Em UD, não existem locuções verbais aspectuais ou modais, mas estudamos uma alternativa para marcar a auxiliaridade dos verbos segundo alguns estudos gramaticais.
 		
 		O que distingue a locução verbal aspectual da modal é que, na primeira, o verbo auxiliar perdeu o seu conteúdo lexical e serve apenas para caracterizar a temporalidade da ação do verbo principal, e na segunda, o verbo auxiliar (ou pleno, segundo algumas gramáticas) caracteriza um julgamento do enunciador sobre a ação do verbo principal.
 		
-		Alguns gramáticos divergem sobre como a classificação se dá, portanto propomos apenas herdar, no Bosque-UD, o que já era a anotação originária do PALAVRAS \citep{bick2000parsing}, e não modificá-la em relação a quais devem ser os verbos auxiliares.
+		Alguns gramáticos divergem sobre como a classificação se dá, portanto propomos herdar, no Bosque-UD, o que já era a anotação originária do PALAVRAS \citep{bick2000parsing}, e não modificá-la em relação a quais devem ser os verbos auxiliares.
 		
-		Para o PALAVRAS (no Bosque-UD, até a versão 2.4), locuções verbais modais não são locuções, isto é, os dois verbos se configuram como verbos plenos, tal como é a anotação seguindo as diretivas do UD (\fullref{dep:locverbalUD}).
+		Para o PALAVRAS (no Bosque-UD, vigente até a versão 2.4), o que por vezes é chamado de locuções verbais modais não são locuções, isto é, os dois verbos se configuram como verbos plenos, tal como é a anotação seguindo as diretivas do UD (\fullref{dep:locverbalUD}).
 
-		Nos casos de locução verbal aspectual, para o PALAVRAS, há uma locução, isto é, o primeiro verbo é auxiliar (\textit{AUX/aux}), e o segundo, verbo pleno (\textit{VERB}). Às vezes há uma partícula interveniente no meio da locução, como na \fullref{dep:auxphrasalverb}, em que há um \say{a} entre \say{começar} e \say{ouvir}. Encaramos que estamos diante de um fenômeno de \emph{phrasal verb}, uma MWE do tipo \emph{AUX}, como sugerido em \citet{elvis2019locverbal}. Na frase, \emph{vai ouvir} é uma locução verbal de tempo composto (\fullref{sec:auxtempocomposto}), e \say{começar a ouvir} é uma locução verbal aspectual, sendo \say{começar a} uma expressão multi-palavra (MWE) do tipo auxiliar.
+		Nos casos de locução verbal aspectual, porém, para o PALAVRAS, há uma locução, isto é, o primeiro verbo é auxiliar (\textit{AUX/aux}), e o segundo, verbo pleno (\textit{VERB}). Às vezes há uma partícula interveniente no meio da locução, como na \fullref{dep:auxphrasalverb}, em que há um \say{a} entre \say{começar} e \say{ouvir}. Encaramos que estamos diante de um fenômeno de \emph{phrasal verb}, uma MWE do tipo \emph{AUX}, como sugerido em \citet{elvis2019locverbal}. Na frase, \emph{vai ouvir} é uma locução verbal de tempo composto (\fullref{sec:auxtempocomposto}), e \say{começar a ouvir} é uma locução verbal aspectual, sendo \say{começar a} uma expressão multi-palavra (MWE) do tipo auxiliar.
 
 		\fullref{tab:auxphrasalverb}
 
@@ -422,7 +424,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	\subsection{Não são locuções verbais: dois verbos plenos}
 
-		Quando não estamos diante de verbos de ligação, voz passiva ou locuções verbais de tempo composto, temos as colocações de dois verbos plenos que não são locuções verbais. Portanto, são todos casos de verbos plenos, de upos \emph{VERB}, em que o segundo verbo é dependente do primeiro, como oração subordinada substantiva objetiva direta reduzida de infinitivo (Xx).
+		Quando não estamos diante de verbos de ligação, voz passiva ou locuções verbais de tempo composto, temos as colocações de dois verbos plenos que não são locuções verbais. Portanto, são todos casos de verbos plenos, de upos \emph{VERB}, em que o segundo verbo é dependente do primeiro, como oração subordinada substantiva objetiva direta reduzida de infinitivo (\fullref{sec:objetooracional}).
 
 		\fullref{dep:naolocverbal}
 
@@ -455,7 +457,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	A discussão sobre o status das formas participiais, frequentemente ambíguas entre \emph{ADJ} ou \emph{VERB}, é reconhecida na literatura linguística, e não é um fenômeno específico do Português (ver, por exemplo, PROPOR 2018 e Dissert Luiza).
 	
-	\subsection{Adjetivo}
+	\subsection{Formas participiais que são adjetivo}
 	No processo de anotação do Bosque-UD, anotamos como \emph{ADJ}:
 
 	\begin{enumerate}
@@ -552,7 +554,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
     	\end{enumerate}{}
 
-	\subsection{Verbo}
+	\subsection{Formas participiais que são verbo}
 
 	No processo de anotação do Bosque-UD, anotamos como \emph{VERB} (deprel \emph{acl}):
 
@@ -598,7 +600,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			
 		\end{enumerate}
 
-	\subsection{Casos difíceis}
+	\subsection{Casos difíceis das formas participiais}
 
 		\begin{enumerate}
 		\item Os seguintes casos foram anotados como adjetivo:
@@ -660,13 +662,13 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 				\label{fig:partDIF7}
 			\end{figure*}
 
-		A presença do “mais” e pode auxiliar a análise como um adjetivo, ainda que esse critério nem sempre seja definitivo ou preciso. Exemplos:
+		A presença do \say{mais} pode auxiliar a análise como um adjetivo, ainda que esse critério nem sempre seja definitivo ou preciso. Exemplos:
 
 		\fullref{fig:partDIF2}
 
 		\fullref{fig:partDIF3}
 
-		No exemplo encontrado na \fullref{fig:partDIF3}, temos um caso de \emph{ADJ}/\emph{acl} e não de \emph{ADJ}/\emph{amod}. Aqui, “cotado” é o predicativo do sujeito de uma oração predicativa na ordem invertida: O brasileiro Raul Boesel é o mais cotado na bolsa de apostas. Como o verbo de ligação nunca é o núcleo da oração, o predicativo recebe a etiqueta de \emph{root}. Anotação similar se encontra na \fullref{fig:partDIF9}.
+		No exemplo encontrado na \fullref{fig:partDIF3}, temos um caso de \emph{ADJ}/\emph{acl} e não de \emph{ADJ}/\emph{amod}. Aqui, \say{cotado} é o predicativo do sujeito de uma oração predicativa na ordem invertida: \say{O brasileiro Raul Boesel é o mais cotado na bolsa de apostas}. Como o verbo de ligação nunca é o núcleo da oração, o predicativo recebe a etiqueta de \emph{root}. Anotação similar se encontra na \fullref{fig:partDIF9}.
 
 		Em frases como a \fullref{fig:partDIF4}, \say{tão} funciona como \say{mais}. Além disso, há o critério da coordenação.
 
@@ -713,7 +715,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 			\begin{figure}
 			\centering
 			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/image19.png}
-			\caption{O mais \emph{cotado} na bolsa de apostas é o brasileiro Raul Boesel, que ontem não consegui terminar a corrida em Detroit.}	
+			\caption{O mais \emph{cotado} na bolsa de apostas é o brasileiro Raul Boesel, que ontem não consegui terminar a corrida em Detroit}	
 			\label{fig:partDIF3}
 		\end{figure}
 			
@@ -850,11 +852,11 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 \section{Numerais}\label{sec:numerais}
 
-	Numerais cardinais (360) e fracionários (\fullref{dep:numfrac}) devem ser anotados como de upos \emph{NUM}, sejam por extenso ou em algarismos. Numerais multiplicativos (dobro, triplo), por outro lado, devem ser anotados como de upos \emph{NUM}.
+	Numerais cardinais (360) e fracionários (\fullref{dep:numfrac}) devem ser anotados como de upos \emph{NUM}, sejam por extenso ou em algarismos. Numerais multiplicativos (dobro, triplo), por outro lado, devem ser anotados como de upos \emph{NOUN}.
 	
 	Numerais coletivos (como \say{dezenas}, \say{centenas}, \say{milhares}, etc.), no corpus Bosque-UD, podem estar anotados de duas formas diferentes: como \emph{NUM}, caso seja um número exato (\say{duas centenas}, \say{dois bilhões}), ou como \emph{NOUN}, quando é indefinido (\say{centenas de pessoas}).
 	
-	Numerais ordinais devem ser anotados como \textit{ADJ} (\fullref{sec:adjounum}).
+	Numerais ordinais devem ser anotados como de upos \textit{ADJ} (\fullref{sec:adjounum}).
 	
 	Ver também: \fullref{sec:numeroscompostos}.
 	
@@ -881,7 +883,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	\subsection{Números compostos}\label{sec:numeroscompostos}
 	
-		Números compostos podem conter upos \emph{NUM}, \emph{CCONJ} e \emph{ADP}. Quando o número composto modifica um substantivo, o primeiro número deve se subordinar ao substantivo como \emph{nummod}; quando há um sintagma preposicionado, o primeiro número do número composto será o head, e o substantivo, \emph{nmod} do número. Além disso, deve-se notar que o primeiro número deve receber no misc \emph{MWE} e \emph{MWEPOS}.
+		Números compostos podem conter upos \emph{NUM}, \emph{CCONJ} e \emph{ADP}. Quando o número composto modifica um substantivo, o primeiro número deve se subordinar ao substantivo como de deprel \emph{nummod}; quando há um sintagma preposicionado, o primeiro número do número composto será o head, e o substantivo, \emph{nmod} do número. Além disso, deve-se notar que o primeiro número deve receber no misc \emph{MWE} e \emph{MWEPOS}.
 		
 		\fullref{dep:trintaesete}
 	
@@ -932,7 +934,9 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	
 	\subsection{\textit{R\$ 50}: quem é o pai?}\label{sec:rs50}
 	
-		Quando há a inserção de símbolos como \fullref{dep:rs50}, \fullref{dep:us50} ou \fullref{dep:50porcento}, o símbolo deve ser o head. No caso de números coletivos (\fullref{dep:2centenas}), o coletivo será o head.
+		Quando há a inserção de símbolos como \fullref{dep:rs50}, \fullref{dep:us50} ou \fullref{dep:50porcento}, o símbolo deve ser o head.
+
+		No caso de números coletivos (\fullref{dep:2centenas}), o primeiro número será o head, e o coletivo será \emph{flat}. Ver: \fullref{sec:numeroscompostos}.
 		
 		\begin{figure*}[htbp]
 			\centering
@@ -995,8 +999,8 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 					2 \& centena \\
 					NumType=Card \& NumType=Card \\
 				\end{deptext}
-				\depedge{2}{1}{nummod}
-				\deproot{2}{root}
+				\depedge{1}{2}{flat}
+				\deproot{1}{root}
 			\end{dependency}
 			\caption{\textit{2 centenas}}
 			\label{dep:2centenas}
@@ -1028,7 +1032,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	
 	\subsection{\textit{Primeiro} lugar: adjetivo ou numeral?}\label{sec:adjounum}
 	
-		Numerais ordinais escritos por extenso devem ser anotados como \emph{ADJ}, e recebem a feature \emph{NumType=Ord}, como na \fullref{dep:primeiratentativa}.
+		Numerais ordinais escritos por extenso ou em algarismos devem ser anotados como de upos \emph{ADJ}, e recebem a feature \emph{NumType=Ord}, como na \fullref{dep:primeiratentativa}.
 		
 		\begin{figure*}[htbp]
 		    \centering
@@ -1135,7 +1139,7 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	\subsection{Pronomes interrogativos}\label{sec:pronint}
 
-		Pronomes interrogativos, assim como os pronomes substantivos, têm upos \textit{PRON} e recebem o deprel do sintagma (\fullref{dep:pronint}). Não confundir com os advérbios interrogativos (Xxx), que podem inclusive se tornar conjunções quando introduzindo orações subordinadas (Xxx).
+		Pronomes interrogativos, assim como os pronomes substantivos, têm upos \textit{PRON} e recebem o deprel do sintagma (\fullref{dep:pronint}). Não confundir com os advérbios interrogativos (\fullref{sec:adverbiosinterrogativos}), que podem inclusive se tornar conjunções quando introduzindo orações subordinadas \fullref{sec:classesdinamicas}.
 
 		\begin{figure*}[htbp]
 			\centering
@@ -1167,9 +1171,9 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 	\subsection{Pronomes relativos}\label{sec:pronrel}
 
-		Pronomes relativos devem receber o valor \emph{PronType=Rel} na coluna feats.
+		Pronomes relativos devem receber o valor \emph{PronType=Rel} na coluna feats. Recebem o deprel da função sintática que exercem na oração que iniciam.
 
-		\say{Cujo/a} são os únicos pronomes relativos que são adjetivos (\emph{DET}), e não substantivos.
+		\say{Cujo/a} são os únicos pronomes relativos que são pronomes adjetivos (\emph{DET}), e não substantivos.
 
 		\fullref{dep:relque}
 
@@ -1332,157 +1336,168 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 
 \section{Preposições}
 
-As preposições são palavras que operam como conectores, geralemente, de termos nominais.
+As preposições são palavras que operam como conectores de termos nominais.
 
-Entretanto, no Bosque-UD, palavras tidas usualmente como preposições podem operar como conjunções subordinativas quando em contexto de introdução de oração (\fullref{dep:classedinamica}).
+	Quando há uma preposição (\emph{ADP}), ela irá depender do nome que está à direita, e a relação será de \emph{case}. Deste modo, a deprel \emph{nmod} se estabelece entre os dois nomes, e não entre um nome e uma preposição.
+	
+	\fullref{tab:adp}
 
-\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					CCONJ \& PROPN \& CCONJ \& DET \& NOUN \& ADV \& VERB \& DET \& NOUN \& SCONJ \& PRON \& 						VERB \\
-					Nem \& Lula \& nem \& o \& partido \& ainda \& encontram \& um \& discurso \& para \& se \& 							diferenciar \\
-				\end{deptext}
-				\deproot{7}{root}
-				\depedge{7}{9}{obj}
-				\depedge{12}{10}{mark}
-				\depedge{9}{12}{acl}
-				
-			\end{dependency}\label{dep:classedinamica}
-			\caption{Nem Lula nem o partido ainda encontraram um discurso \emph{para} se diferenciar}
-		\end{figure*}
+	\subsection{Princípio de classes dinâmicas}\label{sec:classesdinamicas}
+	
+		Palavras tidas usualmente como preposições na GT podem operar como conjunções subordinativas quando em contexto de introdução de oração (\fullref{dep:classedinamica}). Ou seja, a classe gramatical é dada pelo contexto, não existindo preposição estática. Trata-se de uma decisão provisória, mas que tem sido aplicada consistentemente no Bosque-UD. Há apenas uma exceção: o caso das conjunções coordenativas (\emph{CCONJ}), que são sempre de deprel \emph{cc}, como, por exemplo, a conjunção aditiva \say{e} (\fullref{sec:cconj}).
+		
+		\begin{figure*}[htbp]
+					\centering
+					\vspace{.8cm}
+					\begin{dependency}
+						\begin{deptext}
+							VERB \& DET \& NOUN \& SCONJ \& PRON \& VERB \\
+							Encontraram \& um \& discurso \& para \& se \& diferenciar \\
+							encontrar \& um \& discurso \& para \& se \& diferenciar \\
+						\end{deptext}
+						\deproot{1}{root}
+						\depedge{1}{3}{nsubj}
+						\depedge{3}{2}{det}
+						\depedge{6}{4}{mark}
+						\depedge{6}{5}{expl}
+						\depedge{3}{6}{acl}
+					\end{dependency}\label{dep:classedinamica}
+					\caption{Encontraram um discurso \emph{para} se diferenciar}
+				\end{figure*}
 
-	\subsection{Princípio de classes dinâmicas}
 
 \section{Conjunções}
 
-Há dois tipos de conjunções no Bosque-UD: conjunção coordenativa (CCONJ) e conjunção subordinativa (SCONJ). As funções que apresentam são \emph{cc} (coordenador) e \emph{mark} (subordinador). As locuções coordenativas e subordinativas frequentemente aparecem como expressões multi-palavras (MWE) e têm a mesma função que as conjunções coordenativas (\emph{cc/mark}), além da mesma classe gramatical (\emph{CCONJ/SCONJ}).
+	Há dois tipos de conjunções no Bosque-UD: conjunção coordenativa (\emph{CCONJ}) e conjunção subordinativa (\emph{SCONJ}). As funções que apresentam são \emph{cc} (coordenador) e \emph{mark} (subordinador).
 
-\subsection{Conjunções coordenativas}
+	As locuções coordenativas e subordinativas frequentemente aparecem como expressões multi-palavras (MWE). Nesses casos, o primeiro token deve receber o mesmo upos (\emph{SCONJ/CCONJ}) e deprel (\emph{cc/mark}), e os demais tokens devem receber deprel \emph{fixed} para o primeiro. Além disso, deve-se adicionar à coluna misc os valores \emph{MWE} e \emph{MWEPOS}.
+	
+	\subsection{Conjunções coordenativas}\label{sec:cconj}
+		
+		Toda vez que houver a coordenação entre dois ou mais termos, sejam eles oracionais ou nominais, o conectivo entre eles será classificado como conjunção, e o núcleo da coordenação deverá ter deprel \emph{conj}.
 
-As conjunções coordenativas que estão marcadas como tal no corpus são \emph{e, mas, ou nem, porém, entretanto, quer, portanto, contudo, todavia, tampouco}. Além disso, existem as conjunções que aparecem como expressões multi palavras(MWE), são elas: \emph{no entanto, ou seja,além disso, por outro lado, ainda assim, isto é, em vez de, desse modo, apesar disso, sendo assim}.
+		\fullref{tab:cconj}
 
-Além disso, também são consideradas conjunções casos em que não há uma oração. Toda vez que houver a coordenação entre dois ou mais termos, sejam eles oracionais ou nominais, o conectivo entre eles será classificado como conjunção, e o núcleo da coordenação deverá ter deprel \emph{conj}.
+		\fullref{dep:mas}
 
-\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					PRON \& PRON \& VERB \& NOUN \& CCONJ \& ADV \& ADV \& VERB \& PRON \& PRON \& 						AUX \& VERB\\
-					Eles \& se \& dizem \& oposição \& mas \& ainda \& não \& informaram \& o \& que \& vão \& 							combater \\
-				\end{deptext}
-				\deproot{3}{root}
-				\depedge{8}{5}{cc}
-				\depedge{3}{8}{conj}
-				
-			\end{dependency}
-			\caption{Eles se dizem oposição, \emph{mas} ainda não informaram o que vão combater}
-			\label{dep:mas}
-		\end{figure*}
+		\fullref{dep:ousejaMWE2}
+		
+		\begin{figure*}[htbp]
+					\centering
+					\vspace{.8cm}
+					\begin{dependency}
+						\begin{deptext}
+							VERB \& NOUN \& CCONJ \& ADV \& ADP \& NOUN \& ADP \& VERB \\
+							Haverá \& resistências \& mas \& não \& a \& ponto \& de \& inviabilizar \\
+							haver \& resistência \& mas \& não \& a \& ponto \& de \& inviabilizar \\
+							\& \& \& \& MWE=a\_ponto\_de \\
+							\& \& \& \& MWEPOS=SCONJ \\
+						\end{deptext}
+						\deproot{1}{root}
+						\depedge{1}{2}{obj}
+						\depedge{1}{8}{conj}
+						\depedge{8}{3}{cc}
+						\depedge{8}{5}{mark}
+						\depedge{8}{4}{advmod}
+						\depedge{5}{6}{fixed}
+						\depedge{5}{7}{fixed}
+					\end{dependency}
+					\caption{Haverá resistência \emph{mas} não a ponto de inviabilizar}
+					\label{dep:mas}
+				\end{figure*}
+		
+		\begin{figure*}[htbp]
+					\centering
+					\vspace{.8cm}
+					\begin{dependency}
+						\begin{deptext}
+							X \& PUNCT \& CCONJ \& VERB \& PUNCT \& VERB \& VERB \& X \\
+							Minitreking \& , \& ou \& seja \& , \& caminhar \& calçando \& crampones \\
+							minitreking \& , \& ou \& ser \& , \& caminhar \& calçar \& crampone \\
+							\& \& MWE=ou\_seja \\
+							\& \& MWEPOS=CCONJ \\
+						\end{deptext}
+						\depedge{3}{2}{punct}
+						\depedge{3}{4}{fixed}
+						\depedge{3}{5}{punct}
+						\depedge{6}{3}{cc}
+						\depedge{1}{6}{conj}
+						\depedge{6}{7}{advcl}
+						\depedge{7}{8}{obj}
+						\deproot{1}{root}
+					\end{dependency}
+					\caption{Minitreking, \emph{ou seja}, caminhar calçando crampones}
+					\label{dep:ousejaMWE2}
+				\end{figure*}
+	
+	\subsection{Conjunções subordinativas}
+	
+		As conjunções subordinativas devem receber upos \emph{SCONJ} e deprel \emph{mark}.
 
-\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					CCONJ \& VERB \& PUNCT \& VERB \& DET \& NOUN \& ADP \& DET \& NOUN \& ADJ \& ADP \& NUM \& 					NOUN \& CCONJ \& ADV \& VERB \& VERB \& DET \& NOUN \& VERB \\
-					Ou \& seja \& , \& alugam \& o \& imóvel \& por \& um \& prazo \& máximo \& de \\
-					de \& 90 \& dias \& e \& ainda \& podem \& receber \& o \& valor \& adiantado \\
-					\& \& \& \& MWE=ou\_seja \& \\
-					\& \& \& \& MWEPOS=CCONJ \& \\
-				\end{deptext}
-				\depedge{4}{1}{cc}
-				\depedge{1}{2}{fixed}
-				\depedge{1}{3}{punct}
-				\deproot{4}{root}
-				\depedge{6}{5}{det}
-				\depedge{4}{6}{obj}
-				\depedge{9}{7}{case}
-				\depedge{9}{8}{det}
-				\depedge{4}{9}{obl}
-				\depedge{9}{10}{amod}
-				\depedge{13}{11}{case}
-				\depedge{13}{12}{nummod}
-				\depedge{9}{13}{nmod}
-				\depedge{17}{14}{cc}
-				\depedge{17}{15}{advmod}
-				\depedge{4}{16}{conj}
-				\depedge{16}{17}{xcomp}
-				\depedge{19}{18}{det}
-				\depedge{17}{19}{obj}
-				\depedge{19}{20}{acl}
+		No caso de expressões multi-palavras, ou seja, locuções subordinativas, o primeiro token deverá ter deprel \emph{mark}, e seu misc deverá conter as etiquetas \emph{MWE} e \emph{MWEPOS}. Os tokens subsequentes da locução devem ter deprel \emph{fixed}, subordinados ao primeiro token da locução.
+		
+		É importante lembrar que palavras tidas usualmente na GT como preposição, ao introduzir orações, são classificadas como conjunções subordinativas e recebem o deprel \emph{mark} (ver \fullref{sec:classesdinamicas}).
 
-				
-			\end{dependency}
-			\caption{ \emph{Ou seja} , alugam o imóvel por um prazo máximo de 90 dias e ainda podem receber o valor adiantado}
-			\label{dep:ousejaMWE2}
-		\end{figure*}
+		\fullref{tab:sconj}
 
+		\fullref{dep:sconj1}
 
-
-
-\subsection{Conjunções subordinativas}
-
-As conjunções subordinativas que estão marcadas como tal no corpus são \emph{}. Além disso, existem as conjunções que aparecem como expressões multi palavras(MWE), são elas: \emph{a fim de que, à medida que, a partir de, a favor de, a não ser que, ao passo que, ainda que, sem que, já que}. 
-
-É importante lembrar que palavras tidas usualmente como preosição, ao introduzir orações, são classificadas como conjunções subordinativas e recebem a deprel mark. (Ver seção Preposições)
-
-\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					SCONJ \& PRON \& VERB \& DET \& NOUN \& PUNCT \& VERB \& NOUN \& ADJ \& CCONJ \& VERB \& 						DET \& NOUN \& ADJ \\
-					Se \& eu \& dirigisse \& uma \& federação \& , \& apresentaria \& balanços \& mensais \& e \& liberaria 					\& minhas \& contas \& bancárias \\
-				\end{deptext}
-				\depedge{3}{1}{mark}
-				\depedge{7}{3}{advcl}
-				\deproot{7}{root}
-				\depedge{11}{10}{cc}
-				\depedge{7}{11}{conj}
-				
-			\end{dependency}
-			\caption{\emph{Se} eu dirigisse uma federação, apresentaria balanços mensais e liberaria minhas contas bancárias}
-		\end{figure*}
-
-\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					CCONJ \& PUNCT \& SCONJ \& SCONJ \& VERB \& ADV \& VERB \& VERB \& PRON \& ADJ  \\
-					Mas \& , \& mesmo \& que \& quisessem \& não \& conseguiriam \& fazer \& nada \& menor \\
-					\& \& MWE=mesmo\_que \& \\
-					\& \& MWEPOS=SCONJ \& \\
-				\end{deptext}
-				\depedge{5}{3}{mark}
-				\depedge{3}{4}{fixed}
-				\depedge{7}{5}{advcl}
-				\deproot{7}{root}				
-			\end{dependency}
-			\caption{Mas, \emph{mesmo que} quisessem não conseguiriam fazer nada menor}
-		\end{figure*}
-
-
-\subsection{Advérbios interrogativos}
-
-Advérbios são palavras que costumam modificar verbos, adjetivos e outros advérbios. Além disso, em português, algumas dessas palvras podem operar como conjunções subordinativas quando aparecem na introdução de orações subordinadas adverbiais.
-
-\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-						SCONJ \& VERB \& DET \& NOUN \& PUNCT \& AUX \& SCONJ \& VERB \&										 VERB \& DET \& NOUN \\
-						Quando \& recebo \& a \& bola \& , \& tenho \& que \& 													ficar \& olhando \& sua \& trajetória \\
-				\end{deptext}
-				\depedge{2}{1}{mark}
-				\depedge{8}{2}{advcl}	
-			\end{dependency}
-			\caption{\emph{Quando} recebo a bola, tenho que ficar olhando sua trajetória}
-		\end{figure*}
+		\fullref{dep:sconj2}
+		
+		\begin{figure*}[htbp]
+					\centering
+					\vspace{.8cm}
+					\begin{dependency}
+						\begin{deptext}
+							SCONJ \& PRON \& VERB \& DET \& NOUN \& PUNCT \& VERB \& NOUN \& ADJ \& CCONJ \& VERB \& 						DET \& NOUN \& ADJ \\
+							Se \& eu \& dirigisse \& uma \& federação \& , \& apresentaria \& balanços \& mensais \& e \& liberaria 					\& minhas \& contas \& bancárias \\
+						\end{deptext}
+						\depedge{3}{1}{mark}
+						\depedge{7}{3}{advcl}
+						\deproot{7}{root}
+						\depedge{11}{10}{cc}
+						\depedge{7}{11}{conj}
+						
+					\end{dependency}
+					\caption{\emph{Se} eu dirigisse uma federação, apresentaria balanços mensais e liberaria minhas contas bancárias}\label{dep:sconj1}
+				\end{figure*}
+		
+		\begin{figure*}[htbp]
+					\centering
+					\vspace{.8cm}
+					\begin{dependency}
+						\begin{deptext}
+							CCONJ \& PUNCT \& SCONJ \& SCONJ \& VERB \& ADV \& VERB \& VERB \& PRON \& ADJ  \\
+							Mas \& , \& mesmo \& que \& quisessem \& não \& conseguiriam \& fazer \& nada \& menor \\
+							\& \& MWE=mesmo\_que \& \\
+							\& \& MWEPOS=SCONJ \& \\
+						\end{deptext}
+						\depedge{5}{3}{mark}
+						\depedge{3}{4}{fixed}
+						\depedge{7}{5}{advcl}
+						\deproot{7}{root}				
+					\end{dependency}
+					\caption{Mas, \emph{mesmo que} quisessem não conseguiriam fazer nada menor}\label{dep:sconj2}
+				\end{figure*}
+	
+	
+	\subsection{Advérbios interrogativos}\label{sec:adverbiosinterrogativos}
+	
+		Advérbios são palavras que costumam modificar verbos, adjetivos e outros advérbios. Além disso, em português, algumas dessas palvras podem operar como conjunções subordinativas quando aparecem na introdução de orações subordinadas adverbiais.
+		
+		\begin{figure*}[htbp]
+					\centering
+					\vspace{.8cm}
+					\begin{dependency}
+						\begin{deptext}
+								SCONJ \& VERB \& DET \& NOUN \& PUNCT \& AUX \& SCONJ \& VERB \&										 VERB \& DET \& NOUN \\
+								Quando \& recebo \& a \& bola \& , \& tenho \& que \& 													ficar \& olhando \& sua \& trajetória \\
+						\end{deptext}
+						\depedge{2}{1}{mark}
+						\depedge{8}{2}{advcl}	
+					\end{dependency}
+					\caption{\emph{Quando} recebo a bola, tenho que ficar olhando sua trajetória}
+				\end{figure*}
 	
 \chapter{Atributos morfológicos (feats)}\label{sec:feats}
 
@@ -1714,7 +1729,7 @@ Advérbios são palavras que costumam modificar verbos, adjetivos e outros advé
 	Os argumentos de um verbo são os objetos de um verbo transitivo. Os objetos podem ser nominais (\fullref{sec:objetonominal}) ou oracionais (\fullref{sec:objetooracional}). 
 
 
-	\subsection{Caso seja nominal}\label{sec:objetonominal}
+	\subsection{Caso o argumento do verbo seja nominal}\label{sec:objetonominal}
 
 		Em UD, caso o verbo possua apenas um objeto nominal em uma dada sentença, esse objeto deve obrigatoriamente ser direto (deprel \emph{obj}), independentemente da presença ou não de preposição, como na \fullref{dep:objapenas}, que tem anotação igual à \fullref{dep:objapenas2}.
 
@@ -1805,7 +1820,7 @@ Advérbios são palavras que costumam modificar verbos, adjetivos e outros advé
 		\end{figure*}
 
 
-	\subsection{Caso seja oracional}\label{sec:objetooracional}
+	\subsection{Caso o argumento do verbo seja oracional}\label{sec:objetooracional}
 	
 		O objeto oracional é uma oração subordinada substantiva objetiva (direta ou indireta). Em UD, não há nenhuma diferenciação entre a anotação da oração objetiva direta e a indireta, mas deve-se notar outras diferenças em relação à análise das gramáticas do português.
 
@@ -3012,22 +3027,13 @@ Advérbios são palavras que costumam modificar verbos, adjetivos e outros advé
 		\begin{tabular}{|c|c|}
 			\hline
 			\textbf{Voz passiva} & \textbf{Frequência} \\\hline
-			ficar & 1\\\hline
-			ser & 1114\\\hline
+			ter & 465\\\hline
+			ir & 341\\\hline
+			estar & 126\\\hline
+			ser & 48\\\hline
+			haver & 36\\\hline
 		\end{tabular}
-		\caption{Lista das 2 palavras que ocorrem 1115 vezes como voz passiva (\emph{AUX/aux:pass}) no Bosque-UD}
-		\label{tab:vozpassiva}
-	\end{table}
-
-	\begin{table}[]
-		\centering
-		\begin{tabular}{|c|c|}
-			\hline
-			\textbf{Voz passiva} & \textbf{Frequência} \\\hline
-			ficar & 1\\\hline
-			ser & 1114\\\hline
-		\end{tabular}
-		\caption{Lista das 2 palavras que ocorrem 1115 vezes como locução verbal de tempo composto (\emph{AUX/aux}) no Bosque-UD}
+		\caption{Lista das 5 palavras que ocorrem 1016 vezes como locução verbal de tempo composto (\emph{AUX/aux}) no Bosque-UD}
 		\label{tab:loctempocomposto}
 	\end{table}
 
@@ -3037,36 +3043,34 @@ Advérbios são palavras que costumam modificar verbos, adjetivos e outros advé
 			\begin{tabular}{|c|c|}
 				\hline
 				\textbf{MWE auxiliar} & \textbf{Frequência} \\\hline
-				acabar de & 11\\\hline
+				acabar de & 12\\\hline
 				acabar por & 30\\\hline
 				andar a & 3\\\hline
 				chegar a & 22\\\hline
 				começar a & 58\\\hline
 				começar por & 6\\\hline
-				continuar a & 57\\\hline
+				continuar a & 60\\\hline
 				continuar por & 1\\\hline
 				deixar de & 30\\\hline
-				dever a & 1\\\hline
 				estar a & 124\\\hline
 				estar para & 1\\\hline
 				estar por & 1\\\hline
 				ficar a & 4\\\hline
 				ficar de & 1\\\hline
-				haver a & 1\\\hline
 				haver de & 2\\\hline
 				haver que & 1\\\hline
 				ir a & 3\\\hline
 				ir de & 1\\\hline
 				parar de & 3\\\hline
-				passar a & 43\\\hline
-				poder a & 3\\\hline
-				ser de & 3\\\hline
+				passar a & 45\\\hline
+				recomeçar a & 1\\\hline
+				ser de & 2\\\hline
 				tender a & 1\\\hline
 				ter a & 9\\\hline
-				ter de & 62\\\hline
+				ter de & 64\\\hline
 				ter que & 3\\\hline
 				tornar a & 1\\\hline
-				vir a & 42\\\hline
+				vir a & 45\\\hline
 				voltar a & 42\\\hline
 			\end{tabular}
 		}
@@ -3077,246 +3081,546 @@ Advérbios são palavras que costumam modificar verbos, adjetivos e outros advé
 				\hline
 				\textbf{MWE auxiliar} & \textbf{Frequência} \\\hline
 				estar a & 124\\\hline
-				ter de & 62\\\hline
+				ter de & 64\\\hline
+				continuar a & 60\\\hline
 				começar a & 58\\\hline
-				continuar a & 57\\\hline
-				passar a & 43\\\hline
-				vir a & 42\\\hline
+				passar a & 45\\\hline
+				vir a & 45\\\hline
 				voltar a & 42\\\hline
 				acabar por & 30\\\hline
 				deixar de & 30\\\hline
 				chegar a & 22\\\hline
-				acabar de & 11\\\hline
+				acabar de & 12\\\hline
 				ter a & 9\\\hline
 				começar por & 6\\\hline
 				ficar a & 4\\\hline
 				andar a & 3\\\hline
 				ir a & 3\\\hline
 				parar de & 3\\\hline
-				poder a & 3\\\hline
-				ser de & 3\\\hline
 				ter que & 3\\\hline
 				haver de & 2\\\hline
+				ser de & 2\\\hline
 				continuar por & 1\\\hline
-				dever a & 1\\\hline
 				estar para & 1\\\hline
 				estar por & 1\\\hline
 				ficar de & 1\\\hline
-				haver a & 1\\\hline
 				haver que & 1\\\hline
 				ir de & 1\\\hline
+				recomeçar a & 1\\\hline
 				tender a & 1\\\hline
 				tornar a & 1\\\hline
 			\end{tabular}
 		}
-		\caption{Lista das 31 MWEs que ocorreriam 570 vezes como locuções auxiliares (\emph{AUX/aux + ADP/compound}) no Bosque-UD segundo nossa proposta de anotação}
+		\caption{Lista das 29 MWEs que ocorreriam 576 vezes como locuções auxiliares (\emph{AUX/aux + ADP/compound}) no Bosque-UD segundo nossa proposta de anotação}
 		\label{tab:auxphrasalverb}
 	\end{table}
 
 	\begin{longtable}{ p{3cm} | p{1cm} | p{3cm} | p{1cm} }
 		\hline
 		\textbf{Primeiro verbo (ordem alfabética)} & \textbf{\#} & \textbf{Primeiro verbo (ordem de frequência)} & \textbf{\#} \\\hline
-		abster & 2 & querer & 108\\\hline
-		acabar & 3 & conseguir & 83\\\hline
-		aceder & 1 & tentar & 64\\\hline
-		aceitar & 6 & fazer & 45\\\hline
-		achar & 5 & pretender & 39\\\hline
-		aconselhar & 5 & permitir & 37\\\hline
-		acreditar & 2 & decidir & 33\\\hline
-		acusar & 30 & acusar & 30\\\hline
-		admitir & 12 & deixar & 27\\\hline
-		afirmar & 13 & procurar & 21\\\hline
-		aguentar & 1 & levar & 20\\\hline
-		ajudar & 9 & ver & 19\\\hline
-		alegar & 3 & dar & 18\\\hline
-		ambicionar & 1 & gostar & 17\\\hline
-		ameaçar & 14 & obrigar & 17\\\hline
-		andar & 2 & ser & 17\\\hline
-		anunciar & 2 & saber & 16\\\hline
-		aperceber & 1 & ameaçar & 14\\\hline
-		apetecer & 1 & precisar & 14\\\hline
-		aplicar & 1 & preferir & 14\\\hline
-		apostar & 1 & resolver & 14\\\hline
-		aprender & 5 & afirmar & 13\\\hline
-		apresentar & 2 & admitir & 12\\\hline
-		apressar & 1 & considerar & 12\\\hline
-		aprestar & 1 & encontrar & 12\\\hline
-		aproveitar & 1 & ter & 12\\\hline
-		arriscar & 2 & dizer & 11\\\hline
-		atender & 1 & destinar & 10\\\hline
-		atrever & 1 & limitar & 10\\\hline
-		autorizar & 3 & ajudar & 9\\\hline
-		avisar & 1 & ficar & 9\\\hline
-		bastar & 3 & preparar & 9\\\hline
-		caber & 1 & esperar & 8\\\hline
-		cansar & 1 & pensar & 8\\\hline
-		cessar & 1 & comprometer & 7\\\hline
-		chamar & 4 & consistir & 7\\\hline
-		citar & 1 & continuar & 7\\\hline
-		começar & 1 & convidar & 7\\\hline
-		comprometer & 7 & recusar & 7\\\hline
-		concordar & 3 & aceitar & 6\\\hline
-		condenar & 1 & convencer & 6\\\hline
-		conduzir & 1 & estar & 6\\\hline
-		confidenciar & 1 & manter & 6\\\hline
-		confirmar & 1 & prometer & 6\\\hline
-		conseguir & 83 & achar & 5\\\hline
-		considerar & 12 & aconselhar & 5\\\hline
-		consistir & 7 & aprender & 5\\\hline
-		consultar & 1 & forçar & 5\\\hline
-		contar & 1 & mandar & 5\\\hline
-		continuar & 7 & parecer & 5\\\hline
-		contribuir & 3 & passar & 5\\\hline
-		convencer & 6 & propor & 5\\\hline
-		convencionar & 1 & tender & 5\\\hline
-		convidar & 7 & visar & 5\\\hline
-		credenciar & 1 & chamar & 4\\\hline
-		criticar & 1 & desejar & 4\\\hline
-		culpar & 1 & encarregar & 4\\\hline
-		dar & 18 & evitar & 4\\\hline
-		decidir & 33 & impedir & 4\\\hline
-		declarar & 3 & interessar & 4\\\hline
-		declinar & 1 & proibir & 4\\\hline
-		dedicar & 2 & reconhecer & 4\\\hline
-		deixar & 27 & sentir & 4\\\hline
-		depender & 1 & tencionar & 4\\\hline
-		desafiar & 2 & tratar & 4\\\hline
-		desejar & 4 & acabar & 3\\\hline
-		desistir & 1 & alegar & 3\\\hline
-		destinar & 10 & autorizar & 3\\\hline
-		dever & 3 & bastar & 3\\\hline
-		dispor & 3 & concordar & 3\\\hline
-		dizer & 11 & contribuir & 3\\\hline
-		duvidar & 1 & declarar & 3\\\hline
-		empenhar & 2 & dever & 3\\\hline
-		encarregar & 4 & dispor & 3\\\hline
-		encontrar & 12 & insistir & 3\\\hline
-		ensinar & 1 & ir & 3\\\hline
-		equivaler & 1 & optar & 3\\\hline
-		escolher & 1 & ousar & 3\\\hline
-		escusar & 2 & pôr & 3\\\hline
-		esperar & 8 & vir & 3\\\hline
-		estar & 6 & abster & 2\\\hline
-		estimar & 1 & acreditar & 2\\\hline
-		estimular & 1 & andar & 2\\\hline
-		estudar & 1 & anunciar & 2\\\hline
-		evitar & 4 & apresentar & 2\\\hline
-		exigir & 1 & arriscar & 2\\\hline
-		exortar & 1 & dedicar & 2\\\hline
-		experimentar & 1 & desafiar & 2\\\hline
-		falar & 2 & empenhar & 2\\\hline
-		fartar & 1 & escusar & 2\\\hline
-		fazer & 45 & falar & 2\\\hline
-		ficar & 9 & garantir & 2\\\hline
-		fingir & 1 & haver & 2\\\hline
-		foi & 1 & imaginar & 2\\\hline
-		forçar & 5 & impor & 2\\\hline
-		garantir & 2 & importar & 2\\\hline
-		gostar & 17 & incentivar & 2\\\hline
-		habituar & 1 & mostrar & 2\\\hline
-		haver & 2 & necessitar & 2\\\hline
-		imaginar & 2 & negar & 2\\\hline
-		impedir & 4 & ouvir & 2\\\hline
-		impor & 2 & parar & 2\\\hline
-		importar & 2 & queixar & 2\\\hline
-		incentivar & 2 & receber & 2\\\hline
-		incluir & 1 & referir & 2\\\hline
-		indagar & 1 & resistir & 2\\\hline
-		influenciar & 1 & sentar & 2\\\hline
-		informar & 1 & tornar & 2\\\hline
-		insinuar & 1 & aceder & 1\\\hline
-		insistir & 3 & aguentar & 1\\\hline
-		instar & 1 & ambicionar & 1\\\hline
-		interessar & 4 & aperceber & 1\\\hline
-		ir & 3 & apetecer & 1\\\hline
-		lembrar & 1 & aplicar & 1\\\hline
-		levar & 20 & apostar & 1\\\hline
-		limitar & 10 & apressar & 1\\\hline
-		mandar & 5 & aprestar & 1\\\hline
-		manter & 6 & aproveitar & 1\\\hline
-		merecer & 1 & atender & 1\\\hline
-		mostrar & 2 & atrever & 1\\\hline
-		necessitar & 2 & avisar & 1\\\hline
-		negar & 2 & caber & 1\\\hline
-		obrigar & 17 & cansar & 1\\\hline
-		optar & 3 & cessar & 1\\\hline
-		orgulhar & 1 & citar & 1\\\hline
-		ousar & 3 & começar & 1\\\hline
-		ouvir & 2 & condenar & 1\\\hline
-		parar & 2 & conduzir & 1\\\hline
-		parecer & 5 & confidenciar & 1\\\hline
-		passado & 1 & confirmar & 1\\\hline
-		passar & 5 & consultar & 1\\\hline
-		pedir & 1 & contar & 1\\\hline
-		pensar & 8 & convencionar & 1\\\hline
-		perder & 1 & credenciar & 1\\\hline
-		permanecer & 1 & criticar & 1\\\hline
-		permitir & 37 & culpar & 1\\\hline
-		persuadir & 1 & declinar & 1\\\hline
-		planear & 1 & depender & 1\\\hline
-		poder & 1 & desistir & 1\\\hline
-		precisar & 14 & duvidar & 1\\\hline
-		preferir & 14 & ensinar & 1\\\hline
-		preparar & 9 & equivaler & 1\\\hline
-		pretender & 39 & escolher & 1\\\hline
-		prevenir & 1 & estimar & 1\\\hline
-		prever & 1 & estimular & 1\\\hline
-		procurar & 21 & estudar & 1\\\hline
-		proibir & 4 & exigir & 1\\\hline
-		projectar & 1 & exortar & 1\\\hline
-		prometer & 6 & experimentar & 1\\\hline
-		propiciar & 1 & fartar & 1\\\hline
-		propor & 5 & fingir & 1\\\hline
-		provocar & 1 & foi & 1\\\hline
-		pôr & 3 & habituar & 1\\\hline
-		queixar & 2 & incluir & 1\\\hline
-		querer & 108 & indagar & 1\\\hline
-		receber & 2 & influenciar & 1\\\hline
-		reclamar & 1 & informar & 1\\\hline
-		recomeçar & 1 & insinuar & 1\\\hline
-		recompensar & 1 & instar & 1\\\hline
-		reconhecer & 4 & lembrar & 1\\\hline
-		recordar & 1 & merecer & 1\\\hline
-		recusar & 7 & orgulhar & 1\\\hline
-		reduzir & 1 & passado & 1\\\hline
-		referir & 2 & pedir & 1\\\hline
-		resistir & 2 & perder & 1\\\hline
-		resolver & 14 & permanecer & 1\\\hline
-		respeitar & 1 & persuadir & 1\\\hline
-		restar & 1 & planear & 1\\\hline
-		retirar & 1 & poder & 1\\\hline
+		abster & 2 & poder & 398\\\hline
+		acabar & 60 & dever & 221\\\hline
+		aceder & 1 & estar & 130\\\hline
+		aceitar & 6 & querer & 108\\\hline
+		achar & 5 & ter & 86\\\hline
+		aconselhar & 5 & conseguir & 83\\\hline
+		acreditar & 2 & vir & 71\\\hline
+		acusar & 30 & continuar & 64\\\hline
+		admitir & 12 & tentar & 64\\\hline
+		afirmar & 13 & começar & 63\\\hline
+		aguentar & 1 & acabar & 60\\\hline
+		ajudar & 9 & deixar & 51\\\hline
+		alegar & 3 & fazer & 45\\\hline
+		ambicionar & 1 & passar & 44\\\hline
+		ameaçar & 15 & voltar & 41\\\hline
+		andar & 6 & pretender & 39\\\hline
+		anunciar & 2 & permitir & 37\\\hline
+		aperceber & 1 & decidir & 33\\\hline
+		apetecer & 1 & acusar & 30\\\hline
+		aplicar & 1 & parecer & 22\\\hline
+		apostar & 1 & procurar & 22\\\hline
+		aprender & 5 & ficar & 21\\\hline
+		apresentar & 2 & ser & 21\\\hline
+		apressar & 1 & chegar & 20\\\hline
+		aprestar & 1 & levar & 20\\\hline
+		aproveitar & 1 & ver & 19\\\hline
+		arriscar & 2 & dar & 18\\\hline
+		atender & 1 & gostar & 17\\\hline
+		atrever & 1 & obrigar & 17\\\hline
+		autorizar & 3 & saber & 16\\\hline
+		avisar & 1 & ameaçar & 15\\\hline
+		bastar & 3 & precisar & 14\\\hline
+		caber & 1 & preferir & 14\\\hline
+		cansar & 1 & resolver & 14\\\hline
+		cessar & 1 & afirmar & 13\\\hline
+		chamar & 4 & admitir & 12\\\hline
+		chegar & 20 & considerar & 12\\\hline
+		citar & 1 & encontrar & 12\\\hline
+		começar & 63 & dizer & 11\\\hline
+		comprometer & 7 & costumar & 10\\\hline
+		concordar & 3 & destinar & 10\\\hline
+		condenar & 1 & limitar & 10\\\hline
+		conduzir & 1 & ajudar & 9\\\hline
+		confidenciar & 1 & esperar & 9\\\hline
+		confirmar & 1 & preparar & 9\\\hline
+		conseguir & 83 & pensar & 8\\\hline
+		considerar & 12 & comprometer & 7\\\hline
+		consistir & 7 & consistir & 7\\\hline
+		consultar & 1 & convidar & 7\\\hline
+		contar & 1 & recusar & 7\\\hline
+		continuar & 64 & aceitar & 6\\\hline
+		contribuir & 3 & andar & 6\\\hline
+		convencer & 6 & convencer & 6\\\hline
+		convencionar & 1 & ir & 6\\\hline
+		convidar & 7 & manter & 6\\\hline
+		costumar & 10 & prometer & 6\\\hline
+		credenciar & 1 & achar & 5\\\hline
+		criticar & 1 & aconselhar & 5\\\hline
+		culpar & 1 & aprender & 5\\\hline
+		dar & 18 & forçar & 5\\\hline
+		decidir & 33 & mandar & 5\\\hline
+		declarar & 3 & parar & 5\\\hline
+		declinar & 1 & propor & 5\\\hline
+		dedicar & 2 & tender & 5\\\hline
+		deixar & 51 & visar & 5\\\hline
+		depender & 1 & chamar & 4\\\hline
+		desafiar & 2 & desejar & 4\\\hline
+		desejar & 4 & encarregar & 4\\\hline
+		desistir & 1 & evitar & 4\\\hline
+		destinar & 10 & haver & 4\\\hline
+		dever & 221 & impedir & 4\\\hline
+		dispor & 3 & interessar & 4\\\hline
+		dizer & 11 & proibir & 4\\\hline
+		duvidar & 1 & reconhecer & 4\\\hline
+		empenhar & 2 & sentir & 4\\\hline
+		encarregar & 4 & tencionar & 4\\\hline
+		encontrar & 12 & tratar & 4\\\hline
+		ensinar & 1 & alegar & 3\\\hline
+		equivaler & 1 & autorizar & 3\\\hline
+		escolher & 1 & bastar & 3\\\hline
+		escusar & 2 & concordar & 3\\\hline
+		esperar & 9 & contribuir & 3\\\hline
+		estar & 130 & declarar & 3\\\hline
+		estimar & 1 & dispor & 3\\\hline
+		estimular & 1 & insistir & 3\\\hline
+		estudar & 1 & optar & 3\\\hline
+		evitar & 4 & ousar & 3\\\hline
+		exigir & 1 & pôr & 3\\\hline
+		exortar & 1 & abster & 2\\\hline
+		experimentar & 1 & acreditar & 2\\\hline
+		falar & 2 & anunciar & 2\\\hline
+		faltar & 1 & apresentar & 2\\\hline
+		fartar & 1 & arriscar & 2\\\hline
+		fazer & 45 & dedicar & 2\\\hline
+		ficar & 21 & desafiar & 2\\\hline
+		fingir & 1 & empenhar & 2\\\hline
+		foi & 1 & escusar & 2\\\hline
+		forçar & 5 & falar & 2\\\hline
+		garantir & 2 & garantir & 2\\\hline
+		gostar & 17 & imaginar & 2\\\hline
+		habituar & 1 & impor & 2\\\hline
+		haver & 4 & importar & 2\\\hline
+		imaginar & 2 & incentivar & 2\\\hline
+		impedir & 4 & mostrar & 2\\\hline
+		impor & 2 & necessitar & 2\\\hline
+		importar & 2 & negar & 2\\\hline
+		incentivar & 2 & ouvir & 2\\\hline
+		incluir & 1 & queixar & 2\\\hline
+		indagar & 1 & receber & 2\\\hline
+		influenciar & 1 & referir & 2\\\hline
+		informar & 1 & resistir & 2\\\hline
+		insinuar & 1 & sentar & 2\\\hline
+		insistir & 3 & tornar & 2\\\hline
+		instar & 1 & aceder & 1\\\hline
+		interessar & 4 & aguentar & 1\\\hline
+		ir & 6 & ambicionar & 1\\\hline
+		lembrar & 1 & aperceber & 1\\\hline
+		levar & 20 & apetecer & 1\\\hline
+		limitar & 10 & aplicar & 1\\\hline
+		mandar & 5 & apostar & 1\\\hline
+		manter & 6 & apressar & 1\\\hline
+		merecer & 1 & aprestar & 1\\\hline
+		mostrar & 2 & aproveitar & 1\\\hline
+		necessitar & 2 & atender & 1\\\hline
+		negar & 2 & atrever & 1\\\hline
+		obrigar & 17 & avisar & 1\\\hline
+		optar & 3 & caber & 1\\\hline
+		orgulhar & 1 & cansar & 1\\\hline
+		ousar & 3 & cessar & 1\\\hline
+		ouvir & 2 & citar & 1\\\hline
+		parar & 5 & condenar & 1\\\hline
+		parecer & 22 & conduzir & 1\\\hline
+		passado & 1 & confidenciar & 1\\\hline
+		passar & 44 & confirmar & 1\\\hline
+		pedir & 1 & consultar & 1\\\hline
+		pensar & 8 & contar & 1\\\hline
+		perder & 1 & convencionar & 1\\\hline
+		permanecer & 1 & credenciar & 1\\\hline
+		permitir & 37 & criticar & 1\\\hline
+		persuadir & 1 & culpar & 1\\\hline
+		planear & 1 & declinar & 1\\\hline
+		poder & 398 & depender & 1\\\hline
+		precisar & 14 & desistir & 1\\\hline
+		preferir & 14 & duvidar & 1\\\hline
+		preparar & 9 & ensinar & 1\\\hline
+		pretender & 39 & equivaler & 1\\\hline
+		prevenir & 1 & escolher & 1\\\hline
+		prever & 1 & estimar & 1\\\hline
+		procurar & 22 & estimular & 1\\\hline
+		proibir & 4 & estudar & 1\\\hline
+		projectar & 1 & exigir & 1\\\hline
+		prometer & 6 & exortar & 1\\\hline
+		propiciar & 1 & experimentar & 1\\\hline
+		propor & 5 & faltar & 1\\\hline
+		provocar & 1 & fartar & 1\\\hline
+		pôr & 3 & fingir & 1\\\hline
+		queixar & 2 & foi & 1\\\hline
+		quer & 1 & habituar & 1\\\hline
+		querer & 108 & incluir & 1\\\hline
+		receber & 2 & indagar & 1\\\hline
+		reclamar & 1 & influenciar & 1\\\hline
+		recomeçar & 1 & informar & 1\\\hline
+		recompensar & 1 & insinuar & 1\\\hline
+		reconhecer & 4 & instar & 1\\\hline
+		recordar & 1 & lembrar & 1\\\hline
+		recusar & 7 & merecer & 1\\\hline
+		reduzir & 1 & orgulhar & 1\\\hline
+		referir & 2 & passado & 1\\\hline
+		resistir & 2 & pedir & 1\\\hline
+		resolver & 14 & perder & 1\\\hline
+		respeitar & 1 & permanecer & 1\\\hline
+		restar & 1 & persuadir & 1\\\hline
+		retirar & 1 & planear & 1\\\hline
 		saber & 16 & prevenir & 1\\\hline
 		salientar & 1 & prever & 1\\\hline
 		sentar & 2 & projectar & 1\\\hline
 		sentir & 4 & propiciar & 1\\\hline
-		ser & 17 & provocar & 1\\\hline
-		soar & 1 & reclamar & 1\\\hline
-		sonhar & 1 & recomeçar & 1\\\hline
-		sublinhar & 1 & recompensar & 1\\\hline
-		sujeitar & 1 & recordar & 1\\\hline
-		suportar & 1 & reduzir & 1\\\hline
-		surgir & 1 & respeitar & 1\\\hline
-		suspeitar & 1 & restar & 1\\\hline
-		tardar & 1 & retirar & 1\\\hline
-		teimar & 1 & salientar & 1\\\hline
-		temer & 1 & soar & 1\\\hline
-		tencionar & 4 & sonhar & 1\\\hline
-		tender & 5 & sublinhar & 1\\\hline
-		tentar & 64 & sujeitar & 1\\\hline
-		ter & 12 & suportar & 1\\\hline
-		tornar & 2 & surgir & 1\\\hline
-		tratar & 4 & suspeitar & 1\\\hline
-		trazer & 1 & tardar & 1\\\hline
-		ver & 19 & teimar & 1\\\hline
-		vir & 3 & temer & 1\\\hline
-		virar & 1 & trazer & 1\\\hline
-		visar & 5 & virar & 1\\\hline
-		voltar & 1 & voltar & 1\\\hline
-		\caption{Lista dos 196 verbos plenos que ocorrem 1150 vezes como \emph{pais} de uma colocação verbal no Bosque-UD}
+		ser & 21 & provocar & 1\\\hline
+		soar & 1 & quer & 1\\\hline
+		sonhar & 1 & reclamar & 1\\\hline
+		sublinhar & 1 & recomeçar & 1\\\hline
+		sujeitar & 1 & recompensar & 1\\\hline
+		suportar & 1 & recordar & 1\\\hline
+		surgir & 1 & reduzir & 1\\\hline
+		suspeitar & 1 & respeitar & 1\\\hline
+		tardar & 1 & restar & 1\\\hline
+		teimar & 1 & retirar & 1\\\hline
+		temer & 1 & salientar & 1\\\hline
+		tencionar & 4 & soar & 1\\\hline
+		tender & 5 & sonhar & 1\\\hline
+		tentar & 64 & sublinhar & 1\\\hline
+		ter & 86 & sujeitar & 1\\\hline
+		tornar & 2 & suportar & 1\\\hline
+		tratar & 4 & surgir & 1\\\hline
+		trazer & 1 & suspeitar & 1\\\hline
+		ver & 19 & tardar & 1\\\hline
+		vir & 71 & teimar & 1\\\hline
+		virar & 1 & temer & 1\\\hline
+		visar & 5 & trazer & 1\\\hline
+		voltar & 41 & virar & 1\\\hline
+		\caption{Lista dos 200 verbos plenos que ocorrem 2390 vezes como \emph{pais} de uma colocação verbal no Bosque-UD}
 		\label{tab:naolocverbal}
 	\end{longtable}
 
-	
+
+	\begin{longtable}{ | p{3cm} | p{2cm} | }
+		\hline
+		\textbf{Preposição} & \textbf{Frequência} \\\hline
+		de & 16283\\\hline
+		em & 6253\\\hline
+		a & 3071\\\hline
+		por & 1856\\\hline
+		com & 1553\\\hline
+		para & 1237\\\hline
+		como & 405\\\hline
+		entre & 363\\\hline
+		sobre & 340\\\hline
+		até & 187\\\hline
+		segundo & 187\\\hline
+		sem & 157\\\hline
+		contra & 136\\\hline
+		durante & 119\\\hline
+		desde & 104\\\hline
+		após & 71\\\hline
+		sob & 51\\\hline
+		apesar de & 38\\\hline
+		há & 38\\\hline
+		a partir de & 34\\\hline
+		quanto a & 24\\\hline
+		primeira & 22\\\hline
+		perante & 18\\\hline
+		ao & 17\\\hline
+		diante de & 13\\\hline
+		em relação a & 12\\\hline
+		uma & 12\\\hline
+		/ & 11\\\hline
+		enquanto & 11\\\hline
+		nem & 11\\\hline
+		vez & 11\\\hline
+		muitas & 10\\\hline
+		graças a & 8\\\hline
+		no & 7\\\hline
+		ou & 7\\\hline
+		desta & 5\\\hline
+		do que & 5\\\hline
+		mediante & 5\\\hline
+		o & 5\\\hline
+		os & 5\\\hline
+		sua & 5\\\hline
+		eis & 4\\\hline
+		medida & 4\\\hline
+		pra & 4\\\hline
+		quando & 4\\\hline
+		a par de & 3\\\hline
+		des & 3\\\hline
+		exceto & 3\\\hline
+		nessa & 3\\\hline
+		pelo & 3\\\hline
+		por meio de & 3\\\hline
+		que & 3\\\hline
+		sempre & 3\\\hline
+		via & 3\\\hline
+		a não ser & 2\\\hline
+		a respeito de & 2\\\hline
+		acerca de & 2\\\hline
+		além de & 2\\\hline
+		bordo & 2\\\hline
+		conforme & 2\\\hline
+		e & 2\\\hline
+		ex & 2\\\hline
+		excepto & 2\\\hline
+		qualquer & 2\\\hline
+		se & 2\\\hline
+		senão & 2\\\hline
+		tais como & 2\\\hline
+		um & 2\\\hline
+		  & 1\\\hline
+		a favor ou contra & 1\\\hline
+		a propósito de & 1\\\hline
+		al & 1\\\hline
+		além & 1\\\hline
+		ao ponto de & 1\\\hline
+		apenas & 1\\\hline
+		através & 1\\\hline
+		bem & 1\\\hline
+		bons & 1\\\hline
+		breve & 1\\\hline
+		da & 1\\\hline
+		de acordo & 1\\\hline
+		de o que & 1\\\hline
+		dentro & 1\\\hline
+		devido & 1\\\hline
+		em abono de & 1\\\hline
+		haver & 1\\\hline
+		inteligente- & 1\\\hline
+		mais & 1\\\hline
+		mar & 1\\\hline
+		menos & 1\\\hline
+		mesmo & 1\\\hline
+		meu & 1\\\hline
+		mil & 1\\\hline
+		modo & 1\\\hline
+		n & 1\\\hline
+		na melhor das hipóteses & 1\\\hline
+		nos & 1\\\hline
+		para além de & 1\\\hline
+		pois & 1\\\hline
+		pró-direitos & 1\\\hline
+		quanto & 1\\\hline
+		quer & 1\\\hline
+		s/ & 1\\\hline
+		salvo & 1\\\hline
+		tal como & 1\\\hline
+		tão & 1\\\hline
+		x & 1\\\hline
+		à & 1\\\hline
+		\caption{Lista das 108 preposições e locuções prepositivas que ocorrem 32818 vezes no Bosque-UD}
+		\label{tab:adp}
+	\end{longtable}
+
+	\begin{table}[]
+		\parbox{.45\linewidth}{
+			\centering
+			\begin{tabular}{|c|c|}
+				\hline
+				\textbf{Conjunção coordenativa} & \textbf{Frequência} \\\hline
+				\& & 1\\\hline
+				/ & 1\\\hline
+				ainda assim & 8\\\hline
+				além disso & 8\\\hline
+				and & 1\\\hline
+				ao invés & 1\\\hline
+				ao invés de & 1\\\hline
+				apesar disso & 4\\\hline
+				contudo & 6\\\hline
+				desse modo & 1\\\hline
+				e & 4163\\\hline
+				e/ou & 3\\\hline
+				em vez de & 14\\\hline
+				entretanto & 15\\\hline
+				isto é & 9\\\hline
+				mais & 4\\\hline
+				mas & 562\\\hline
+				nem & 58\\\hline
+				no & 7\\\hline
+				no entanto & 54\\\hline
+				não obstante & 1\\\hline
+				ou & 348\\\hline
+				ou seja & 20\\\hline
+				por conseguinte & 1\\\hline
+				por outro lado & 17\\\hline
+				portanto & 9\\\hline
+				porém & 27\\\hline
+				quanto & 1\\\hline
+				quer & 10\\\hline
+				sendo assim & 3\\\hline
+				tampouco & 1\\\hline
+				tanto & 2\\\hline
+				todavia & 2\\\hline
+			\end{tabular}
+		}
+		\hfill
+		\parbox{.45\linewidth}{
+			\centering
+			\begin{tabular}{|c|c|}
+				\hline
+				\textbf{Conjunção coordenativa} & \textbf{Frequência} \\\hline
+				e & 4163\\\hline
+				mas & 562\\\hline
+				ou & 348\\\hline
+				nem & 58\\\hline
+				no entanto & 54\\\hline
+				porém & 27\\\hline
+				ou seja & 20\\\hline
+				por outro lado & 17\\\hline
+				entretanto & 15\\\hline
+				em vez de & 14\\\hline
+				quer & 10\\\hline
+				isto é & 9\\\hline
+				portanto & 9\\\hline
+				ainda assim & 8\\\hline
+				além disso & 8\\\hline
+				no & 7\\\hline
+				contudo & 6\\\hline
+				apesar disso & 4\\\hline
+				mais & 4\\\hline
+				e/ou & 3\\\hline
+				sendo assim & 3\\\hline
+				tanto & 2\\\hline
+				todavia & 2\\\hline
+				\& & 1\\\hline
+				/ & 1\\\hline
+				and & 1\\\hline
+				ao invés & 1\\\hline
+				ao invés de & 1\\\hline
+				desse modo & 1\\\hline
+				não obstante & 1\\\hline
+				por conseguinte & 1\\\hline
+				quanto & 1\\\hline
+				tampouco & 1\\\hline
+			\end{tabular}
+		}
+		\caption{Lista das 33 conjunções coordenativas ou locuções coordenativas que ocorrem 5363 vezes no Bosque-UD}
+		\label{tab:cconj}
+	\end{table}	
+
+
+	\begin{longtable}{ | p{3cm} | p{2cm} | }
+		\hline
+		\textbf{Conjunções subordinativas} & \textbf{Frequência} \\\hline
+		que & 1588\\\hline
+		a & 948\\\hline
+		de & 751\\\hline
+		para & 726\\\hline
+		se & 263\\\hline
+		porque & 163\\\hline
+		por & 116\\\hline
+		como & 94\\\hline
+		em & 81\\\hline
+		quando & 78\\\hline
+		embora & 59\\\hline
+		sem & 47\\\hline
+		depois de & 41\\\hline
+		pois & 41\\\hline
+		apesar de & 40\\\hline
+		antes de & 27\\\hline
+		caso & 23\\\hline
+		é & 22\\\hline
+		com & 20\\\hline
+		foi & 20\\\hline
+		tal como & 16\\\hline
+		enquanto & 14\\\hline
+		até & 13\\\hline
+		desde & 13\\\hline
+		já & 13\\\hline
+		ainda que & 12\\\hline
+		após & 11\\\hline
+		já que & 11\\\hline
+		além de & 9\\\hline
+		sobre & 9\\\hline
+		uma vez que & 9\\\hline
+		do que & 8\\\hline
+		segundo & 8\\\hline
+		sem que & 8\\\hline
+		mesmo & 6\\\hline
+		a não ser que & 5\\\hline
+		ao ponto de & 5\\\hline
+		conforme & 5\\\hline
+		entre & 5\\\hline
+		pelo que & 5\\\hline
+		tanto & 4\\\hline
+		a fim de & 3\\\hline
+		antes & 3\\\hline
+		assim & 3\\\hline
+		se bem que & 3\\\hline
+		ver & 3\\\hline
+		a não ser & 2\\\hline
+		a ponto de & 2\\\hline
+		dado que & 2\\\hline
+		depois & 2\\\hline
+		mesmo que & 2\\\hline
+		quanto & 2\\\hline
+		quanto a & 2\\\hline
+		senão & 2\\\hline
+		tão & 2\\\hline
+		afinal & 1\\\hline
+		agora & 1\\\hline
+		agora que & 1\\\hline
+		ainda & 1\\\hline
+		ainda a & 1\\\hline
+		através de & 1\\\hline
+		com vista a & 1\\\hline
+		consoante & 1\\\hline
+		dado & 1\\\hline
+		de aí a & 1\\\hline
+		de forma a & 1\\\hline
+		de modo que & 1\\\hline
+		de o que & 1\\\hline
+		de tal modo que & 1\\\hline
+		de uma vez por todas & 1\\\hline
+		desde que & 1\\\hline
+		devido a & 1\\\hline
+		e & 1\\\hline
+		face a & 1\\\hline
+		há & 1\\\hline
+		independentemente de & 1\\\hline
+		na medida em que & 1\\\hline
+		para além de & 1\\\hline
+		perto de & 1\\\hline
+		por assim dizer & 1\\\hline
+		por mais que & 1\\\hline
+		que foi & 1\\\hline
+		recentemente & 1\\\hline
+		ser & 1\\\hline
+		uma & 1\\\hline
+		uma vez & 1\\\hline
+		uns & 1\\\hline
+		visto que & 1\\\hline
+		\caption{Lista das 88 conjunções subordinativas ou locuções subordinativas que ocorrem 5403 vezes no Bosque-UD}
+		\label{tab:sconj}
+	\end{longtable}
+
+
 \chapter*{Abreviações}
 
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
