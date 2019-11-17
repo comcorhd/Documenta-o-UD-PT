@@ -1366,7 +1366,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 				\end{figure*}
 
 
-\section{Conjunções}
+\section{Conjunções}\label{sec:conjuncoes}
 
 	Há dois tipos de conjunções no Bosque-UD: conjunção coordenativa (\emph{CCONJ}) e conjunção subordinativa (\emph{SCONJ}). As funções que apresentam são \emph{cc} (coordenador) e \emph{mark} (subordinador).
 
@@ -1449,17 +1449,21 @@ As preposições são palavras que operam como conectores de termos nominais.
 					\vspace{.8cm}
 					\begin{dependency}
 						\begin{deptext}
-							SCONJ \& PRON \& VERB \& DET \& NOUN \& PUNCT \& VERB \& NOUN \& ADJ \& CCONJ \& VERB \& 						DET \& NOUN \& ADJ \\
-							Se \& eu \& dirigisse \& uma \& federação \& , \& apresentaria \& balanços \& mensais \& e \& liberaria 					\& minhas \& contas \& bancárias \\
+							SCONJ \& PRON \& VERB \& DET \& NOUN \& PUNCT \& VERB \& NOUN \& ADJ \\
+							Se \& eu \& dirigisse \& uma \& federação \& , \& apresentaria \& balanços \& mensais \\
+							se \& eu \& dirigir \& um \& federação \& , \& apresentar \& balanço \& mensal \\
 						\end{deptext}
 						\depedge{3}{1}{mark}
 						\depedge{7}{3}{advcl}
 						\deproot{7}{root}
-						\depedge{11}{10}{cc}
-						\depedge{7}{11}{conj}
-						
+						\depedge{3}{2}{nsubj}
+						\depedge{5}{4}{det}
+						\depedge{3}{6}{punct}
+						\depedge{3}{5}{obj}
+						\depedge{7}{8}{obj}
+						\depedge{8}{9}{amod}
 					\end{dependency}
-					\caption{\emph{Se} eu dirigisse uma federação, apresentaria balanços mensais e liberaria minhas contas bancárias}\label{dep:sconj1}
+					\caption{\emph{Se} eu dirigisse uma federação, apresentaria balanços mensais}\label{dep:sconj1}
 				\end{figure*}
 		
 		\begin{figure*}[htbp]
@@ -1467,36 +1471,50 @@ As preposições são palavras que operam como conectores de termos nominais.
 					\vspace{.8cm}
 					\begin{dependency}
 						\begin{deptext}
-							CCONJ \& PUNCT \& SCONJ \& SCONJ \& VERB \& ADV \& VERB \& VERB \& PRON \& ADJ  \\
-							Mas \& , \& mesmo \& que \& quisessem \& não \& conseguiriam \& fazer \& nada \& menor \\
-							\& \& MWE=mesmo\_que \& \\
-							\& \& MWEPOS=SCONJ \& \\
+							SCONJ \& SCONJ \& VERB \& ADV \& VERB \\
+							Mesmo \& que \& quisessem \& não \& conseguiriam \\
+							mesmo \& que \& querer \& não \& conseguir \\
+							MWE=mesmo\_que \\
+							MWEPOS=SCONJ \\
 						\end{deptext}
-						\depedge{5}{3}{mark}
-						\depedge{3}{4}{fixed}
-						\depedge{7}{5}{advcl}
-						\deproot{7}{root}				
+						\depedge{1}{2}{fixed}
+						\depedge{5}{3}{advcl}
+						\deproot{5}{root}				
+						\depedge{5}{4}{advmod}
+						\depedge{3}{1}{mark}
 					\end{dependency}
-					\caption{Mas, \emph{mesmo que} quisessem não conseguiriam fazer nada menor}\label{dep:sconj2}
+					\caption{\emph{Mesmo que} quisessem não conseguiriam}\label{dep:sconj2}
 				\end{figure*}
 	
 	
 	\subsection{Advérbios interrogativos}\label{sec:adverbiosinterrogativos}
 	
-		Advérbios são palavras que costumam modificar verbos, adjetivos e outros advérbios. Além disso, em português, algumas dessas palvras podem operar como conjunções subordinativas quando aparecem na introdução de orações subordinadas adverbiais.
+		Os advérbios interrogativos podem operar como conjunções subordinativas quando aparecem na introdução de orações subordinadas adverbiais, conforme \fullref{sec:classesdinamicas}.
+
+		\fullref{dep:adverbiointerrogativo}
 		
 		\begin{figure*}[htbp]
 					\centering
 					\vspace{.8cm}
 					\begin{dependency}
 						\begin{deptext}
-								SCONJ \& VERB \& DET \& NOUN \& PUNCT \& AUX \& SCONJ \& VERB \&										 VERB \& DET \& NOUN \\
-								Quando \& recebo \& a \& bola \& , \& tenho \& que \& 													ficar \& olhando \& sua \& trajetória \\
+								SCONJ \& VERB \& DET \& NOUN \& PUNCT \& VERB \& SCONJ \& VERB \&										 VERB \& DET \& NOUN \\
+								Quando \& recebo \& a \& bola \& , \& tenho \& que \& ficar \& olhando \& sua \& trajetória \\
+								quando \& receber \& a \& bola \& , \& ter \& que \& ficar \& olhar \& seu \& trajetória \\
 						\end{deptext}
 						\depedge{2}{1}{mark}
-						\depedge{8}{2}{advcl}	
+						\depedge{6}{2}{advcl}	
+						\deproot{6}{root}
+						\depedge{4}{3}{det}
+						\depedge{2}{4}{obj}
+						\depedge{2}{5}{punct}
+						\depedge{6}{8}{xcomp}
+						\depedge{8}{7}{mark}
+						\depedge{11}{10}{det}
+						\depedge{9}{11}{obj}
+						\depedge{8}{9}{xcomp}
 					\end{dependency}
-					\caption{\emph{Quando} recebo a bola, tenho que ficar olhando sua trajetória}
+					\caption{\emph{Quando} recebo a bola, tenho que ficar olhando sua trajetória}\label{dep:adverbiointerrogativo}
 				\end{figure*}
 	
 \chapter{Atributos morfológicos (feats)}\label{sec:feats}
@@ -1534,6 +1552,28 @@ As preposições são palavras que operam como conectores de termos nominais.
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
 
+\section{Núcleo da oração}
+
+	\begin{enumerate}
+
+		\item O predicado é verbal quando o núcleo da oração tem upos \emph{VERB}. Sua deprel deverá ser, portanto, a função sintática da oração: seja ela principal (\emph{root}), subordinada ou coordenada (\fullref{sec:coordenacao}). Caso seja subordinada, qualquer uma das funções sintáticas poderá se aplicar.
+	
+		\item O predicado é nominal quando o verbo é de ligação (\fullref{sec:verbosdeligacao}). Nesses casos, o verbo deve ter upos \emph{AUX} e deprel \emph{aux}, sendo dependente do sintagma nominal que o verbo introduz. Este sintagma nominal, por sua vez, será o núcleo da oração.
+
+		\item O predicado é verbo-nominal quando o núcleo da oração é um verbo pleno, de upos \emph{VERB}, mas há espaço para um predicativo do objeto. É o caso, por exemplo, de \fullref{sec:pintouamodelonua}.
+
+	\end{enumerate}
+
+\section{Coordenação}\label{sec:coordenacao}
+
+	A coordenação acontece quando duas sentenças não são subordinadas uma à outra, mas são independentes. É possível falar, também, em coordenação de sintagmas nominais, e não apenas verbais.
+
+	Em todo tipo de coordenação, é necessário uma conjunção coordenativa, de upos \emph{CCONJ} e deprel \emph{cc}, dependente de um núcleo de coordenação, que deve receber deprel \emph{conj}. O núcleo da coordenação, por sua vez, é dependente do núcleo da oração à qual é coordenado.
+
+	Ver \fullref{sec:cconj}
+
+	Repare que, em alguns casos, coordenação de apostos pode não ser anotada como \emph{conj}, conforme \fullref{sec:apostoscoordenados}.
+
 \section{Parataxis}\label{sec:parataxis}
 
 	O deprel \emph{parataxis} é utilizado quando a relação entre duas orações não é explicitamente nem de coordenação, nem de subordinação.
@@ -1542,9 +1582,56 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 	\fullref{dep:parataxis1}
 
+	\fullref{dep:parataxis2}
+
+	\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+						VERB \& ADP \& DET \& NOUN \& PUNCT \& VERB \& VERB \& ADP \& DET \& NOUN \\
+						Gostamos \& de \& a \& ideia \& , \& resolvemos \& fazer \& em \& este \& formato \\
+						gostar \& de \& a \& ideia \& , \& resolver \& fazer \& em \& este \& formato \\
+				\end{deptext}
+				\deproot{1}{root}
+				\depedge{4}{3}{det}
+				\depedge{4}{2}{case}
+				\depedge{1}{4}{obj}
+				\depedge{1}{5}{punct}
+				\depedge{1}{6}{parataxis}
+				\depedge{6}{7}{xcomp}
+				\depedge{10}{9}{det}
+				\depedge{10}{8}{case}
+				\depedge{7}{10}{obl}
+				\depedge{6}{7}{xcomp}
+			\end{dependency}
+			\caption{Gostamos da idéia, \emph{resolvemos} fazer neste formato}\label{dep:parataxis1}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+						PROPN \& PROPN \& PROPN \& VERB \& ADV \& VERB \& NOUN \& ADJ \\
+						BRASÍLIA \& Pesquisa \& Datafolha \& publicada \& hoje \& revela \& dado \& surpreendente \\
+						Brasília \& Pesquisa \& Datafolha \& publicar \& hoje \& revelar \& dado \& surpreendente \\
+				\end{deptext}
+				\depedge{6}{1}{parataxis}
+				\depedge{6}{2}{nsubj}	
+				\deproot{6}{root}
+				\depedge{2}{3}{flat:name}
+				\depedge{2}{4}{acl}
+				\depedge{4}{5}{advmod}
+				\depedge{6}{7}{obj}
+				\depedge{7}{8}{amod}
+			\end{dependency}
+			\caption{\emph{BRASÍLIA} Pesquisa Datafolha publicada hoje revela um dado surpreendente}\label{dep:parataxis2}
+		\end{figure*}
+
 \section{Sujeito da oração}\label{sec:suj}
 
-\subsection{Caso seja nominal}
+\subsection{Caso o sujeito seja nominal}
 		O sujeito será anotado com a deprel \emph{nsubj}.  
 	
 		\fullref{dep:nsubj1}
@@ -1587,7 +1674,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 					\label{fig:nsubj2}
 				\end{figure*}
 	
-	\subsection{Caso seja oracional} 
+	\subsection{Caso o sujeito seja oracional} 
 		O sujeito será anotado com a deprel \emph{csubj}, que corresponde a uma oração subordinada substantiva subjetiva.
 	
 		\fullref{fig:csubj1}
@@ -1634,9 +1721,9 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 \section{Predicativos}\label{sec:predicativos}
 
-	Os predicativos do sujeito, quando são o predicado nominal da oração (conforme Xxx), devem ter deprel \emph{root} como na \fullref{dep:predicativodosujeito1}.
+	Os predicativos do sujeito, quando são o predicado nominal da oração, devem ter deprel \emph{root} como na \fullref{dep:predicativodosujeito1}.
 
-	Quando são adjunto do sujeito, os predicativos são adjuntos adnominais, conforme \fullref{sec:adjuntoadnominal}, e devem receber deprel \emph{acl}.
+	Quando são adjunto do sujeito, os predicativos são adjuntos adnominais, conforme \fullref{sec:adjuntoadnominal}, e devem receber deprel \emph{acl}, \emph{nmod}, \emph{amod} ou \emph{nummod}.
 
 	Os predicativos do objeto podem diferir caso sejam subordinados ao objeto ou ao verbo, conforme \fullref{sec:pintouamodelonua} e \fullref{sec:declarouoreuculpado}.
 
@@ -1663,7 +1750,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 		Assim como o predicativo do sujeito, o predicativo do objeto que é subordinado ao objeto deve ter deprel \emph{acl}, como na \fullref{dep:pintouamodelonua}.
 
-		Caso o predicativo seja dependente do verbo, será \emph{xcomp}, conforme \fullref{sec:declarouoreuculpado}.
+		Por outro lado, caso o predicativo seja dependente do verbo, será \emph{xcomp}, conforme \fullref{sec:declarouoreuculpado}.
 
 		\begin{figure*}[htbp]
 			\centering
@@ -1686,9 +1773,9 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 		Quando o predicativo do objeto é dependente do verbo, e não do objeto, estamos diante de um caso de \fullref{sec:argumentosdoverbo}, que deve ter deprel \emph{xcomp}, como na \fullref{dep:declarouoreuculpado} e na \fullref{dep:euoconsideroidiota}.
 	
-		Na frase \fullref{dep:xcomp4}, além do \say{deixando} que é \emph{xcomp} (objeto oracional), há também o \say{extenso} que tem deprel \emph{xcomp} por ser predicativo do objeto \say{currículo} mas argumento do verbo \emph{deixando}.
+		Na frase \fullref{dep:xcomp4}, além do \say{deixando} que é \emph{xcomp} (objeto oracional), há também o \say{extenso} que tem deprel \emph{xcomp} por ser predicativo do objeto \say{currículo} ao mesmo tempo que argumento do verbo \emph{deixando}.
 	
-		Caso o predicativo seja dependente do objeto, será \emph{acl}, conforme \fullref{sec:pintouamodelonua}.
+		Por outro lado, caso o predicativo seja dependente do objeto, será \emph{acl}, conforme \fullref{sec:pintouamodelonua}.
 	
 		\begin{figure*}[htbp]
 			\centering
@@ -1826,9 +1913,9 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 		De modo geral, orações subordinadas substantivas objetivas devem receber o deprel \emph{ccomp}, como na \fullref{dep:ccomp} e na \fullref{dep:ccomp2}.
 
-		No entanto, em alguns casos, o objeto oracional pode ser \emph{xcomp}, quando o sujeito da oração subordinada é, obrigatoriamente, mesmo sujeito ou o objeto da oração à qual se subordina. De modo geral, são os casos de oração subordinada substantiva objetiva reduzida, como em \fullref{dep:xcomp1}, \fullref{dep:xcomp2}, \fullref{dep:xcomp3}, e \fullref{dep:xcomp4}. 
+		No entanto, em alguns casos, o objeto oracional pode ser \emph{xcomp}, quando o sujeito da oração subordinada é, obrigatoriamente, o mesmo sujeito da oração principal, ou o objeto da oração principal. De modo geral, são os casos de oração subordinada substantiva objetiva reduzida, como em \fullref{dep:xcomp1}, \fullref{dep:xcomp2}, \fullref{dep:xcomp3}, e \fullref{dep:xcomp4}. 
 
-		Esses casos, porém, não devem ser confundidos com os de sujeito oculto quando a oração é desenvolvida (ou seja, tem a conjunção subordinativa), como na \fullref{dep:xcompsujeitooculto}.
+		Esses casos, porém, não devem ser confundidos com os de sujeito oculto quando a oração é desenvolvida (ou seja, há a conjunção subordinativa), como na \fullref{dep:xcompsujeitooculto}.
 
 		Outro caso de argumento do verbo que deve receber deprel \emph{xcomp}, embora seja nominal, é o dos predicativos do objeto quando são subordinados ao verbo, e não ao objeto, conforme \fullref{sec:declarouoreuculpado}.
 
@@ -1975,7 +2062,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 		
 \section{Adjuntos adverbiais}\label{sec:adjadv}
 
-		\subsection{Caso seja advérbio}
+		\subsection{Caso o adjunto adverbial seja advérbio}
 		
 			O advérbio, que recebe upos \emph{ADV}, será anotado com a deprel \emph{advmod}. Poderá modificar \emph{VERB}, \emph{ADJ} ou \emph{ADV}.
 
@@ -2049,7 +2136,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 				\label{fig:advmod3}
 			\end{figure*}
 		
-		\subsection{Caso seja nome}
+		\subsection{Caso o adjunto adverbial seja nome}
 			
 			 O núcleo nominal de um adjunto adverbial (substantivo, pronome, sintagma nominal) será anotado como \emph{obl}. Poderá modificar \emph{VERB}, \emph{ADJ} ou \emph{ADV}.
 
@@ -2151,14 +2238,14 @@ As preposições são palavras que operam como conectores de termos nominais.
 				\label{fig:obl4}
 			\end{figure*}
 
-			A relação de \emph{obl}, como é vista na \fullref{fig:obl3}, pode ser considerada um argumento de adjetivo. (Ver Xx)
+			A relação de \emph{obl}, como é vista na \fullref{fig:obl3}, pode ser considerada um argumento de adjetivo (ver \fullref{sec:argumentosdoadjetivo}).
 			
 			A subrelação \emph{obl:agent} é utilizada para indicar o agente de um verbo na voz passiva. (ver \fullref{sec:vozpass}) 
 
-		\subsection{Caso seja verbo}
+		\subsection{Caso o adjunto adverbial seja verbo}
 			A oração subordinada adverbial será anotada como \emph{advcl}, não havendo diferenciação semântica (temporal, causal, concessiva, final, etc). Poderá modificar \emph{VERB}.
 
-			Nas estruturas comparativas, independente de o núcleo do fragmento ser um verbo ou um nome, ele será anotado com a deprel \emph{advcl}. (ver Xx)
+			Nas estruturas comparativas, independente de o núcleo do fragmento ser um verbo ou um nome, ele será anotado com a deprel \emph{advcl} (ver \fullref{sec:estruturascomparativas}).
 
 			\fullref{fig:advcl1}
 
@@ -2212,10 +2299,10 @@ As preposições são palavras que operam como conectores de termos nominais.
 				\label{fig:advcl2}
 			\end{figure*}
 
-		\subsection{''Teve uma relação extraconjugal com \emph{Monica} Lewinsky''}
-			Consideramos que \say{Monica} apontará para o verbo, e não para o nome. Sendo assim, o pai de \say{Monica} será \say{teve} e sua deprel será \emph{obl}, . 
+		\subsection{Teve uma relação extraconjugal com \emph{Monica} Lewinsky: quem é o pai?}\label{sec:terrelacaocom}
+			Consideramos que \say{Monica} apontará para o verbo, e não para o nome. Sendo assim, o pai de \say{Monica} será \say{teve} e sua deprel será \emph{obl}.
 			
-			\fullref{fig:monica}
+			\fullref{dep:monica}
 			
 			\begin{figure*}[htbp]
 				\centering
@@ -2237,7 +2324,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 				
 				\end{dependency}
 				\caption{Teve uma relação extraconjugal com \emph{Monica} Lewinsky}
-				\label{fig:monica}
+				\label{dep:monica}
 			\end{figure*}
 
 
@@ -2263,7 +2350,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 		Adjuntos adnominais que são \emph{VERB} são orações subordinadas adjetivas, e devem ter deprel \emph{acl:relcl}, caso sejam desenvolvidas (\fullref{dep:aclrelcl}), ou \emph{acl}, caso sejam reduzidas (\fullref{dep:acl}).
 
-		Sentenças como Xxx (ter relação com) são ambíguas, e privilegiamos leituras como \emph{obl} (Xxx).
+		Sentenças como \fullref{dep:monica} são ambíguas, e privilegiamos leituras como \emph{obl} (\fullref{sec:terrelacaocom}).
 
 		\begin{figure*}[htbp]
 			\centering
@@ -2636,13 +2723,14 @@ As preposições são palavras que operam como conectores de termos nominais.
 				\label{fig:vozpass2}
 			\end{figure*}
 
-	\fullref{tab:vozpassiva}
 
 \section{Discurso direto}\label{sec:discursodireto}
 
 	Discurso direto é anotado como de deprel \emph{parataxis}.
 
 	\fullref{dep:discursodireto}
+
+	Ver também \fullref{sec:parataxis}.
 
 
 	\begin{figure*}[htbp]
@@ -2669,7 +2757,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 		\caption{«É uma \emph{coisa} do Primeiro Mundo», afirmou}\label{dep:discursodireto}
 	\end{figure*}
 
-	\section{Estruturas comparativas}
+	\section{Estruturas comparativas}\label{sec:estruturascomparativas}
 
 	Estruturas comparativas são de anotação complexa, o que se verifica pela existência de um \href{https://universaldependencies.org/workgroups/comparatives.html}{working group (WG) em UD} dedicado especialmente a elas. A seguir, listamos as frases utilizadas no WG, traduzidas em português, e com a anotação adequada, além de algumas frases de anotação complexa no Bosque-UD.
 
@@ -2738,6 +2826,10 @@ As preposições são palavras que operam como conectores de termos nominais.
 	\end{figure}{}
 
 	\subsubsection{menos do que}
+
+	\fullref{fig:comparative7}
+
+	\fullref{fig:comparative8}
 
 	\begin{figure}
 	    \centering
@@ -2816,7 +2908,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 \section{Particípio}
 
-	Ver \fullref{sec:formaspart}.
+	Ver \fullref{sec:formaspart}
 	
 \section{Elementos discursivos}
 
@@ -2934,7 +3026,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 		\fullref{fig:equedif1}: \say{é} foi anotado como AUX/discourse e \say{que} como SCONJ/mark. Não é um caso de MWE, visto que consideramos apenas \say{é} como discourse.
 
-		\fullref{fig:equedif2}: \say{R} é \emph{root} (ver Xx) e \say{é} tem deprel \emph{parataxis}.
+		\fullref{fig:equedif2}: \say{R} é \emph{root} e \say{é} tem deprel \emph{parataxis}.
 
 		\fullref{fig:equedif3}
 
@@ -2994,7 +3086,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 		Para os casos em que \say{tal como} indica hiperonímia, criamos uma MWE com valor prepositivo (\fullref{fig:talcomo2}).
 
-		Além disso, essa estrutura de hiperonímia também pode aparecer em frases com apenas \say{como}, em vez de \say{tal como}. Essas frases, em termos semânticos, têm valores semelhantes; no entanto, não há MWE nas frases de \say{como}. (\fullref{fig:talcomo4})
+		Além disso, essa estrutura de hiperonímia também pode aparecer em frases com apenas \say{como}, em vez de \say{tal como}. Essas frases, em termos semânticos, têm valores semelhantes; no entanto, não há MWE nas frases de \say{como} (\fullref{fig:talcomo4}).
 
 		\begin{figure}
 	    	\centering
