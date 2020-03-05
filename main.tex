@@ -69,12 +69,12 @@ Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{und
     \item “word”, à palavra tal como aparece na frase (exceto no caso de contração, como “da”, em que a palavra será desmembrada nos tokens “de” e “a”);
     \item “lemma” se refere à palavra tal como aparece no dicionário: em singular e em masculino ou infinitivo;
     \item “upos” (classe gramatical \say{universal}) se refere à classe gramatical;
-    \item No corpus Bosque-UD, a coluna “xpos” (classe gramatical específica) é preenchida com a saída do sistema PALAVRAS \citep{bick2000parsing} para a mesma frase;
+    \item No corpus Bosque-UD, a coluna “xpos” (classe gramatical específica) é preenchida com a saída do sistema PALAVRAS \citep{bick2000parsing} para a mesma frase. No entanto, essa coluna é removida na versão que é tornada pública (release);
     \item “feats” (atributos morfológicos) é preenchida com as características morfológicas do token;
-    \item “dephead” (dependência sintática), com o id do token de quem é filho;
-    \item “deprel” (relação de dependência), com a relação sintática que o conecta ao seu pai;
+    \item “dephead” (dependência sintática), com o id do token de quem é filho. Indica a relação estrutural de dependência entre os elementos de um enunciado; 
+    \item “deprel” (relação de dependência), com a relação sintática que o conecta ao seu pai.  Indica a natureza, isto é, o tipo de relação sintática entre os elementos de um enunciado;
     \item “deps” (dependência específica) não é utilizado no Bosque-UD;
-    \item “misc” (miscelânea) se refere a quaisquer informações extras que desejemos adicionar ao token.
+    \item “misc” (miscelânea) se refere a quaisquer informações extras que se queira adicionar ao token.
 \end{enumerate}{}
 
 \section{Princípios}\label{sec:principios}
@@ -319,7 +319,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	\subsection{Locuções verbais aspectuais/modais não existem no UD}\label{sec:auxaspecto}
 	
-		Em UD, não existem locuções verbais aspectuais ou modais, de modo que as sentenças são anotadas como na \fullref{dep:locverbalUD} e \fullref{dep:locverbalUD2}, com dois verbos plenos (\emph{VERB}), sendo o segundo de deprel \emph{xcomp} dependente do primeiro.
+		Em UD, não existem locuções verbais aspectuais ou modais, de modo que as sentenças são anotadas como na \fullref{dep:locverbalUD} e \fullref{dep:locverbalUD2}, com dois verbos plenos (\emph{VERB}), sendo o segundo de deprel \emph{xcomp} dependente do primeiro (ver \fullref{sec:objetooraciona}).
 		
 		Para entender melhor o fenômeno das locuções verbais e conhecer um modelo de anotação para o fenômeno, ver \fullref{sec:locverbalJDP}.
 		
@@ -368,45 +368,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			\label{dep:locverbalUD2}
 		\end{figure*}
 	
-	\subsection{Proposta de anotação para as locuções verbais aspectuais/modais}\label{sec:locverbalJDP}
-
-		Em UD, não existem locuções verbais aspectuais ou modais, mas estudamos uma alternativa para marcar a auxiliaridade dos verbos segundo alguns estudos gramaticais.
-		
-		O que distingue a locução verbal aspectual da modal é que, na primeira, o verbo auxiliar perdeu o seu conteúdo lexical e serve apenas para caracterizar a temporalidade da ação do verbo principal, e na segunda, o verbo auxiliar (ou pleno, segundo algumas gramáticas) caracteriza um julgamento do enunciador sobre a ação do verbo principal.
-		
-		Alguns gramáticos divergem sobre como a classificação se dá, portanto propomos herdar, no Bosque-UD, o que já era a anotação originária do PALAVRAS \citep{bick2000parsing}, e não modificá-la em relação a quais devem ser os verbos auxiliares.
-		
-		Para o PALAVRAS (no Bosque-UD, vigente até a versão 2.4), o que por vezes é chamado de locuções verbais modais não são locuções, isto é, os dois verbos se configuram como verbos plenos, tal como é a anotação seguindo as diretivas do UD (\fullref{dep:locverbalUD}).
-
-		Nos casos de locução verbal aspectual, porém, para o PALAVRAS, há uma locução, isto é, o primeiro verbo é auxiliar (\textit{AUX/aux}), e o segundo, verbo pleno (\textit{VERB}). Às vezes há uma partícula interveniente no meio da locução, como na \fullref{dep:auxphrasalverb}, em que há um \say{a} entre \say{começar} e \say{ouvir}. Encaramos que estamos diante de um fenômeno de \emph{phrasal verb}, uma MWE do tipo \emph{AUX}, como sugerido em \citet{elvis2019locverbal}. Na frase, \emph{vai ouvir} é uma locução verbal de tempo composto (\fullref{sec:auxtempocomposto}), e \say{começar a ouvir} é uma locução verbal aspectual, sendo \say{começar a} uma expressão multi-palavra (MWE) do tipo auxiliar.
-
-		\fullref{tab:auxphrasalverb}
-
-		\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					DET \& PROPN \& AUX \& AUX \& ADP \& VERB \& DET \& NOUN \& PUNCT \\
-					O \& Tribunal \& vai \& começar \& a \& ouvir \& as \& testemunhas \& . \\
-					o \& Tribunal \& ir \& começar \& a \& ouvir \& o \& testemunha \& . \\
-					\& \& \& \& MWE=começar\_a \& \& \& \& \\
-					\& \& \& \& MWEPOS=AUX \& \& \& \& \\
-				\end{deptext}
-				\depedge{2}{1}{det}
-				\deproot{6}{root}
-				\depedge{6}{8}{obj}
-				\depedge{8}{7}{det}
-				\depedge{6}{2}{nsubj}
-				\depedge{6}{9}{punct}
-				\depedge{6}{3}{aux}
-				\depedge{6}{4}{aux}
-				\depedge{4}{5}{compound}
-			\end{dependency}
-			\caption{O Tribunal vai \emph{começar a ouvir} as testemunhas}
-			\label{dep:auxphrasalverb}
-		\end{figure*}
-
 
 	\subsection{Isso \emph{foi} nos Estados Unidos: verbo \textit{ser} como verbo pleno}\label{sec:serpleno}
 	
@@ -494,7 +455,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			\label{dep:naolocverbal}
 		\end{figure*}
 
-\section{Formas participiais: verbo ou adjetivo?}\label{sec:formaspart}
+\section{Formas participiais: verbo, adjetivo ou outra coisa?}\label{sec:formaspart}
 
 	A discussão sobre o status das formas participiais, frequentemente ambíguas entre \emph{ADJ} ou \emph{VERB}, é reconhecida na literatura linguística, e não é um fenômeno específico do Português (ver, por exemplo, PROPOR 2018 e Dissert Luiza).
 	
@@ -642,6 +603,8 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\end{enumerate}
 
 	\subsection{Casos difíceis das formas participiais}
+
+		Como, frequentemente, a decisão será arbitrária, havendo bons argumentos para a leitura verbal e a leitura nominal, listamos aqui as decisões tomadas:
 
 		\begin{enumerate}
 		\item Os seguintes casos foram anotados como adjetivo:
@@ -891,11 +854,70 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	\end{enumerate}
 
+	\subsection{Formas participiais que não são nem adjetivo nem verbo}
+
+		Há ainda os casos em que as formas participiais serão coisa.
+
+		Por exemplo, em \fullref{dep:partdet}. Neste caso, \say{determinado} é equivalente a \say{certo}, ou \say{algum}. Por isso, será analisado como \emph{DET} (com \emph{PronType=Ind} em suas features e a deprel será \emph{det})
+		
+		Em \fullref{dep:partnoun}, analisamos \say{aposentados} e \say{casados} como \emph{NOUN}.
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					NOUN \& CCONJ \& NOUN \& ADP \& NOUN \& ADV \& ADJ \& ADP \& DET \& NOUN \\
+					ovos \& e \& larvas \& de \& peixes \& possivelmente \& presentes \& em \& determinado \& local \\
+					ovo \& e \& larva \& de \& peixe \& possível \& presente \& em \& determinado \& local \\
+					 \&  \&  \&  \&  \&  \&  \&  \& PronType=Ind \&  \& \\
+				\end{deptext}
+				\depedge{3}{2}{cc}
+				\depedge{1}{3}{conj}
+				\depedge{5}{4}{case}
+				\depedge{1}{5}{nmod}
+				\depedge{7}{6}{advmod}
+				\depedge{1}{7}{acl}
+				\depedge{10}{7}{obl}
+				\depedge{10}{9}{det}
+				\depedge{10}{8}{case}
+				\deproot{1}{root}
+			\end{dependency}
+			\caption{\textit{ovos e larvas de peixes possivelmente presentes em determinado local}}
+			\label{dep:partdet}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& PUNCT \& CCONJ \& DET \& NOUN \& PUNCT \& AUX \& ADJ \\
+					os \& aposentados \& ( \& e \& os \& casados \& ) \& são \& maioria \\
+					o \& aposentado \& ( \& e \& o \& casado \& ) \& ser \& maioria \\
+				\end{deptext}
+				\depedge{2}{1}{det}
+				\depedge{6}{3}{punct}
+				\depedge{6}{4}{cc}
+				\depedge{6}{5}{det}
+				\depedge{6}{7}{punct}
+				\depedge{9}{8}{cop}
+				\depedge{9}{2}{nsubj}
+				\depedge{2}{6}{conj}
+				\deproot{2}{root}
+			\end{dependency}
+			\caption{\textit{os aposentados (e os casados) são maioria}}
+			\label{dep:partnoun}
+		\end{figure*}
+
+
 \section{Numerais}\label{sec:numerais}
 
-	Numerais cardinais (360) e fracionários (\fullref{dep:numfrac}) devem ser anotados como de upos \emph{NUM}, sejam por extenso ou em algarismos. Numerais multiplicativos (dobro, triplo), por outro lado, devem ser anotados como de upos \emph{NOUN}.
+	Numerais \emph{cardinais} (\say{360}) e \emph{fracionários} (\fullref{dep:numfrac}) e algarismos romanos devem ser anotados como \emph{NUM}, sejam por extenso ou em algarismos.
+
+	Numerais \emph{multiplicativos} (\say{dobro}, \say{triplo}, etc.), por outro lado, devem ser anotados como \emph{NOUN}. Trata-se de uma abordagem diferente da proposta pelas diretivas oficiais do projeto Universal Dependencies (a consulta foi realizada dia 5 de março de 2020), uma vez que, nos exemplos propostos por eles, em inglês, \say{once} e \say{twice} funcionam como advérbios, modificando o verbo, enquanto que no português estas palavras não existem, e os numerais multiplicativos, como \say{dobro}, modificam um nome como adjunto adnominal (ver \fullref{sec:adjuntoadnominal}).
 	
-	Numerais coletivos (como \say{dezenas}, \say{centenas}, \say{milhares}, etc.), no corpus Bosque-UD, podem estar anotados de duas formas diferentes: como \emph{NUM}, caso seja um número exato (\say{duas centenas}, \say{dois bilhões}), ou como \emph{NOUN}, quando é indefinido (\say{centenas de pessoas}).
+	Numerais coletivos (como \say{dezenas}, \say{centenas}, \say{milhares}, etc.), no corpus Bosque-UD, podem estar anotados de duas formas diferentes, conforme o contexto: como \emph{NUM}, caso seja um número exato (\say{duas centenas}, \say{dois bilhões}), ou como \emph{NOUN}, quando é indefinido (\say{centenas de pessoas}).
 	
 	Numerais ordinais devem ser anotados como de upos \textit{ADJ} (\fullref{sec:adjounum}).
 	
@@ -924,27 +946,30 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	\subsection{Números compostos}\label{sec:numeroscompostos}
 	
-		Números compostos podem conter upos \emph{NUM}, \emph{CCONJ} e \emph{ADP}. Quando o número composto modifica um substantivo, o primeiro número deve se subordinar ao substantivo como de deprel \emph{nummod}; quando há um sintagma preposicionado, o primeiro número do número composto será o head, e o substantivo, \emph{nmod} do número. Além disso, deve-se notar que o primeiro número deve receber no misc \emph{MWE} e \emph{MWEPOS}.
+		Números compostos podem conter upos \emph{NUM} e \emph{CCONJ}. 
 		
-		\fullref{dep:trintaesete}
-	
-		\fullref{dep:montantede}
+		A maneira de garantir que números compostos são \emph{um número}, isto é, que \say{106} é o mesmo que \say{cento e seis}, uma unidade, é pela sintaxe: números compostos estarão relacionados pela deprel \say{flat}, e todos serão filhos da primeira palavra do número. Ou seja, em \say{cento e quinze mil}, \say{cento} é o head (núcleo) e \say{e}, \say{quinze}, \say{mil} apontam para \say{cento} como \emph{flat}.
+
+		Quando o número composto modifica um substantivo (\fullref{dep:trintaesete}), o primeiro número deve se subordinar ao substantivo como de deprel \emph{nummod}.
+
+		Quando há um sintagma preposicionado (\fullref{montantede}), a relação se inverte: o primeiro número do número composto será o head (\say{1300}), e o substantivo (\say{dólares}), \emph{nmod} do número. Além disso, deve-se notar que o primeiro número deve receber no misc \emph{MWE} e \emph{MWEPOS}.
 		
 		\begin{figure*}[htbp]
 			\centering
 			\vspace{.8cm}
 			\begin{dependency}
 				\begin{deptext}
-					NUM \& CCONJ \& NUM \\
-					Trinta \& e \& sete \\
-					trinta \& e \& sete \\
-					NumType=Card \& \& NumType=Card \\
-					MWE=trinta\_e\_sete \& \& \\
-					MWEPOS=NUM \& \& \\
+					NUM \& CCONJ \& NUM \& NOUN \\
+					Trinta \& e \& sete \& casas \\
+					trinta \& e \& sete \& casa \\
+					NumType=Card \& \& NumType=Card \& \\
+					MWE=trinta\_e\_sete \& \& \& \\
+					MWEPOS=NUM \& \& \& \\
 				\end{deptext}
 				\depedge{1}{2}{flat}
 				\depedge{1}{3}{flat}
-				\deproot{1}{root}
+				\depedge{4}{1}{nummod}
+				\deproot{4}{root}
 			\end{dependency}
 			\caption{\textit{Trinta e sete}}
 			\label{dep:trintaesete}
@@ -1091,13 +1116,15 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		    \caption{\textit{Primeira tentativa}}\label{dep:primeiratentativa}
 		\end{figure*}
 	
-\section{Pronomes substantivos, pronomes adjetivos e artigos}\label{sec:pronedet}
+\section{Artigos, pronomes substantivos e pronomes adjetivos}\label{sec:pronedet}
 
-	Pronomes substantivos são anotados como de upos \textit{PRON} e são núcleo do sintagma de que fazem parte, recebendo a deprel do sintagma (\fullref{dep:pronsubst}).
+	Pronomes substantivos são anotados como \textit{PRON} (\fullref{dep:pronsubst}).
 	
 	Pronomes adjetivos são anotados como de upos \textit{DET}, e recebem deprel \textit{det}, sendo dependentes do token que modificam (\fullref{dep:pronadj}).
 	
-	Artigos/determinantes têm anotação similar à dos pronomes adjetivos (\textit{DET/det}), como na \fullref{dep:artdet}, e devem receber o valor \emph{PronType=Art} na coluna feats, além de \emph{Definite=[Def, Ind]}.
+	Artigos, assim como adjetivos, também são anotados como \textit{DET/det}, como na \fullref{dep:artdet}, e devem receber o valor \emph{PronType=Art} na coluna feats, além de \emph{Definite=[Def, Ind]}.
+
+	E lembramos que \say{cujo/cuja} são os únicos pronomes relativos que são pronomes adjetivos (\emph{DET}), e não substantivos (\emph{PRON}).
 
 	Ver também:
 
@@ -1334,6 +1361,14 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			\caption{Essa divisão gera \emph{algumas} distorções terríveis}\label{dep:pronindadj}
 		\end{figure*}
 
+		Ou seja, os seguintes elementos são anotados como \emph{DET} (porque são pronomes indefinidos, e portanto devem ter \emph{PronType=Ind}):
+
+		\begin{enumerate}
+			\item um \emph{determinado} lugar
+			\item um \emph{certo} lugar
+			\item \emph{algum} lugar
+		\end{enumerate}
+
 
 	\subsection{\emph{A} mais querida, \emph{O} que eu sei: pronome ou artigo?}\label{sec:amaisquerida}
 
@@ -1386,9 +1421,9 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 \section{Conjunções}\label{sec:conjuncoes}
 
-	Há dois tipos de conjunções no Bosque-UD: conjunção coordenativa (\emph{CCONJ}) e conjunção subordinativa (\emph{SCONJ}). As funções que apresentam são \emph{cc} (coordenador) e \emph{mark} (subordinador).
+	Assim como na GT, as conjunções em UD são de dois tipos: conjunção coordenativa (\emph{CCONJ}) e conjunção subordinativa (\emph{SCONJ}). A conjunção coordenativa (\emph{CCONJ}) sempre exercerá a função de coordenador (\emph{cc}) e a conjunção subordinativa (\emph{SCONJ}) sempre exercerá a função de subordinador (\emph{mark}).
 
-	As locuções coordenativas e subordinativas frequentemente aparecem como expressões multi-palavras (MWE). Nesses casos, o primeiro token deve receber o mesmo upos (\emph{SCONJ/CCONJ}) e deprel (\emph{cc/mark}), e os demais tokens devem receber deprel \emph{fixed} para o primeiro. Além disso, deve-se adicionar à coluna misc os valores \emph{MWE} e \emph{MWEPOS}.
+	Além disso, é comum que as conjunções sejam compostas por mais de uma palavra — o que tradicionalmente chamamos de locuções conjuntivas, e que em UD é traduzido como uma MWE (multi-word expression) do tipo \emph{fixed}. Nesses casos, o primeiro token deve receber o mesmo upos (\emph{CCONJ/SCONJ}) e deprel (\emph{cc/mark}), e os demais tokens devem receber deprel \emph{fixed} para o primeiro. Além disso, deve-se adicionar à coluna misc os valores \emph{MWE} e \emph{MWEPOS}, como em \fullref{dep:mas}.
 	
 	\subsection{Conjunções coordenativas}\label{sec:cconj}
 		
@@ -1454,7 +1489,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 		No caso de expressões multi-palavras, ou seja, locuções subordinativas, o primeiro token deverá ter deprel \emph{mark}, e seu misc deverá conter as etiquetas \emph{MWE} e \emph{MWEPOS}. Os tokens subsequentes da locução devem ter deprel \emph{fixed}, subordinados ao primeiro token da locução.
 		
-		É importante lembrar que palavras tidas usualmente na GT como preposição, ao introduzir orações, são classificadas como conjunções subordinativas e recebem o deprel \emph{mark} (ver \fullref{sec:classesdinamicas}).
+		É importante lembrar que palavras tidas usualmente na GT como preposição, ao introduzir orações, são classificadas como conjunções subordinativas e recebem o deprel \emph{mark}, como \fullref{dep:classesdinamicas} (ver \fullref{sec:classesdinamicas}).
 
 		\fullref{tab:sconj}
 
@@ -1507,7 +1542,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 	
 	\subsection{Advérbios interrogativos}\label{sec:adverbiosinterrogativos}
 	
-		Os advérbios interrogativos podem operar como conjunções subordinativas quando aparecem na introdução de orações subordinadas adverbiais, conforme \fullref{sec:classesdinamicas}.
+		Os advérbios interrogativos podem operar como conjunções subordinativas quando aparecem na introdução de orações subordinadas adverbiais.
 
 		\fullref{dep:adverbiointerrogativo}
 		
