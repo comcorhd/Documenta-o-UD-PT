@@ -23,7 +23,16 @@
 \author{Elvis de Souza\affiliation{PUC-Rio, Brasil}\and Tatiana Cavalcanti\and Aline Silveira\and Wograine Evelyn\and Cláudia Freitas}
 \title{Documentação UD em português\\
 (e para língua portuguesa)}
-\abstract{O projeto Universal Dependencies \citep{mcdonald2013universal} apresenta um tagset e uma gramática. Isso significa dizer que, para além de um conjunto de etiquetas que correspondem às classes da Gramática Tradicional (objeto, sujeito etc.), o UD também faz diversas escolhas que diferem da GT. Nesse documento, apresentamos a documentação detalhada e as escolhas linguísticas relativas ao processo de revisão do material UD em Português. Considerando que UD funciona como uma espécie de segunda língua gramatical, partimos, sempre que possível, das categorias e análises de GT, e não de UD. Os exemplos de frases e as listas foram retirados do corpus \href{https://github.com/UniversalDependencies/UD\_Portuguese-Bosque}{Bosque-UD} (\citet{rademaker2017universal}) versão 2.5.}
+\abstract{O projeto Universal Dependencies \citep{mcdonald2013universal} apresenta um tagset e uma gramática. Isso significa dizer que, para além de um conjunto de etiquetas que correspondem às classes da Gramática Tradicional (objeto, sujeito etc.), o UD também faz diversas escolhas que diferem da GT. Nesse documento, apresentamos a documentação detalhada e as escolhas linguísticas relativas ao processo de revisão do material UD em Português. Considerando que UD funciona como uma espécie de segunda língua gramatical, partimos, sempre que possível, das categorias e análises de GT, e não de UD, para facilitar a consulta.
+
+As diretivas originais, em inglês, estão disponíveis na página do projeto e devem ser consultadas também:
+
+Classes gramaticais: \href{https://universaldependencies.org/u/pos/}{https://universaldependencies.org/u/pos/}
+
+Análise sintática: \href{https://universaldependencies.org/u/dep/}{https://universaldependencies.org/u/dep/}
+
+Este documento não pretende ser uma substituição das diretivas originais, mas um complemento, por um lado, e um detalhamento, por outro, no que se refere à língua portuguesa.}
+
 
 \input{localpackages.tex}
 \input{localcommands.tex}
@@ -53,6 +62,21 @@ Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{und
     \label{tab:colunasUD}
 \end{table}
 
+\section{Colunas/anotações}\label{sec:colunas}
+
+\begin{enumerate}
+    \item “id” corresponde ao número do token, em ordem crescente;
+    \item “word”, à palavra tal como aparece na frase (exceto no caso de contração, como “da”, em que a palavra será desmembrada nos tokens “de” e “a”);
+    \item “lemma” se refere à palavra tal como aparece no dicionário: em singular e em masculino ou infinitivo;
+    \item “upos” (classe gramatical \say{universal}) se refere à classe gramatical;
+    \item No corpus Bosque-UD, a coluna “xpos” (classe gramatical específica) é preenchida com a saída do sistema PALAVRAS \citep{bick2000parsing} para a mesma frase;
+    \item “feats” (atributos morfológicos) é preenchida com as características morfológicas do token;
+    \item “dephead” (dependência sintática), com o id do token de quem é filho;
+    \item “deprel” (relação de dependência), com a relação sintática que o conecta ao seu pai;
+    \item “deps” (dependência específica) não é utilizado no Bosque-UD;
+    \item “misc” (miscelânea) se refere a quaisquer informações extras que desejemos adicionar ao token.
+\end{enumerate}{}
+
 \section{Princípios}\label{sec:principios}
 
 	De \href{https://universaldependencies.org/introduction.html}{Página do Universal Dependencies} (acesso em 28 de outubro de 2019).
@@ -69,32 +93,14 @@ Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{und
 		\item UD must support well downstream language understanding tasks (relation extraction, reading comprehension, machine translation, …).
 	\end{enumerate}
 
-\section{Colunas/anotações}\label{sec:colunas}
-
-
-
-\begin{enumerate}
-    \item “id” corresponde ao número do token, em ordem crescente;
-    \item “word”, à palavra tal como aparece na frase (exceto no caso de contração, como “da”, em que a palavra será desmembrada nos tokens “de” e “a”);
-    \item “lemma” se refere à palavra tal como aparece no dicionário: em singular e em masculino ou infinitivo;
-    \item “upos” (classe gramatical \say{universal}) se refere à classe gramatical;
-    \item No corpus Bosque-UD, a coluna “xpos” (classe gramatical específica) é preenchida com a saída do sistema PALAVRAS \citep{bick2000parsing} para a mesma frase;
-    \item “feats” (atributos morfológicos) é preenchida com as características morfológicas do token;
-    \item “dephead” (dependência sintática), com o id do token de quem é filho;
-    \item “deprel” (relação de dependência), com a relação sintática que o conecta ao seu pai;
-    \item “deps” (dependência específica) não é utilizado no Bosque-UD;
-    \item “misc” (miscelânea) se refere a quaisquer informações extras que desejemos adicionar ao token.
-\end{enumerate}{}
 
 \section{Manipulação em Python}\label{sec:python}
 
-
-
-Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence e Token (e suas respectivas anotações), desenvolvemos e utilizamos o \href{https://github.com/alvelvis/ACDC-UD/blob/master/estrutura_ud.py}{estrutura\_ud.py}.
+	Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence e Token (e suas respectivas anotações), desenvolvemos e utilizamos o script \href{https://github.com/alvelvis/ACDC-UD#estrutura_udpy}{estrutura\_ud.py}.
 
 \chapter{Lemas}\label{sec:lemas}
 
-	O lema é a terceira coluna (ou atributo) no formato CoNLL-U. De modo geral, os lemas não são capitalizados, isto é, devem ter letras minúsculas, exceto pelos nomes próprios (\emph{PROPN}).
+	O lema é a terceira coluna (ou atributo) no formato CoNLL-U. Lemas não são capitalizados, isto é, devem ter letras minúsculas, exceto pelos nomes próprios (\emph{PROPN}).
 
 	\fullref{tab:lemma}
 
@@ -117,80 +123,115 @@ Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence
 	    \hline
 	    PRON & se substantivos, devem seguir as diretivas dos \emph{NOUN};\\ & se pronomes adjetivos, dos \emph{ADJ} \\
 	    \end{tabular}
-	    \caption{Como encontrar o lema das classes gramaticais que flexionam}
+	    \caption{Indicação do lema das classes gramaticais variáveis}
 	    \label{tab:lemma}
 	\end{table}{}
 
+	Os lemas das palavras de classes invariáveis (preposições, conjunções, advérbios) é a própria palavra, em minúscula.
+
+
+\chapter{Para começar...}\label{sec:paracomecar}
+
+	Listamos aqui alguns pontos que podem causar surpresa para quem não é familiarizado com dependências sintáticas e/ou com UD:
 	
+	\begin{enumerate}
+		\item O núcleo da oração é sempre um verbo. E quando estamos tratando de núcleo da oração principal, ele é o \emph{root}. EXCEÇÃO: Quando estivermos diante de um verbo de ligação como \say{ser} e, em alguns contextos, \say{estar}, eles NÃO SERÃO NÚCLEOS. Nesses casos, o núcleo é o elemento predicado/predicativo (em geral, um substantivo ou adjetivo). Apenas o verbo \say{ser}, e algumas ocorrências de \say{estar} (\say{estar feliz}, mas não \say{estar na praia}) são considerados auxiliares em UD. 
+
+		\item Preposições: Estamos habituados a atrelar as preposições às palavras que as antecedem: em \say{gostar de sorvete}, o \say{de} depende (isto é, é filho sintático) gostar; em \say{casa de madeira}, o \say{de} depende (isto é, é filho sintático) de \say{casa}. Em UD, as preposições dependem do elemento que está à direita. Assim, em \say{gostar de sorvete}, o \say{de} depende (isto é, \say{é filho sintático}) de \say{sorvete} - e \say{sorvete}, por sua vez, depende (isto é, é filho sinstático) de \say{gostar}; em \say{casa de madeira}, o \say{de} depende (isto é, é filho sintático) de \say{madeira} — e \say{madeira}, por sua vez, depende (é filho) de \say{casa}. 
+
+		\item Conjunções: a mesma coisa que preposições. Em \say{gato e sapato}, o \say{e} depende de \say{sapato}; e \say{sapato} depende de \say{gato}.
+	\end{enumerate}
+
 
 \chapter{Classes gramaticais (upos)}\label{sec:upos}
 
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
 
-São 17 as classes gramaticais em UD. Elas são decididas com base no contexto, seguindo o \fullref{sec:classesdinamicas}.
+São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto, conforme \fullref{sec:classesdinamicas}.
 
 \fullref{tab:upos}
 
-\begin{table}[]
-    \centering
-    \begin{tabular}{| c | c |}
+\begin{longtable}{| p{1.5cm} | p{10cm} | }
     \hline
-    ADJ & adjetivos e numerais ordinais \\
+    ADJ & Adjetivos e numerais ordinais\newline Manchete estréia \textbf{novo} jornalístico\newline É o \textbf{5º} Encontro Nacional de Histórias em Quadrinhos \\
     \hline
-    ADP & preposições \\
+    ADP & Preposições\newline «Confissões» chega \textbf{a} Portugal \\
     \hline
-    PUNCT & pontuação \\
+    PUNCT & Pontuação\newline \textbf{«}Tem que torcer muito e rezar bastante, porque milagres acontecem\textbf{»}. \\
     \hline
-    ADV & advérbio \\
+    ADV & Advérbio\newline Outros profissionais brasileiros, que atuam nos EUA, \textbf{também} participam. \\
     \hline
-    AUX & verbos auxiliares e copulativos \\
+    AUX & Verbos auxiliares e copulativos\newline A direção do novo semanal \textbf{será} assinada por Ewaldo Ruy. \\
     \hline
-    SYM & símbolos \\
+    SYM & Símbolos\newline BRIZOLA É O 3º No Rio, com 13 \textbf{\%} . \\
     \hline
-    INTJ & interjeição \\
+    INTJ & Interjeição\newline «\textbf{Ah bem}, pensei que voce ia pescar». \\
     \hline
-    CCONJ & conjunção coordenativa \\
+    CCONJ & Conjunção coordenativa\newline Eles se dizem oposição, \textbf{mas} ainda não informaram o que vão combater. \\
     \hline
-    NOUN & substantivo \\
+    NOUN & Substantivo\newline Romário não se exercitou nas \textbf{cobranças} de \textbf{falta} e \textbf{pênalti}. \\
     \hline
-    DET & determinante - artigos e pronomes adjetivos \\
+    DET & Determinante — artigos e pronomes adjetivos\newline De Mario Bernardini, d\textbf{a} Fiesp, sobre \textbf{a} seleção e \textbf{o} real: \\
     \hline
-    PROPN & nomes próprios, apenas se com inicial maiúscula \\
+    PART & Partículas/morfemas livres\newline Esta vertente, francamente conteudista, derivava das experiências realizadas no período \textbf{pré}-64 pelos Centros Populares de Cultura (CPCs), ligados à União Nacional dos Estudantes, que privilegiavam a «mensagem» e procuravam falar uma idealizada linguagem do «povo».\\
     \hline
-    NUM & numerais - exceto os ordinais, que são adjetivos \\
+    PROPN & Nomes próprios, apenas se com inicial maiúscula\newline \textbf{Ilmar Galvão} e \textbf{Moreira Alves} votaram pela concessão do mandato de segurança. \\
     \hline
-    PART & partícula \\
+    NUM & Numerais — exceto os ordinais, que são adjetivos\newline Os \textbf{três} estão presos desde \textbf{30} de julho de \textbf{93}. \\
     \hline
-    VERB & verbo \\
+    VERB & Verbo\newline \textbf{Tem} sentido -- aliás, muitíssimo sentido. \\
     \hline
-    PRON & apenas pronomes substantivos \\
+    PRON & Apenas pronomes substantivos\newline Aqui só joga \textbf{quem} está bem. \\
     \hline
-    SCONJ & conjunções subordinativas \\
+    SCONJ & Conjunções subordinativas\newline Ele só não jogava \textbf{porque} não estava bem.\newline Nem Lula nem o partido ainda encontraram um discurso \textbf{para} se diferenciar. \\
     \hline
-    X & no Bosque-UD, palavras estrangeiras \\
+    X & No Bosque-UD, palavras estrangeiras\newline Na largada, Ayrton Senna, que havia feito a \textbf{pole position}, manteve a primeira colocação. \\
     \hline
-    \end{tabular}
     \caption{As 17 classes gramaticais do UD em português}
     \label{tab:upos}
-\end{table}{}
+\end{longtable}
+
+	Nas próximas seções, comentamos apenas casos de classes que podem causar dificuldade. 
+
+\section{A classificação de uma palavra é feita em contexto}\label{sec:classesdinamicas}
+
+	A classe gramatical de uma palavra é sempre dada pelo contexto. Assim, em \emph{Ela joga bonito}, \say{bonito} deve ser um \emph{ADV}, e não um \emph{ADJ}. O mesmo se aplica às palavras gramaticais, como preposições e conjunções (e não à toa a GT tem o conceito de \say{preposição acidental}). Ao longo da anotação, é comum, por exemplo, que uma palavra como \say{para} seja utilizada para introduzir uma oração subordinada adverbial, como em \fullref{dep:classesdinamicas}. Nesse caso, o \say{para} será classificado como uma conjunção subordinativa (\emph{SCONJ}).
+		
+		\begin{figure*}[htbp]
+					\centering
+					\vspace{.8cm}
+					\begin{dependency}
+						\begin{deptext}
+							VERB \& DET \& NOUN \& SCONJ \& PRON \& VERB \\
+							Encontraram \& um \& discurso \& para \& se \& diferenciar \\
+							encontrar \& um \& discurso \& para \& se \& diferenciar \\
+						\end{deptext}
+						\deproot{1}{root}
+						\depedge{1}{3}{nsubj}
+						\depedge{3}{2}{det}
+						\depedge{6}{4}{mark}
+						\depedge{6}{5}{expl}
+						\depedge{3}{6}{acl}
+					\end{dependency}\label{dep:classesdinamicas}
+					\caption{Encontraram um discurso \emph{para} se diferenciar}
+				\end{figure*}
 
 
+\section{Verbos auxiliares e verbo de ligação}\label{sec:verbosauxiliares}
 
-\section{Verbos auxiliares}\label{sec:verbosauxiliares}
+	Verbos auxiliares são classificados como \emph{AUX}. Via de regra, verbos auxiliares (\emph{AUX}) não podem ter dependentes, isto é, filhos sintáticos, e dependem, isto é, são filhos, de um verbo principal (\emph{VERB}). O deprel pode ser \emph{cop}, \emph{aux} ou \emph{aux:pass}, de acordo com a função sintática exercida pelo \emph{AUX} e/ou pela locução verbal.
 
-	Verbos auxiliares são classificados como \emph{AUX}. Via de regra, verbos auxiliares (\emph{AUX}) não podem ter dependentes, e dependem de um verbo principal (\emph{VERB}). O deprel pode ser \emph{cop}, \emph{aux} ou \emph{aux:pass}, de acordo com a função sintática.
+	O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}).
 
-	O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}). De modo geral, classificamos como verbos auxiliares os verbos de ligação (\fullref{sec:verbosdeligacao}), o verbo auxiliar na voz passiva (\fullref{sec:servozpassiva}), as locuções de tempo composto (\fullref{sec:auxtempocomposto}), e as locuções verbais aspectuais e modais.
-	
-	No UD, as locuções verbais aspectuais e modais não são classificadas como locução, ou seja, os verbos são anotados como se constituíssem duas orações distintas (\fullref{sec:auxaspecto}). No entanto, conforme apontado no trabalho supracitado, é possível propor uma anotação que leve em conta a auxiliaridade das locuções verbais aspectuais (\fullref{sec:locverbalJDP}).
+	Em UD, o que algumas GTs consideram locuções verbais aspectuais e modais não são classificadas como locução, ou seja, os verbos são anotados como se constituíssem duas orações distintas (\fullref{sec:auxaspecto}). No entanto, conforme apontado em \citet{elvis2019locverbal}, é possível propor uma anotação que leve em conta a auxiliaridade das locuções verbais aspectuais (\fullref{sec:locverbalJDP}).
 
 	\subsection{Verbos de ligação}\label{sec:verbosdeligacao}
 	
 		Apenas os verbos \say{ser} e \say{estar} são considerados verbos de ligação, e portanto serão sempre anotados como \textit{AUX}. Os demais verbos que a GT costuma elencar como verbo de ligação (\say{parecer}, \say{permanecer}, etc.) são anotados como \textit{VERB}.
 
-		Os verbos de ligação \textit{AUX} terão relação sintática \emph{cop}, e nunca poderão ser núcleo de uma oração nem conter dependentes.
+		Os verbos de ligação \textit{AUX} terão relação sintática (isto é, deprel) \emph{cop}, e nunca poderão ser núcleo de uma oração nem conter dependentes.
 
-		\fullref{dep:serAUX}
+		Na frase em \fullref{dep:serAUX}, o núcleo da oração (\emph{root}) não é o verbo \say{ser}, mas o seu complemento. Se a frase fosse \say{a casa é amarela}, o núcleo da oração seria \say{amarela}. Mas, na frase da figura, o complemento do verbo ser é \say{US\$ 422}. Neste caso, e de maneira arbitrária, \say{US\$} (cuja classe/upos é \emph{SYM}, de símbolo) é o núcleo do valor. Portanto, \say{US\$} é pai de \say{422}. E, porque \say{US\$} é o núcleo de \say{US\$ 422}, ele será o núcleo da oração.  
 
 		\fullref{tab:verbosdeligacao}
 		
@@ -215,7 +256,7 @@ São 17 as classes gramaticais em UD. Elas são decididas com base no contexto, 
 
 
 	\subsection{Verbo \textit{ser} como voz passiva}\label{sec:servozpassiva}
-	
+		
 		A anotação de \say{ser} como voz passiva, além do upos \emph{AUX}, deve receber deprel \emph{aux:pass}.
 
 		Para o fenômeno da voz passiva, ver \fullref{sec:vozpass}.
@@ -1341,29 +1382,6 @@ As preposições são palavras que operam como conectores de termos nominais.
 	Quando há uma preposição (\emph{ADP}), ela irá depender do nome que está à direita, e a relação será de \emph{case}. Deste modo, a deprel \emph{nmod} se estabelece entre os dois nomes, e não entre um nome e uma preposição.
 	
 	\fullref{tab:adp}
-
-	\subsection{Princípio de classes dinâmicas}\label{sec:classesdinamicas}
-	
-		Palavras tidas usualmente como preposições na GT podem operar como conjunções subordinativas quando em contexto de introdução de oração (\fullref{dep:classedinamica}). Ou seja, a classe gramatical é dada pelo contexto, não existindo preposição estática. Trata-se de uma decisão provisória, mas que tem sido aplicada consistentemente no Bosque-UD. Há apenas uma exceção: o caso das conjunções coordenativas (\emph{CCONJ}), que são sempre de deprel \emph{cc}, como, por exemplo, a conjunção aditiva \say{e} (\fullref{sec:cconj}).
-		
-		\begin{figure*}[htbp]
-					\centering
-					\vspace{.8cm}
-					\begin{dependency}
-						\begin{deptext}
-							VERB \& DET \& NOUN \& SCONJ \& PRON \& VERB \\
-							Encontraram \& um \& discurso \& para \& se \& diferenciar \\
-							encontrar \& um \& discurso \& para \& se \& diferenciar \\
-						\end{deptext}
-						\deproot{1}{root}
-						\depedge{1}{3}{nsubj}
-						\depedge{3}{2}{det}
-						\depedge{6}{4}{mark}
-						\depedge{6}{5}{expl}
-						\depedge{3}{6}{acl}
-					\end{dependency}\label{dep:classedinamica}
-					\caption{Encontraram um discurso \emph{para} se diferenciar}
-				\end{figure*}
 
 
 \section{Conjunções}\label{sec:conjuncoes}
