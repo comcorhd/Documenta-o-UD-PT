@@ -100,6 +100,8 @@ Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{und
 
 \chapter{Lemas}\label{sec:lemas}
 
+	\hyperlink{toc}{Ir para tabela de conteúdos\\}
+
 	O lema é a terceira coluna (ou atributo) no formato CoNLL-U. Lemas não são capitalizados, isto é, devem ter letras minúsculas, exceto pelos nomes próprios (\emph{PROPN}).
 
 	\fullref{tab:lemma}
@@ -131,6 +133,8 @@ Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{und
 
 
 \chapter{Para começar...}\label{sec:paracomecar}
+
+	\hyperlink{toc}{Ir para tabela de conteúdos\\}
 
 	Listamos aqui alguns pontos que podem causar surpresa para quem não é familiarizado com dependências sintáticas e/ou com UD:
 	
@@ -320,8 +324,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	\subsection{Locuções verbais aspectuais/modais não existem no UD}\label{sec:auxaspecto}
 	
 		Em UD, não existem locuções verbais aspectuais ou modais, de modo que as sentenças são anotadas como na \fullref{dep:locverbalUD} e \fullref{dep:locverbalUD2}, com dois verbos plenos (\emph{VERB}), sendo o segundo de deprel \emph{xcomp} dependente do primeiro (ver \fullref{sec:objetooraciona}).
-		
-		Para entender melhor o fenômeno das locuções verbais e conhecer um modelo de anotação para o fenômeno, ver \fullref{sec:locverbalJDP}.
 		
 		\begin{figure*}[htbp]
 			\centering
@@ -1410,13 +1412,35 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\end{figure*}
 
 
-\section{Preposições}
+\section{Preposições}\label{sec:preposicoes}
 
-As preposições são palavras que operam como conectores de termos nominais.
+	As preposições são palavras que operam como conectores de termos nominais.
 
-	Quando há uma preposição (\emph{ADP}), ela irá depender do nome que está à direita, e a relação será de \emph{case}. Deste modo, a deprel \emph{nmod} se estabelece entre os dois nomes, e não entre um nome e uma preposição.
-	
+	Quando há uma preposição (\emph{ADP}), ela irá depender do nome que está à direita, e a relação será de \emph{case}. Deste modo, a deprel \emph{nmod} se estabelece entre os dois nomes, e não entre um nome e uma preposição, como em \fullref{dep:preposicoes}.
+
 	\fullref{tab:adp}
+
+	\begin{figure*}[htbp]
+		\centering
+		\vspace{.8cm}
+		\begin{dependency}
+			\begin{deptext}
+				DET \& NOUN \& VERB \& ADP \& DET \& PROPN \& ADP \& PROPN \& PUNCT \\
+				A \& série \& estreou \& em \& a \& TVI \& de \& Portugal \& . \\
+				o \& série \& estrear \& em \& o \& TVI \& de \& Portugal \& . \\
+			\end{deptext}
+			\deproot{3}{root}
+			\depedge{3}{2}{nsubj}
+			\depedge{2}{1}{det}
+			\depedge{3}{6}{obl}
+			\depedge{6}{8}{nmod}
+			\depedge{8}{7}{case}
+			\depedge{3}{9}{case}
+			\depedge{6}{5}{det}
+			\depedge{6}{4}{case}
+		\end{dependency}
+		\caption{A série estreou na TVI \emph{de} Portugal.}\label{dep:preposicoes}
+	\end{figure*}
 
 
 \section{Conjunções}\label{sec:conjuncoes}
@@ -1939,7 +1963,7 @@ As preposições são palavras que operam como conectores de termos nominais.
 		\end{figure*}
 
 
-	\subsection{Caso o argumento do verbo seja uma oração (oração subordinada substantiva objetiva…)}\label{sec:objetooracional}
+	\subsection{Caso o argumento do verbo seja uma oração (oração subordinada substantiva objetiva)}\label{sec:objetooracional}
 	
 		O objeto oracional é uma oração subordinada substantiva objetiva (direta ou indireta). Em UD, não há nenhuma diferenciação entre a anotação da oração objetiva direta e a indireta, mas deve-se notar outras diferenças em relação à análise das gramáticas do português.
 
@@ -2547,7 +2571,9 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 		Ainda que haja argumentos para uma anotação de adjunto adnominal, em casos como \say{o médico XXX}, \say{o grupo XXX} e \say{o parque XXX}, indicamos uma relação de aposto. Do mesmo modo, nomes científicos são tratados como \emph{appos} e \emph{compound}, como em \fullref{dep:nomecientif}.
 
-		Também estão em relação de aposto endereços de internet e emails, como em \fullref{dep:sitenet} e \fullref{dep:email}, respectivamente.
+		Ver também: \fullref{sec:compound}
+
+		Também estão em relação de aposto endereços de internet e e-mails, como em \fullref{dep:sitenet} e \fullref{dep:email}, respectivamente.
 
 		\begin{figure*}[htbp]
 				\centering
@@ -2680,16 +2706,16 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 		\subsubsection{Aposto e traduções}\label{sec:apostotrad}
 
-			As diretivas originais UD não especificam como anotar termos/expressões frases que são traduções. Em UD-PT, optamos por deixá-las como aposto: \fullref{dep:apostotrad}
+			As diretivas originais UD não especificam como anotar termos/expressões frases que são traduções. Em UD-PT, optamos por deixá-las como aposto: \fullref{fig:apostotrad}
 
 			\begin{figure}
 			    	\centering
 			    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/appos1.PNG}
-			    	\caption{SOFC (solid oxide fuel cell – célula a combustível de óxido sólido):}
+			    	\caption{SOFC (solid oxide fuel cell – \emph{célula} a combustível de óxido sólido):}
 			    	\label{fig:apostotrad}
 			\end{figure}{}
 
-		\subsubsection{Orações com ", o que", como proceder}\label{sec:apostooque}
+		\subsubsection{Orações com '', o que'', como proceder}\label{sec:apostooque}
 
 			Em orações com a presença de \say{, o que}, analisamos o \say{o} como pronome demonstrativo, isto é, igual a \say{aquilo} (conforme \fullref{sec:amaisquerida}), funcionando como aposto da oração antecendente (\fullref{dep:apostooque}).
 
@@ -3043,6 +3069,46 @@ As preposições são palavras que operam como conectores de termos nominais.
 	    \label{fig:comparative14}
 	\end{figure}{}
 
+\section{Relações que só existem em UD}
+
+	\subsection{xcomp}
+
+		\emph{xcomp} pode se referir a diferentes categorias da GT, como oração subordinada substantiva objetiva e predicativo do objeto. O que há em comum nas duas classificações é que, em ambos os casos, o \emph{xcomp} é dependente/subordinado a um verbo, invariavelmente.
+
+		Ver também: \fullref{sec:objetooracional}
+
+		Ver também: \fullref{sec:declarouoreuculpado}
+
+	\subsection{cop}
+
+		\emph{cop} é a deprel utilizada unicamente para verbos de ligação, mais especificamente, apenas \say{ser} e \say{estar}.
+
+		Ver também: \fullref{sec:verbosdeligacao}
+
+	\subsection{aux}
+
+		\emph{aux} refere-se unicamente às locuções verbais de tempo composto. \emph{aux:pass}, por sua vez, ao verbo \say{ser} como voz passiva.
+
+		Ver também: \fullref{sec:auxtempocomposto}
+
+		Ver também: \fullref{sec:servozpassiva}
+
+	\subsection{parataxis}
+
+		\emph{parataxis} é a deprel utilizada quando a relação sintática entre duas orações não é explicitada na sentença.
+
+		Ver também: \fullref{sec:parataxis}
+
+	\subsection{fixed, compound, flat:name (MWE)}
+
+	\subsection{case}
+
+		\emph{case} é a deprel utilizada pelas preposições. Elas, por sua vez, dependem/se subordinam sempre ao token à sua direita.
+
+		Ver também: \fullref{sec:preposicoes}
+
+		Ver também: \fullref{sec:classesdinamicas}
+
 \section{Particípio}
 
 	Ver \fullref{sec:formaspart}
@@ -3234,9 +3300,9 @@ As preposições são palavras que operam como conectores de termos nominais.
 
 \section{O que fazer com...}\label{sec:quefazer}
 
-	URLs - endereços de internet, emails etc.
+	URLs - endereços de internet, e-mails etc.
 	
-		Endereços de internet, emails etc são anotados como \emph{NOUN}. Com relação à função sintática, em geral estarão envolvidos em estrutura de aposto (Ver \fullref{sec:aposto}).
+		Endereços de internet, e-mails etc. são anotados como \emph{NOUN}. Com relação à função sintática, em geral estarão envolvidos em estrutura de aposto (Ver \fullref{sec:aposto}).
 
 \chapter{Apêndice}
 
