@@ -98,6 +98,21 @@ Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{und
 
 	Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence e Token (e suas respectivas anotações), desenvolvemos e utilizamos o script \href{https://github.com/alvelvis/ACDC-UD#estrutura_udpy}{estrutura\_ud.py}.
 
+\chapter{Para começar...}\label{sec:paracomecar}
+
+	\hyperlink{toc}{Ir para tabela de conteúdos\\}
+
+	Listamos aqui alguns pontos que podem causar surpresa para quem não é familiarizado com dependências sintáticas e/ou com UD:
+	
+	\begin{enumerate}
+		\item O núcleo da oração é sempre um verbo. E quando estamos tratando de núcleo da oração principal, ele é o \emph{root}. EXCEÇÃO: Quando estivermos diante de um verbo de ligação como \say{ser} e, em alguns contextos, \say{estar}, eles NÃO SERÃO NÚCLEOS. Nesses casos, o núcleo é o elemento predicado/predicativo (em geral, um substantivo ou adjetivo). Apenas o verbo \say{ser}, e algumas ocorrências de \say{estar} (\say{estar feliz}, mas não \say{estar na praia}) são considerados auxiliares em UD. 
+
+		\item Preposições: Estamos habituados a atrelar as preposições às palavras que as antecedem: em \say{gostar de sorvete}, o \say{de} depende (isto é, é filho sintático) gostar; em \say{casa de madeira}, o \say{de} depende (isto é, é filho sintático) de \say{casa}. Em UD, as preposições dependem do elemento que está à direita. Assim, em \say{gostar de sorvete}, o \say{de} depende (isto é, \say{é filho sintático}) de \say{sorvete} - e \say{sorvete}, por sua vez, depende (isto é, é filho sinstático) de \say{gostar}; em \say{casa de madeira}, o \say{de} depende (isto é, é filho sintático) de \say{madeira} — e \say{madeira}, por sua vez, depende (é filho) de \say{casa}. 
+
+		\item Conjunções: a mesma coisa que preposições. Em \say{gato e sapato}, o \say{e} depende de \say{sapato}; e \say{sapato} depende de \say{gato}.
+	\end{enumerate}
+
+
 \chapter{Lemas}\label{sec:lemas}
 
 	\hyperlink{toc}{Ir para tabela de conteúdos\\}
@@ -130,21 +145,6 @@ Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{und
 	\end{table}{}
 
 	Os lemas das palavras de classes invariáveis (preposições, conjunções, advérbios) é a própria palavra, em minúscula.
-
-
-\chapter{Para começar...}\label{sec:paracomecar}
-
-	\hyperlink{toc}{Ir para tabela de conteúdos\\}
-
-	Listamos aqui alguns pontos que podem causar surpresa para quem não é familiarizado com dependências sintáticas e/ou com UD:
-	
-	\begin{enumerate}
-		\item O núcleo da oração é sempre um verbo. E quando estamos tratando de núcleo da oração principal, ele é o \emph{root}. EXCEÇÃO: Quando estivermos diante de um verbo de ligação como \say{ser} e, em alguns contextos, \say{estar}, eles NÃO SERÃO NÚCLEOS. Nesses casos, o núcleo é o elemento predicado/predicativo (em geral, um substantivo ou adjetivo). Apenas o verbo \say{ser}, e algumas ocorrências de \say{estar} (\say{estar feliz}, mas não \say{estar na praia}) são considerados auxiliares em UD. 
-
-		\item Preposições: Estamos habituados a atrelar as preposições às palavras que as antecedem: em \say{gostar de sorvete}, o \say{de} depende (isto é, é filho sintático) gostar; em \say{casa de madeira}, o \say{de} depende (isto é, é filho sintático) de \say{casa}. Em UD, as preposições dependem do elemento que está à direita. Assim, em \say{gostar de sorvete}, o \say{de} depende (isto é, \say{é filho sintático}) de \say{sorvete} - e \say{sorvete}, por sua vez, depende (isto é, é filho sinstático) de \say{gostar}; em \say{casa de madeira}, o \say{de} depende (isto é, é filho sintático) de \say{madeira} — e \say{madeira}, por sua vez, depende (é filho) de \say{casa}. 
-
-		\item Conjunções: a mesma coisa que preposições. Em \say{gato e sapato}, o \say{e} depende de \say{sapato}; e \say{sapato} depende de \say{gato}.
-	\end{enumerate}
 
 
 \chapter{Classes gramaticais (upos)}\label{sec:upos}
@@ -223,7 +223,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 \section{Verbos auxiliares e verbo de ligação}\label{sec:verbosauxiliares}
 
-	Verbos auxiliares são classificados como \emph{AUX}. Via de regra, verbos auxiliares (\emph{AUX}) não podem ter dependentes, isto é, filhos sintáticos, e dependem, isto é, são filhos, de um verbo principal (\emph{VERB}). O deprel pode ser \emph{cop}, \emph{aux} ou \emph{aux:pass}, de acordo com a função sintática exercida pelo \emph{AUX} e/ou pela locução verbal.
+	Verbos auxiliares são classificados como \emph{AUX}. Via de regra, verbos auxiliares (\emph{AUX}) não podem ter dependentes, isto é, filhos sintáticos, e dependem, isto é, são filhos, de um verbo principal (\emph{VERB}). A deprel pode ser \emph{cop}, \emph{aux} ou \emph{aux:pass}, de acordo com a função sintática exercida pelo \emph{AUX} e/ou pela locução verbal.
 
 	O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}).
 
@@ -385,8 +385,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		    DET \& NOUN \& VERB \& SCONJ \& VERB \& ADP \& SYM \& NUM \& NUM \\
 		    A \& expectativa \& era \& que \& chegasse \& a \& US\$ \& 7 \& milhões \\
 		    o \& expectativa \& ser \& que \& chegar \& a \& US\$ \& 7 \& milhão \\
-		    \& \& \& \& \& \& \& MWE=7\_milhões \& \\
-		    \& \& \& \& \& \& \& MWEPOS=NUM \& \\
 		    \end{deptext}
 		    \depedge{2}{1}{det}
 		    \depedge{3}{2}{nsubj}
@@ -411,8 +409,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 					PRON \& VERB \& ADP \& DET \& PROPN \& PROPN \\
 					Isso \& foi \& em \& os \& Estados \& Unidos \\
 					isso \& ser \& em \& o \& Estados \& Unidos \\
-					\& \& \& \& MWE=Estados\_Unidos \& \\
-					\& \& \& \& MWEPOS=PROPN \& \\
 				\end{deptext}
 				\depedge{2}{1}{nsubj}
 				\depedge{5}{3}{case}
@@ -459,7 +455,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 \section{Formas participiais: verbo, adjetivo ou outra coisa?}\label{sec:formaspart}
 
-	A discussão sobre o status das formas participiais, frequentemente ambíguas entre \emph{ADJ} ou \emph{VERB}, é reconhecida na literatura linguística, e não é um fenômeno específico do Português (ver, por exemplo, PROPOR 2018 e Dissert Luiza).
+	A discussão sobre o status das formas participiais, frequentemente ambíguas entre \emph{ADJ} ou \emph{VERB}, é reconhecida na literatura linguística, e não é um fenômeno específico do Português (ver, por exemplo, \cite{10.1007/978-3-319-99722-3_46} e \cite{de2016classes}).
 	
 	\subsection{Formas participiais que são adjetivo}
 	No processo de anotação do Bosque-UD, anotamos como \emph{ADJ}:
@@ -581,24 +577,23 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			\vspace{.8cm}
 			\begin{dependency}
 				\begin{deptext}
-					DET \& NOUN \& ADV \& VERB \& AUX \& NOUN \& ADJ \& CC \& NOUN \& ADP \& NOUN\\
-					Os \& serviços \& mais \& procurados \& são \& correio \& eletrônico \& e \& transferência \& de \& arquivos\\
-					o \& serviço \& mais \& procurar \& ser \& correio \& eletrônico \& e \& transferência \& de \& arquivo\\
+					DET \& NOUN \& VERB \& AUX \& NOUN \& ADJ \& CC \& NOUN \& ADP \& NOUN\\
+					Os \& serviços \& procurados \& são \& correio \& eletrônico \& e \& transferência \& de \& arquivos\\
+					o \& serviço \& procurar \& ser \& correio \& eletrônico \& e \& transferência \& de \& arquivo\\
 				\end{deptext}
 				\depedge{2}{1}{det}
-				\depedge{6}{2}{nsubj}
-				\depedge{4}{3}{advmod}
-				\depedge{2}{4}{acl}
-				\depedge{6}{5}{cop}
-				\deproot{6}{root}
-				\depedge{6}{7}{amod}
-				\depedge{9}{8}{cc}
-				\depedge{6}{9}{conj}
-				\depedge{11}{10}{case}
-				\depedge{9}{11}{nmod}
+				\depedge{5}{2}{nsubj}
+				\depedge{2}{3}{acl}
+				\depedge{5}{4}{cop}
+				\deproot{5}{root}
+				\depedge{5}{6}{amod}
+				\depedge{8}{7}{cc}
+				\depedge{5}{8}{conj}
+				\depedge{10}{9}{case}
+				\depedge{8}{10}{nmod}
 				
 			\end{dependency}
-			\caption{Os serviços mais \emph{procurados} são correio eletrônico e transferência de arquivos}
+			\caption{Os serviços \emph{procurados} são correio eletrônico e transferência de arquivos}
 			\label{fig:partverb2}
 		\end{figure*}		
 			
@@ -754,28 +749,28 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\fullref{fig:partDIF8}
 
 		\begin{figure*}[htbp]
-				\centering
-				\vspace{.8cm}
-				\begin{dependency}
-					\begin{deptext}
-						DET\& NOUN\& PUNCT\& VERB\& ADP\& DET\& NOUN\& PUNCT\& VERB\\
-						O\& técnico\& ,\& irritado\& com\& sua\& atuação\& ,\& reclamou\\
-						o\& técnico\& ,\& irritar\& com\& seu\& atuação\& ,\& reclamar\\
-					\end{deptext}
-					
-					\depedge{2}{1}{det}
-					\depedge{9}{2}{nsubj}
-					\depedge{4}{3}{punct}
-					\depedge{2}{4}{acl}
-					\depedge{7}{5}{case}
-					\depedge{7}{6}{det}
-					\depedge{4}{7}{obl}
-					\depedge{4}{8}{punct}
-					\deproot{9}{root}
-				\end{dependency}
-				\caption{O técnico, \emph{irritado} com sua atuação, reclamou}
-				\label{fig:partDIF5}
-			\end{figure*}
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET\& NOUN\& PUNCT\& VERB\& ADP\& DET\& NOUN\& PUNCT\& VERB\\
+					O\& técnico\& ,\& irritado\& com\& sua\& atuação\& ,\& reclamou\\
+					o\& técnico\& ,\& irritar\& com\& seu\& atuação\& ,\& reclamar\\
+				\end{deptext}
+				
+				\depedge{2}{1}{det}
+				\depedge{9}{2}{nsubj}
+				\depedge{4}{3}{punct}
+				\depedge{2}{4}{acl}
+				\depedge{7}{5}{case}
+				\depedge{7}{6}{det}
+				\depedge{4}{7}{obl}
+				\depedge{4}{8}{punct}
+				\deproot{9}{root}
+			\end{dependency}
+			\caption{O técnico, \emph{irritado} com sua atuação, reclamou}
+			\label{fig:partDIF5}
+		\end{figure*}
 
 		\begin{figure*}[htbp]
 		    \centering
@@ -869,23 +864,22 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			\vspace{.8cm}
 			\begin{dependency}
 				\begin{deptext}
-					NOUN \& CCONJ \& NOUN \& ADP \& NOUN \& ADV \& ADJ \& ADP \& DET \& NOUN \\
-					ovos \& e \& larvas \& de \& peixes \& possivelmente \& presentes \& em \& determinado \& local \\
-					ovo \& e \& larva \& de \& peixe \& possível \& presente \& em \& determinado \& local \\
-					 \&  \&  \&  \&  \&  \&  \&  \& PronType=Ind \&  \& \\
+					NOUN \& CCONJ \& NOUN \& ADP \& NOUN \& ADJ \& ADP \& DET \& NOUN \\
+					ovos \& e \& larvas \& de \& peixes \& presentes \& em \& determinado \& local \\
+					ovo \& e \& larva \& de \& peixe \& presente \& em \& determinado \& local \\
+					 \&  \&  \&  \&  \&  \&  \& PronType=Ind \&  \& \\
 				\end{deptext}
 				\depedge{3}{2}{cc}
 				\depedge{1}{3}{conj}
 				\depedge{5}{4}{case}
 				\depedge{1}{5}{nmod}
-				\depedge{7}{6}{advmod}
-				\depedge{1}{7}{acl}
-				\depedge{10}{7}{obl}
-				\depedge{10}{9}{det}
-				\depedge{10}{8}{case}
+				\depedge{1}{6}{acl}
+				\depedge{9}{6}{obl}
+				\depedge{9}{8}{det}
+				\depedge{9}{7}{case}
 				\deproot{1}{root}
 			\end{dependency}
-			\caption{\textit{ovos e larvas de peixes possivelmente presentes em determinado local}}
+			\caption{ovos e larvas de peixes possivelmente \emph{presentes} em determinado local}
 			\label{dep:partdet}
 		\end{figure*}
 
@@ -908,7 +902,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 				\depedge{2}{6}{conj}
 				\deproot{2}{root}
 			\end{dependency}
-			\caption{\textit{os aposentados (e os casados) são maioria}}
+			\caption{os \emph{aposentados} (e os \emph{casados}) são maioria}
 			\label{dep:partnoun}
 		\end{figure*}
 
@@ -934,8 +928,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 				2 \& casas \& e \& meia \\
 				2 \& casa \& e \& meio \\
 				NumType=Card \& \& \& NumType=Frac \\
-				MWE=2\_e\_meia \& \& \& \\
-				MWEPOS=NUM \& \& \& \\
 			\end{deptext}
 			\depedge{2}{1}{nummod}
 			\depedge{1}{3}{flat}
@@ -954,7 +946,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 		Quando o número composto modifica um substantivo (\fullref{dep:trintaesete}), o primeiro número deve se subordinar ao substantivo como de deprel \emph{nummod}.
 
-		Quando há um sintagma preposicionado (\fullref{montantede}), a relação se inverte: o primeiro número do número composto será o head (\say{1300}), e o substantivo (\say{dólares}), \emph{nmod} do número. Além disso, deve-se notar que o primeiro número deve receber no misc \emph{MWE} e \emph{MWEPOS}.
+		Quando há um sintagma preposicionado (\fullref{montantede}), a relação se inverte: o primeiro número do número composto será o head (\say{1300}), e o substantivo (\say{dólares}), \emph{nmod} do número.
 		
 		\begin{figure*}[htbp]
 			\centering
@@ -965,8 +957,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 					Trinta \& e \& sete \& casas \\
 					trinta \& e \& sete \& casa \\
 					NumType=Card \& \& NumType=Card \& \\
-					MWE=trinta\_e\_sete \& \& \& \\
-					MWEPOS=NUM \& \& \& \\
 				\end{deptext}
 				\depedge{1}{2}{flat}
 				\depedge{1}{3}{flat}
@@ -986,8 +976,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 					Montante \& de \& 1300 \& milhões \& de \& dólares \\
 					montante \& de \& 1300 \& milhão \& de \& dólar \\
 					\& \& NumType=Card \& NumType=Card \\
-					\& \& MWE=1300\_milhões \& \& \& \\
-					\& \& MWEPOS=NUM \& \& \& \\
 				\end{deptext}
 				\depedge{3}{2}{case}
 				\depedge{3}{4}{flat}
@@ -1209,7 +1197,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	\subsection{Pronomes interrogativos}\label{sec:pronint}
 
-		Pronomes interrogativos, assim como os pronomes substantivos, têm upos \textit{PRON} e recebem o deprel do sintagma (\fullref{dep:pronint}). Não confundir com os advérbios interrogativos (\fullref{sec:adverbiosinterrogativos}), que podem inclusive se tornar conjunções quando introduzindo orações subordinadas \fullref{sec:classesdinamicas}.
+		Pronomes interrogativos, assim como os pronomes substantivos, têm upos \textit{PRON} e recebem a deprel do sintagma (\fullref{dep:pronint}). Não confundir com os advérbios interrogativos (\fullref{sec:adverbiosinterrogativos}), que podem inclusive se tornar conjunções quando introduzindo orações subordinadas \fullref{sec:classesdinamicas}.
 
 		\begin{figure*}[htbp]
 			\centering
@@ -1241,7 +1229,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	\subsection{Pronomes relativos}\label{sec:pronrel}
 
-		Pronomes relativos devem receber o valor \emph{PronType=Rel} na coluna feats. Recebem o deprel da função sintática que exercem na oração que iniciam.
+		Pronomes relativos devem receber o valor \emph{PronType=Rel} na coluna feats. Recebem a deprel da função sintática que exercem na oração que iniciam.
 
 		\say{Cujo/a} são os únicos pronomes relativos que são pronomes adjetivos (\emph{DET}), e não substantivos.
 
@@ -1447,7 +1435,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	Assim como na GT, as conjunções em UD são de dois tipos: conjunção coordenativa (\emph{CCONJ}) e conjunção subordinativa (\emph{SCONJ}). A conjunção coordenativa (\emph{CCONJ}) sempre exercerá a função de coordenador (\emph{cc}) e a conjunção subordinativa (\emph{SCONJ}) sempre exercerá a função de subordinador (\emph{mark}).
 
-	Além disso, é comum que as conjunções sejam compostas por mais de uma palavra — o que tradicionalmente chamamos de locuções conjuntivas, e que em UD é traduzido como uma MWE (multi-word expression) do tipo \emph{fixed}. Nesses casos, o primeiro token deve receber o mesmo upos (\emph{CCONJ/SCONJ}) e deprel (\emph{cc/mark}), e os demais tokens devem receber deprel \emph{fixed} para o primeiro. Além disso, deve-se adicionar à coluna misc os valores \emph{MWE} e \emph{MWEPOS}, como em \fullref{dep:mas}.
+	Além disso, é comum que as conjunções sejam compostas por mais de uma palavra — o que tradicionalmente chamamos de locuções conjuntivas, e que em UD é traduzido como uma MWE (multi-word expression) do tipo \emph{fixed}, conforme \fullref{sec:mwe}. Nesses casos, o primeiro token deve receber o mesmo upos (\emph{CCONJ/SCONJ}) e deprel (\emph{cc/mark}), e os demais tokens devem receber deprel \emph{fixed} para o primeiro.
 	
 	\subsection{Conjunções coordenativas}\label{sec:cconj}
 		
@@ -1467,8 +1455,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 							VERB \& NOUN \& CCONJ \& ADV \& ADP \& NOUN \& ADP \& VERB \\
 							Haverá \& resistências \& mas \& não \& a \& ponto \& de \& inviabilizar \\
 							haver \& resistência \& mas \& não \& a \& ponto \& de \& inviabilizar \\
-							\& \& \& \& MWE=a\_ponto\_de \\
-							\& \& \& \& MWEPOS=SCONJ \\
 						\end{deptext}
 						\deproot{1}{root}
 						\depedge{1}{2}{obj}
@@ -1491,8 +1477,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 							X \& PUNCT \& CCONJ \& VERB \& PUNCT \& VERB \& VERB \& X \\
 							Minitreking \& , \& ou \& seja \& , \& caminhar \& calçando \& crampones \\
 							minitreking \& , \& ou \& ser \& , \& caminhar \& calçar \& crampone \\
-							\& \& MWE=ou\_seja \\
-							\& \& MWEPOS=CCONJ \\
 						\end{deptext}
 						\depedge{3}{2}{punct}
 						\depedge{3}{4}{fixed}
@@ -1511,9 +1495,9 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	
 		As conjunções subordinativas devem receber upos \emph{SCONJ} e deprel \emph{mark}.
 
-		No caso de expressões multi-palavras, ou seja, locuções subordinativas, o primeiro token deverá ter deprel \emph{mark}, e seu misc deverá conter as etiquetas \emph{MWE} e \emph{MWEPOS}. Os tokens subsequentes da locução devem ter deprel \emph{fixed}, subordinados ao primeiro token da locução.
+		No caso de expressões multi-palavras, ou seja, locuções subordinativas, o primeiro token deverá ter deprel \emph{mark}. Os tokens subsequentes da locução devem ter deprel \emph{fixed}, subordinados ao primeiro token da locução.
 		
-		É importante lembrar que palavras tidas usualmente na GT como preposição, ao introduzir orações, são classificadas como conjunções subordinativas e recebem o deprel \emph{mark}, como \fullref{dep:classesdinamicas} (ver \fullref{sec:classesdinamicas}).
+		É importante lembrar que palavras tidas usualmente na GT como preposição, ao introduzir orações, são classificadas como conjunções subordinativas e recebem a deprel \emph{mark}, como \fullref{dep:classesdinamicas} (ver \fullref{sec:classesdinamicas}).
 
 		\fullref{tab:sconj}
 
@@ -1551,8 +1535,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 							SCONJ \& SCONJ \& VERB \& ADV \& VERB \\
 							Mesmo \& que \& quisessem \& não \& conseguiriam \\
 							mesmo \& que \& querer \& não \& conseguir \\
-							MWE=mesmo\_que \\
-							MWEPOS=SCONJ \\
 						\end{deptext}
 						\depedge{1}{2}{fixed}
 						\depedge{5}{3}{advcl}
@@ -1630,7 +1612,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 \section{Parataxis}\label{sec:parataxis}
 
-	O deprel \emph{parataxis} é utilizado quando a relação entre duas orações não é explicitamente nem de coordenação, nem de subordinação.
+	A deprel \emph{parataxis} é utilizado quando a relação entre duas orações não é explicitamente nem de coordenação, nem de subordinação.
 
 	Em UD, discurso direto também é caso de \emph{parataxis} (\fullref{sec:discursodireto}).
 
@@ -1967,7 +1949,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	
 		O objeto oracional é uma oração subordinada substantiva objetiva (direta ou indireta). Em UD, não há nenhuma diferenciação entre a anotação da oração objetiva direta e a indireta, mas deve-se notar outras diferenças em relação à análise das gramáticas do português.
 
-		Orações subordinadas substantivas objetivas devem receber o deprel \emph{ccomp}, como na \fullref{dep:ccomp} e na \fullref{dep:ccomp2}.
+		Orações subordinadas substantivas objetivas devem receber a deprel \emph{ccomp}, como na \fullref{dep:ccomp} e na \fullref{dep:ccomp2}.
 
 		Em UD, quando o sujeito da oração subordinada é, obrigatoriamente, o mesmo sujeito da oração principal, usamos \emph{xcomp}. 
 		
@@ -2798,7 +2780,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\depedge{3}{10}{punct}
 		\depedge{6}{9}{obl}
 	\end{dependency}
-	\caption{A reivindicação irritou os partidos favoráveis à \emph{revisão}}\label{dep:argumentoadjetivonominal}
+	\caption{Irritou os partidos favoráveis à \emph{revisão}}\label{dep:argumentoadjetivonominal}
 \end{figure*}
 
 	\begin{figure*}[htbp]
@@ -2806,22 +2788,20 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\vspace{.8cm}
 		\begin{dependency}
 			\begin{deptext}
-				DET \& NOUN \& VERB \& DET \& NOUN \& ADJ \& SCONJ \& VERB \& NOUN \& PUNCT \\
-				A \& reivindicação \& irritou \& os \& partidos \& favoráveis \& a \& rever \& candidaturas \& . \\
-				o \& reivindicação \& irritar \& o \& partido \& favorável \& a \& rever \& candidatura \& . \\
+				VERB \& DET \& NOUN \& ADJ \& SCONJ \& VERB \& NOUN \& PUNCT \\
+				Irritou \& os \& partidos \& favoráveis \& a \& rever \& candidaturas \& . \\
+				irritar \& o \& partido \& favorável \& a \& rever \& candidatura \& . \\
 			\end{deptext}
-			\deproot{3}{root}
-			\depedge{3}{2}{nsubj}
-			\depedge{2}{1}{det}
-			\depedge{5}{4}{det}
-			\depedge{3}{5}{obj}
-			\depedge{5}{6}{amod}
-			\depedge{8}{7}{mark}
-			\depedge{3}{10}{punct}
-			\depedge{6}{8}{ccomp}
-			\depedge{8}{9}{obj}
+			\deproot{1}{root}
+			\depedge{3}{2}{det}
+			\depedge{1}{3}{obj}
+			\depedge{3}{4}{amod}
+			\depedge{6}{5}{mark}
+			\depedge{1}{8}{punct}
+			\depedge{4}{6}{ccomp}
+			\depedge{6}{7}{obj}
 		\end{dependency}
-		\caption{A reivindicação irritou os partidos favoráveis a \emph{rever} candidaturas}\label{dep:argumentoadjetivooracional}
+		\caption{Irritou os partidos favoráveis a \emph{rever} candidaturas}\label{dep:argumentoadjetivooracional}
 	\end{figure*}
 	
 	
@@ -2962,7 +2942,119 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	    \label{fig:comparative4}
 	\end{figure}{}
 
-	\subsection{Frases difíceis, retiradas do Bosque-UD}
+\section{Relações que só existem em UD}
+
+	\subsection{xcomp}
+
+		\emph{xcomp} pode se referir a diferentes categorias da GT, como oração subordinada substantiva objetiva e predicativo do objeto. O que há em comum nas duas classificações é que, em ambos os casos, o \emph{xcomp} é dependente/subordinado a um verbo, invariavelmente.
+
+		Ver também: \fullref{sec:objetooracional}
+
+		Ver também: \fullref{sec:declarouoreuculpado}
+
+	\subsection{cop}
+
+		\emph{cop} é a deprel utilizada unicamente para verbos de ligação, mais especificamente, apenas \say{ser} e \say{estar}.
+
+		Ver também: \fullref{sec:verbosdeligacao}
+
+	\subsection{aux}
+
+		\emph{aux} refere-se unicamente às locuções verbais de tempo composto.
+
+		\emph{aux:pass}, por sua vez, ao verbo \say{ser} como voz passiva.
+
+		Ver também: \fullref{sec:auxtempocomposto}
+
+		Ver também: \fullref{sec:servozpassiva}
+
+	\subsection{parataxis}
+
+		\emph{parataxis} é a deprel utilizada quando a relação sintática entre duas orações não é explicitada na sentença.
+
+		Ver também: \fullref{sec:parataxis}
+
+	\subsection{fixed, compound, flat:name (MWE)}\label{sec:mwe}
+
+		Há pelo menos três formas diferentes de indicar expressões multi-palavras (MWEs) em UD. Quando se trata de uma expressão estritamente gramatical, sem flexão, usamos a deprel \emph{fixed} (\fullref{dep:fixed}). Quando a expressão multi-palavra pode conter flexão, utilizamos a deprel \emph{compound} (\fullref{dep:compound}), e quando se trata de nome próprio de pessoa composto, utilizamos a deprel \emph{flat:name} (\fullref{dep:flatname}).
+
+		Ver também: \fullref{sec:numeroscompostos}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					ADP \& DET \& NOUN \& VERB \& ADP \& NOUN \& ADP \& NOUN \\
+					A \& as \& vezes \& peco \& por \& falta \& de \& experiência \\
+					A \& o \& vez \& pecar \& por \& falta \& de \& experiência \\
+				\end{deptext}
+				\depedge{1}{2}{fixed}
+				\depedge{1}{3}{fixed}
+				\depedge{4}{1}{advmod}
+				\depedge{4}{6}{obl}
+				\depedge{6}{8}{nmod}
+				\depedge{8}{7}{case}
+				\depedge{6}{5}{case}
+				\deproot{1}{root}
+			\end{dependency}
+			\caption{\emph{Às vezes} peco por falta de experiência}
+			\label{dep:fixed}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PROPN \& ADP \& DET \& PROPN \& PROPN \\
+					Secretaria \& de \& o \& Meio \& Ambiente \\
+					Secretaria \& de \& o \& Meio \& Ambiente \\
+				\end{deptext}
+				\depedge{4}{3}{det}
+				\depedge{4}{2}{case}
+				\depedge{4}{5}{compound}
+				\depedge{1}{4}{nmod}
+				\deproot{1}{root}
+			\end{dependency}
+			\caption{Secretaria do Meio \emph{Ambiente}}
+			\label{dep:compound}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& VERB \& NOUN \& ADJ \& ADP \& PROPN \& PROPN \\
+					o \& programa \& mostrará \& reportagens \& especiais \& de \& Sônia \& Pompeu \\
+					o \& programa \& mostrar \& reportagem \& especial \& de \& Sônia \& Pompeu \\
+				\end{deptext}
+				\depedge{2}{1}{det}
+				\depedge{3}{2}{nsubj}
+				\depedge{3}{4}{obj}
+				\depedge{4}{5}{amod}
+				\depedge{7}{6}{case}
+				\depedge{4}{7}{nmod}
+				\depedge{7}{8}{flat:name}
+				\deproot{3}{root}
+			\end{dependency}
+			\caption{o programa mostrará reportagens especiais de Sônia \emph{Pompeu}}
+			\label{dep:flatname}
+		\end{figure*}
+
+	\subsection{case}
+
+		\emph{case} é a deprel utilizada pelas preposições. Elas, por sua vez, dependem/se subordinam sempre ao token à sua direita.
+
+		Ver também: \fullref{sec:classesdinamicas}
+
+		Ver também: \fullref{sec:preposicoes}
+
+\chapter{Frases difíceis, retiradas do Bosque-UD}
+\hyperlink{toc}{Ir para tabela de conteúdos\\}
+
+	\section{Comparativas}
 
 	\subsubsection{mais do que}
 
@@ -2988,7 +3080,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	    \label{fig:comparative6}
 	\end{figure}{}
 
-	\subsubsection{menos do que}
+	\subsection{menos do que}
 
 	\fullref{fig:comparative7}
 
@@ -3008,7 +3100,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	    \label{fig:comparative8}
 	\end{figure}{}
 
-	\subsubsection{melhor do que}
+	\subsection{melhor do que}
 
 	\fullref{fig:comparative9}
 
@@ -3028,7 +3120,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	    \label{fig:comparative10}
 	\end{figure}{}
 
-	\subsubsection{pior do que}
+	\subsection{pior do que}
 
 	\fullref{fig:comparative11}
 
@@ -3040,7 +3132,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	\end{figure}{}
 
 
-	\subsubsection{Comparativos tão/tanto quanto}
+	\subsection{Tão/tanto quanto}
 
 	\fullref{fig:comparative12}
 
@@ -3069,55 +3161,9 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	    \label{fig:comparative14}
 	\end{figure}{}
 
-\section{Relações que só existem em UD}
-
-	\subsection{xcomp}
-
-		\emph{xcomp} pode se referir a diferentes categorias da GT, como oração subordinada substantiva objetiva e predicativo do objeto. O que há em comum nas duas classificações é que, em ambos os casos, o \emph{xcomp} é dependente/subordinado a um verbo, invariavelmente.
-
-		Ver também: \fullref{sec:objetooracional}
-
-		Ver também: \fullref{sec:declarouoreuculpado}
-
-	\subsection{cop}
-
-		\emph{cop} é a deprel utilizada unicamente para verbos de ligação, mais especificamente, apenas \say{ser} e \say{estar}.
-
-		Ver também: \fullref{sec:verbosdeligacao}
-
-	\subsection{aux}
-
-		\emph{aux} refere-se unicamente às locuções verbais de tempo composto. \emph{aux:pass}, por sua vez, ao verbo \say{ser} como voz passiva.
-
-		Ver também: \fullref{sec:auxtempocomposto}
-
-		Ver também: \fullref{sec:servozpassiva}
-
-	\subsection{parataxis}
-
-		\emph{parataxis} é a deprel utilizada quando a relação sintática entre duas orações não é explicitada na sentença.
-
-		Ver também: \fullref{sec:parataxis}
-
-	\subsection{fixed, compound, flat:name (MWE)}
-
-	\subsection{case}
-
-		\emph{case} é a deprel utilizada pelas preposições. Elas, por sua vez, dependem/se subordinam sempre ao token à sua direita.
-
-		Ver também: \fullref{sec:preposicoes}
-
-		Ver também: \fullref{sec:classesdinamicas}
-
-\section{Particípio}
-
-	Ver \fullref{sec:formaspart}
-	
-\section{Elementos discursivos}
-
+	\section{Elementos discursivos}
 
 	\subsection{É que}\label{sec:eque}
-
 
 	A construção \say{é que} pode aparecer de duas maneiras: marcada ou não como MWE. Como MWE, \say{é que} é uma ocorrência típica do discurso oral, sem ligação clara com a estrutura da oração. Por outro lado, \say{é} e \say{que} são independentes entre si quando introduzem uma oração subordinada substantiva predicativa ou subjetiva.
 
@@ -3146,8 +3192,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 					ADV \& ADV \& AUX \& SCONJ \& VERB \& DET \& NOUN \& SCONJ \& VERB \& DET \& NOUN \\
 					Só \& depois \& é \& que \& levanto \& a \& cabeça \& para \& fazer \& um \& lançamento \\
 					só \& depois \& ser \& que \& levantar \& o \& cabeça \& para \& fazer \& um \& lançamento \\
-					\& \& \& \& MWE=é\_que \& \\
-					\& \& \& \& MWEPOS=INTJ \& \\
 				\end{deptext}
 				\depedge{2}{1}{advmod}
 				\depedge{5}{2}{advmod}
@@ -3160,7 +3204,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 				\depedge{5}{9}{advcl}
 				\depedge{11}{10}{det}
 				\depedge{9}{11}{obj}
-				
 			\end{dependency}
 			\caption{Só depois \emph{é que} levanto a cabeça para fazer um lançamento}
 			\label{dep:equeMWE1}
@@ -3298,11 +3341,21 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	    	\label{fig:talcomo4}
 	    	\end{figure}{}
 
-\section{O que fazer com...}\label{sec:quefazer}
+	\section{O que fazer com...}\label{sec:quefazer}
 
-	URLs - endereços de internet, e-mails etc.
+		URLs - endereços de internet, e-mails etc.
+		
+			Endereços de internet, e-mails etc. são anotados como \emph{NOUN}. Com relação à função sintática, em geral estarão envolvidos em estrutura de aposto (Ver \fullref{sec:aposto}).
+
+\chapter{Decisões exclusivas do material UD em português}
+
+\hyperlink{toc}{Ir para tabela de conteúdos\\}
+
+	No material do UD em PT, temos utilizado também o campo misc para adicionar a etiqueta \emph{MWE}, seguida dos lemas das palavras que formam a expressão multi-palavra, e \emph{MWEPOS} seguida da classe gramatical da expressão em questão. Essas informações devem estar no campo misc da palavra principal da expressão.
+
+	Ver também: \fullref{sec:mwe}
+
 	
-		Endereços de internet, e-mails etc. são anotados como \emph{NOUN}. Com relação à função sintática, em geral estarão envolvidos em estrutura de aposto (Ver \fullref{sec:aposto}).
 
 \chapter{Apêndice}
 
