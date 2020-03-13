@@ -1283,27 +1283,27 @@ Storage and cataloguing done by FU Berlin \\[3ex]
 
 \usepackage{datetime}
 \usepackage{scrpage2}
-\ohead{\headmark}
-\ihead{}
-\cfoot{}
-\ofoot[]{\pagemark}
-\iflsDraft
-  \ifoot{Draft of \today, \currenttime}
-\fi
-\iflsOpenReview
-  \ifoot{{\color{lsRed}Open review version}. Final version at \url{\lsURL}.}
-\fi
+%\ohead{\headmark}
+%\ihead{}
+%\cfoot{}
+%\ofoot[]{\pagemark}
+%\iflsDraft
+%  \ifoot{Draft of \today, \currenttime}
+%\fi
+%\iflsOpenReview
+%  \ifoot{{\color{lsRed}Open review version}. Final version at \url{\lsURL}.}
+%\fi
 
-\newcommand{\lsPageStyleEmpty}{
-  \ohead{}
-  \ihead{}
-  \cfoot{}
-  \ofoot[]{}
-}
+%\newcommand{\lsPageStyleEmpty}{
+%  \ohead{}
+%  \ihead{}
+%  \cfoot{}
+%  \ofoot[]{}
+%}
 
-\renewcommand*{\partpagestyle}{empty}
+%\renewcommand*{\partpagestyle}{empty}
 
-\pagestyle{scrheadings}
+%\pagestyle{scrheadings}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2009,7 +2009,7 @@ width=.8\textwidth
 %     \\[-1\baselineskip]
 %     \vspace*{-2\baselineskip}
   \renewcommand{\chapterheadstartvskip}{}
-  {\small \noindent \hspace*{-.7cm} \href{http://comcorhd.letras.puc-rio.br}{Linguística Computacional, Corpus e Humanidades Digitais}}\\ %there must be a better way to undo this length than a hard value
+  {\small \noindent \hspace*{-.7cm}\href{http://comcorhd.letras.puc-rio.br}{Linguística Computacional, Corpus e Humanidades Digitais}}\\ %there must be a better way to undo this length than a hard value
   \bigskip
   \@title}}
 

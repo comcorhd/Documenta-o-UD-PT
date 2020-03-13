@@ -8,6 +8,7 @@
 %\usepackage{python}
 %\usepackage{minted} %\begin{minted}{python}
 \usepackage{longtable}
+\usepackage{biblatex}
 
 %nome da section no header de cada página
 %\usepackage{fancyhdr}
@@ -18,21 +19,22 @@
 %\renewcommand{\headrulewidth}{0pt}
 \usepackage{dirtytalk}
 
-\bibliography{localbibliography.bib}
+%\bibliography{localbibliography.bib}
+\addbibresource{localbibliography.bib}
 
-\author{Elvis de Souza\affiliation{PUC-Rio, Brasil}\and Tatiana Cavalcanti\and Aline Silveira\and Wograine Evelyn\and Cláudia Freitas}
-\title{Documentação UD em português\\
+\author{Elvis de Souza\and Tatiana Cavalcanti\and Aline Silveira\and Wograine Evelyn\and Cláudia Freitas}
+\title{Diretivas e documentação\\
+de anotação UD em português\\
 (e para língua portuguesa)}
-\abstract{O projeto Universal Dependencies \citep{mcdonald2013universal} apresenta um tagset e uma gramática. Isso significa dizer que, para além de um conjunto de etiquetas que correspondem às classes da Gramática Tradicional (objeto, sujeito etc.), o UD também faz diversas escolhas que diferem da GT. Nesse documento, apresentamos a documentação detalhada e as escolhas linguísticas relativas ao processo de revisão do material UD em Português. Considerando que UD funciona como uma espécie de segunda língua gramatical, partimos, sempre que possível, das categorias e análises de GT, e não de UD, para facilitar a consulta.
 
-As diretivas originais, em inglês, estão disponíveis na página do projeto e devem ser consultadas também:
+\newpage
+\abstract{Versão 1.1 - 13/03/2020\newline Baseadas nas diretivas originais do Projeto Universal Dependencies\newline\newline
+O projeto Universal Dependencies \citep{mcdonald2013universal} apresenta um tagset e uma gramática. Isso significa dizer que, para além de um conjunto de etiquetas que correspondem às classes da Gramática Tradicional (objeto, sujeito etc.), o UD também faz diversas escolhas que diferem da GT. Nesse documento, apresentamos a documentação detalhada e as escolhas linguísticas relativas ao processo de revisão do material UD em Português. Considerando que UD funciona como uma espécie de segunda língua gramatical, partimos, sempre que possível, das categorias e análises de GT, e não de UD, para facilitar a consulta.
 
-Classes gramaticais: \href{https://universaldependencies.org/u/pos/}{https://universaldependencies.org/u/pos/}
+As diretivas originais, em inglês, estão disponíveis na página do projeto e devem ser consultadas também: \href{https://universaldependencies.org/guidelines.html}{https://universaldependencies.org/guidelines.html}
 
-Análise sintática: \href{https://universaldependencies.org/u/dep/}{https://universaldependencies.org/u/dep/}
-
-Este documento não pretende ser uma substituição das diretivas originais, mas um complemento, por um lado, e um detalhamento, por outro, no que se refere à língua portuguesa.}
-
+Este documento não pretende ser uma substituição das diretivas originais, mas um complemento, por um lado, e um detalhamento, por outro, no que se refere à língua portuguesa.
+}
 
 \input{localpackages.tex}
 \input{localcommands.tex}
@@ -93,10 +95,6 @@ Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{und
 		\item UD must support well downstream language understanding tasks (relation extraction, reading comprehension, machine translation, …).
 	\end{enumerate}
 
-
-\section{Manipulação em Python}\label{sec:python}
-
-	Para manipular arquivos no formato UD em Python, com as classes Corpus, Sentence e Token (e suas respectivas anotações), desenvolvemos e utilizamos o script \href{https://github.com/alvelvis/ACDC-UD#estrutura_udpy}{estrutura\_ud.py}.
 
 \chapter{Para começar...}\label{sec:paracomecar}
 
@@ -185,11 +183,11 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
     \hline
     VERB & Verbo\newline \textbf{Tem} sentido -- aliás, muitíssimo sentido. \\
     \hline
-    PRON & Apenas pronomes substantivos\newline Aqui só joga \textbf{quem} está bem. \\
+    PRON & Apenas pronomes substantivos\newline \textbf{Ele} só não jogava porque não estava bem. \newline Aqui só joga \textbf{quem} está bem. \\
     \hline
     SCONJ & Conjunções subordinativas\newline Ele só não jogava \textbf{porque} não estava bem.\newline Nem Lula nem o partido ainda encontraram um discurso \textbf{para} se diferenciar. \\
     \hline
-    X & No Bosque-UD, palavras estrangeiras\newline Na largada, Ayrton Senna, que havia feito a \textbf{pole position}, manteve a primeira colocação. \\
+    X & No Bosque-UD, palavras estrangeiras\newline A dupla planeja agora temporada de \textbf{dolce far niente}. \\
     \hline
     \caption{As 17 classes gramaticais do UD em português}
     \label{tab:upos}
@@ -227,7 +225,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	O que conta como um verbo auxiliar é alvo de discussão nas gramáticas do português (\citet{elvis2019locverbal}).
 
-	Em UD, o que algumas GTs consideram locuções verbais aspectuais e modais não são classificadas como locução, ou seja, os verbos são anotados como se constituíssem duas orações distintas (\fullref{sec:auxaspecto}). No entanto, conforme apontado em \citet{elvis2019locverbal}, é possível propor uma anotação que leve em conta a auxiliaridade das locuções verbais aspectuais (\fullref{sec:locverbalJDP}).
+	Em UD, o que algumas GTs consideram locuções verbais aspectuais e modais não são classificadas como locução, ou seja, os verbos são anotados como se constituíssem duas orações distintas (\fullref{sec:auxaspecto}). No entanto, conforme apontado em \citet{elvis2019locverbal}, é possível propor uma anotação que leve em conta a auxiliaridade das locuções verbais aspectuais.
 
 	\subsection{Verbos de ligação}\label{sec:verbosdeligacao}
 	
@@ -455,7 +453,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 \section{Formas participiais: verbo, adjetivo ou outra coisa?}\label{sec:formaspart}
 
-	A discussão sobre o status das formas participiais, frequentemente ambíguas entre \emph{ADJ} ou \emph{VERB}, é reconhecida na literatura linguística, e não é um fenômeno específico do Português (ver, por exemplo, \cite{10.1007/978-3-319-99722-3_46} e \cite{de2016classes}).
+	A discussão sobre o status das formas participiais, frequentemente ambíguas entre \emph{ADJ} ou \emph{VERB}, é reconhecida na literatura linguística, e não é um fenômeno específico do Português (ver, por exemplo, \citet{propor2018} e \citet{de2016classes}).
 	
 	\subsection{Formas participiais que são adjetivo}
 	No processo de anotação do Bosque-UD, anotamos como \emph{ADJ}:
@@ -3343,7 +3341,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	\section{O que fazer com...}\label{sec:quefazer}
 
-		URLs - endereços de internet, e-mails etc.
+		\subsection{Endereços de internet, e-mails etc.}
 		
 			Endereços de internet, e-mails etc. são anotados como \emph{NOUN}. Com relação à função sintática, em geral estarão envolvidos em estrutura de aposto (Ver \fullref{sec:aposto}).
 
@@ -3974,17 +3972,9 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	\end{longtable}
 
 
-\chapter*{Abreviações}
-
-\hyperlink{toc}{Ir para tabela de conteúdos\\}
-
-
-
 \chapter*{Agradecimentos}
 
-\hyperlink{toc}{Ir para tabela de conteúdos\\}
-
-
+Agradecemos Alexandre Rademaker, Livy Real e Valeria de Paiva pelas valiosas discussões e contribuições que viabilizaram a criação da versão UD do corpus Bosque (\citet{rademaker2017universal}), dando origem às primeiras discussões sobre a sua anotação em português (e muito dessa discussão está pública no GitHub do projeto). Agradecemos também ao CNPq pela bolsa de Iniciação Científica de Elvis de Souza no âmbito do projeto \emph{Construção de datasets para o PLN de língua portuguesa} (128693/2019-3) e pelo apoio da ANP — Agência Natural de Petróleo, Gás Natural e Biocombustíveis — que, associado ao investimento de recursos oriundos das cláusulas de P, D \& I, por meio de termo de cooperação entre a Petrobrás e a PUC-Rio, permitiu que um grupo maior se juntasse à empreitada, com o objetivo produzir a presente documentação para a língua portuguesa.
 
 \printbibliography[heading=subbibliography,notkeyword=this]
 
