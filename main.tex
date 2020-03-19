@@ -21,6 +21,8 @@
 %\addbibresource{localbibliography.bib}
 
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1}: \nameref*{#1}}} % One single link
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
 
 \author{Elvis de Souza\and Tatiana Cavalcanti\and Aline Silveira\and Wograine Evelyn\and Cláudia Freitas}
 \title{Diretivas e documentação\\
@@ -2388,6 +2390,8 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	\fullref{sec:adjuntoadnominal}
 
+	\fullref{sec:relativas}
+
 	\fullref{sec:complementonominal}
 
 	\fullref{sec:aposto}
@@ -2401,8 +2405,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		Caso sejam \emph{ADJ}, devem ter deprel \emph{amod} (\fullref{dep:amod}).
 
 		Caso sejam \emph{NUM}, devem ter deprel \emph{nummod} (\fullref{dep:nummod}). Ver também: \fullref{sec:numerais}.
-
-		Adjuntos adnominais na forma de orações (adjetivas) devem ter deprel \emph{acl:relcl} (que vem de adjective clause: relative clause), caso sejam desenvolvidas (\fullref{dep:aclrelcl}), ou \emph{acl}, caso sejam reduzidas (\fullref{dep:acl}).
 
 		Sentenças como \fullref{dep:monica} são ambíguas, e privilegiamos leituras como \emph{obl} (\fullref{sec:terrelacaocom}).
 
@@ -2473,50 +2475,54 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			\caption{\emph{3.600} concessionários}\label{dep:nummod}
 		\end{figure*}
 
-		\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					PRON \& AUX \& DET \& NOUN \& PRON \& VERB \& NOUN \& PUNCT \\
-					Esse \& é \& outro \& ponto \& que \& merece \& atenção \& . \\
-					esse \& ser \& outro \& ponto \& que \& merecer \& atenção \& . \\
-					PronType=Dem\& \& PronType=Ind \& \& PronType=Rel \& \& \& \\
-				\end{deptext}
-				\deproot{4}{root}
-				\depedge{4}{2}{cop}
-				\depedge{4}{1}{nsubj}
-				\depedge{4}{3}{det}
-				\depedge{6}{5}{nsubj}
-				\depedge{4}{6}{acl:relcl}
-				\depedge{4}{3}{det}
-				\depedge{6}{7}{obj}
-				\depedge{8}{4}{punct}
-			\end{dependency}
-			\caption{Esse é outro ponto que \emph{merece} atenção}\label{dep:aclrelcl}
-		\end{figure*}
+		\subsubsection{Orações relativas}\label{sec:relativas}
 
-		\begin{figure*}[htbp]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					PRON \& AUX \& DET \& NOUN \& VERB \& ADP \& NOUN \& PUNCT \\
-					Esse \& é \& outro \& ponto \& merecedor \& de \& atenção \& . \\
-					esse \& ser \& outro \& ponto \& merecedor \& de \& atenção \& . \\
-					PronType=Dem\& \& PronType=Ind \& \& VerbForm=Inf \& \& \& \\
-				\end{deptext}
-				\deproot{4}{root}
-				\depedge{4}{2}{cop}
-				\depedge{4}{1}{nsubj}
-				\depedge{4}{3}{det}
-				\depedge{4}{5}{acl}
-				\depedge{5}{7}{nmod}
-				\depedge{7}{6}{case}
-				\depedge{8}{4}{punct}
-			\end{dependency}
-			\caption{Esse é outro ponto \emph{merecedor} de atenção}\label{dep:acl}
-		\end{figure*}
+			Adjuntos adnominais na forma de orações (adjetivas/relativas) devem ter deprel \emph{acl:relcl} (que vem de adjective clause: relative clause), caso sejam desenvolvidas (\fullref{dep:aclrelcl}), ou \emph{acl}, caso sejam reduzidas (\fullref{dep:acl}).
+	
+			\begin{figure*}[htbp]
+				\centering
+				\vspace{.8cm}
+				\begin{dependency}
+					\begin{deptext}
+						PRON \& AUX \& DET \& NOUN \& PRON \& VERB \& NOUN \& PUNCT \\
+						Esse \& é \& outro \& ponto \& que \& merece \& atenção \& . \\
+						esse \& ser \& outro \& ponto \& que \& merecer \& atenção \& . \\
+						PronType=Dem\& \& PronType=Ind \& \& PronType=Rel \& \& \& \\
+					\end{deptext}
+					\deproot{4}{root}
+					\depedge{4}{2}{cop}
+					\depedge{4}{1}{nsubj}
+					\depedge{4}{3}{det}
+					\depedge{6}{5}{nsubj}
+					\depedge{4}{6}{acl:relcl}
+					\depedge{4}{3}{det}
+					\depedge{6}{7}{obj}
+					\depedge{8}{4}{punct}
+				\end{dependency}
+				\caption{Esse é outro ponto que \emph{merece} atenção}\label{dep:aclrelcl}
+			\end{figure*}
+	
+			\begin{figure*}[htbp]
+				\centering
+				\vspace{.8cm}
+				\begin{dependency}
+					\begin{deptext}
+						PRON \& AUX \& DET \& NOUN \& VERB \& ADP \& NOUN \& PUNCT \\
+						Esse \& é \& outro \& ponto \& merecedor \& de \& atenção \& . \\
+						esse \& ser \& outro \& ponto \& merecedor \& de \& atenção \& . \\
+						PronType=Dem\& \& PronType=Ind \& \& VerbForm=Inf \& \& \& \\
+					\end{deptext}
+					\deproot{4}{root}
+					\depedge{4}{2}{cop}
+					\depedge{4}{1}{nsubj}
+					\depedge{4}{3}{det}
+					\depedge{4}{5}{acl}
+					\depedge{5}{7}{nmod}
+					\depedge{7}{6}{case}
+					\depedge{8}{4}{punct}
+				\end{dependency}
+				\caption{Esse é outro ponto \emph{merecedor} de atenção}\label{dep:acl}
+			\end{figure*}
 
 	\subsection{Complemento nominal}\label{sec:complementonominal}
 
