@@ -1,6 +1,9 @@
 # Guidelines das guidelines UD-PT
 
-Fluxo de trabalho para preparação da Documentação UD em português (e para língua portuguesa)
+Repositório de trabalho para preparação da Documentação UD em português (e para língua portuguesa).
+
+Para consultar a última versão da documentação:
+[http://comcorhd.letras.puc-rio.br/Documenta-o-UD-PT/](http://comcorhd.letras.puc-rio.br/Documenta-o-UD-PT/)
 
 * [Como começar](#como-começar)
 * [Para enviar alterações](#para-enviar-alterações)
@@ -15,14 +18,14 @@ Fluxo de trabalho para preparação da Documentação UD em português (e para l
 
 ## Como começar
 
-1) **Seguir** o repositório para receber os [**issues**](https://github.com/alvelvis/Documenta-o-UD-PT/issues) por e-mail:
+1) **Seguir** o repositório para receber os [**issues**](https://github.com/comcorhd/Documenta-o-UD-PT/issues) por e-mail:
 
-[![Seguir no GitHub](https://img.shields.io/github/watchers/alvelvis/Documenta-o-UD-PT.svg?style=social)](https://github.com/alvelvis/Documenta-o-UD-PT/watchers)
+[![Seguir no GitHub](https://img.shields.io/github/watchers/comcorhd/Documenta-o-UD-PT.svg?style=social)](https://github.com/comcorhd/Documenta-o-UD-PT/watchers)
 
 2) Instalar o [Git (Windows)](https://git-scm.com/downloads) e **clonar** a *sua* versão do repositório:
 
 ```
-git clone https://github.com/alvelvis/Documenta-o-UD-PT
+git clone https://github.com/comcorhd/Documenta-o-UD-PT
 ```
 
 3) Instalar o [MiKTeX](https://miktex.org/download) e editar o arquivo **main.tex** com o compilador **XeLaTeX**.
