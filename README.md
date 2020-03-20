@@ -161,6 +161,6 @@ Resultado 2: `McDonald et al. 2013`
 
   (c) Salve o script com as modificações e execute-o:
 
-    `python3 build_dependencies.py`
+    $ python3 build_dependencies.py
 
   (d) Cole o resultado no arquivo do LaTeX e edite o `caption` para deixar em itálico a palavra que deve estar em foco na sentença.
