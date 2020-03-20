@@ -151,4 +151,16 @@ Resultado 2: `McDonald et al. 2013`
 
 1) Sentenças ideais que representam algum fenômeno podem ser desenhadas utilizando o pacote `tikz-dependency`, cortando a sentença para caber horizontalmente na página.
 
-2) Sentenças de anotação complexa devem ter uma imagem da anotação completa.
+2) Sentenças de anotação complexa devem ter uma imagem (com rótulo `fig:`) da anotação completa, tendo em realce as linhas de destaque.
+
+3) Para facilitar a montagem de uma sentença utilizando o `tikz-dependency`, utilize o script `build_dependencies.py` da seguinte forma:
+
+  (a) Abra o arquivo `build_dependencies.py` com algum editor de texto;
+
+  (b) Edite as variáveis `label` (com o nome do rótulo da dependência, que deve começar com `dep:`), e `phrase`, com o trecho do arquivo CoNLL-U que deseja representar utilizando a árvore de dependências;
+
+  (c) Salve o script com as modificações e execute-o:
+
+    `python3 build_dependencies.py`
+
+  (d) Cole o resultado no arquivo do LaTeX e edite o `caption` para deixar em itálico a palavra que deve estar em foco na sentença.

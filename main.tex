@@ -214,7 +214,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			\depedge{3}{2}{det}
 			\depedge{6}{4}{mark}
 			\depedge{6}{5}{expl}
-			\depedge{3}{6}{acl}
+			\depedge{1}{6}{advcl}
 		\end{dependency}
 		\caption{Encontraram um discurso \emph{para} se diferenciar}\label{dep:classesdinamicas}
 	\end{figure*}
@@ -914,7 +914,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	
 	Numerais ordinais devem ser anotados como de upos \textit{ADJ} (\fullref{sec:adjounum}).
 	
-	Ver também: \fullref{sec:numeroscompostos}.
+	Ver também: \fullref{sec:numeroscompostos}
 	
 	\begin{figure*}[htbp]
 		\centering
@@ -1102,7 +1102,160 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		    \end{dependency}
 		    \caption{\textit{Primeira tentativa}}\label{dep:primeiratentativa}
 		\end{figure*}
-	
+
+	\subsection{\emph{um}: numeral, pronome ou artigo?}\label{sec:numeralpronomeouartigo}
+
+		Em português, a palavra \say{um} pode ser classificada de muitas maneiras. Tendo em vista sua ambiguidade, definimos situações em que a sua leitura preferencial será numeral, artigo ou pronome.
+
+		\say{um} será numeral em todos os casos em que estiver quantificando, de maneira clara, um nome, garantindo-se que não é possível, de maneira alguma, a leitura de indeterminação, já que o papel do numeral é, justamente, \textbf{determinar} quantidade. É o caso de \fullref{dep:umnumeral1} e \fullref{dep:umnumeral2}.
+
+		\say{um} será artigo indeterminado em todos os casos em que estiver modificando um nome e a leitura de indeterminação for possível. É o caso de \fullref{dep:umartigo1} e \fullref{dep:umartigo2}.
+
+		\say{um} será pronome indeterminado em todos os casos em que estiver substituindo um nome. É o caso de \fullref{dep:umpronome1} e \fullref{dep:umpronome2}.
+
+		\begin{figure*}[htbp]
+		        \centering
+		        \vspace{.8cm}
+		        \begin{dependency}
+		                \begin{deptext}
+		                        VERB \& ADV \& NUM \& NOUN \& ADP \& NOUN \& ADP \& DET \& NOUN \\
+		                        pediu \& mais \& um \& dia \& de \& folga \& a \& o \& treinador \\
+		                        pedir \& mais \& um \& dia \& de \& folga \& a \& o \& treinador \\
+					 \&  \& NumType=Card \&  \&  \&  \& \& \& \\
+		                \end{deptext}
+		                \deproot{1}{root}
+		                \depedge{3}{2}{advmod}
+		                \depedge{4}{3}{nummod}
+		                \depedge{1}{4}{obj}
+		                \depedge{6}{5}{case}
+		                \depedge{4}{6}{nmod}
+		                \depedge{9}{7}{case}
+		                \depedge{9}{8}{det}
+		                \depedge{1}{9}{iobj}
+		        \end{dependency}
+		        \caption{pediu mais \emph{um} dia de folga a o treinador}
+		        \label{dep:umnumeral1}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+		        \centering
+		        \vspace{.8cm}
+		        \begin{dependency}
+		                \begin{deptext}
+		                        AUX \& ADJ \& ADP \& DET \& PROPN \& ADP \& ADV \& NUM \& NOUN \\
+		                        São \& vistos \& por \& a \& CPI \& como \& mais \& um \& indício \\
+		                        ser \& ver \& por \& o \& CPI \& como \& mais \& um \& indício \\
+		                         \&  \&  \&  \&  \&  \&  \& NumType=Card \&  \& \\
+		                \end{deptext}
+		                \depedge{2}{1}{aux}
+		                \deproot{2}{root}
+		                \depedge{5}{3}{case}
+		                \depedge{5}{4}{det}
+		                \depedge{2}{5}{obl}
+		                \depedge{9}{6}{case}
+		                \depedge{8}{7}{advmod}
+		                \depedge{9}{8}{nummod}
+		                \depedge{2}{9}{xcomp}
+		        \end{dependency}
+		        \caption{São vistos por a CPI como mais \emph{um} indício}
+		        \label{dep:umnumeral2}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+		        \centering
+		        \vspace{.8cm}
+		        \begin{dependency}
+		                \begin{deptext}
+		                        DET \& NOUN \& ADP \& DET \& NOUN \& VERB \& DET \& NOUN \& ADJ \\
+		                        O \& governo \& de \& o \& Estado \& realizará \& um \& concurso \& público \\
+		                        o \& governo \& de \& o \& estado \& realizar \& um \& concurso \& público \\
+		                         \&  \&  \&  \&  \&  \& Definite=Ind \&  \&  \\
+		                         \&  \&  \&  \&  \&  \& PronType=Art  \&  \&  \\
+		                \end{deptext}
+		                \depedge{2}{1}{det}
+		                \depedge{6}{2}{nsubj}
+		                \depedge{5}{3}{case}
+		                \depedge{5}{4}{det}
+		                \depedge{2}{5}{nmod}
+		                \deproot{6}{root}
+		                \depedge{8}{7}{det}
+		                \depedge{6}{8}{obj}
+		                \depedge{8}{9}{amod}
+		        \end{dependency}
+		        \caption{O governo de o Estado realizará \emph{um} concurso público}
+		        \label{dep:umartigo1}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+		        \centering
+		        \vspace{.8cm}
+		        \begin{dependency}
+		                \begin{deptext}
+		                        VERB \& DET \& NOUN \& SCONJ \& PRON \& VERB \\
+		                        Encontraram \& um \& discurso \& para \& se \& diferenciar \\
+		                        encontrar \& um \& discurso \& para \& se \& diferenciar \\
+		                         \& Definite=Ind  \&  \&  \&  \&  \\
+		                         \& PronType=Art  \&  \&  \&  \&  \\
+		                \end{deptext}
+		                \deproot{1}{root}
+		                \depedge{3}{2}{det}
+		                \depedge{1}{3}{obj}
+		                \depedge{6}{4}{mark}
+		                \depedge{6}{5}{expl}
+		                \depedge{1}{6}{advcl}
+		        \end{dependency}
+		        \caption{Encontraram \emph{um} discurso para se diferenciar}
+		        \label{dep:umartigo2}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+		        \centering
+		        \vspace{.8cm}
+		        \begin{dependency}
+		                \begin{deptext}
+		                        NUM \& NOUN \& ADP \& PRON \& PUNCT \& NUM \& ADP \& PRON \\
+		                        quatro \& disparos \& em \& um \& , \& seis \& em \& outro \\
+		                        quatro \& disparo \& em \& um \& , \& seis \& em \& outro \\
+		                         \&  \&  \& PronType=Ind  \&  \&  \&  \&  \\
+		                \end{deptext}
+		                \depedge{2}{1}{nummod}
+		                \deproot{2}{root}
+		                \depedge{4}{3}{case}
+		                \depedge{2}{4}{obl}
+		                \depedge{6}{5}{punct}
+		                \depedge{2}{6}{conj}
+		                \depedge{8}{7}{case}
+		                \depedge{6}{8}{orphan}
+		        \end{dependency}
+		        \caption{quatro disparos em \emph{um} , seis em outro}
+		        \label{dep:umpronome1}
+		\end{figure*}
+
+		\begin{figure*}[htbp]
+		        \centering
+		        \vspace{.8cm}
+		        \begin{dependency}
+		                \begin{deptext}
+		                        VERB \& ADP \& PRON \& ADP \& DET \& NOUN \& ADP \& DET \& NOUN \& ADJ \\
+		                        estamos \& perante \& um \& de \& os \& documentos \& de \& o \& art. \& 46º \\
+		                        estar \& perante \& um \& de \& o \& documento \& de \& o \& art. \& 46º \\
+		                         \&  \& PronType=Ind \&  \&  \&  \&  \&  \&  \&  \\
+		                \end{deptext}
+		                \deproot{1}{root}
+		                \depedge{3}{2}{case}
+		                \depedge{1}{3}{obl}
+		                \depedge{6}{4}{case}
+		                \depedge{6}{5}{det}
+		                \depedge{3}{6}{nmod}
+		                \depedge{9}{7}{case}
+		                \depedge{9}{8}{det}
+		                \depedge{6}{9}{nmod}
+		                \depedge{9}{10}{amod}
+		        \end{dependency}
+		        \caption{estamos perante \emph{um} de os documentos de o art. 46º}
+		        \label{dep:umpronome2}
+		\end{figure*}
+
 \section{Artigos, pronomes substantivos e pronomes adjetivos}\label{sec:pronedet}
 
 	Pronomes substantivos são anotados como \textit{PRON} (\fullref{dep:pronsubst}).
@@ -1122,6 +1275,8 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	\fullref{sec:pronrel}
 
 	\fullref{sec:pronind}
+
+	\fullref{sec:numeralpronomeouartigo}
 	
 	\begin{figure*}[htbp]
 		\centering
@@ -2698,7 +2853,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			    	\label{fig:apostotrad}
 			\end{figure}{}
 
-		\subsubsection{Orações com '', o que'', como proceder}\label{sec:apostooque}
+		\subsubsection{Orações com '', o que''}\label{sec:apostooque}
 
 			Em orações com a presença de \say{, o que}, analisamos o \say{o} como pronome demonstrativo, isto é, igual a \say{aquilo} (conforme \fullref{sec:amaisquerida}), funcionando como aposto da oração antecendente (\fullref{dep:apostooque}).
 
