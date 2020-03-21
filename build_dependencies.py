@@ -15,7 +15,7 @@ phrase = '''
 14	46º	46º	ADJ	ADJ|M|S|@N<	Gender=Masc|Number=Sing	13	amod	_	_
 '''.strip()
 
-tex = "\\begin{figure*}[htbp]"
+tex = "\\begin{figure}[H]"
 tex += "\n\t\\centering"
 tex += "\n\t\\vspace{.8cm}"
 tex += "\n\t\\begin{dependency}"
@@ -57,5 +57,5 @@ for id, a in dic_tokens.items():
 tex += "\n\t\\end{dependency}"
 tex += "\n\t\\caption{" + " ".join([x.split("\t")[1] for x in phrase.splitlines() if not '-' in x.split("\t")[0]]) + "}"
 tex += "\n\t\\label{" + label + "}"
-tex += "\n\\end{figure*}"
+tex += "\n\\end{figure}"
 print(tex)
