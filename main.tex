@@ -107,11 +107,16 @@ Colunas sem nenhum valor devem, necessariamente, ser preenchidas com \textit{und
 	\begin{enumerate}
 		\item O núcleo da oração é sempre um verbo. E quando estamos tratando de núcleo da oração principal, ele é o \emph{root}. EXCEÇÃO: Quando estivermos diante de um verbo de ligação como \say{ser} e, em alguns contextos, \say{estar}, eles NÃO SERÃO NÚCLEOS. Nesses casos, o núcleo é o elemento predicado/predicativo (em geral, um substantivo ou adjetivo). Apenas o verbo \say{ser}, e algumas ocorrências de \say{estar} (\say{estar feliz}, mas não \say{estar na praia}) são considerados auxiliares em UD. 
 
-		\item Preposições: Estamos habituados a atrelar as preposições às palavras que as antecedem: em \say{gostar de sorvete}, o \say{de} depende (isto é, é filho sintático) gostar; em \say{casa de madeira}, o \say{de} depende (isto é, é filho sintático) de \say{casa}. Em UD, as preposições dependem do elemento que está à direita. Assim, em \say{gostar de sorvete}, o \say{de} depende (isto é, \say{é filho sintático}) de \say{sorvete} - e \say{sorvete}, por sua vez, depende (isto é, é filho sinstático) de \say{gostar}; em \say{casa de madeira}, o \say{de} depende (isto é, é filho sintático) de \say{madeira} — e \say{madeira}, por sua vez, depende (é filho) de \say{casa}. 
+		\item Preposições: Estamos habituados a atrelar as preposições às palavras que as antecedem: em \say{gostar de sorvete}, o \say{de} depende (isto é,  \say{é filho sintático}) de  \say{gostar}; em \say{casa de madeira}, o \say{de} depende de \say{casa}. Em UD, as preposições dependem do elemento que está à direita. Assim, em \say{gostar de sorvete}, o \say{de} depende de \say{sorvete} — e \say{sorvete}, por sua vez, depende de \say{gostar}; em \say{casa de madeira}, o \say{de} depende de \say{madeira} — e \say{madeira}, por sua vez, depende de \say{casa}. 
 
 		\item Conjunções: a mesma coisa que preposições. Em \say{gato e sapato}, o \say{e} depende de \say{sapato}; e \say{sapato} depende de \say{gato}.
-	\end{enumerate}
 
+		\item \textbf{Algumas palavras sobre o Bosque-UD}
+
+		A maioria dos exemplos compilados nessa documentação vem do corpus Bosque-UD, que é uma conversão, para o modelo UD, do corpus Bosque, seguido de algumas rodadas de revisão. O corpus Bosque, por sua vez, foi tornado público pela primeira vez em 2002 \citep{santos2002floresta}, como parte do projeto Floresta Sintá(c)tica (\href{http://www.linguateca.pt/Floresta/}{http://www.linguateca.pt/Floresta/}), coordenado pela Linguateca (\href{http://www.linguateca.pt}{http://www.linguateca.pt}).  Por se tratar de um material revisto, tem sido amplamente utilizado em tarefas de PLN, inclusive no âmbito internacional (por exemplo, o CoNLL 2006), e está disponível em diversos formatos (veja-se a página do projeto).
+		
+		Em \href{http://www.linguateca.pt/Floresta/documentacao.html}{http://www.linguateca.pt/Floresta/documentacao.html} encontra-se a documentação linguística da anotação do Bosque no âmbito do projeto Floresta Sintá(c)tica, e a construção do presente documento se inspira, também, nesta documentação. 
+	\end{enumerate}
 
 \chapter{Lemas}\label{sec:lemas}
 
@@ -1106,13 +1111,13 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	\subsection{\emph{um}: numeral, pronome ou artigo?}\label{sec:numeralpronomeouartigo}
 
-		Em português, a palavra \say{um} pode ser classificada de muitas maneiras. Tendo em vista sua ambiguidade, definimos situações em que a sua leitura preferencial será numeral, artigo ou pronome.
+		Em português, a palavra \say{um} pode ser classificada de diversas maneiras. Definimos situações em que a sua leitura preferencial será numeral, artigo ou pronome.
 
 		\say{um} será numeral em todos os casos em que estiver quantificando, de maneira clara, um nome, garantindo-se que não é possível, de maneira alguma, a leitura de indeterminação, já que o papel do numeral é, justamente, \textbf{determinar} quantidade. É o caso de \fullref{dep:umnumeral1} e \fullref{dep:umnumeral2}.
 
-		\say{um} será artigo indeterminado em todos os casos em que estiver modificando um nome e a leitura de indeterminação for possível. É o caso de \fullref{dep:umartigo1} e \fullref{dep:umartigo2}.
+		\say{um} será artigo indefinido em todos os casos em que estiver modificando um nome e a leitura de indeterminação for possível. É o caso de \fullref{dep:umartigo1} e \fullref{dep:umartigo2}.
 
-		\say{um} será pronome indeterminado em todos os casos em que estiver substituindo um nome. É o caso de \fullref{dep:umpronome1} e \fullref{dep:umpronome2}.
+		\say{um} será pronome indefinido em todos os casos em que estiver substituindo um nome. É o caso de \fullref{dep:umpronome1} e \fullref{dep:umpronome2}.
 
 		\begin{figure}[H]
 		        \centering
@@ -3508,14 +3513,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\subsection{Endereços de internet, e-mails etc.}
 		
 			Endereços de internet, e-mails etc. são anotados como \emph{NOUN}. Com relação à função sintática, em geral estarão envolvidos em estrutura de aposto (Ver \fullref{sec:aposto}).
-
-\chapter{Decisões exclusivas do material UD em português}
-
-\hyperlink{toc}{Ir para tabela de conteúdos\\}
-
-	No material do UD em PT, temos utilizado também o campo misc para adicionar a etiqueta \emph{MWE}, seguida dos lemas das palavras que formam a expressão multi-palavra, e \emph{MWEPOS} seguida da classe gramatical da expressão em questão. Essas informações devem estar no campo misc da palavra principal da expressão.
-
-	Ver também: \fullref{sec:mwe}
 
 	
 
