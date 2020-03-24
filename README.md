@@ -25,7 +25,7 @@ Para consultar a última versão da documentação:
 2) Instalar o [Git (Windows)](https://git-scm.com/downloads) e **clonar** a *sua* versão do repositório:
 
 ```
-git clone https://github.com/comcorhd/Documenta-o-UD-PT
+git clone https://github.com/comcorhd/Documenta-o-UD-PT --recursive
 ```
 
 3) Instalar o [MiKTeX](https://miktex.org/download) e editar o arquivo **main.tex** com o compilador **XeLaTeX**.
