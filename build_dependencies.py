@@ -1,18 +1,16 @@
-label = "dep:umpronome2"
+label = "dep:quantomaiormenor"
 
 phrase = '''
-5	estamos	estar	VERB	_	Mood=Sub|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	0	root	_	_
-6	perante	perante	ADP	PRP|@<SC	_	10	case	_	_
-7	um	um	PRON	<card>|NUM|M|S|@P<	Gender=Masc|Number=Sing|PronType=Dem	5	obl	_	_
-8-9	dos	_	_	_	_	_	_	_	_
-8	de	de	ADP	<sam->|PRP|@N<	_	10	case	_	_
-9	os	o	DET	<-sam>|<artd>|ART|M|P|@>N	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	10	det	_	_
-10	documentos	documento	NOUN	<np-def>|N|M|P|@P<	Gender=Masc|Number=Plur	7	nmod	_	_
-11-12	do	_	_	_	_	_	_	_	_
-11	de	de	ADP	<sam->|PRP|@N<	_	13	case	_	_
-12	o	o	DET	<-sam>|<artd>|ART|M|S|@>N	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	13	det	_	_
-13	art.	art.	NOUN	<np-def>|N|M|S|@P<	Gender=Masc|Number=Sing	10	nmod	_	ChangedBy=Issue165|SpaceAfter=No
-14	46º	46º	ADJ	ADJ|M|S|@N<	Gender=Masc|Number=Sing	13	amod	_	_
+1	Quanto	quanto	ADV	_	_	2	advmod	_	_
+2	maior	maior	ADJ	_	Gender=Fem|Number=Sing	4	amod	_	_
+3	a	o	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
+4	concentração	concentração	NOUN	_	Gender=Fem|Number=Sing	10	advcl	_	_
+7	,	,	PUNCT	_	_	8	punct	_	_
+8	menor	pequeno	ADJ	_	Gender=Fem|Number=Sing	10	amod	_	_
+9	a	o	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	det	_	_
+10	invasão	invasão	NOUN	_	Gender=Fem|Number=Sing	0	root	_	_
+11	de	de	ADP	_	_	12	case	_	_
+12	filtrado	filtrado	NOUN	_	Gender=Masc|Number=Sing	10	nmod	_	SpaceAfter=No
 '''.strip()
 
 tex = "\\begin{figure}[H]"

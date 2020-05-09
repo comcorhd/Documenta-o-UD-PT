@@ -2467,6 +2467,8 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			\fullref{fig:advcl1}
 
 			\fullref{fig:advcl2}
+
+			\fullref{dep:quantomaiormenor}
 			
 			\begin{figure}[H]
 				\centering
@@ -2568,6 +2570,8 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		Caso sejam \emph{NUM}, devem ter deprel \emph{nummod} (\fullref{dep:nummod}). Ver também: \fullref{sec:numerais}.
 
 		Sentenças como \fullref{dep:monica} são ambíguas, e privilegiamos leituras como \emph{obl} (\fullref{sec:terrelacaocom}).
+
+		Sintagmas iniciados com preposição são sintagmas encaixados, como em \fullref{dep:epp}.
 
 		\begin{figure}[H]
 			\centering
@@ -3213,8 +3217,38 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 		Ver também: \fullref{sec:preposicoes}
 
-\chapter{Frases difíceis, retiradas do Bosque-UD}
+\chapter{Frases difíceis}
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
+
+	\section{Adverbial proporcional}
+
+		\fullref{dep:quantomaiormenor}
+
+		\begin{figure}[H]
+		        \centering
+		        \vspace{.8cm}
+		        \begin{dependency}
+		                \begin{deptext}
+		                        ADV \& ADJ \& DET \& NOUN \& PUNCT \& ADJ \& DET \& NOUN \& ADP \& NOUN \\
+		                        Quanto \& maior \& a \& concentração \& , \& menor \& a \& invasão \& de \& filtrado \\
+		                        quanto \& maior \& o \& concentração \& , \& pequeno \& o \& invasão \& de \& filtrado \\
+		                         \&  \&  \&  \&  \&  \&  \&  \&  \&  \\
+		                         \&  \&  \&  \&  \&  \&  \&  \&  \&  \\
+		                \end{deptext}
+		                \depedge{2}{1}{advmod}
+		                \depedge{4}{2}{amod}
+		                \depedge{4}{3}{det}
+		                \depedge{8}{4}{advcl}
+		                \depedge{6}{5}{punct}
+		                \depedge{8}{6}{amod}
+		                \depedge{8}{7}{det}
+		                \deproot{8}{root}
+		                \depedge{10}{9}{case}
+		                \depedge{8}{10}{nmod}
+		        \end{dependency}
+		        \caption{Quanto maior a concentração , menor a invasão de filtrado}
+		        \label{dep:quantomaiormenor}
+		\end{figure}
 
 	\section{Comparativas}
 
@@ -3513,6 +3547,10 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\subsection{Endereços de internet, e-mails etc.}
 		
 			Endereços de internet, e-mails etc. são anotados como \emph{NOUN}. Com relação à função sintática, em geral estarão envolvidos em estrutura de aposto (Ver \fullref{sec:aposto}).
+
+		\subsection{Enumerações, porcentagens e parênteses}
+
+			\fullref{dep:epp}
 
 	
 
