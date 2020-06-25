@@ -1,29 +1,15 @@
-label = "dep:epp"
+label = "dep:aclrelclouacl2"
 
 phrase = '''
-11	as	o	DET	_	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	13	det	_	_
-12	seguintes	seguinte	ADJ	_	Gender=Fem|Number=Plur	13	amod	_	_
-13	concentrações	concentração	NOUN	_	Gender=Fem|Number=Plur	10	nsubj:pass	_	SpaceAfter=No
-14	:	:	PUNCT	_	_	10	punct	_	_
-15	petróleo	petróleo	NOUN	_	Gender=Masc|Number=Sing	13	appos	_	_
-17	(	(	PUNCT	_	_	19	punct	_	SpaceAfter=No
-18	5	5	NUM	_	NumType=Card	19	nummod	_	SpaceAfter=No
-19	%	%	SYM	_	_	15	appos:parataxis	_	SpaceAfter=No
-20	,	,	PUNCT	_	_	35	punct	_	_
-33	e	e	CCONJ	_	_	35	cc	_	_
-34	100	100	NUM	_	NumType=Card	35	nummod	_	SpaceAfter=No
-35	%	%	SYM	_	_	15	conj	_	_
-36	de	de	ADP	_	_	37	case	_	_
-37	FSA	FSA	NOUN	_	Gender=Fem|Number=Sing	19	nmod	_	SpaceAfter=No
-38	)	)	PUNCT	_	_	43	punct	_	SpaceAfter=No
-39	e	e	CCONJ	_	_	40	cc	_	_
-40	diesel	diesel	NOUN	_	Gender=Masc|Number=Sing	15	conj	_	_
-41	(	(	PUNCT	_	_	43	punct	_	SpaceAfter=No
-42	1	1	NUM	_	NumType=Card	43	nummod	_	SpaceAfter=No
-43	%	%	SYM	_	_	40	appos:parataxis	_	SpaceAfter=No
-44	,	,	PUNCT	_	_	57	punct	_	_
-56	32	32	NUM	_	NumType=Card	57	nummod	_	SpaceAfter=No
-57	%	%	SYM	_	_	43	conj	_	SpaceAfter=No
+1	A	o	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
+2	casa	casa	NOUN	_	Gender=Fem|Number=Sing	8	nsubj	_	_
+3	de	de	ADP	_	_	4	case	_	_
+4	que	que	PRON	_	_	6	obj	_	_
+5	eu	eu	PRON	_	Case=Nom|Gender=Unsp|Number=Sing|Person=1|PronType=Prs	6	nsubj	_	_
+6	gosto	gostar	VERB	_	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	2	acl:relcl	_	_
+7	é	ser	AUX	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	cop	_	_
+8	amarela	amarelo	PRON	_	Gender=Fem|Number=Sing|PronType=Dem	0	root	_	SpaceAfter=No
+9	.	.	PUNCT	_	_	2	punct	_	SpacesAfter=\r\n
 '''.strip().replace("%", "\\%")
 
 tex = "\\begin{figure}[H]"
