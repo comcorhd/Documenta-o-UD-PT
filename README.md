@@ -22,7 +22,7 @@ Para consultar a última versão da documentação:
 
 [![Seguir no GitHub](https://img.shields.io/github/watchers/comcorhd/Documenta-o-UD-PT.svg?style=social)](https://github.com/comcorhd/Documenta-o-UD-PT/watchers)
 
-2) Instalar o [Git (Windows)](https://git-scm.com/downloads) e **clonar** a *sua* versão do repositório:
+2) Instalar o [Git (Windows)](https://git-scm.com/downloads) e **clonar** o repositório:
 
 ```
 git clone https://github.com/comcorhd/Documenta-o-UD-PT --recursive
