@@ -1,4 +1,4 @@
-\documentclass[output=paper,colorlinks,citecolor=brown]{langscibook} 
+\documentclass[output=paper,colorlinks,citecolor=brown,portuguese]{langscibook} 
 
 %dependencias para desenhar árvores sintáticas
 \usepackage{tikz}
@@ -30,7 +30,7 @@
 de anotação UD em português\\
 (e para língua portuguesa)}
 
-\abstract{Versão 1.2 - 23/06/2020\newline Baseadas nas diretivas originais do Projeto Universal Dependencies\newline\newline
+\abstract{Versão 1.3 - 26/10/2020\newline Baseadas nas diretivas originais do Projeto Universal Dependencies\newline\newline
 O projeto Universal Dependencies \citep{mcdonald2013universal} apresenta um tagset e uma gramática. Isso significa dizer que, para além de um conjunto de etiquetas que correspondem às classes da Gramática Tradicional (objeto, sujeito etc.), o UD também faz diversas escolhas que diferem da GT. Nesse documento, apresentamos a documentação detalhada e as escolhas linguísticas relativas ao processo de revisão do material UD em Português. Considerando que UD funciona como uma espécie de segunda língua gramatical, partimos, sempre que possível, das categorias e análises de GT, e não de UD, para facilitar a consulta.
 
 As diretivas originais, em inglês, estão disponíveis na página do projeto e devem ser consultadas também: \href{https://universaldependencies.org/guidelines.html}{https://universaldependencies.org/guidelines.html}
@@ -479,27 +479,27 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\end{figure}{}		
 		
 		\begin{figure}[H]
-				\centering
-				\vspace{.8cm}
-				\begin{dependency}
-					\begin{deptext}
-						DET\& NOUN\& ADP\& NOUN\& ADJ\& VERB\& ADP\& NOUN\\
-						A\& ideia\& de\& cinema\& engajado\& está\& por\& baixo\\
-						o\& ideia\& de\& cinema\& engajado\& estar\& por\& baixo\\
-					\end{deptext}
-					
-					\depedge{2}{1}{det}
-					\depedge{6}{2}{nsubj}
-					\depedge{4}{3}{case}
-					\depedge{2}{4}{nmod}
-					\depedge{4}{5}{amod}
-					\deproot{6}{root}
-					\depedge{8}{7}{case}
-					\depedge{6}{8}{obl}
-				\end{dependency}
-				\caption{A ideia de cinema \emph{engajado} está por baixo}
-				\label{fig:partadj2}
-			\end{figure}
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET\& NOUN\& ADP\& NOUN\& ADJ\& VERB\& ADP\& NOUN \\
+					A\& ideia\& de\& cinema\& engajado\& está\& por\& baixo \\
+					o\& ideia\& de\& cinema\& engajado\& estar\& por\& baixo \\
+				\end{deptext}
+				
+				\depedge{2}{1}{det}
+				\depedge{6}{2}{nsubj}
+				\depedge{4}{3}{case}
+				\depedge{2}{4}{nmod}
+				\depedge{4}{5}{amod}
+				\deproot{6}{root}
+				\depedge{8}{7}{case}
+				\depedge{6}{8}{obl}
+			\end{dependency}
+			\caption{A ideia de cinema \emph{engajado} está por baixo}
+			\label{fig:partadj2}
+		\end{figure}
 
 		\item Formas participiais que estejam em coordenação com outros adjetivos.
 
@@ -3681,84 +3681,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\end{tabular}
 		\caption{Lista das 5 palavras que ocorrem 1016 vezes como locução verbal de tempo composto (\emph{AUX/aux}) no Bosque-UD}
 		\label{tab:loctempocomposto}
-	\end{table}
-
-	\begin{table}[]
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{MWE auxiliar} & \textbf{Frequência} \\\hline
-				acabar de & 12\\\hline
-				acabar por & 30\\\hline
-				andar a & 3\\\hline
-				chegar a & 22\\\hline
-				começar a & 58\\\hline
-				começar por & 6\\\hline
-				continuar a & 60\\\hline
-				continuar por & 1\\\hline
-				deixar de & 30\\\hline
-				estar a & 124\\\hline
-				estar para & 1\\\hline
-				estar por & 1\\\hline
-				ficar a & 4\\\hline
-				ficar de & 1\\\hline
-				haver de & 2\\\hline
-				haver que & 1\\\hline
-				ir a & 3\\\hline
-				ir de & 1\\\hline
-				parar de & 3\\\hline
-				passar a & 45\\\hline
-				recomeçar a & 1\\\hline
-				ser de & 2\\\hline
-				tender a & 1\\\hline
-				ter a & 9\\\hline
-				ter de & 64\\\hline
-				ter que & 3\\\hline
-				tornar a & 1\\\hline
-				vir a & 45\\\hline
-				voltar a & 42\\\hline
-			\end{tabular}
-		}
-		\hfill
-		\parbox{.45\linewidth}{
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{MWE auxiliar} & \textbf{Frequência} \\\hline
-				estar a & 124\\\hline
-				ter de & 64\\\hline
-				continuar a & 60\\\hline
-				começar a & 58\\\hline
-				passar a & 45\\\hline
-				vir a & 45\\\hline
-				voltar a & 42\\\hline
-				acabar por & 30\\\hline
-				deixar de & 30\\\hline
-				chegar a & 22\\\hline
-				acabar de & 12\\\hline
-				ter a & 9\\\hline
-				começar por & 6\\\hline
-				ficar a & 4\\\hline
-				andar a & 3\\\hline
-				ir a & 3\\\hline
-				parar de & 3\\\hline
-				ter que & 3\\\hline
-				haver de & 2\\\hline
-				ser de & 2\\\hline
-				continuar por & 1\\\hline
-				estar para & 1\\\hline
-				estar por & 1\\\hline
-				ficar de & 1\\\hline
-				haver que & 1\\\hline
-				ir de & 1\\\hline
-				recomeçar a & 1\\\hline
-				tender a & 1\\\hline
-				tornar a & 1\\\hline
-			\end{tabular}
-		}
-		\caption{Lista das 29 MWEs que ocorreriam 576 vezes como locuções auxiliares (\emph{AUX/aux + ADP/compound}) no Bosque-UD segundo nossa proposta de anotação}
-		\label{tab:auxphrasalverb}
 	\end{table}
 
 	\begin{longtable}{ p{3cm} | p{1cm} | p{3cm} | p{1cm} }
