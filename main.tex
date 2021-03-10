@@ -1468,7 +1468,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	\subsection{Pronomes indefinidos}\label{sec:pronind}
 
-		Pronomes indefinidos devem receber o valor \emph{PronType=Ind} na coluna feats, e podem ser pronomes substantivos, como na \fullref{dep:pronindsubst}, ou adjetivos, como na \fullref{dep:pronindadj}.
+		Pronomes indefinidos devem receber o valor \emph{PronType=Ind} na coluna feats, e podem ser pronomes substantivos (upos \emp{PRON}), como na \fullref{dep:pronindsubst}, ou adjetivos (upos \emp{DET}), como na \fullref{dep:pronindadj}.
 
 		\begin{figure}[H]
 			\centering
@@ -1489,6 +1489,52 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\end{figure}
 
 		\begin{figure}[H]
+					\centering
+					\vspace{.8cm}
+					\begin{dependency}
+						\begin{deptext}
+								DET \& NOUN \& ADJ \& ADV \& PRON \& VERB \& SCONJ \& VERB \& DET \& DET \& NOUN \\
+								A \& comissão \& técnica \& não \& se \& cansa \& de \& estudar \& os \& outros \& times \\
+								o \& comissão \& técnico \& não \& se \& cansar \& de \& estudar \& o \& outro \& time \\
+						\end{deptext}
+						\depedge{2}{1}{det}
+						\depedge{6}{2}{nsubj}
+						\depedge{2}{3}{amod}
+						\depedge{6}{4}{advmod}
+						\depedge{6}{5}{expl}
+						\depedge{8}{7}{mark}
+						\depedge{6}{8}{xcomp}
+						\depedge{11}{9}{det}
+						\depedge{11}{10}{det}
+						\depedge{8}{11}{obj}
+						\deproot{6}{root}
+					\end{dependency}
+					\caption{A comissão técnica não se cansa de estudar os \emph{outros} times}\label{dep:pronindadj}
+				\end{figure}
+		
+		O pronome indefinido \say{algum} pode ser substantivo \emph{PRON} ou adjetivo \emph{DET}. No primeiro caso, será o núcleo do sintagma nominal em que se encontra, como se observa na \fullref{dep:pronalgum}; já no segundo caso, modificará um nome, como na \fullref{dep:detalgum}. Nota-se que a construção pronome substantivo + preposição \say{de} é muito produtiva na língua e por isso a solução dada para \say{algum} se aplica também a casos como \say{vários}, \say{muitos}, \say{outros}, \say{um} (Ver \fullref{sec:numeralpronomeouartigo}).
+
+		\begin{figure}[H]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					PROPN \& VERB \& PRON \& ADP \& DET \& NOUN \\
+					Euclides \& preparou \& alguns \& de \& os \& mapas \\
+					Euclides \& preparar \& algum \& de \& o \& mapa \\
+					\& \& PronType=Ind \& \& \& \\
+				\end{deptext}
+				\depedge{2}{1}{nsubj}
+				\depedge{2}{3}{obj}
+				\depedge{6}{4}{case}
+				\depedge{6}{5}{det}
+				\depedge{3}{6}{nmod}
+				\deproot{2}{root}
+			\end{dependency}
+			\caption{Euclides preparou \emph{alguns dos} mapas}\label{dep:pronalgum}
+		\end{figure}
+
+		\begin{figure}[H]
 			\centering
 			\vspace{.8cm}
 			\begin{dependency}
@@ -1506,7 +1552,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 				\depedge{3}{7}{punct}
 				\depedge{3}{5}{obj}
 			\end{dependency}
-			\caption{Essa divisão gera \emph{algumas} distorções terríveis}\label{dep:pronindadj}
+			\caption{Essa divisão gera \emph{algumas} distorções terríveis}\label{dep:detalgum}
 		\end{figure}
 
 		Ou seja, os seguintes elementos são anotados como \emph{DET} (porque são pronomes indefinidos, e portanto devem ter \emph{PronType=Ind}):
@@ -1517,10 +1563,11 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			\item \emph{algum} lugar
 		\end{enumerate}
 
+		
 
 	\subsection{\emph{A} mais querida, \emph{O} que eu sei: pronome ou artigo?}\label{sec:amaisquerida}
 
-		Em frases como \fullref{dep:amaisquerida} e \fullref{dep:oqueeusei}, preferimos a leitura de um pronome substantivo demonstantivo (\emph{PRON}).
+		Em frases como \fullref{dep:amaisquerida} e \fullref{dep:oqueeusei}, preferimos a leitura de um pronome substantivo demonstantivo (\emph{PRON}). Ver também: \fullref{sec:sujnom}.
 
 		\begin{figure}[H]
 			\centering
@@ -1547,7 +1594,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 					PRON \& PRON \& PRON \& VERB \\
 					O \& que \& eu \& sei \\
 					o \& que \& eu \& saber \\
-					\& PronType=Dem \& \& \\
+					PronType=Dem \& PronType=Rel \& \& \\
 				\end{deptext}
 				\deproot{1}{root}
 				\depedge{4}{2}{obj}
@@ -1825,14 +1872,34 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 \section{Sujeito da oração}\label{sec:suj}
 
-\subsection{Caso o sujeito seja nominal ou em oração com voz passiva}
-		O sujeito será anotado com a deprel \emph{nsubj}. Se for sujeito de uma oração com voz passiva, será anotado como \emph{nsubj:pass} (Ver \fullref{sec:vozpass}).
+\subsection{Caso o sujeito seja nominal ou em oração com voz passiva}\label{sec:sujnom}
+		O sujeito será anotado com a deprel \emph{nsubj}. Se for sujeito de uma oração com voz passiva, será anotado como \emph{nsubj:pass}, como na \fullref{fig:vozpass1} (Ver \fullref{sec:vozpass}).
 	
 		\fullref{dep:nsubj1}
 	
 		\fullref{fig:nsubj2}
-
-		Quando em uma oração na voz passiva, o sujeito deve receber a deprel \emph{nsubj:pass}, como na \fullref{fig:vozpass1}.
+		
+		Em caso de elipse, o adjetivo pode assumir função de sujeito, como ilustra a \fullref{dep:adjnsubj}. Ver também: \fullref{sec:amaisquerida}.
+		
+		\begin{figure}[H]
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& ADJ \& AUX \& VERB \& ADP \& NOUN \& ADJ \\
+					A \& primeira \& foi \& gerada \& por \& movimentos \& horizontais \\
+					o \& primeiro \& ser \& gerar \& por \& movimento \& horizontal \\
+				\end{deptext}
+				\depedge{2}{1}{det}
+				\depedge{4}{2}{nsubj:pass}
+				\depedge{4}{3}{aux:pass}
+				\depedge{6}{5}{case}
+				\depedge{4}{6}{obl:agent}
+				\depedge{6}{7}{amod}
+				\deproot{4}{root}
+			\end{dependency}
+			\caption{A \emph{primeira} foi gerada por movimentos horizontais}\label{dep:adjnsubj}
+		\end{figure}
 	
 		\begin{figure}[H]
 					\centering
@@ -1962,7 +2029,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 				\begin{deptext}
 					VERB \& DET \& NOUN \& ADJ \\
 					Pintou \& a \& modelo \& nua \\
-					pintar \& a \& modelo \& nu \\
+					pintar \& o \& modelo \& nu \\
 				\end{deptext}
 				\deproot{1}{root}
 				\depedge{1}{3}{obj}
@@ -3307,6 +3374,24 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		Ver também: \fullref{sec:classesdinamicas}
 
 		Ver também: \fullref{sec:preposicoes}
+		
+	\subsection{orphan}	
+	
+		\emph{orphan} é a deprel utilizada quando há elipse do núcleo (head) da oração, em situações cuja solução mais óbvia levaria a uma classificação inadequada. Esse caso poderia acontecer, por exemplo, na sentença da \fullref{fig:orphan-cigarros}, com \say{5} apontando para \say{mulher} como \emph{obj}; porém, \say{5} não é objeto de \say{mulher}. Em vez disso, usa-se a deprel \emph{orphan}. O pai do \emph{orphan} é promovido a núcleo e assume a relação \emph{conj} com o verbo da oração. Outro exemplo se encontra na \fullref{fig:orphan-graus}.
+	
+		\begin{figure}[H]
+		    \centering
+		    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/orphan-cigarros.png}
+		    \caption{O homem fuma entre 11 e 20 cigarros por dia e a mulher, entre \emph{5} e 10.}
+		    \label{fig:orphan-cigarros}
+		\end{figure}{}	
+	
+		\begin{figure}[H]
+		    \centering
+		    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/orphan-graus.png}
+		    \caption{O PBE teve o início da sua temperatura de início de decomposição elevado para 180 oC e o Nafion para 290 \emph{oC}.}
+		    \label{fig:orphan-graus}
+		\end{figure}{}	
 
 \chapter{Frases difíceis}
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
@@ -3655,7 +3740,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 			Substantivos (\emph{NOUN}) e nomes próprios (\emph{PROPN}) seguidos de outros substantivos ou nomes próprios podem receber diferentes funções sintáticas.
 
 
-			\subsubsection{\emph{appos}}
+			\subsubsection{\emph{appos}}\label{sec:nomeappos}
 
 				Utilizado quando o segundo nome especifica um tipo do primeiro nome
 	
@@ -3715,7 +3800,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 				Ver também: \fullref{sec:aposto}
 
-			\subsubsection{\emph{compound}}
+			\subsubsection{\emph{compound}}\label{sec:nomecompound}
 
 				Utilizado quando a expressão inteira é um termo relevante para algum domínio; expressão cristalizada, possivelmente com flexão interna
 
@@ -3747,7 +3832,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 				Ver também: \fullref{sec:mwe}
 
-			\subsubsection{\emph{flat:name}}
+			\subsubsection{\emph{flat:name}}\label{sec:nomeflatname}
 
 				Utilizado quando é nome de empresa/pessoa; sem sintaxe interna
 
@@ -3816,7 +3901,27 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 				navio \emph{tipo} A (\say{A} é \emph{appos} de \say{tipo})
 	
 				Ver também: \fullref{sec:adjuntoadnominal}
-	
+				
+				
+		\subsection{Referências bibliográficas, figuras e tabelas}	
+			
+			As referências bibliográficas que ocorrem no fim de uma frase são filhas do \emph{root} da sentença e recebem deprel \emph{parataxis}, conforme a \fullref{fig:refbibliofinal}. Ver também: \fullref{sec:nomeflatname}.
+			
+				\begin{figure}[H]
+				    	\centering
+				    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/refbibliofinal2.png}
+				    	\caption{Estima-se que 33\% da totalidade do óleo que entra na hidrosfera marinha passe por estuários (\emph{Kennish, 1997}).}
+				    	\label{fig:refbibliofinal}
+				    	\end{figure}{}
+			
+			Do mesmo modo, as menções a figuras e tabelas, independentemente da posição na frase, são filhas do \emph{root} da sentença e recebem deprel \emph{parataxis}: \fullref{fig:reffigura}. Ver também: \fullref{sec:nomeappos}.
+			
+				\begin{figure}[H]
+					    	\centering
+					    	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{imagesDrive/reffigura2.png}
+					    	\caption{As células a combustível (\emph{Figura} 1) são unidades que convertem energia química (contida em um oxidante e um combustível) diretamente em energia elétrica e térmica}
+					    	\label{fig:reffigura}
+					    	\end{figure}{}
 
 \chapter{Apêndice}
 
