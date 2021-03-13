@@ -1468,7 +1468,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 	\subsection{Pronomes indefinidos}\label{sec:pronind}
 
-		Pronomes indefinidos devem receber o valor \emph{PronType=Ind} na coluna feats, e podem ser pronomes substantivos (upos \emp{PRON}), como na \fullref{dep:pronindsubst}, ou adjetivos (upos \emp{DET}), como na \fullref{dep:pronindadj}.
+		Pronomes indefinidos devem receber o valor \emph{PronType=Ind} na coluna feats, e podem ser pronomes substantivos (upos \emph{PRON}), como na \fullref{dep:pronindsubst}, ou adjetivos (upos \emph{DET}), como na \fullref{dep:pronindadj}.
 
 		\begin{figure}[H]
 			\centering
@@ -1489,28 +1489,28 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\end{figure}
 
 		\begin{figure}[H]
-					\centering
-					\vspace{.8cm}
-					\begin{dependency}
-						\begin{deptext}
-								DET \& NOUN \& ADJ \& ADV \& PRON \& VERB \& SCONJ \& VERB \& DET \& DET \& NOUN \\
-								A \& comissão \& técnica \& não \& se \& cansa \& de \& estudar \& os \& outros \& times \\
-								o \& comissão \& técnico \& não \& se \& cansar \& de \& estudar \& o \& outro \& time \\
-						\end{deptext}
-						\depedge{2}{1}{det}
-						\depedge{6}{2}{nsubj}
-						\depedge{2}{3}{amod}
-						\depedge{6}{4}{advmod}
-						\depedge{6}{5}{expl}
-						\depedge{8}{7}{mark}
-						\depedge{6}{8}{xcomp}
-						\depedge{11}{9}{det}
-						\depedge{11}{10}{det}
-						\depedge{8}{11}{obj}
-						\deproot{6}{root}
-					\end{dependency}
-					\caption{A comissão técnica não se cansa de estudar os \emph{outros} times}\label{dep:pronindadj}
-				\end{figure}
+			\centering
+			\vspace{.8cm}
+			\begin{dependency}
+				\begin{deptext}
+					DET \& NOUN \& ADJ \& ADV \& PRON \& VERB \& SCONJ \& VERB \& DET \& DET \& NOUN \\
+					A \& comissão \& técnica \& não \& se \& cansa \& de \& estudar \& os \& outros \& times \\
+					o \& comissão \& técnico \& não \& se \& cansar \& de \& estudar \& o \& outro \& time \\
+				\end{deptext}
+				\depedge{2}{1}{det}
+				\depedge{6}{2}{nsubj}
+				\depedge{2}{3}{amod}
+				\depedge{6}{4}{advmod}
+				\depedge{6}{5}{expl}
+				\depedge{8}{7}{mark}
+				\depedge{6}{8}{xcomp}
+				\depedge{11}{9}{det}
+				\depedge{11}{10}{det}
+				\depedge{8}{11}{obj}
+				\deproot{6}{root}
+			\end{dependency}
+			\caption{A comissão técnica não se cansa de estudar os \emph{outros} times}\label{dep:pronindadj}
+		\end{figure}
 		
 		O pronome indefinido \say{algum} pode ser substantivo \emph{PRON} ou adjetivo \emph{DET}. No primeiro caso, será o núcleo do sintagma nominal em que se encontra, como se observa na \fullref{dep:pronalgum}; já no segundo caso, modificará um nome, como na \fullref{dep:detalgum}. Nota-se que a construção pronome substantivo + preposição \say{de} é muito produtiva na língua e por isso a solução dada para \say{algum} se aplica também a casos como \say{vários}, \say{muitos}, \say{outros}, \say{um} (Ver \fullref{sec:numeralpronomeouartigo}).
 
@@ -2873,11 +2873,11 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 		Tanto os apostos nominais (\fullref{dep:apostonominal1}, e \fullref{dep:apostonominal2}) como os oracionais (\fullref{dep:apostooracional}) recebem deprel \emph{appos}, sejam eles restritivos ou explicativos.
 
-		Ainda que haja argumentos para uma anotação de adjunto adnominal, em casos como \say{o médico XXX}, \say{o grupo XXX} e \say{o parque XXX}, indicamos uma relação de aposto. Do mesmo modo, nomes científicos são tratados como \emph{appos} e \emph{compound}, como em \fullref{dep:nomecientif}.
+		Nomes científicos são tratados como \emph{appos} e \emph{compound}, como em \fullref{dep:nomecientif}.
 
 		Ver também: \fullref{sec:mwe}
 
-		Também estão em relação de aposto endereços de internet e e-mails, como em \fullref{dep:sitenet} e \fullref{dep:email}, respectivamente.
+		Também estão em relação de aposto endereços de internet e e-mails, como em \fullref{dep:email}, quando há a presença dos dois pontos. Caso não haja pontuação, a classificação será de \emph{nmod}. (Ver \fullref{sec:nomeseguidodenome}
 
 		\begin{figure}[H]
 				\centering
@@ -2898,28 +2898,6 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 					\depedge{7}{8}{compound}
 				\end{dependency}
 				\caption{Microestruturas dos otólitos de arenques \emph{Clupea arengus}}\label{dep:nomecientif}
-			\end{figure}
-
-			\begin{figure}[H]
-				\centering
-				\vspace{.8cm}
-				\begin{dependency}
-					\begin{deptext}
-						DET \& NOUN \& VERB \& AUX \& VERB \& ADP \& DET \& NOUN \& NOUN\\
-						O \& sistema \& pode \& ser \& acessado \& em \& o \& portal \& http://www.lei.furg.br/sidipla\\
-						o \& sistema \& poder \& ser \& acessar \& em \& o \& portal \& http://www.lei.furg.br/sidipla\\
-					\end{deptext}
-					\depedge{2}{1}{det}
-					\depedge{3}{2}{nsubj:pass}
-					\deproot{3}{root}
-					\depedge{5}{4}{aux:pass}
-					\depedge{3}{5}{xcomp}
-					\depedge{8}{6}{case}
-					\depedge{8}{7}{det}
-					\depedge{5}{8}{obl}
-					\depedge{8}{9}{appos}
-				\end{dependency}
-				\caption{O sistema pode ser acessado no portal \emph{http://www.lei.furg.br/sidipla}}\label{dep:sitenet}
 			\end{figure}
 
 			\begin{figure}[H]
@@ -3393,6 +3371,34 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		    \label{fig:orphan-graus}
 		\end{figure}{}	
 
+	\subsection{flat:foreign}
+
+		\emph{flat:foreign} é a deprel utilizada quando há termos em língua estrangeira, isto é, diferente da língua majoritária do corpus
+
+				Java \emph{Climate}
+	
+				Wind \emph{Down}
+
+				Safe \emph{Drinking Water Act}
+	
+				Occupational \emph{safety}
+	
+				Molten \emph{carbonate}
+
+				Solvay \emph{Solexis}
+	
+				American \emph{Petroleum Institute}
+	
+				International \emph{Energy Agency}
+	
+				Sir \emph{William Grove}
+
+				Dow \emph{Chemicals}
+
+				proton \emph{exchange}
+
+				two-step \emph{sintering}
+
 \chapter{Frases difíceis}
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
 
@@ -3742,63 +3748,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 			\subsubsection{\emph{appos}}\label{sec:nomeappos}
 
-				Utilizado quando o segundo nome especifica um tipo do primeiro nome
-	
-				grupos \emph{éter}
-	
-				cepa \emph{Pseudomonas}
-	
-				sistemas \emph{metano-éster}
-	
-				base \emph{éster}
-	
-				base \emph{água}
-	
-				razão \emph{ar/combustível }
-	
-				combustão \emph{in-situ}
-	
-				metais \emph{prata}, lítio e cobre
-	
-				ânion \emph{oxigênio}
-	
-				ácido \emph{p-tolueno}
-	
-				Decreto \emph{n.º 5.297}
-	
-				Lei \emph{nº 997} (os algarismos também são \emph{appos} de \say{nº})
-	
-				íons \emph{carbonato}
-	
-				tipo \emph{FPSO}
-	
-				campo \emph{onshore}
-	
-				corrente \emph{infra-estrutura}
-	
-				fácie \emph{silte}
-	
-				portal \emph{http://www.lei.furg.br/sidipla}
-	
-				Figura \emph{1}
-	
-				Figura \emph{2}
-	
-				Figura \emph{3}
-	
-				variáveis \emph{concentração} de inóculo, temperatura e teor de umidade inicial
-	
-				enzima \emph{cloroperoxidase}
-	
-				tipo \emph{ramnolipídeo}
-	
-				fator \emph{probabilidade} de crescimento
-	
-				Bacia \emph{Pelotas}
-	
-				Goma \emph{Xantana}
-
-				Ver também: \fullref{sec:aposto}
+				Utilizado quando o segundo nome especifica um tipo do primeiro nome. Ver também: \fullref{sec:aposto}
 
 			\subsubsection{\emph{compound}}\label{sec:nomecompound}
 
@@ -3819,6 +3769,52 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 				grupo \emph{controle}
 	
 				desvio \emph{padrão}
+
+				poli(bisfenol \emph{A-co-epicloridrina})
+
+				1,2 milhão de barris \emph{/ dia}
+
+				tert-butanol \emph{60 \%}
+
+				Ver também: \fullref{sec:mwe}
+
+			\subsubsection{\emph{flat:name}}\label{sec:nomeflatname}
+
+				Utilizado quando um nome próprio modifica outro nome próprio; sem sintaxe interna; em casos de coordenadas geográficas
+
+				Baleia \emph{Franca}
+	
+				Corrente \emph{Malvinas}
+	
+				Cone \emph{do Rio Grande}
+	
+				Alto \emph{de Cabo Frio}
+
+				Bacia \emph{Pelotas}
+	
+				Goma \emph{Xantana}
+	
+				Petróleo \emph{Brasileiro}
+	
+				Doris \emph{Engenharia}
+	
+				Santa \emph{Marta}
+	
+				XXXX \emph{et al.}
+	
+				São \emph{Paulo}
+	
+				Radix \emph{Engenharia}
+	
+				Thiago \emph{Cleyandson}
+	
+				Estados \emph{Unidos}
+	
+				Espírito \emph{Santo}
+	
+				Exxon \emph{Valdez}
+	
+				Aspen \emph{Plus}
 	
 				Gás \emph{Natural}
 	
@@ -3830,75 +3826,67 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	
 				Engenharia \emph{Química}
 
-				Ver também: \fullref{sec:mwe}
+				N \emph{30º W}
 
-			\subsubsection{\emph{flat:name}}\label{sec:nomeflatname}
-
-				Utilizado quando é nome de empresa/pessoa; sem sintaxe interna
-
-				Baleia \emph{Franca}
-	
-				Corrente \emph{Malvinas}
-	
-				Cone \emph{do Rio Grande}
-	
-				Alto \emph{de Cabo Frio}
-	
-				Petróleo \emph{Brasileiro}
-	
-				Java \emph{Climate}
-	
-				Wind \emph{Down}
-	
-				Doris \emph{Engenharia}
-	
-				Safe \emph{Drinking Water Act}
-	
-				Occupational \emph{safety}
-	
-				Molten \emph{carbonate}
-	
-				Santa \emph{Marta}
-	
-				XXXX \emph{et al.}
-	
-				São \emph{Paulo}
-	
-				Solvay \emph{Solexis}
-	
-				American \emph{Petroleum Institute}
-	
-				International \emph{Energy Agency}
-	
-				Sir \emph{William Grove}
-	
-				Radix \emph{Engenharia}
-	
-				Thiago \emph{Cleyandson}
-	
-				Estados \emph{Unidos}
-	
-				Dow \emph{Chemicals}
-	
-				Espírito \emph{Santo}
-	
-				proton \emph{exchange}
-	
-				Exxon \emph{Valdez}
-	
-				Aspen \emph{Plus}
-	
-				two-step \emph{sintering}
+				N \emph{60º E}
 	
 				Ver também: \fullref{sec:mwe}
 
 			\subsubsection{\emph{nmod} e \emph{amod}}
 
-				São utilizados quando não se aplicam os casos anteriores; no caso de substantivo (\emph{nmod}), há a preposição \say{de} ou ela está omitida
+				São utilizados na maioria dos casos de nomes que modificam nomes; no caso de substantivo (\emph{nmod}), há a preposição \say{de} ou ela está omitida
 
-				emulsões \emph{base} éster (\say{éster} é \emph{appos} de \say{base})
+				emulsões \emph{base} \emph{éster} (\say{éster} é \emph{nmod} de \say{base})
 	
-				navio \emph{tipo} A (\say{A} é \emph{appos} de \say{tipo})
+				navio \emph{tipo} \emph{A} (\say{A} é \emph{nmod} de \say{tipo})
+
+				sistemas \emph{metano-éster}
+	
+				base \emph{éster}
+	
+				base \emph{água}
+	
+				razão \emph{ar/combustível }
+	
+				combustão \emph{in-situ}
+
+				Decreto \emph{n.º} 5.297 (os algarismos são \emph{nummod} de \say{nº})
+	
+				Lei \emph{nº} 11.097 (os algarismos são \emph{nummod} de \say{nº})
+	
+				íons \emph{carbonato}
+	
+				tipo \emph{FPSO}
+	
+				campo \emph{onshore}
+	
+				corrente \emph{infra-estrutura}
+	
+				fácie \emph{silte}
+	
+				portal \emph{http://www.lei.furg.br/sidipla}
+
+				tipo \emph{ramnolipídeo}
+	
+				fator \emph{probabilidade} de crescimento
+
+				grupos \emph{éter}
+
+				ânion \emph{oxigênio}
+	
+				ácido \emph{p-tolueno}
+
+				serra do \emph{Mar}
+				
+				cidade do \emph{Rio}
+
+				cepa \emph{Pseudomonas}
+	
+				metais \emph{prata}, lítio e cobre
+	
+				variáveis \emph{concentração} de inóculo, temperatura e teor de umidade inicial
+	
+				enzima \emph{cloroperoxidase}
 	
 				Ver também: \fullref{sec:adjuntoadnominal}
 				
