@@ -5,9 +5,7 @@ Repositório de trabalho para preparação da Documentação UD em português (e
 Para consultar a última versão da documentação:
 [http://comcorhd.letras.puc-rio.br/Documenta-o-UD-PT/](http://comcorhd.letras.puc-rio.br/Documenta-o-UD-PT/)
 
-* [Como começar](#como-começar)
-* [Para enviar alterações](#para-enviar-alterações)
-* [Para atualizar a documentação](#para-atualizar-a-documentação)
+* [Para lançar nova versão](#para-lancar-nova-versao)
 * [Guidelines](#guidelines)
     * [Chapter, section, subsection, label, caption e fullref](#chapter-section-subsection-label-caption-e-fullref)
     * [Aspas e itálico](#aspas-e-itálico)
@@ -16,46 +14,9 @@ Para consultar a última versão da documentação:
     * [Representação de sentenças](#representação-de-sentenças)
 
 
-## Como começar
+## Para lançar nova versão
 
-1) **Seguir** o repositório para receber os [**issues**](https://github.com/comcorhd/Documenta-o-UD-PT/issues) por e-mail:
-
-[![Seguir no GitHub](https://img.shields.io/github/watchers/comcorhd/Documenta-o-UD-PT.svg?style=social)](https://github.com/comcorhd/Documenta-o-UD-PT/watchers)
-
-2) Instalar o [Git (Windows)](https://git-scm.com/downloads) e **clonar** o repositório:
-
-```
-git clone https://github.com/comcorhd/Documenta-o-UD-PT --recursive
-```
-
-3) Instalar o [MiKTeX](https://miktex.org/download) e editar o arquivo **main.tex** com o compilador **XeLaTeX**.
-
-## Para enviar alterações
-
-1) Adicionar todas as alterações feitas ao próximo commit:
-
-```
-git add -u
-```
-
-2) Realizar **commit** das suas alterações:
-
-```
-git commit -m "sobre o que é o commit #número_do_issue_se_houver"
-```
-
-3) Continuar realizando outros commits *OU* Enviar as alterações para a *sua* versão do repositório:
-
-```
-git push
-```
-
-
-## Para atualizar a documentação
-
-```
-git pull
-```
+`cp main.pdf Documenta-o-UD-PT.pdf`
 
 ## Guidelines
 
