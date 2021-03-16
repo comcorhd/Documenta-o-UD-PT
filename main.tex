@@ -2877,7 +2877,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 		Ver também: \fullref{sec:mwe}
 
-		Também estão em relação de aposto endereços de internet e e-mails, como em \fullref{dep:email}, quando há a presença dos dois pontos. Caso não haja pontuação, a classificação será de \emph{nmod}. (Ver \fullref{sec:nomeseguidodenome}
+		Também estão em relação de aposto endereços de internet e e-mails, como em \fullref{dep:email}, quando há a presença dos dois pontos. Caso não haja pontuação, a classificação será \emph{nmod}. (Ver \fullref{sec:nomeseguidodenome}
 
 		\begin{figure}[H]
 				\centering
@@ -3399,6 +3399,8 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 				two-step \emph{sintering}
 
+				solid \emph{oxide fuel cell}
+
 \chapter{Frases difíceis}
 \hyperlink{toc}{Ir para tabela de conteúdos\\}
 
@@ -3728,7 +3730,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 		\subsection{Endereços de internet, e-mails etc.}
 		
-			Endereços de internet, e-mails etc. são anotados como \emph{NOUN}. Com relação à função sintática, em geral estarão envolvidos em estrutura de aposto (Ver \fullref{sec:aposto}).
+			Endereços de internet, e-mails etc. são anotados como \emph{NOUN}. Com relação à função sintática, podem ser \emph{nmod} ou {appos}, dependendo da pontuação que os acompanham (Ver \fullref{sec:aposto}).
 
 		\subsection{Enumerações, porcentagens e parênteses}
 
@@ -3748,7 +3750,25 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 
 			\subsubsection{\emph{appos}}\label{sec:nomeappos}
 
-				Utilizado quando o segundo nome especifica um tipo do primeiro nome. Ver também: \fullref{sec:aposto}
+				Utilizado nos casos típicos em que o segundo nome especifica um tipo do primeiro nome; em casos de abreviação. Ver também: \fullref{sec:aposto}
+
+				empresa Doris Engenharia, \emph{subsidiária} da Doris Engineering,
+
+				sócios-gerentes da empresa, \emph{profissionais} com ampla experiência em projetos
+
+				altas concentrações de compostos aromáticos (\emph{BTX} 209 µg/g e HPAs 1093 µg/g)
+
+				ramnolipídeo, um \emph{surfactante} biodegradável com aplicações em diversas áreas
+
+				Fundação Universidade Federal de o Rio Grande (\emph{FURG})
+
+				hexametilendiamina (\emph{HMDA})
+
+				Laboratório de Biotecnologia Microbiana (\emph{LaBiM})
+
+				Petróleo Brasileiro S/A (\emph{Petrobras})
+
+				HPAs (\emph{hidrocarbonetos} poliaromáticos)
 
 			\subsubsection{\emph{compound}}\label{sec:nomecompound}
 
@@ -3770,9 +3790,9 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 	
 				desvio \emph{padrão}
 
-				poli(bisfenol \emph{A-co-epicloridrina})
+				poli(\emph{bisfenol} \emph{A-co-epicloridrina})
 
-				1,2 milhão de barris \emph{/ dia}
+				1,2 milhão de barris \emph{/ dia} (\say{barris} é \emph{nmod} de \say{milhão})
 
 				tert-butanol \emph{60 \%}
 
@@ -3893,7 +3913,7 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 				
 		\subsection{Referências bibliográficas, figuras e tabelas}	
 			
-			As referências bibliográficas que ocorrem no fim de uma frase são filhas do \emph{root} da sentença e recebem deprel \emph{parataxis}, conforme a \fullref{fig:refbibliofinal}. Ver também: \fullref{sec:nomeflatname}.
+			As referências bibliográficas que ocorrem no fim de uma frase são filhas do \emph{root} da sentença e recebem deprel \emph{parataxis}, conforme a \fullref{fig:refbibliofinal} Ver também: \fullref{sec:nomeflatname}.
 			
 				\begin{figure}[H]
 				    	\centering

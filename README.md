@@ -5,7 +5,7 @@ Repositório de trabalho para preparação da Documentação UD em português (e
 Para consultar a última versão da documentação:
 [http://comcorhd.letras.puc-rio.br/Documenta-o-UD-PT/](http://comcorhd.letras.puc-rio.br/Documenta-o-UD-PT/)
 
-* [Para lançar nova versão](#para-lancar-nova-versao)
+* [Para lançar nova versão](#para-lançar-nova-versão)
 * [Guidelines](#guidelines)
     * [Chapter, section, subsection, label, caption e fullref](#chapter-section-subsection-label-caption-e-fullref)
     * [Aspas e itálico](#aspas-e-itálico)
