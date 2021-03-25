@@ -19,7 +19,7 @@
 \usepackage{float}
 
 \bibliography{localbibliography.bib}
-%\addbibresource{localbibliography.bib}
+\addbibresource{localbibliography.bib}
 
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1}: \nameref*{#1}}} % One single link
 \setcounter{secnumdepth}{5}
@@ -30,7 +30,7 @@
 de anotação UD em português\\
 (e para língua portuguesa)}
 
-\abstract{Versão 1.3 - 26/10/2020\newline Baseadas nas diretivas originais do Projeto Universal Dependencies\newline\newline
+\abstract{Versão 1.4 - 25/03/2021\newline Baseadas nas diretivas originais do Projeto Universal Dependencies\newline\newline
 O projeto Universal Dependencies \citep{mcdonald2013universal} apresenta um tagset e uma gramática. Isso significa dizer que, para além de um conjunto de etiquetas que correspondem às classes da Gramática Tradicional (objeto, sujeito etc.), o UD também faz diversas escolhas que diferem da GT. Nesse documento, apresentamos a documentação detalhada e as escolhas linguísticas relativas ao processo de revisão do material UD em Português. Considerando que UD funciona como uma espécie de segunda língua gramatical, partimos, sempre que possível, das categorias e análises de GT, e não de UD, para facilitar a consulta.
 
 As diretivas originais, em inglês, estão disponíveis na página do projeto e devem ser consultadas também: \href{https://universaldependencies.org/guidelines.html}{https://universaldependencies.org/guidelines.html}
@@ -374,11 +374,11 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		\end{figure}
 	
 
-	\subsection{Isso \emph{foi} nos Estados Unidos: verbo \textit{ser} como verbo pleno}\label{sec:serpleno}
+	\subsection{O importante \emph{é} manter a calma: verbo \textit{ser} como verbo pleno}\label{sec:serpleno}
 	
-		Atenção para 2 casos em que o \say{ser} não é verbo auxiliar e deve ser verbo pleno (upos \textit{VERB}).
+		Atenção para um caso em que o \say{ser} não é verbo auxiliar e deve ser verbo pleno (upos \textit{VERB}).
 		
-		1) Como na \fullref{dep:serVERB}, o \say{ser} deve ser núcleo da oração caso o predicado seja uma outra oração (\textit{ccomp, xcomp}).
+		Como na \fullref{dep:serVERB}, o \say{ser} deve ser núcleo da oração caso o predicado seja uma outra oração (\textit{ccomp, xcomp}).
 		
 		\begin{figure}[H]
 		    \centering
@@ -402,27 +402,27 @@ São 17 as classes gramaticais em UD. Elas são atribuídas com base no contexto
 		    \caption{A expectativa \emph{era} que chegasse a US\$7 milhões}\label{dep:serVERB}
 		\end{figure}
 		
-		2) \say{ser} verbo intransitivo (verbo pleno) também deve ter a anotação \textit{VERB}, como na \fullref{dep:serVERB2}.
-		
-		\begin{figure}[H]
-			\centering
-			\vspace{.8cm}
-			\begin{dependency}
-				\begin{deptext}
-					PRON \& VERB \& ADP \& DET \& PROPN \& PROPN \\
-					Isso \& foi \& em \& os \& Estados \& Unidos \\
-					isso \& ser \& em \& o \& Estados \& Unidos \\
-				\end{deptext}
-				\depedge{2}{1}{nsubj}
-				\depedge{5}{3}{case}
-				\deproot{2}{root}
-				\depedge{5}{4}{det}
-				\depedge{5}{6}{flat:name}
-				\depedge{2}{5}{obl}
-			\end{dependency}
-			\caption{Isso \emph{foi} nos Estados Unidos}
-			\label{dep:serVERB2}
-		\end{figure}
+%		2) \say{ser} verbo intransitivo (verbo pleno) também deve ter a anotação \textit{VERB}, como na \fullref{dep:serVERB2}.
+%		
+%		\begin{figure}[H]
+%			\centering
+%			\vspace{.8cm}
+%			\begin{dependency}
+%				\begin{deptext}
+%					PRON \& VERB \& ADP \& DET \& PROPN \& PROPN \\
+%					Isso \& foi \& em \& os \& Estados \& Unidos \\
+%					isso \& ser \& em \& o \& Estados \& Unidos \\
+%				\end{deptext}
+%				\depedge{2}{1}{nsubj}
+%				\depedge{5}{3}{case}
+%				\deproot{2}{root}
+%				\depedge{5}{4}{det}
+%				\depedge{5}{6}{flat:name}
+%				\depedge{2}{5}{obl}
+%			\end{dependency}
+%			\caption{Isso \emph{foi} nos Estados Unidos}
+%			\label{dep:serVERB2}
+%		\end{figure}
 
 
 	\subsection{Não são locuções verbais: dois verbos plenos}
